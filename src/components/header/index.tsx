@@ -56,12 +56,12 @@ const Header = () => {
             >
               Estadísticas
             </Link>
-            <a
-              href="#"
+            <Link
+              to="/news"
               className="text-black text-2xl hover:text-[#2A579E] transition-colors"
             >
-              Sponsors
-            </a>
+              Noticias
+            </Link>
           </nav>
 
           {/* Mobile: Hamburger */}
@@ -122,11 +122,11 @@ const Header = () => {
                 Estadísticas
               </Link>
               <Link
-                to="/stats"
+                to="/news"
                 className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
                 onClick={() => setOpen(false)}
               >
-                Sponsors
+                Noticias
               </Link>
               <div className="w-3/4 h-0.5 bg-[#E6E6E6]" />
 
