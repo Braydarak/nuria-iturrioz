@@ -1,5 +1,6 @@
 import bg from '../../assets/Nuria-golfing.png'
-import LogoLoop from '../../components/logoLoop'
+import LogoLoop from '../../components/logoLoopDesktop'
+import LogoLoopMobile from '../../components/LogoLoopMobile'
 
 const Hero = () => {
   return (
@@ -42,9 +43,13 @@ const Hero = () => {
 
       {/* Contenido principal del Hero */}
       <div className="relative z-10 mx-auto max-w-screen h-full flex items-stretch justify-end">
-        <div className="w-64 md:w-72 lg:w-80 h-full drop-shadow-2xl">
+        <div className="hidden md:block w-64 md:w-72 lg:w-80 h-full drop-shadow-2xl">
           <LogoLoop heightClass="h-full" />
         </div>
+      </div>
+      {/* Loop de logos para mobile en el fondo */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 md:hidden">
+        <LogoLoopMobile heightClass="h-24" />
       </div>
     </section>
   )
