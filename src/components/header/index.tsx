@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react" 
-import { Link, useLocation } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useLayout } from "../../context/LayoutContext";
 
 const Header = () => {
-  const [open, setOpen] = useState(false);
+  const { isHeaderOpen: open, setIsHeaderOpen: setOpen } = useLayout();
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
@@ -13,7 +14,7 @@ const Header = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const visible = location.pathname !== "/" || scrolled;
+  const visible = location.pathname !== "/" || scrolled || open;
 
   return (
     <header

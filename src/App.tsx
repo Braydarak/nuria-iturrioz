@@ -7,17 +7,21 @@ import CareerPage from './pages/carrer'
 import ScrollToTop from './components/ScrollToTop'
 import StatsPage from './pages/stats-page'
 
+import { LayoutProvider } from './context/LayoutContext'
+
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/carrer" element={<CareerPage />} />
-        <Route path="/stats" element={<StatsPage />} />
-      </Routes>
-    </BrowserRouter>
+    <LayoutProvider>
+      <BrowserRouter>
+        <Header />
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/carrer" element={<CareerPage />} />
+          <Route path="/stats" element={<StatsPage />} />
+        </Routes>
+      </BrowserRouter>
+    </LayoutProvider>
   )
 }
 
