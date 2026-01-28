@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useLayout } from "../../context/LayoutContext";
+import LogoLoopMobile from "../LogoLoopMobile";
 
 const Header = () => {
   const { isHeaderOpen: open, setIsHeaderOpen: setOpen } = useLayout();
@@ -24,8 +25,8 @@ const Header = () => {
           : "-translate-y-full opacity-0"
       }`}
     >
-      <div className="mx-auto max-w-screen px-4">
-        <div className="flex h-26 items-center justify-between md:justify-around">
+      <div className="mx-auto max-w-screen">
+        <div className="flex h-26 items-center justify-between md:justify-around px-4">
           {/* Left: Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img
@@ -91,34 +92,57 @@ const Header = () => {
         {/* Mobile menu panel */}
         <div
           id="mobile-menu"
-          className={`md:hidden overflow-hidden transition-all duration-200 ${
-            open ? "max-h-64 border-t border-[#E6E6E6] bg-[#F8F8F8]" : "max-h-0"
+          className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
+            open
+              ? "h-[calc(100vh-6.5rem)] opacity-100 translate-y-0 border-t border-[#E6E6E6] bg-[#F8F8F8]"
+              : "h-0 opacity-0 -translate-y-5"
           }`}
         >
-          <div className="py-3 space-y-2">
-            <Link
-              to="/"
-              className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
-              onClick={() => setOpen(false)}
-            >
-              Inicio
-            </Link>
-            <Link
-              to="/carrer"
-              className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
-              onClick={() => setOpen(false)}
-            >
-              Carrera
-            </Link>
-            <Link
-              to="/stats"
-              className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
-              onClick={() => setOpen(false)}
-            >
-              Estadísticas
-            </Link>
-            <div className="mt-1 pt-2 border-t border-[#E6E6E6]">
-              <span className="block px-2 py-2 text-black/90">Sponsors</span>
+          <div className="flex flex-col h-full pt-10 w-full">
+            <div className="flex flex-col items-center justify-center text-xl gap-10">
+              <Link
+                to="/"
+                className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
+                onClick={() => setOpen(false)}
+              >
+                Inicio
+              </Link>
+              <Link
+                to="/carrer"
+                className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
+                onClick={() => setOpen(false)}
+              >
+                Carrera
+              </Link>
+              <Link
+                to="/stats"
+                className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
+                onClick={() => setOpen(false)}
+              >
+                Estadísticas
+              </Link>
+              <Link
+                to="/stats"
+                className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
+                onClick={() => setOpen(false)}
+              >
+                Sponsors
+              </Link>
+              <div className="w-3/4 h-0.5 bg-[#E6E6E6]" />
+
+              <div className="flex flex-col justify-center items-center gap-2 text-center">
+                <span className="text-[#2A579E] text-sm uppercase tracking-widest font-bold">
+                  Próximo torneo
+                </span>
+                <span className="text-black text-2xl font-semibold leading-tight px-4">
+                  PIF Saudi Ladies International
+                </span>
+                <span className="text-gray-500 text-lg">1/02/26</span>
+              </div>
+            </div>
+
+            <div className="mt-auto w-full">
+              <LogoLoopMobile />
             </div>
           </div>
         </div>
