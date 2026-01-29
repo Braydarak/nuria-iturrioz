@@ -1,0 +1,129 @@
+{
+    "trophies": [
+        {
+            "id": 1,
+            "name": "Campeona amateur 2014 en el Open de españa de profesionales",
+            "image": "../assets/trophies/Campeona-amateur-2014-en-el-Open-de-espana-de-profesionales.png"
+        },
+        {
+            "id": 2,
+            "name": "Campeona de baleares 2007",
+            "image": "../assets/trophies/campeona-de-baleares-2007.webp"
+        },
+        {
+            "id": 3,
+            "name": "Campeona de baleares 2008",
+            "image": "../assets/trophies/campeona-de-baleares-2008.webp"
+        },
+        {
+            "id": 4,
+            "name": "Campeona de españa 2015",
+            "image": "../assets/trophies/Campeona-de-espana-2015.webp"
+        },
+        {
+            "name": "Campeona de españa sub18 2012",
+            "id": 5,
+            "image": "../assets/trophies/Campeona-de-espana-sub18-2012.webp"
+        },
+        {
+            "id": 6,
+            "name": "Campeona de la copa Andalucia 2014",
+            "image": "../assets/trophies/campeona-de-la-copa-Andalucia-2014.webp"
+        },
+        {
+            "id": 7,
+            "name": "Campeonato de puerta de hierro 2015",
+            "image": "../assets/trophies/puerta-de-hierro-2015.webp"
+        },
+        {
+            "id": 8,
+            "name": "Campeona del campeonato de puerta de hierro 2013",
+            "image": "../assets/trophies/puerta-de-hierro-2013.webp"
+        },
+        {
+            "id": 9,
+            "name": "Campeona del Open de madrid amateur 2012",
+            "image": "../assets/trophies/Campeona-del-Open-de-madrid-2012.webp"
+        },
+        {
+            "id": 10,
+            "name": "Campeona del Open de madrid amateur 2013",
+            "image": "../assets/trophies/Campeona-del-Open-de-madrid-2013.webp"
+        },
+        {
+            "id": 11,
+            "name": "Campeonato de España 5a 2013",
+            "image": "../assets/trophies/campeonato-de-Espana-5a-2013.webp"
+        },
+        {
+            "id": 12,
+            "name": "Campeona puntuable zonal 2009",
+            "image": "../assets/trophies/campeona-puntuable-zonal-2009.webp"
+        },
+        {
+            "id": 13,
+            "name": "Campeona internacional de Francia 2015",
+            "image": "../assets/trophies/Campeona-internacional-de-Francia.webp"
+        },
+        {
+            "id": 14,
+            "name": "Campeonato de Madrid 2a 2011",
+            "image": "../assets/trophies/campeonato-de-Madrid-2a-2011.webp"
+        },  
+        {
+            "id": 15,
+            "name": "Capitana y campeonas del campeonato de España por territoriales 2a division (con la federación balear) 2010",
+            "image": "../assets/trophies/capitana-y-campeonas-del-campeon.webp"
+        },
+        {
+            "id": 16,
+            "name": "",
+            "image": "../assets/trophies/3as.webp"
+        },
+        {
+            "id": 17,
+            "name": "",
+            "image": "../assets/trophies/3as-2013.webp"
+        },
+        {
+            "id": 18,
+            "name": "",
+            "image": "../assets/trophies/2012.webp"
+        },
+        {
+            "id": 19,
+            "name": "",
+            "image": "../assets/trophies/2013.webp"
+        },
+        {
+            "id": 20,
+            "name": "Subcampeona de baleares 2010",
+            "image": "../assets/trophies/subcampeona-de-baleares-2010.webp"
+        },
+        {
+            "id": 21,
+            "name": "Subcampeona de españa 2012",
+            "image": "../assets/trophies/Subcampeona-de-espana-2012.webp"
+        },
+        {
+            "id": 22,
+            "name": "Subcampeona del Open de madrid amateur 2014",
+            "image": "../assets/trophies/Subcampeona-del-Open-de-madrid-2014.webp"
+        },
+        {
+            "id": 23,
+            "name": "Subcampeona del Open de madrid amateur 2015 marco",
+            "image": "../assets/trophies/Subcampeona-2015-Open-de-madrid.webp"
+        },
+        {
+            "id": 24,
+            "name": "Campeona del Santander Golf Tour 2019",
+            "image": "../assets/trophies/campeona-del-Santander-Golf-Tour-2019.webp"
+        },
+        {
+            "id": 25,
+            "name": "",
+            "image": "../assets/trophies/removal.ai_tmp-6234c3a0aec59.webp"
+        }
+    ]
+}

@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
+import Trophies from '../../components/trophies'
+import Recognitions from '../../components/recognitions'
 
 type YouTubePlayer = {
   isMuted: () => boolean
@@ -106,7 +108,8 @@ export default function CareerPage() {
 
       <div className="texture-wedge golf-texture opacity-60 pointer-events-none" />
 
-      <section aria-labelledby="career-title" className="relative max-w-3xl z-10 mx-auto text-center">
+      <section aria-labelledby="career-title" className="relative max-w-full flex flex-col items-center z-10 mx-auto text-center">
+        <div className='max-w-3xl mb-10'>
         <h1
           id="career-title"
           className="font-signature text-4xl md:text-5xl text-[#2A579E] mb-10 tracking-tight"
@@ -187,8 +190,11 @@ export default function CareerPage() {
               </button>
             </div>
           </div>
-        </div>
+          </div>
+          </div>
+        <Trophies variant="career" />
+        <Recognitions />
       </section>
     </main>
-  )
+  );
 }
