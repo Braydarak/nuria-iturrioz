@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useLayout } from "../../context/LayoutContext";
 import LogoLoopMobile from "../LogoLoopMobile";
-import tournamentsData from "../../data/tournaments.json";
+import { getNextTournament } from "../../utils/tournamentDate";
 
 const Header = () => {
   const { isHeaderOpen: open, setIsHeaderOpen: setOpen } = useLayout();
@@ -18,33 +18,7 @@ const Header = () => {
 
   const visible = location.pathname !== "/" || scrolled || open;
 
-  const nextTournament = (() => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const parseDate = (dateStr: string) => {
-      const [day, month, year] = dateStr.split("/").map(Number);
-      return new Date(2000 + year, month - 1, day);
-    };
-
-    const upcoming = tournamentsData.tournaments
-      .filter((t) => t.confirmed)
-      .map((t) => ({
-        ...t,
-        parsedDate: parseDate(t.date),
-        parsedEndDate: t.date_end ? parseDate(t.date_end) : parseDate(t.date),
-      }))
-      .filter((t) => t.parsedEndDate >= today)
-      .sort((a, b) => a.parsedDate.getTime() - b.parsedDate.getTime());
-
-    const tournament = upcoming[0];
-    if (!tournament) return null;
-
-    return {
-      ...tournament,
-      isCurrent: tournament.parsedDate <= today,
-    };
-  })();
+  const nextTournament = getNextTournament();
 
   return (
     <header
