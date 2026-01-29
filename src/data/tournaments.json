@@ -1,0 +1,125 @@
+{
+  "tournaments": [
+    {
+      "id": 1,
+      "name": "PIF Saudi Ladies International",
+      "date": "11/02/26",
+      "location": "Riyadh Golf Club",
+      "country": "Saudi Arabia",
+      "type": "Ladies",
+      "date_end": "15/02/26",
+      "confirmed": true
+    },
+    {
+      "id": 2,
+      "name": "Ford Women's NSW Open",
+      "date": "26/02/26",
+      "location": "Wolongong Golf Club",
+      "country": "Australia",
+      "date_end": "01/03/26",
+      "type": "Ladies",
+      "confirmed": true
+    },
+    {
+      "id": 3,
+      "name": "Australian Women's Classic",
+      "date": "04/03/26",
+      "location": "Magenta Shores Golf and Country Club",
+      "country": "Australia",
+      "date_end": "08/03/26",
+      "type": "Ladies",
+      "confirmed": true
+    },
+    {
+      "id": 4,
+      "name": "Women's Australian Open",
+      "date": "11/03/26",
+      "country": "Australia",
+      "location": "Kooyonga Golf Club",
+      "date_end": "15/03/26",
+      "type": "Ladies",
+      "confirmed": true
+    },
+    {
+      "id": 5,
+      "name": "Australian WPGA Championships",
+      "date": "18/03/26",
+      "country": "Australia",
+      "location": "Sanctuary Cave Golf and Country Club",
+      "type": "Ladies", 
+      "date_end": "22/03/26",
+      "confirmed": true
+    },
+    {
+      "id": 6,
+      "name": "Aramco Championship",
+      "date": "01/04/26",
+      "country": "Las vegas, USA",
+      "location": "Shadow Creek Golf",
+      "type": "Ladies",
+      "date_end": "05/04/26",
+      "confirmed": true
+    },
+    {
+      "id": 7,
+      "name": "Joburg Ladies Open",
+      "date": "15/04/26",
+      "country": "South Africa",
+      "location": "Randpark Golf Club",
+      "type": "Ladies",
+      "date_end": "19/04/26",
+      "confirmed": true
+    },
+    {
+      "id": 8,
+      "name": "Investec SA Women's Open",
+      "date": "22/04/26",
+      "country": "South Africa",
+      "location": "Royal Cape Golf Club",
+      "type": "Ladies",
+      "date_end": "26/04/26",   
+      "confirmed": true
+    },
+    {
+      "id": 9,
+      "name": "MCB Ladies Classic - Mauritius",
+      "date": "30/05/26",
+      "country": "Mauritius Islands",
+      "location": "The Legend Course at Con Mare Plage",
+      "type": "Ladies",
+      "date_end": "03/05/26",   
+      "confirmed": true
+    },
+    {
+      "id": 10,
+      "name": "Amoundi German Masters",
+      "date": "13/05/26",
+      "country": "Germany",
+      "location": "Green Eagle Golf Courses",
+      "type": "Ladies",
+      "date_end": "17/05/26",   
+      "confirmed": true
+    },
+    {
+      "id": 11,
+      "name": "Lalla Meryem Cup",
+      "date": "20/05/26",
+      "country": "Morocco",
+      "location": "Royal Golf Dar Es Salam",
+      "type": "Ladies",
+      "date_end": "24/05/26",   
+      "confirmed": true
+    },
+    {
+      "id": 12,
+      "name": "Jabra Ladies Open",
+      "date": "27/05/26",
+      "country": "France",
+      "location": "Evian Golf Resort",
+      "type": "Ladies",
+      "date_end": "31/05/26",   
+      "confirmed": true
+    }
+
+  ]
+}

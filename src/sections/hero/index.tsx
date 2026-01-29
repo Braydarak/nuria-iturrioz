@@ -2,9 +2,11 @@ import bg from "../../assets/Nuria-golfing.png";
 import LogoLoop from "../../components/logoLoopDesktop";
 import LogoLoopMobile from "../../components/LogoLoopMobile";
 import { useLayout } from "../../context/LayoutContext";
+import { getNextTournament } from "../../utils/tournamentDate";
 
 const Hero = () => {
   const { isHeaderOpen } = useLayout();
+  const nextTournament = getNextTournament();
 
   return (
     <section
@@ -118,6 +120,20 @@ const Hero = () => {
           />
         </svg>
       </div>
+
+      {nextTournament && (
+        <div className="hidden md:flex absolute bottom-10 left-30 z-20 flex-col gap-2 text-left">
+          <span className="text-white text-sm uppercase tracking-widest font-bold">
+            {nextTournament.isCurrent ? "Torneo actual" : "Próximo torneo"}
+          </span>
+          <span className="text-white text-3xl font-semibold leading-tight">
+            {nextTournament.name}
+          </span>
+          <span className="text-gray-200 text-xl">
+            {nextTournament.date} - {nextTournament.country}
+          </span>
+        </div>
+      )}
 
       {/* Contenido principal del Hero */}
       <div className="relative z-10 mx-auto max-w-screen h-full flex items-stretch justify-end">

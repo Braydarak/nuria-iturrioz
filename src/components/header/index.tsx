@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useLayout } from "../../context/LayoutContext";
 import LogoLoopMobile from "../LogoLoopMobile";
+import { getNextTournament } from "../../utils/tournamentDate";
 
 const Header = () => {
   const { isHeaderOpen: open, setIsHeaderOpen: setOpen } = useLayout();
@@ -16,6 +17,8 @@ const Header = () => {
   }, []);
 
   const visible = location.pathname !== "/" || scrolled || open;
+
+  const nextTournament = getNextTournament();
 
   return (
     <header
@@ -130,15 +133,21 @@ const Header = () => {
               </Link>
               <div className="w-3/4 h-0.5 bg-[#E6E6E6]" />
 
-              <div className="flex flex-col justify-center items-center gap-2 text-center">
-                <span className="text-[#2A579E] text-sm uppercase tracking-widest font-bold">
-                  Próximo torneo
-                </span>
-                <span className="text-black text-2xl font-semibold leading-tight px-4">
-                  PIF Saudi Ladies International
-                </span>
-                <span className="text-gray-500 text-lg">1/02/26</span>
-              </div>
+              {nextTournament && (
+                <div className="flex flex-col justify-center items-center gap-2 text-center">
+                  <span className="text-[#2A579E] text-sm uppercase tracking-widest font-bold">
+                    {nextTournament.isCurrent
+                      ? "Torneo actual"
+                      : "Próximo torneo"}
+                  </span>
+                  <span className="text-black text-2xl font-semibold leading-tight px-4">
+                    {nextTournament.name}
+                  </span>
+                  <span className="text-gray-500 text-lg">
+                    {nextTournament.date} - {nextTournament.country}
+                  </span>
+                </div>
+              )}
             </div>
 
             <div className="mt-auto w-full">
