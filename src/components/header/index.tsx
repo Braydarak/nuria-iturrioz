@@ -48,7 +48,7 @@ const Header = () => {
               Inicio
             </Link>
             <Link
-              to="/carrer"
+              to="/career"
               className="text-black text-2xl hover:text-[#2A579E] transition-colors"
             >
               Carrera
@@ -111,7 +111,7 @@ const Header = () => {
                 Inicio
               </Link>
               <Link
-                to="/carrer"
+                to="/career"
                 className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
                 onClick={() => setOpen(false)}
               >
