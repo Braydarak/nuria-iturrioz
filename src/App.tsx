@@ -4,7 +4,7 @@ import Header from "./components/header";
 import HomePage from "./pages/home";
 import NewsPage from "./pages/news";
 import CareerPage from "./pages/carrer";
-import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTop from "./components/scrollToTop";
 import StatsPage from "./pages/stats-page";
 
 import { LayoutProvider } from "./context/LayoutContext";
