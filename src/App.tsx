@@ -8,6 +8,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import StatsPage from "./pages/stats-page";
 
 import { LayoutProvider } from "./context/LayoutContext";
+import Footer from "./components/footer";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/carrer" element={<CareerPage />} />
           <Route path="/stats" element={<StatsPage />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </LayoutProvider>
   );
