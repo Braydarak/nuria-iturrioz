@@ -7,5 +7,14 @@
     "contact": "Contact",
     "actualTour": "Current tournament",
     "nextTour": "Next tournament"
+  },
+  "footer": {
+    "description": "Official website of Nuria Iturrioz. Professional golfer competing at the highest level. Passion, discipline, and dedication in every swing.",
+    "followMe": "Follow me",
+    "rights": "All rights reserved.",
+    "legal": "Nuria Iturrioz's name, image, and signature are registered trademarks and/or protected personality rights. Unauthorized use of these elements is strictly prohibited. This website is the official channel of communication and digital representation of the athlete.",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookies",
+    "contact": "Contact"
   }
 }

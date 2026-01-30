@@ -1,7 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useTranslation();
 
   return (
     <footer className="relative bg-[#2A579E] text-white pt-16 pb-8">
@@ -20,16 +22,14 @@ const Footer = () => {
               />
             </Link>
             <p className="text-blue-100/90 text-sm leading-relaxed font-light">
-              Sitio web oficial de Nuria Iturrioz. Golfista profesional
-              compitiendo al más alto nivel. Pasión, disciplina y dedicación en
-              cada swing.
+              {t("footer.description")}
             </p>
           </div>
 
           {/* Redes Sociales y Enlaces */}
           <div className="flex flex-col items-center lg:items-end gap-6">
             <h3 className="text-sm uppercase tracking-[0.2em] font-semibold text-blue-200">
-              Sígueme
+              {t("footer.followMe")}
             </h3>
             <div className="flex items-center gap-6">
               {/* Instagram */}
@@ -134,26 +134,20 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-blue-100/60 font-light">
           <div className="text-center md:text-left max-w-2xl space-y-2">
             <p>
-              © {currentYear} Nuria Iturrioz. Todos los derechos reservados.
+              © {currentYear} Nuria Iturrioz. {t("footer.rights")}
             </p>
-            <p className="leading-relaxed">
-              El nombre, imagen y firma de Nuria Iturrioz son marcas registradas
-              y/o derechos de personalidad protegidos. El uso no autorizado de
-              estos elementos está estrictamente prohibido. Este sitio web es el
-              canal oficial de comunicación y representación digital de la
-              deportista.
-            </p>
+            <p className="leading-relaxed">{t("footer.legal")}</p>
           </div>
 
           <div className="flex items-center gap-6">
             <Link to="/privacy" className="hover:text-white transition-colors">
-              Política de Privacidad
+              {t("footer.privacy")}
             </Link>
             <Link to="/cookies" className="hover:text-white transition-colors">
-              Cookies
+              {t("footer.cookies")}
             </Link>
             <Link to="/contact" className="hover:text-white transition-colors">
-              Contacto
+              {t("footer.contact")}
             </Link>
           </div>
         </div>
