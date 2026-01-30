@@ -66,6 +66,12 @@ const Header = () => {
             >
               Noticias
             </Link>
+            <Link
+              to="/contact"
+              className="text-black text-2xl hover:text-[#2A579E] transition-colors"
+            >
+              Contacto
+            </Link>
             <LanguageSelector />
           </nav>
 
@@ -136,6 +142,12 @@ const Header = () => {
               >
                 Noticias
               </Link>
+              <Link
+              to="/contact"
+              className="text-black text-2xl hover:text-[#2A579E] transition-colors"
+            >
+              Contacto
+            </Link>
               <div className="w-3/4 h-0.5 bg-[#E6E6E6]" />
 
               {nextTournament && (

@@ -6,6 +6,7 @@ import NewsPage from "./pages/news";
 import CareerPage from "./pages/carrer";
 import ScrollToTop from "./components/scrollToTop";
 import StatsPage from "./pages/stats-page";
+import ContactPage from "./pages/contact";
 
 import { LayoutProvider } from "./context/LayoutContext";
 import Footer from "./components/footer";
@@ -21,6 +22,7 @@ function App() {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/career" element={<CareerPage />} />
           <Route path="/stats" element={<StatsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
