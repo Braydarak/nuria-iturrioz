@@ -17,9 +17,24 @@ const Header = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   const visible = location.pathname !== "/" || scrolled || open;
 
   const nextTournament = getNextTournament();
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <header
@@ -32,7 +47,11 @@ const Header = () => {
       <div className="mx-auto max-w-screen">
         <div className="flex h-26 items-center justify-between md:justify-around px-4">
           {/* Left: Logo */}
-          <Link to="/" className="flex items-center gap-2">
+          <Link
+            to="/"
+            className="flex items-center gap-2"
+            onClick={handleScrollToTop}
+          >
             <img
               src="/NuriaLogo.blue.svg"
               alt="Nuria Iturrioz"
@@ -45,6 +64,7 @@ const Header = () => {
             <Link
               to="/"
               className="text-black text-2xl hover:text-[#2A579E] transition-colors"
+              onClick={handleScrollToTop}
             >
               Inicio
             </Link>
@@ -117,7 +137,10 @@ const Header = () => {
               <Link
                 to="/"
                 className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  handleScrollToTop();
+                }}
               >
                 Inicio
               </Link>
