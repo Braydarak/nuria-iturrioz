@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLetNews } from "../../data/news";
 import letLogo from "../../assets/LET-LOGO.webp";
+import AnimatedLoader from "../animatedLoader";
 
 const NewsSection = () => {
   const { news, loading, error } = useLetNews();
@@ -12,16 +13,16 @@ const NewsSection = () => {
     return 6;
   });
 
-  // No useEffect needed for initial set if we do lazy initialization,
-  // but if we want to handle resize dynamically we could add listener,
-  // though typically "load more" state shouldn't reset on resize.
-  // We'll stick to initial check.
-
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 6);
   };
 
-  if (loading) return <div>Cargando noticias...</div>;
+  if (loading)
+    return (
+      <div className="flex w-full justify-center items-center">
+        <AnimatedLoader />
+      </div>
+    );
   if (error) return null;
 
   const displayedNews = news.slice(0, visibleCount);
