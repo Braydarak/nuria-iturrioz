@@ -10,7 +10,8 @@ const LogoLoop = ({ heightClass = 'h-50', className = '' }: LogoLoopProps) => {
   const logos = useMemo(() => {
     const modules = import.meta.glob('../../assets/sponsors/*.{png,jpg,jpeg,svg,avif,webp}', {
       eager: true,
-      as: 'url',
+      query: '?url',
+      import: 'default',
     }) as Record<string, string>
     // Ordena por nombre para un orden estable
     return Object.entries(modules)

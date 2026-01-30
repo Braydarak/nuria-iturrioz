@@ -152,7 +152,8 @@ const LogoLoopMobile = ({ heightClass = 'h-16', className = '' }: { heightClass?
   const logos = useMemo(() => {
     const modules = import.meta.glob('../../assets/sponsors/*.{png,jpg,jpeg,svg,avif,webp}', {
       eager: true,
-      as: 'url',
+      query: '?url',
+      import: 'default',
     }) as Record<string, string>
     const urls = Object.entries(modules)
       .sort(([a], [b]) => a.localeCompare(b))

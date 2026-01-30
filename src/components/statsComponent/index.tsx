@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { useLetStatistics, type StatEntry } from './useLetStatistics'
+import { useLetStatistics, type StatEntry } from '../../data/useLetStatistics'
 
 export default function StatsComponent() {
   const { data, entries, loading, error, hasData } = useLetStatistics()

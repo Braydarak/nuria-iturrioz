@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import nuri from '../../assets/nuri.png'
-import { useLetStatistics } from '../../components/statsComponent/useLetStatistics'
+import { useLetStatistics } from '../../data/useLetStatistics'
 
 function useCountUp(target: number | null, duration = 1200) {
   const [value, setValue] = useState(0)
