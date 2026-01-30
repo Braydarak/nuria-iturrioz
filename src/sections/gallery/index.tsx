@@ -1,6 +1,6 @@
 import { useFlickrPhotos } from "../../data/last_letPhotos";
 import AnimatedLoader from "../../components/animatedLoader";
-import Masonry from "../../components/ui/Masonry";
+import Masonry from "../../components/mansoryGrid";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
