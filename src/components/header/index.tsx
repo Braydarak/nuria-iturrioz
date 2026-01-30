@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full font-header transform transition-all drop-shadow-2xl duration-300 ${
+      className={`fixed top-0 z-[100] w-full font-header transform transition-all drop-shadow-2xl duration-300 ${
         visible
           ? "translate-y-0 opacity-100 bg-[#F8F8F8] border-b border-[#E6E6E6] shadow-sm"
           : "-translate-y-full opacity-0"
