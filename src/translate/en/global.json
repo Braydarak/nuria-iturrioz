@@ -1,0 +1,11 @@
+{
+  "header": {
+    "home": "Home",
+    "career": "Career",
+    "stats": "Statistics",
+    "news": "News",
+    "contact": "Contact",
+    "actualTour": "Current tournament",
+    "nextTour": "Next tournament"
+  }
+}

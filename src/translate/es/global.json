@@ -1,0 +1,11 @@
+{
+  "header": {
+    "home": "Inicio",
+    "career": "Carrera",
+    "stats": "Estadísticas",
+    "news": "Noticias",
+    "contact": "Contacto",
+    "actualTour": "Torneo actual",
+    "nextTour": "Próximo torneo"
+  }
+}

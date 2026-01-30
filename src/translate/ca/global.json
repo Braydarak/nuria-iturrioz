@@ -1,0 +1,11 @@
+{
+  "header": {
+    "home": "Inici",
+    "career": "Carrera",
+    "stats": "Estadístiques",
+    "news": "Notícies",
+    "contact": "Contacte",
+    "actualTour": "Torneig actual",
+    "nextTour": "Proper torneig"
+  }
+}

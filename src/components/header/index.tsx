@@ -4,11 +4,13 @@ import { useLayout } from "../../context/LayoutContext";
 import LogoLoopMobile from "../LogoLoopMobile";
 import { getNextTournament } from "../../utils/tournamentDate";
 import LanguageSelector from "../languageSelector";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const { isHeaderOpen: open, setIsHeaderOpen: setOpen } = useLayout();
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 0);
@@ -66,31 +68,31 @@ const Header = () => {
               className="text-black text-2xl hover:text-[#2A579E] transition-colors"
               onClick={handleScrollToTop}
             >
-              Inicio
+              {t("header.home")}
             </Link>
             <Link
               to="/career"
               className="text-black text-2xl hover:text-[#2A579E] transition-colors"
             >
-              Carrera
+              {t("header.career")}
             </Link>
             <Link
               to="/stats"
               className="text-black text-2xl hover:text-[#2A579E] transition-colors"
             >
-              Estadísticas
+              {t("header.stats")}
             </Link>
             <Link
               to="/news"
               className="text-black text-2xl hover:text-[#2A579E] transition-colors"
             >
-              Noticias
+              {t("header.news")}
             </Link>
             <Link
               to="/contact"
               className="text-black text-2xl hover:text-[#2A579E] transition-colors"
             >
-              Contacto
+              {t("header.contact")}
             </Link>
             <LanguageSelector />
           </nav>
@@ -142,35 +144,35 @@ const Header = () => {
                   handleScrollToTop();
                 }}
               >
-                Inicio
+                {t("header.home")}
               </Link>
               <Link
                 to="/career"
                 className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
                 onClick={() => setOpen(false)}
               >
-                Carrera
+                {t("header.career")}
               </Link>
               <Link
                 to="/stats"
                 className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
                 onClick={() => setOpen(false)}
               >
-                Estadísticas
+                {t("header.stats")}
               </Link>
               <Link
                 to="/news"
                 className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
                 onClick={() => setOpen(false)}
               >
-                Noticias
+                {t("header.news")}
               </Link>
               <Link
                 to="/contact"
                 className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
                 onClick={() => setOpen(false)}
               >
-                Contacto
+                {t("header.contact")}
               </Link>
               <div className="w-3/4 h-0.5 bg-[#E6E6E6]" />
 
@@ -178,8 +180,8 @@ const Header = () => {
                 <div className="flex flex-col justify-center items-center gap-2 text-center">
                   <span className="text-[#2A579E] text-sm uppercase tracking-widest font-bold">
                     {nextTournament.isCurrent
-                      ? "Torneo actual"
-                      : "Próximo torneo"}
+                      ? t("header.actualTour")
+                      : t("header.nextTour")}
                   </span>
                   <span className="text-black text-2xl font-semibold leading-tight px-4">
                     {nextTournament.name}
