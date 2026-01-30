@@ -113,7 +113,7 @@ const Header = () => {
           }`}
         >
           <div className="flex flex-col h-full pt-10 w-full">
-            <div className="flex flex-col items-center justify-center text-xl gap-10">
+            <div className="flex flex-col items-center justify-center text-xl gap-7">
               <Link
                 to="/"
                 className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
