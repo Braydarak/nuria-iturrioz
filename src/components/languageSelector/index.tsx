@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-type Language = "ES" | "EN" | "CA";
+type Language = "es" | "en" | "ca";
 
 interface LanguageOption {
   code: Language;
@@ -8,15 +9,17 @@ interface LanguageOption {
 }
 
 const languages: LanguageOption[] = [
-  { code: "ES", label: "Español" },
-  { code: "EN", label: "English" },
-  { code: "CA", label: "Català" },
+  { code: "es", label: "Español" },
+  { code: "en", label: "English" },
+  { code: "ca", label: "Català" },
 ];
 
 export default function LanguageSelector() {
+  const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState<Language>("ES");
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const currentLang = (i18n.resolvedLanguage || "es") as Language;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -32,9 +35,8 @@ export default function LanguageSelector() {
   }, []);
 
   const handleSelect = (lang: Language) => {
-    setCurrentLang(lang);
+    i18n.changeLanguage(lang);
     setIsOpen(false);
-    console.log(`Language changed to: ${lang}`);
   };
 
   return (
@@ -45,7 +47,7 @@ export default function LanguageSelector() {
         aria-expanded={isOpen}
         aria-haspopup="listbox"
       >
-        <span>{currentLang}</span>
+        <span>{currentLang.toUpperCase()}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
