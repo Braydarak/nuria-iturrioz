@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useLetStatistics } from '../statsComponent/useLetStatistics'
+import { useLetStatistics } from '../../data/useLetStatistics'
 
 function useCountUp(target: number | null, duration = 1200) {
   const [value, setValue] = useState(0)
