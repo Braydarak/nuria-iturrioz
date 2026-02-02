@@ -1,44 +1,44 @@
 {
-    "recognitions": [
-        {
-            "id": 1,
-            "name": "Reconocimiento por el ayuntamiento de Son Servera 2014",
-            "image": "../assets/recognitions/reconocimiento-por-el-ayuntamiento.webp"
-        },
-        {
-            "id": 2,
-            "name": "Reconocimiento por la federación española de golf 2013",
-            "image": "../assets/recognitions/reconocimiento-por-la-federacion.webp"
-        },
-        {
-            "id": 3,
-            "name": "Reconocimiento por la federación española de golf 2014",
-            "image": "../assets/recognitions/reconocimiento-por-la-federacion-2014.webp"
-        },
-        {
-            "id": 4,
-            "name": "Récord de campo Golf El Saler 2012 (65golpes)",
-            "image": "../assets/recognitions/Record-de-campo-Golf-El-Saler-20.webp"
-        },
-        {
-            "id": 5,
-            "name": "Reconocimiento federación española de golf 2016",
-            "image": "../assets/recognitions/reconocimiento-federacion-2016.webp"
-        },
-        {
-            "id": 6,
-            "name": "Reconocimiento de la federación española de golf 2019",
-            "image": "../assets/recognitions/reconocimiento-de-la-federacion-2019.webp"
-        },
-        {
-            "id": 7,
-            "name": "Reconocimiento federación balear de golf 2016",
-            "image": "../assets/recognitions/reconocimiento-federacion-balear-2016.webp"
-        },
-        {
-            "id": 8,
-            "name": "Diploma de haber conseguido el pase al LET 2016",
-            "image": "../assets/recognitions/diploma-LET.webp"
-        }
-    ]
+  "recognitions": [
+    {
+      "id": 1,
+      "name": "recognitions.items.r1",
+      "image": "../assets/recognitions/reconocimiento-por-el-ayuntamiento.webp"
+    },
+    {
+      "id": 2,
+      "name": "recognitions.items.r2",
+      "image": "../assets/recognitions/reconocimiento-por-la-federacion.webp"
+    },
+    {
+      "id": 3,
+      "name": "recognitions.items.r3",
+      "image": "../assets/recognitions/reconocimiento-por-la-federacion-2014.webp"
+    },
+    {
+      "id": 4,
+      "name": "recognitions.items.r4",
+      "image": "../assets/recognitions/Record-de-campo-Golf-El-Saler-20.webp"
+    },
+    {
+      "id": 5,
+      "name": "recognitions.items.r5",
+      "image": "../assets/recognitions/reconocimiento-federacion-2016.webp"
+    },
+    {
+      "id": 6,
+      "name": "recognitions.items.r6",
+      "image": "../assets/recognitions/reconocimiento-de-la-federacion-2019.webp"
+    },
+    {
+      "id": 7,
+      "name": "recognitions.items.r7",
+      "image": "../assets/recognitions/reconocimiento-federacion-balear-2016.webp"
+    },
+    {
+      "id": 8,
+      "name": "recognitions.items.r8",
+      "image": "../assets/recognitions/diploma-LET.webp"
+    }
+  ]
 }

@@ -2,9 +2,11 @@ import { useFlickrPhotos } from "../../data/last_letPhotos";
 import AnimatedLoader from "../../components/animatedLoader";
 import Masonry from "../../components/mansoryGrid";
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import gsap from "gsap";
 
 export default function MasonryGallery() {
+  const { t } = useTranslation();
   const { photos, loading, error } = useFlickrPhotos();
   const buttonRef = useRef<HTMLDivElement>(null);
 
@@ -74,7 +76,7 @@ export default function MasonryGallery() {
           rel="noreferrer"
           className="inline-flex items-center gap-2 bg-white text-[#2A579E] px-8 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 font-bold text-sm uppercase tracking-wide"
         >
-          Ver más en Flickr
+          {t("gallery.viewMoreFlickr")}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useLetNews } from "../../data/news";
 import letLogo from "../../assets/LET-LOGO.webp";
 import AnimatedLoader from "../animatedLoader";
+import { useTranslation } from "react-i18next";
 
 const NewsSection = () => {
+  const { t } = useTranslation("global");
   const { news, loading, error } = useLetNews();
   const [visibleCount, setVisibleCount] = useState(() => {
     // Check window if available during initialization (safe for client-side only apps like Vite)
@@ -52,7 +54,7 @@ const NewsSection = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 w-full bg-[#2A579E] text-white font-bold py-2 px-4 rounded hover:bg-[#1B3A75] transition-colors"
                 >
-                  <span>Ver noticia en la web del LET</span>
+                  <span>{t("newsPage.viewOnLet")}</span>
                   <img
                     src={letLogo}
                     alt="LET Logo"
@@ -71,7 +73,7 @@ const NewsSection = () => {
             onClick={handleLoadMore}
             className="px-6 py-3 border-2 border-[#2A579E] text-[#2A579E] font-bold rounded-full hover:bg-[#2A579E] hover:text-white transition-all duration-300"
           >
-            Cargar más noticias
+            {t("newsPage.loadMore")}
           </button>
         </div>
       )}

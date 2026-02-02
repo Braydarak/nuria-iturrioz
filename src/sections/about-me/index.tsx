@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import nuri from "../../assets/nuri.png";
 import { useLetStatistics } from "../../data/useLetStatistics";
 
@@ -35,6 +36,7 @@ function toNumberSafe(v: unknown): number | null {
 }
 
 const AboutMe = () => {
+  const { t } = useTranslation();
   const { data, entries, loading, error, memberAge } = useLetStatistics();
 
   const tournamentsRaw = useMemo(() => {
@@ -96,7 +98,7 @@ const AboutMe = () => {
 
           <div className="space-y-4">
             <h2 className="inline-block font-signature text-4xl md:text-5xl font-semibold -rotate-2 drop-shadow">
-              Sobre mí
+              {t("aboutMe.title")}
             </h2>
             <svg
               className="mt-1"
@@ -116,21 +118,15 @@ const AboutMe = () => {
             </svg>
             <div className="text-2xl leading-relaxed">
               <p className="mt-4">
-                Me llamo Nuria Iturrioz y{" "}
+                {t("aboutMe.p1_prefix")}
                 <strong className="bg-clip-text text-transparent bg-linear-to-r from-white to-[#A8D0FF]">
-                  quiero llegar a lo más alto del golf femenino mundial
+                  {t("aboutMe.p1_highlight")}
                 </strong>
-                .
+                {t("aboutMe.p1_suffix")}
               </p>
-              <p className="mt-4">
-                Aquí podréis saber un poco más de mí, de mi pasado, mi presente
-                y mi futuro.
-              </p>
-              <p className="mt-4">
-                ¡Espero que os guste y podáis disfrutar de mi carrera
-                acompañándome por todo el mundo!
-              </p>
-              <p className="mt-4">Gracias por vuestro apoyo.</p>
+              <p className="mt-4">{t("aboutMe.p2")}</p>
+              <p className="mt-4">{t("aboutMe.p3")}</p>
+              <p className="mt-4">{t("aboutMe.p4")}</p>
             </div>
 
             <div className="pt-2">
@@ -138,7 +134,7 @@ const AboutMe = () => {
                 to="/career"
                 className="group inline-flex items-center gap-3 rounded-full bg-white text-[#1B3A75] px-8 py-4 text-lg md:text-xl font-bold shadow-lg ring-1 ring-white/60 hover:bg-[#E6F0FF] hover:shadow-xl hover:ring-white transition-all duration-200"
               >
-                Animate a conocer mas sobre mí
+                {t("aboutMe.cta")}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -165,14 +161,16 @@ const AboutMe = () => {
                 <div className="font-signature text-6xl sm:text-7xl text-white leading-tight tracking-tight">
                   {age}
                 </div>
-                <div className="mt-2 text-xl sm:text-2xl text-white">Edad</div>
+                <div className="mt-2 text-xl sm:text-2xl text-white">
+                  {t("aboutMe.stats.age")}
+                </div>
               </div>
               <div>
                 <div className="font-signature text-6xl sm:text-7xl text-white leading-tight tracking-tight">
                   {wins ?? 0}
                 </div>
                 <div className="mt-2 text-xl sm:text-2xl text-white">
-                  Victorias LET
+                  {t("aboutMe.stats.wins")}
                 </div>
               </div>
               <div>
@@ -180,7 +178,7 @@ const AboutMe = () => {
                   {tournaments ?? 0}
                 </div>
                 <div className="mt-2 text-xl sm:text-2xl text-white">
-                  Torneos jugados
+                  {t("aboutMe.stats.played")}
                 </div>
               </div>
               <div>
@@ -188,7 +186,7 @@ const AboutMe = () => {
                   {visited}
                 </div>
                 <div className="mt-2 text-xl sm:text-2xl text-white">
-                  Países visitados
+                  {t("aboutMe.stats.countries")}
                 </div>
               </div>
             </div>

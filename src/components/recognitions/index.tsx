@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import recognitionsData from "../../data/recognitions.json";
+import { useTranslation } from "react-i18next";
 
 // Import all recognition images eagerly
 const recognitionImages = import.meta.glob(
@@ -7,10 +8,11 @@ const recognitionImages = import.meta.glob(
   {
     eager: true,
     import: "default",
-  }
+  },
 );
 
 const Recognitions = () => {
+  const { t } = useTranslation();
   const [visibleCount, setVisibleCount] = useState(4);
 
   const getImagePath = (jsonPath: string) => {
@@ -18,7 +20,7 @@ const Recognitions = () => {
     if (!filename) return "";
 
     const imageKey = Object.keys(recognitionImages).find((key) =>
-      key.endsWith(filename)
+      key.endsWith(filename),
     );
 
     return imageKey ? (recognitionImages[imageKey] as string) : "";
@@ -40,7 +42,7 @@ const Recognitions = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <h2 className="font-signature text-4xl md:text-5xl text-[#2A579E] text-center mb-16 tracking-tight">
-          Reconocimientos
+          {t("recognitions.title")}
         </h2>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
@@ -63,12 +65,12 @@ const Recognitions = () => {
                     {getImagePath(recognition.image) ? (
                       <img
                         src={getImagePath(recognition.image)}
-                        alt={recognition.name || "Reconocimiento"}
+                        alt={t(recognition.name) || t("recognitions.noImage")}
                         className="relative z-10 max-w-full max-h-full object-contain drop-shadow-sm transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
                       <div className="text-gray-300 text-xs uppercase tracking-widest font-bold">
-                        No image
+                        {t("recognitions.noImage")}
                       </div>
                     )}
                   </div>
@@ -77,7 +79,7 @@ const Recognitions = () => {
                   {recognition.name && (
                     <div className="w-full text-center border-t border-gray-200/50 pt-4 mt-auto">
                       <p className="text-[#1B3A75] text-xs md:text-sm font-bold uppercase tracking-widest leading-relaxed line-clamp-3">
-                        {recognition.name}
+                        {t(recognition.name)}
                       </p>
                     </div>
                   )}
@@ -94,7 +96,7 @@ const Recognitions = () => {
               onClick={handleLoadMore}
               className="group relative inline-flex items-center gap-3 px-8 py-4 bg-transparent border-2 border-[#1B3A75] text-[#1B3A75] rounded-full font-bold uppercase tracking-widest text-xs hover:bg-[#1B3A75] hover:text-white transition-all duration-300"
             >
-              <span>Cargar más</span>
+              <span>{t("recognitions.loadMore")}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
