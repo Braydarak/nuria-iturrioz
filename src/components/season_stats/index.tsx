@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import AnimatedLoader from "../animatedLoader";
 import {
   fetchSeasonStats,
@@ -8,6 +9,7 @@ import {
 } from "../../data/seasonStats";
 
 export default function SeasonStats() {
+  const { t } = useTranslation();
   const [highlights, setHighlights] = useState<HighlightTournament[]>([]);
   const [currentSeason, setCurrentSeason] = useState<string | null>(null);
   const [currentItems, setCurrentItems] = useState<HighlightTournament[]>([]);
@@ -29,7 +31,8 @@ export default function SeasonStats() {
           setCurrentItems(data.currentItems);
         }
       } catch (e) {
-        const msg = e instanceof Error ? e.message : "Error desconocido";
+        const msg =
+          e instanceof Error ? e.message : t("seasonStats.errorUnknown");
         if (!cancelled) setError(msg);
       } finally {
         if (!cancelled) setLoading(false);
@@ -39,7 +42,7 @@ export default function SeasonStats() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [t]);
 
   const seasons = useMemo(() => {
     const all = Array.from(new Set(highlights.map(seasonKey)));
@@ -113,10 +116,10 @@ export default function SeasonStats() {
     <section className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10">
       <header className="mb-6">
         <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-900">
-          Resultados por temporada
+          {t("seasonStats.title")}
         </h2>
         <p className="mt-1 text-sm text-neutral-600">
-          Explora los torneos de cada año y de la temporada actual.
+          {t("seasonStats.description")}
         </p>
       </header>
 
@@ -147,7 +150,7 @@ export default function SeasonStats() {
                       : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"
                   }`}
                 >
-                  Temporada actual
+                  {t("seasonStats.currentSeason")}
                 </button>
                 {seasons.length > 0 && (
                   <span
@@ -183,13 +186,13 @@ export default function SeasonStats() {
                   {selectedSeason === "__CURRENT__" ? (
                     <span className="inline-flex items-center gap-2 text-sm text-neutral-700">
                       <span className="px-2 py-1 rounded-full bg-[#2A579E]/10 text-[#2A579E] font-medium">
-                        Temporada actual
+                        {t("seasonStats.currentSeason")}
                       </span>
                     </span>
                   ) : (
                     <span className="inline-flex items-center gap-2 text-sm text-neutral-700">
                       <span className="px-2 py-1 rounded-full bg-neutral-800/10 text-neutral-800 font-medium">
-                        Temporada {selectedSeason}
+                        {t("seasonStats.season", { year: selectedSeason })}
                       </span>
                     </span>
                   )}
@@ -199,30 +202,34 @@ export default function SeasonStats() {
                   {(showAll
                     ? listForSelected
                     : listForSelected.slice(0, 4)
-                  ).map((t, idx) => (
+                  ).map((item, idx) => (
                     <li
                       key={idx}
                       className="px-4 sm:px-6 py-4 grid grid-cols-1 sm:grid-cols-5 gap-2 sm:gap-4 items-center"
                     >
                       <div className="text-neutral-600">
-                        <div className="text-sm">{t.date ?? "—"}</div>
+                        <div className="text-sm">{item.date ?? "—"}</div>
                         <div className="text-xs">
-                          Posición: {t.position ?? "—"}
+                          {t("seasonStats.position")} {item.position ?? "—"}
                         </div>
                       </div>
                       <div className="sm:col-span-2">
                         <div className="text-neutral-900 font-semibold">
-                          {t.name ?? "—"}
+                          {item.name ?? "—"}
                         </div>
                         <div className="text-xs text-neutral-500">
-                          Rondas: {t.rounds ?? "—"}
+                          {t("seasonStats.rounds")} {item.rounds ?? "—"}
                         </div>
                       </div>
                       <div className="text-neutral-900">
-                        <div className="text-sm">Score: {t.score ?? "—"}</div>
+                        <div className="text-sm">
+                          {t("seasonStats.score")} {item.score ?? "—"}
+                        </div>
                       </div>
                       <div className="text-neutral-900">
-                        <div className="text-sm">Vs Par: {t.vspar ?? "—"}</div>
+                        <div className="text-sm">
+                          {t("seasonStats.vsPar")} {item.vspar ?? "—"}
+                        </div>
                       </div>
                     </li>
                   ))}
@@ -235,7 +242,9 @@ export default function SeasonStats() {
                       onClick={() => setShowAll((v) => !v)}
                       className="text-sm font-medium text-[#2A579E] hover:underline"
                     >
-                      {showAll ? "Ver menos" : "Ver todos"}
+                      {showAll
+                        ? t("seasonStats.showLess")
+                        : t("seasonStats.showAll")}
                     </button>
                   </div>
                 )}
@@ -247,7 +256,7 @@ export default function SeasonStats() {
 
       {!loading && !error && !hasAnyData && (
         <div className="rounded-xl border border-yellow-200 bg-yellow-50 text-yellow-800 p-4">
-          No hay datos de torneos destacados por ahora.
+          {t("seasonStats.noData")}
         </div>
       )}
     </section>

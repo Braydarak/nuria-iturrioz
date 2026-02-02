@@ -1,19 +1,24 @@
-import SeasonStats from '../../components/season_stats'
-import StatsSection from '../../sections/stats'
+import SeasonStats from "../../components/season_stats";
+import StatsSection from "../../sections/stats";
+import { useTranslation } from "react-i18next";
 
 export default function StatsPage() {
+  const { t } = useTranslation();
   return (
     <main className="mx-auto max-w-screen mt-40">
       {/* Bloque superior: Season Stats con fondo blanco */}
       <section className="bg-white">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8">
           <header className="mb-8">
-            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900">Estadísticas</h1>
-            <p className="mt-2 text-sm text-neutral-600">Resumen por temporadas y métricas destacadas.</p>
+            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900">
+              {t("statsPage.title")}
+            </h1>
+            <p className="mt-2 text-sm text-neutral-600">
+              {t("statsPage.subtitle")}
+            </p>
             {/* Descripción de la sección de estadísticas */}
             <p className="mt-4 text-base text-neutral-700">
-              En esta sección os mostramos un poco sobre mis estadísticas en el Ladies European Tour:
-              primero, los resultados por temporada; debajo, otras métricas destacadas.
+              {t("statsPage.description")}
             </p>
           </header>
         </div>
@@ -48,5 +53,5 @@ export default function StatsPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import trophiesData from "../../data/trophies.json";
 
 // Import all trophy images eagerly
@@ -8,7 +9,7 @@ const trophyImages = import.meta.glob(
   {
     eager: true,
     import: "default",
-  }
+  },
 );
 
 interface TrophiesProps {
@@ -16,6 +17,7 @@ interface TrophiesProps {
 }
 
 const Trophies = ({ variant = "home" }: TrophiesProps) => {
+  const { t } = useTranslation();
   const [visibleCount, setVisibleCount] = useState(4);
 
   const getImagePath = (jsonPath: string) => {
@@ -23,7 +25,7 @@ const Trophies = ({ variant = "home" }: TrophiesProps) => {
     if (!filename) return "";
 
     const imageKey = Object.keys(trophyImages).find((key) =>
-      key.endsWith(filename)
+      key.endsWith(filename),
     );
 
     return imageKey ? (trophyImages[imageKey] as string) : "";
@@ -37,7 +39,9 @@ const Trophies = ({ variant = "home" }: TrophiesProps) => {
     if (variant === "home") {
       const timeout = setTimeout(() => {
         setHomeItems(
-          [...trophiesData.trophies].sort(() => 0.5 - Math.random()).slice(0, 4)
+          [...trophiesData.trophies]
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 4),
         );
       }, 0);
       return () => clearTimeout(timeout);
@@ -57,10 +61,9 @@ const Trophies = ({ variant = "home" }: TrophiesProps) => {
 
   return (
     <section className="w-full bg-transparent py-20 relative overflow-hidden">
-          <div className="container mx-auto px-4 relative z-10">
-              <h2
-          className="font-signature text-4xl text-center md:text-5xl text-[#2A579E] mb-10 tracking-tight">
-          Mis Trofeos
+      <div className="container mx-auto px-4 relative z-10">
+        <h2 className="font-signature text-4xl text-center md:text-5xl text-[#2A579E] mb-10 tracking-tight">
+          {t("trophies.title")}
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
           {itemsToRender.map((trophy, index) => {
@@ -96,7 +99,7 @@ const Trophies = ({ variant = "home" }: TrophiesProps) => {
                   {trophy.name && (
                     <div className="w-full text-center border-t border-gray-50 pt-4 mt-auto">
                       <p className="text-[#1B3A75] text-xs md:text-sm font-bold uppercase tracking-widest leading-relaxed line-clamp-3">
-                        {trophy.name}
+                        {t(trophy.name)}
                       </p>
                     </div>
                   )}
@@ -113,7 +116,7 @@ const Trophies = ({ variant = "home" }: TrophiesProps) => {
               to="/career"
               className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#1B3A75] text-white rounded-full font-bold uppercase tracking-widest text-xs shadow-lg hover:bg-[#2A579E] hover:shadow-blue-900/20 transition-all duration-300 overflow-hidden"
             >
-              <span className="relative z-10">Ver todos los trofeos</span>
+              <span className="relative z-10">{t("trophies.viewAll")}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

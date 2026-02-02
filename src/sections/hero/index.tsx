@@ -3,8 +3,10 @@ import LogoLoop from "../../components/logoLoopDesktop";
 import LogoLoopMobile from "../../components/LogoLoopMobile";
 import { useLayout } from "../../context/LayoutContext";
 import { getNextTournament } from "../../utils/tournamentDate";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
+  const { t } = useTranslation();
   const { isHeaderOpen } = useLayout();
   const nextTournament = getNextTournament();
 
@@ -30,7 +32,7 @@ const Hero = () => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 674.02 296.87"
           role="img"
-          aria-label="Nuria Logo"
+          aria-label={t("hero.logoAria")}
         >
           <title>NuriaLogo.ok</title>
           <path
@@ -124,7 +126,9 @@ const Hero = () => {
       {nextTournament && (
         <div className="hidden md:flex absolute bottom-10 left-30 z-20 flex-col gap-2 text-left">
           <span className="text-white text-sm uppercase tracking-widest font-bold">
-            {nextTournament.isCurrent ? "Torneo actual" : "Próximo torneo"}
+            {nextTournament.isCurrent
+              ? t("header.actualTour")
+              : t("header.nextTour")}
           </span>
           <span className="text-white text-3xl font-semibold leading-tight">
             {nextTournament.name}

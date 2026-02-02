@@ -1,6 +1,9 @@
 import nuriImg from "../../assets/nuri.png";
+import { useTranslation } from "react-i18next";
 
 const LivePage = () => {
+  const { t } = useTranslation("global");
+
   // Mock data - easy to update or replace with API later
   const liveData = {
     tournamentName: "Aramco Team Series - Tampa",
@@ -68,7 +71,7 @@ const LivePage = () => {
           </div>
         ))}
         <div className="flex items-center text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider pl-2">
-          Hole
+          {t("livePage.hole")}
         </div>
       </div>
 
@@ -83,7 +86,7 @@ const LivePage = () => {
           </div>
         ))}
         <div className="flex items-center text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider pl-2">
-          Par
+          {t("livePage.par")}
         </div>
       </div>
 
@@ -123,7 +126,7 @@ const LivePage = () => {
           );
         })}
         <div className="flex items-center text-[10px] sm:text-xs font-black text-gray-900 uppercase tracking-wider pl-2">
-          Score
+          {t("livePage.score")}
         </div>
       </div>
     </div>
@@ -145,7 +148,7 @@ const LivePage = () => {
           <div className="flex flex-col items-center md:items-end">
             <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-red-50 text-red-600 text-sm font-bold tracking-wider animate-pulse border border-red-100 mb-2">
               <span className="w-2 h-2 mr-2 bg-red-500 rounded-full"></span>
-              LIVE
+              {t("livePage.live")}
             </div>
             <div className="text-sm text-gray-400 font-medium">
               {liveData.date}
@@ -178,12 +181,9 @@ const LivePage = () => {
 
               {/* Info & Stats */}
               <div className="pt-4 px-6 pb-8 text-center">
-                <h2 className="text-2xl font-bold text-gray-900 font-header">
+                <h2 className="text-2xl mb-10 font-bold text-gray-900 font-header">
                   Nuria Iturrioz
                 </h2>
-                <p className="text-sm text-gray-500 font-medium uppercase tracking-wide mb-8">
-                  Spain
-                </p>
 
                 {/* KEY STATS: POSITION & SCORE */}
                 <div className="grid grid-cols-2 gap-3 mb-6">
@@ -191,7 +191,7 @@ const LivePage = () => {
                   <div className="bg-yellow-50 p-4 rounded-2xl border border-yellow-100 flex flex-col items-center justify-center relative overflow-hidden">
                     <div className="absolute top-0 right-0 -mt-2 -mr-2 w-10 h-10 bg-yellow-200 rounded-full opacity-50 blur-xl"></div>
                     <div className="text-[10px] text-yellow-800 uppercase font-bold tracking-widest mb-1 z-10">
-                      Position
+                      {t("livePage.position")}
                     </div>
                     <div className="text-4xl font-black text-yellow-900 z-10">
                       {liveData.rank}
@@ -202,7 +202,7 @@ const LivePage = () => {
                   <div className="bg-blue-900 p-4 rounded-2xl border border-blue-800 flex flex-col items-center justify-center text-white relative overflow-hidden">
                     <div className="absolute bottom-0 left-0 -mb-2 -ml-2 w-10 h-10 bg-cyan-500 rounded-full opacity-30 blur-xl"></div>
                     <div className="text-[10px] text-blue-200 uppercase font-bold tracking-widest mb-1 z-10">
-                      Total
+                      {t("livePage.total")}
                     </div>
                     <div className="text-4xl font-black text-white z-10">
                       {liveData.scoreToPar > 0
@@ -216,7 +216,7 @@ const LivePage = () => {
                 <div className="grid grid-cols-2 gap-4 border-t border-gray-100 pt-6">
                   <div>
                     <div className="text-xs text-gray-400 uppercase font-bold mb-1">
-                      Today
+                      {t("livePage.today")}
                     </div>
                     <div
                       className={`text-xl font-bold ${liveData.todayScore < 0 ? "text-green-600" : "text-gray-800"}`}
@@ -228,7 +228,7 @@ const LivePage = () => {
                   </div>
                   <div>
                     <div className="text-xs text-gray-400 uppercase font-bold mb-1">
-                      Hole
+                      {t("livePage.hole")}
                     </div>
                     <div className="text-xl font-bold text-gray-800">
                       {liveData.currentHole}
@@ -246,22 +246,22 @@ const LivePage = () => {
               <div className="flex flex-wrap items-center justify-between mb-6 gap-4">
                 <h3 className="text-lg font-bold text-gray-900 flex items-center">
                   <span className="w-1.5 h-6 bg-blue-600 rounded-full mr-3"></span>
-                  Live Scorecard
+                  {t("livePage.scorecard")}
                 </h3>
 
                 {/* Compact Legend */}
                 <div className="flex gap-3 text-[10px] sm:text-xs font-medium text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full">
                   <div className="flex items-center">
                     <span className="w-2 h-2 rounded-full bg-blue-500 mr-1.5"></span>
-                    Birdie
+                    {t("livePage.birdie")}
                   </div>
                   <div className="flex items-center">
                     <span className="w-2 h-2 rounded-full bg-gray-300 mr-1.5"></span>
-                    Par
+                    {t("livePage.par")}
                   </div>
                   <div className="flex items-center">
                     <span className="w-2 h-2 rounded-full bg-red-500 mr-1.5"></span>
-                    Bogey
+                    {t("livePage.bogey")}
                   </div>
                 </div>
               </div>
@@ -271,15 +271,15 @@ const LivePage = () => {
                 {/* Front 9 */}
                 <div>
                   <div className="text-xs text-gray-400 uppercase font-bold mb-3 tracking-widest pl-1">
-                    Front 9
+                    {t("livePage.frontNine")}
                   </div>
                   {renderHoleSet(frontNine)}
                 </div>
 
                 {/* Back 9 */}
-                <div>
+                <div className="mt-15">
                   <div className="text-xs text-gray-400 uppercase font-bold mb-3 tracking-widest pl-1">
-                    Back 9
+                    {t("livePage.backNine")}
                   </div>
                   {renderHoleSet(backNine)}
                 </div>
@@ -289,7 +289,7 @@ const LivePage = () => {
             {/* Compact Rounds History */}
             <div>
               <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 ml-1">
-                Rounds History
+                {t("livePage.roundsHistory")}
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {liveData.rounds.map((round) => (
@@ -305,14 +305,15 @@ const LivePage = () => {
                       <div
                         className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${round.isCurrent ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-400"}`}
                       >
-                        R{round.id}
+                        {t("livePage.roundAbbr")}
+                        {round.id}
                       </div>
                       <div className="text-sm font-semibold">
                         {round.isCurrent
-                          ? "Current"
+                          ? t("livePage.status.inProgress")
                           : round.strokes
-                            ? "Finished"
-                            : "Upcoming"}
+                            ? t("livePage.status.finished")
+                            : t("livePage.status.upcoming")}
                       </div>
                     </div>
 
@@ -338,7 +339,7 @@ const LivePage = () => {
               className="flex items-center justify-center w-full p-4 bg-gray-900 text-white rounded-2xl shadow-lg hover:bg-gray-800 transition-all group"
             >
               <span className="font-bold mr-2">
-                Ver estadísticas completas en LET
+                {t("livePage.viewFullStats")}
               </span>
               <svg
                 className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors"

@@ -8,6 +8,178 @@
     "actualTour": "Current tournament",
     "nextTour": "Next tournament"
   },
+  "hero": {
+    "logoAria": "Nuria Logo"
+  },
+  "aboutMe": {
+    "title": "About me",
+    "p1_prefix": "My name is Nuria Iturrioz and ",
+    "p1_highlight": "I want to reach the top of world women's golf",
+    "p1_suffix": ".",
+    "p2": "Here you can learn a little more about me, my past, my present, and my future.",
+    "p3": "I hope you like it and can enjoy my career accompanying me around the world!",
+    "p4": "Thanks for your support.",
+    "cta": "Get to know more about me",
+    "stats": {
+      "age": "Age",
+      "wins": "LET Wins",
+      "played": "Tournaments played",
+      "countries": "Countries visited"
+    }
+  },
+  "gallery": {
+    "viewMoreFlickr": "View more on Flickr"
+  },
+  "trophies": {
+    "title": "My Trophies",
+    "viewAll": "View all trophies",
+    "loadMore": "Load more",
+    "noImage": "No image",
+    "items": {
+      "t1": "2014 Amateur Champion at the Spanish Professional Open",
+      "t2": "2007 Balearic Champion",
+      "t3": "2008 Balearic Champion",
+      "t4": "2015 Spanish Champion",
+      "t5": "2012 Spanish U18 Champion",
+      "t6": "2014 Andalusia Cup Champion",
+      "t7": "2015 Puerta de Hierro Championship",
+      "t8": "2013 Puerta de Hierro Championship Winner",
+      "t9": "2012 Madrid Amateur Open Champion",
+      "t10": "2013 Madrid Amateur Open Champion",
+      "t11": "2013 Spanish Championship 5th Category",
+      "t12": "2009 Zonal Scoring Champion",
+      "t13": "2015 French International Champion",
+      "t14": "2011 Madrid Championship 2nd Category",
+      "t15": "Captain and Champions of the Spanish Territorial Championship 2nd Division (with the Balearic Federation) 2010",
+      "t20": "2010 Balearic Runner-up",
+      "t21": "2012 Spanish Runner-up",
+      "t22": "2014 Madrid Amateur Open Runner-up",
+      "t23": "2015 Madrid Amateur Open Runner-up",
+      "t24": "2019 Santander Golf Tour Champion"
+    }
+  },
+  "recognitions": {
+    "title": "Recognitions",
+    "loadMore": "Load more",
+    "noImage": "No image",
+    "items": {
+      "r1": "Recognition by the Son Servera Town Hall 2014",
+      "r2": "Recognition by the Spanish Golf Federation 2013",
+      "r3": "Recognition by the Spanish Golf Federation 2014",
+      "r4": "El Saler Golf Course Record 2012 (65 strokes)",
+      "r5": "Recognition by the Spanish Golf Federation 2016",
+      "r6": "Recognition by the Spanish Golf Federation 2019",
+      "r7": "Recognition by the Balearic Golf Federation 2016",
+      "r8": "Diploma for achieving the LET card 2016"
+    }
+  },
+  "career": {
+    "title": "My Career",
+    "p1": "I have always been passionate about sports: tennis, football, swimming... at 12 years old I decided to follow my sports path only with golf, thanks to my coach who pushed me to it.",
+    "p2": "At 14, my life moved to Madrid for the next 5 years at the CAR (High Performance Center). There I grew, learned, and formed myself as a person, accumulating tournaments and trophies.",
+    "p3": "The death of my father meant a great loss, certainly the most complicated situation I have had to live. Everything I am now, I owe to his effort and his vision to involve me in golf at just 6 years old.",
+    "p4": "Another decision in my life was not to go to the USA to pursue a university degree, as my goal was to become a professional soon. My future was cut short by pancreatitis that totally limited me from going to the 2nd stage of the qualifiers to compete in the Professional Golf League having passed the first stage a month earlier.",
+    "p5": "In 2016, after qualifying in December in the LET, my adventure begins without forgetting my main goal, to be one of the best in the LPGA.",
+    "p6": "I continue to pursue my main goal, to be the best golfer in the world, although I would also like to highlight my focus on qualifying for the Solheim Cup and the Olympics.",
+    "video": {
+      "rewind": "Rewind 10s",
+      "restart": "Restart",
+      "unmute": "Unmute",
+      "mute": "Mute"
+    }
+  },
+  "statsPage": {
+    "title": "Stats",
+    "subtitle": "Season summary and key metrics.",
+    "description": "In this section we show you a little about my statistics on the Ladies European Tour: first, the results by season; below, other outstanding metrics."
+  },
+  "seasonStats": {
+    "title": "Season Results",
+    "description": "Explore tournaments from each year and the current season.",
+    "errorUnknown": "Unknown error",
+    "currentSeason": "Current Season",
+    "season": "Season {{year}}",
+    "position": "Position:",
+    "rounds": "Rounds:",
+    "score": "Score:",
+    "vsPar": "Vs Par:",
+    "showLess": "Show less",
+    "showAll": "Show all",
+    "noData": "No highlight tournament data available for now."
+  },
+  "statsComponent": {
+    "title": "My Numbers on the LET",
+    "description": "You can press below to see more data",
+    "tournamentWins": "Tournament Wins",
+    "topTen": "Tournament Top Ten Finishes",
+    "drivingDistance": "Driving Distance",
+    "error": "Error: {{error}}",
+    "noData": "No statistics available for now.",
+    "otherStats": "Other statistics",
+    "hideAll": "hide full statistics",
+    "showAll": "show full statistics",
+    "noMoreStats": "No more statistics available."
+  },
+  "statsMetrics": {
+    "biggestComebackMargin": "Biggest Comeback Margin",
+    "totalNumberOfBirdies": "Total Number of Birdies",
+    "scoringAverage": "Scoring Average",
+    "strokeAverage": "Stroke Average",
+    "scramblingPercentage": "Scrambling %",
+    "bounceBackPercentage": "Bounce Back %",
+    "puttingAveragePerHole": "Putting Average (per Hole)",
+    "puttingAveragePerRound": "Putting Average (per Round)",
+    "sandSavesPercentage": "Sand Saves Percentage",
+    "greensInRegulationPercentage": "Greens in Regulation Percent",
+    "drivingAccuracyPercentage": "Driving Accuracy Percentage",
+    "totalHolesInOne": "Total Holes in One",
+    "averageParsPerRound": "Average Pars per Round",
+    "totalNumberOfPars": "Total Number of Pars",
+    "averageBirdiesPerRound": "Average Birdies per Round",
+    "averageEaglesPerRound": "Average Eagles per Round",
+    "totalNumberOfEagles": "Total Number of Eagles",
+    "totalNumberOfAlbatrosses": "Total Number of Albatrosses",
+    "averageAgainstPar": "Average against Par",
+    "lowRoundScore": "Low Round Score",
+    "greensInRegulation": "Greens in Regulation",
+    "puttsPerRound": "Putts per Round",
+    "sandSaves": "Sand Saves",
+    "drivingAccuracy": "Driving Accuracy",
+    "roundsUnderPar": "Rounds Under Par"
+  },
+  "newsPage": {
+    "title": "News",
+    "description": "Stay up to date with my latest tournaments, results, and news from the Ladies European Tour.",
+    "loadMore": "Load more news",
+    "viewOnLet": "View news on LET website"
+  },
+  "livePage": {
+    "live": "LIVE",
+    "position": "Position",
+    "total": "Total",
+    "today": "Today",
+    "hole": "Hole",
+    "par": "Par",
+    "score": "Score",
+    "frontNine": "Front 9",
+    "backNine": "Back 9",
+    "scorecard": "Scorecard",
+    "roundsHistory": "Rounds History",
+    "round": "Round",
+    "roundAbbr": "R",
+    "strokes": "Strokes",
+    "birdie": "Birdie",
+    "bogey": "Bogey",
+    "country": "Spain",
+    "viewFullStats": "View full stats on LET",
+    "dataSimulated": "Data is simulated for demonstration",
+    "refreshData": "Refresh Data",
+    "status": {
+      "inProgress": "In Progress",
+      "finished": "Finished",
+      "upcoming": "Upcoming"
+    }
+  },
   "footer": {
     "description": "Official website of Nuria Iturrioz. Professional golfer competing at the highest level. Passion, discipline, and dedication in every swing.",
     "followMe": "Follow me",

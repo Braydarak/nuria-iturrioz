@@ -8,6 +8,178 @@
     "actualTour": "Torneig actual",
     "nextTour": "Proper torneig"
   },
+  "hero": {
+    "logoAria": "Logo de Nuria"
+  },
+  "aboutMe": {
+    "title": "Sobre mi",
+    "p1_prefix": "Em dic Nuria Iturrioz i ",
+    "p1_highlight": "vull arribar al més alt del golf femení mundial",
+    "p1_suffix": ".",
+    "p2": "Aquí podreu saber una mica més de mi, del meu passat, el meu present i el meu futur.",
+    "p3": "Espero que us agradi i pugueu gaudir de la meva carrera acompanyant-me per tot el món!",
+    "p4": "Gràcies pel vostre suport.",
+    "cta": "Anima't a conèixer més sobre mi",
+    "stats": {
+      "age": "Edat",
+      "wins": "Victòries LET",
+      "played": "Tornejos jugats",
+      "countries": "Països visitats"
+    }
+  },
+  "gallery": {
+    "viewMoreFlickr": "Veure més a Flickr"
+  },
+  "trophies": {
+    "title": "Els meus trofeus",
+    "viewAll": "Veure tots els trofeus",
+    "loadMore": "Carregar més",
+    "noImage": "Sense imatge",
+    "items": {
+      "t1": "Campiona amateur 2014 a l'Open d'Espanya de professionals",
+      "t2": "Campiona de Balears 2007",
+      "t3": "Campiona de Balears 2008",
+      "t4": "Campiona d'Espanya 2015",
+      "t5": "Campiona d'Espanya sub18 2012",
+      "t6": "Campiona de la Copa Andalusia 2014",
+      "t7": "Campionat de Puerta de Hierro 2015",
+      "t8": "Campiona del Campionat de Puerta de Hierro 2013",
+      "t9": "Campiona de l'Open de Madrid amateur 2012",
+      "t10": "Campiona de l'Open de Madrid amateur 2013",
+      "t11": "Campionat d'Espanya 5a 2013",
+      "t12": "Campiona puntuable zonal 2009",
+      "t13": "Campiona internacional de França 2015",
+      "t14": "Campionat de Madrid 2a 2011",
+      "t15": "Capitana i campiones del Campionat d'Espanya per territorials 2a divisió (amb la federació balear) 2010",
+      "t20": "Subcampiona de Balears 2010",
+      "t21": "Subcampiona d'Espanya 2012",
+      "t22": "Subcampiona de l'Open de Madrid amateur 2014",
+      "t23": "Subcampiona de l'Open de Madrid amateur 2015 marco",
+      "t24": "Campiona del Santander Golf Tour 2019"
+    }
+  },
+  "recognitions": {
+    "title": "Reconeixements",
+    "loadMore": "Carregar més",
+    "noImage": "Sense imatge",
+    "items": {
+      "r1": "Reconeixement per l'Ajuntament de Son Servera 2014",
+      "r2": "Reconeixement per la Federació Espanyola de Golf 2013",
+      "r3": "Reconeixement per la Federació Espanyola de Golf 2014",
+      "r4": "Rècord de camp Golf El Saler 2012 (65 cops)",
+      "r5": "Reconeixement Federació Espanyola de Golf 2016",
+      "r6": "Reconeixement de la Federació Espanyola de Golf 2019",
+      "r7": "Reconeixement Federació Balear de Golf 2016",
+      "r8": "Diploma d'haver aconseguit el passi al LET 2016"
+    }
+  },
+  "career": {
+    "title": "La Meva Carrera",
+    "p1": "Tota la vida he estat una apassionada de l'esport: tennis, futbol, natació... als 12 anys vaig decidir seguir el meu camí esportiu només amb el golf, gràcies al meu entrenador que em va empènyer a fer-ho.",
+    "p2": "Amb 14 anys la meva vida es va traslladar a Madrid, pels 5 anys següents, al CAR (Centre d'Alt Rendiment). Allà vaig créixer, vaig aprendre i em vaig formar com a persona, acumulant tornejos i trofeus.",
+    "p3": "La mort del meu pare va significar una gran pèrdua, amb total seguretat la situació més complicada que he hagut de viure. Tot el que sóc ara, li ho dec al seu esforç i la seva visió per involucrar-me en el golf amb tan sols 6 anys.",
+    "p4": "Una altra decisió a la meva vida va ser no anar als EUA a cursar una carrera universitària, ja que el meu objectiu era convertir-me en professional aviat. El meu futur es trunca amb una pancreatitis que em limita totalment d'anar a la 2a fase de les classificatòries per competir a Lliga Professional de Golf havent superat la primera fase un mes abans.",
+    "p5": "El 2016, després de classificar-me al desembre al LET, comença la meva aventura sense oblidar-me del meu objectiu principal, ser de les millors a la LPGA.",
+    "p6": "Segueixo perseguint el meu objectiu principal, ser la millor golfista del món, tot i que també m'agradaria remarcar la meva focalització en classificar-me per a la Solheim Cup i les Olimpíades.",
+    "video": {
+      "rewind": "Retrocedir 10s",
+      "restart": "Reiniciar",
+      "unmute": "Reactivar so",
+      "mute": "Silenciar"
+    }
+  },
+  "statsPage": {
+    "title": "Estadístiques",
+    "subtitle": "Resum per temporades i mètriques destacades.",
+    "description": "En aquesta secció us mostrem una mica sobre les meves estadístiques al Ladies European Tour: primer, els resultats per temporada; a sota, altres mètriques destacades."
+  },
+  "seasonStats": {
+    "title": "Resultats per temporada",
+    "description": "Explora els tornejos de cada any i de la temporada actual.",
+    "errorUnknown": "Error desconegut",
+    "currentSeason": "Temporada actual",
+    "season": "Temporada {{year}}",
+    "position": "Posició:",
+    "rounds": "Rondes:",
+    "score": "Score:",
+    "vsPar": "Vs Par:",
+    "showLess": "Veure menys",
+    "showAll": "Veure tots",
+    "noData": "No hi ha dades de tornejos destacats per ara."
+  },
+  "statsComponent": {
+    "title": "Els meus números al LET",
+    "description": "Podeu prémer a sota per veure més dades",
+    "tournamentWins": "Victòries en Tornejos",
+    "topTen": "Top 10 en Tornejos",
+    "drivingDistance": "Distància de Drive",
+    "error": "Error: {{error}}",
+    "noData": "No hi ha estadístiques disponibles per ara.",
+    "otherStats": "Altres estadístiques",
+    "hideAll": "amagar estadístiques completes",
+    "showAll": "veure estadístiques completes",
+    "noMoreStats": "No hi ha més estadístiques disponibles."
+  },
+  "statsMetrics": {
+    "biggestComebackMargin": "Major marge de remuntada",
+    "totalNumberOfBirdies": "Total de Birdies",
+    "scoringAverage": "Mitjana de cops",
+    "strokeAverage": "Mitjana de cops",
+    "scramblingPercentage": "Percentatge de recuperació",
+    "bounceBackPercentage": "Percentatge de recuperació després de bogey",
+    "puttingAveragePerHole": "Mitjana de putts (per forat)",
+    "puttingAveragePerRound": "Mitjana de putts (per ronda)",
+    "sandSavesPercentage": "Percentatge de salvades des de búnquer",
+    "greensInRegulationPercentage": "Percentatge de Greens en regulació",
+    "drivingAccuracyPercentage": "Percentatge de precisió de Drive",
+    "totalHolesInOne": "Total de Forats en un",
+    "averageParsPerRound": "Mitjana de pars per ronda",
+    "totalNumberOfPars": "Total de pars",
+    "averageBirdiesPerRound": "Mitjana de birdies per ronda",
+    "averageEaglesPerRound": "Mitjana d'eagles per ronda",
+    "totalNumberOfEagles": "Total d'eagles",
+    "totalNumberOfAlbatrosses": "Total d'albatros",
+    "averageAgainstPar": "Mitjana contra par",
+    "lowRoundScore": "Puntuació de ronda més baixa",
+    "greensInRegulation": "Greens en regulació",
+    "puttsPerRound": "Putts per ronda",
+    "sandSaves": "Salvades des de búnquer",
+    "drivingAccuracy": "Precisió de Drive",
+    "roundsUnderPar": "Rondes sota par"
+  },
+  "newsPage": {
+    "title": "Notícies",
+    "description": "Mantigues-te al dia amb els meus últims tornejos, resultats i novetats del Ladies European Tour.",
+    "loadMore": "Carregar més notícies",
+    "viewOnLet": "Veure notícia al web del LET"
+  },
+  "livePage": {
+    "live": "EN DIRECTE",
+    "position": "Posició",
+    "total": "Total",
+    "today": "Avui",
+    "hole": "Forat",
+    "par": "Par",
+    "score": "Puntuació",
+    "frontNine": "Primers 9 forats",
+    "backNine": "Últims 9 forats",
+    "scorecard": "Targeta de puntuació",
+    "roundsHistory": "Historial de voltes",
+    "round": "Volta",
+    "roundAbbr": "V",
+    "strokes": "Cops",
+    "birdie": "Birdie",
+    "bogey": "Bogey",
+    "country": "Espanya",
+    "viewFullStats": "Veure estadístiques completes al LET",
+    "dataSimulated": "Les dades són simulades per demostració",
+    "refreshData": "Actualitzar dades",
+    "status": {
+      "inProgress": "En curs",
+      "finished": "Finalitzat",
+      "upcoming": "Pròxim"
+    }
+  },
   "footer": {
     "description": "Lloc web oficial de Nuria Iturrioz. Golfista professional competint al més alt nivell. Passió, disciplina i dedicació en cada swing.",
     "followMe": "Segueix-me",

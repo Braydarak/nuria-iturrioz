@@ -8,6 +8,178 @@
     "actualTour": "Torneo actual",
     "nextTour": "Próximo torneo"
   },
+  "hero": {
+    "logoAria": "Logo de Nuria"
+  },
+  "aboutMe": {
+    "title": "Sobre mí",
+    "p1_prefix": "Me llamo Nuria Iturrioz y ",
+    "p1_highlight": "quiero llegar a lo más alto del golf femenino mundial",
+    "p1_suffix": ".",
+    "p2": "Aquí podréis saber un poco más de mí, de mi pasado, mi presente y mi futuro.",
+    "p3": "¡Espero que os guste y podáis disfrutar de mi carrera acompañándome por todo el mundo!",
+    "p4": "Gracias por vuestro apoyo.",
+    "cta": "Anímate a conocer más sobre mí",
+    "stats": {
+      "age": "Edad",
+      "wins": "Victorias LET",
+      "played": "Torneos jugados",
+      "countries": "Países visitados"
+    }
+  },
+  "gallery": {
+    "viewMoreFlickr": "Ver más en Flickr"
+  },
+  "trophies": {
+    "title": "Mis Trofeos",
+    "viewAll": "Ver todos los trofeos",
+    "loadMore": "Cargar más",
+    "noImage": "Sin imagen",
+    "items": {
+      "t1": "Campeona amateur 2014 en el Open de españa de profesionales",
+      "t2": "Campeona de baleares 2007",
+      "t3": "Campeona de baleares 2008",
+      "t4": "Campeona de españa 2015",
+      "t5": "Campeona de españa sub18 2012",
+      "t6": "Campeona de la copa Andalucia 2014",
+      "t7": "Campeonato de puerta de hierro 2015",
+      "t8": "Campeona del campeonato de puerta de hierro 2013",
+      "t9": "Campeona del Open de madrid amateur 2012",
+      "t10": "Campeona del Open de madrid amateur 2013",
+      "t11": "Campeonato de España 5a 2013",
+      "t12": "Campeona puntuable zonal 2009",
+      "t13": "Campeona internacional de Francia 2015",
+      "t14": "Campeonato de Madrid 2a 2011",
+      "t15": "Capitana y campeonas del campeonato de España por territoriales 2a division (con la federación balear) 2010",
+      "t20": "Subcampeona de baleares 2010",
+      "t21": "Subcampeona de españa 2012",
+      "t22": "Subcampeona del Open de madrid amateur 2014",
+      "t23": "Subcampeona del Open de madrid amateur 2015 marco",
+      "t24": "Campeona del Santander Golf Tour 2019"
+    }
+  },
+  "recognitions": {
+    "title": "Reconocimientos",
+    "loadMore": "Cargar más",
+    "noImage": "Sin imagen",
+    "items": {
+      "r1": "Reconocimiento por el ayuntamiento de Son Servera 2014",
+      "r2": "Reconocimiento por la federación española de golf 2013",
+      "r3": "Reconocimiento por la federación española de golf 2014",
+      "r4": "Récord de campo Golf El Saler 2012 (65 golpes)",
+      "r5": "Reconocimiento federación española de golf 2016",
+      "r6": "Reconocimiento de la federación española de golf 2019",
+      "r7": "Reconocimiento federación balear de golf 2016",
+      "r8": "Diploma de haber conseguido el pase al LET 2016"
+    }
+  },
+  "career": {
+    "title": "Mi Carrera",
+    "p1": "Toda la vida he sido una apasionada del deporte: tenis, fútbol, natación… a los 12 años decidí seguir mi camino deportivo solo con el golf, gracias a mi entrenador que me empujó a ello.",
+    "p2": "Con 14 años mi vida se trasladó a Madrid, por los 5 siguientes años, en el CAR (Centro de Alto Rendimiento). Ahí crecí, aprendí y me formé como persona, acumulando torneos y trofeos.",
+    "p3": "La muerte de mi padre significó una gran pérdida, con total seguridad la situación más complicada que he tenido que vivir. Todo lo que soy ahora, se lo debo a su esfuerzo y su visión por involucrarme en el golf con tan solo 6 años.",
+    "p4": "Otra decisión en mi vida fue no ir a EE. UU. a cursar una carrera universitaria, ya que mi objetivo era convertirme en profesional pronto. Mi futuro se trunca con una pancreatitis que me limita totalmente de ir a la 2ª fase de las clasificatorias para competir a Liga Profesional de Golf habiendo superado la primera fase un mes antes.",
+    "p5": "En 2016, después de clasificarme en diciembre en la LET, empieza mi aventura sin olvidarme de mi objetivo principal, ser de las mejores en la LPGA.",
+    "p6": "Sigo persiguiendo mi principal objetivo, ser la mejor golfista del mundo, aunque también me gustaría remarcar mi focalización en clasificarme para la Solheim Cup y las Olimpiadas.",
+    "video": {
+      "rewind": "Retroceder 10s",
+      "restart": "Reiniciar",
+      "unmute": "Reactivar sonido",
+      "mute": "Mutear"
+    }
+  },
+  "statsPage": {
+    "title": "Estadísticas",
+    "subtitle": "Resumen por temporadas y métricas destacadas.",
+    "description": "En esta sección os mostramos un poco sobre mis estadísticas en el Ladies European Tour: primero, los resultados por temporada; debajo, otras métricas destacadas."
+  },
+  "seasonStats": {
+    "title": "Resultados por temporada",
+    "description": "Explora los torneos de cada año y de la temporada actual.",
+    "errorUnknown": "Error desconocido",
+    "currentSeason": "Temporada actual",
+    "season": "Temporada {{year}}",
+    "position": "Posición:",
+    "rounds": "Rondas:",
+    "score": "Score:",
+    "vsPar": "Vs Par:",
+    "showLess": "Ver menos",
+    "showAll": "Ver todos",
+    "noData": "No hay datos de torneos destacados por ahora."
+  },
+  "statsComponent": {
+    "title": "Mis Números en el LET",
+    "description": "Pueden presionar abajo para ver mas datos",
+    "tournamentWins": "Victorias en Torneos",
+    "topTen": "Top 10 en Torneos",
+    "drivingDistance": "Distancia de Drive",
+    "error": "Error: {{error}}",
+    "noData": "No hay estadísticas disponibles por ahora.",
+    "otherStats": "Otras estadísticas",
+    "hideAll": "ocultar estadísticas completas",
+    "showAll": "ver estadísticas completas",
+    "noMoreStats": "No hay más estadísticas disponibles."
+  },
+  "statsMetrics": {
+    "biggestComebackMargin": "Mayor margen de remontada",
+    "totalNumberOfBirdies": "Total de Birdies",
+    "scoringAverage": "Media de golpes",
+    "strokeAverage": "Media de golpes",
+    "scramblingPercentage": "Porcentaje de recuperación",
+    "bounceBackPercentage": "Porcentaje de recuperación tras bogey",
+    "puttingAveragePerHole": "Media de putts (por hoyo)",
+    "puttingAveragePerRound": "Media de putts (por vuelta)",
+    "sandSavesPercentage": "Porcentaje de recuperaciones desde bunker",
+    "greensInRegulationPercentage": "Porcentaje de Greens en regulación",
+    "drivingAccuracyPercentage": "Porcentaje de precisión de Drive",
+    "totalHolesInOne": "Total de Hoyos en uno",
+    "averageParsPerRound": "Media de pares por vuelta",
+    "totalNumberOfPars": "Total de pares",
+    "averageBirdiesPerRound": "Media de birdies por vuelta",
+    "averageEaglesPerRound": "Media de eagles por vuelta",
+    "totalNumberOfEagles": "Total de eagles",
+    "totalNumberOfAlbatrosses": "Total de albatros",
+    "averageAgainstPar": "Media contra par",
+    "lowRoundScore": "Vuelta más baja",
+    "greensInRegulation": "Greens en regulación",
+    "puttsPerRound": "Putts por vuelta",
+    "sandSaves": "Recuperaciones desde bunker",
+    "drivingAccuracy": "Precisión de Drive",
+    "roundsUnderPar": "Vueltas bajo par"
+  },
+  "newsPage": {
+    "title": "Noticias",
+    "description": "Mantente al día con mis últimos torneos, resultados y novedades del Ladies European Tour.",
+    "loadMore": "Cargar más noticias",
+    "viewOnLet": "Ver noticia en la web del LET"
+  },
+  "livePage": {
+    "live": "EN VIVO",
+    "position": "Posición",
+    "total": "Total",
+    "today": "Hoy",
+    "hole": "Hoyo",
+    "par": "Par",
+    "score": "Puntuación",
+    "frontNine": "Primeros 9 hoyos",
+    "backNine": "Últimos 9 hoyos",
+    "scorecard": "Tarjeta de puntuación",
+    "roundsHistory": "Historial de vueltas",
+    "round": "Vuelta",
+    "roundAbbr": "V",
+    "strokes": "Golpes",
+    "birdie": "Birdie",
+    "bogey": "Bogey",
+    "country": "España",
+    "viewFullStats": "Ver estadísticas completas en LET",
+    "dataSimulated": "Los datos son simulados para demostración",
+    "refreshData": "Actualizar datos",
+    "status": {
+      "inProgress": "En curso",
+      "finished": "Finalizado",
+      "upcoming": "Próximo"
+    }
+  },
   "footer": {
     "description": "Sitio web oficial de Nuria Iturrioz. Golfista profesional compitiendo al más alto nivel. Pasión, disciplina y dedicación en cada swing.",
     "followMe": "Sígueme",
