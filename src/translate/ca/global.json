@@ -180,6 +180,59 @@
       "upcoming": "Pròxim"
     }
   },
+  "contactPage": {
+    "title": "Uneix-te a l'Equip",
+    "whyCollaborate": "Per què col·laborar?",
+    "description": "Formar part del meu equip és més que un patrocini; és una aliança estratègica. Junts podem assolir noves fites, portar la teva marca als millors camps del món i connectar amb una audiència apassionada i fidel.",
+    "stats": {
+      "followers": "Seguidors a Instagram",
+      "career": "Carrera Professional",
+      "careerYears": "10 Anys",
+      "presence": "Presència Internacional",
+      "global": "Global"
+    },
+    "imageCaption": "Nuria Iturrioz"
+  },
+  "contactForm": {
+    "title": "Envia'm un missatge",
+    "subtitle": "Omple el formulari a continuació i em posaré en contacte amb tu el més aviat possible.",
+    "contactType": {
+      "label": "Motiu del contacte",
+      "placeholder": "Selecciona una opció",
+      "options": {
+        "sponsor": "Patrocini / Sponsor",
+        "press": "Premsa / Mitjans",
+        "fan": "Fan / Seguidor",
+        "other": "Altre"
+      },
+      "error": "Has de seleccionar un motiu de contacte"
+    },
+    "name": {
+      "label": "Nom complet",
+      "placeholder": "El teu nom",
+      "error": "El nom és obligatori"
+    },
+    "email": {
+      "label": "Correu electrònic",
+      "placeholder": "exemple@correu.com",
+      "errorRequired": "El correu electrònic és obligatori",
+      "errorInvalid": "Si us plau, introdueix un correu electrònic vàlid"
+    },
+    "message": {
+      "label": "El teu missatge",
+      "optional": "(Opcional)",
+      "placeholder": "En què et puc ajudar?"
+    },
+    "submit": {
+      "sending": "Enviant...",
+      "default": "Enviar missatge"
+    },
+    "errors": {
+      "general": "Si us plau, corregeix els errors marcats abans d'enviar."
+    },
+    "success": "Missatge enviat correctament! Gràcies per contactar.",
+    "error": "Hi ha hagut un error en enviar el missatge. Si us plau, torna-ho a provar."
+  },
   "footer": {
     "description": "Lloc web oficial de Nuria Iturrioz. Golfista professional competint al més alt nivell. Passió, disciplina i dedicació en cada swing.",
     "followMe": "Segueix-me",

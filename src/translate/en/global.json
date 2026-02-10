@@ -180,6 +180,59 @@
       "upcoming": "Upcoming"
     }
   },
+  "contactPage": {
+    "title": "Join the Team",
+    "whyCollaborate": "Why collaborate?",
+    "description": "Being part of my team is more than a sponsorship; it is a strategic alliance. Together we can reach new goals, take your brand to the best courses in the world and connect with a passionate and loyal audience.",
+    "stats": {
+      "followers": "Instagram Followers",
+      "career": "Professional Career",
+      "careerYears": "10 Years",
+      "presence": "International Presence",
+      "global": "Global"
+    },
+    "imageCaption": "Nuria Iturrioz"
+  },
+  "contactForm": {
+    "title": "Send me a message",
+    "subtitle": "Fill out the form below and I will get back to you as soon as possible.",
+    "contactType": {
+      "label": "Reason for contact",
+      "placeholder": "Select an option",
+      "options": {
+        "sponsor": "Sponsorship / Sponsor",
+        "press": "Press / Media",
+        "fan": "Fan / Follower",
+        "other": "Other"
+      },
+      "error": "You must select a reason for contact"
+    },
+    "name": {
+      "label": "Full name",
+      "placeholder": "Your name",
+      "error": "Name is required"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "example@email.com",
+      "errorRequired": "Email is required",
+      "errorInvalid": "Please enter a valid email"
+    },
+    "message": {
+      "label": "Your message",
+      "optional": "(Optional)",
+      "placeholder": "How can I help you?"
+    },
+    "submit": {
+      "sending": "Sending...",
+      "default": "Send message"
+    },
+    "errors": {
+      "general": "Please correct the marked errors before sending."
+    },
+    "success": "Message sent successfully! Thanks for contacting.",
+    "error": "There was an error sending the message. Please try again."
+  },
   "footer": {
     "description": "Official website of Nuria Iturrioz. Professional golfer competing at the highest level. Passion, discipline, and dedication in every swing.",
     "followMe": "Follow me",

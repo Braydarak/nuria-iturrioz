@@ -180,6 +180,59 @@
       "upcoming": "Próximo"
     }
   },
+  "contactPage": {
+    "title": "Únete al Equipo",
+    "whyCollaborate": "¿Por qué colaborar?",
+    "description": "Formar parte de mi equipo es más que un patrocinio; es una alianza estratégica. Juntos podemos alcanzar nuevas metas, llevar tu marca a los mejores campos del mundo y conectar con una audiencia apasionada y fiel.",
+    "stats": {
+      "followers": "Seguidores en Instagram",
+      "career": "Carrera Profesional",
+      "careerYears": "10 Años",
+      "presence": "Presencia Internacional",
+      "global": "Global"
+    },
+    "imageCaption": "Nuria Iturrioz"
+  },
+  "contactForm": {
+    "title": "Envíame un mensaje",
+    "subtitle": "Rellena el formulario a continuación y me pondré en contacto contigo lo antes posible.",
+    "contactType": {
+      "label": "Motivo del contacto",
+      "placeholder": "Selecciona una opción",
+      "options": {
+        "sponsor": "Patrocinio / Sponsor",
+        "press": "Prensa / Medios",
+        "fan": "Fan / Seguidor",
+        "other": "Otro"
+      },
+      "error": "Debes seleccionar un motivo de contacto"
+    },
+    "name": {
+      "label": "Nombre completo",
+      "placeholder": "Tu nombre",
+      "error": "El nombre es obligatorio"
+    },
+    "email": {
+      "label": "Correo electrónico",
+      "placeholder": "ejemplo@correo.com",
+      "errorRequired": "El correo electrónico es obligatorio",
+      "errorInvalid": "Por favor, introduce un correo electrónico válido"
+    },
+    "message": {
+      "label": "Tu mensaje",
+      "optional": "(Opcional)",
+      "placeholder": "¿En qué puedo ayudarte?"
+    },
+    "submit": {
+      "sending": "Enviando...",
+      "default": "Enviar mensaje"
+    },
+    "errors": {
+      "general": "Por favor, corrige los errores marcados antes de enviar."
+    },
+    "success": "¡Mensaje enviado correctamente! Gracias por contactar.",
+    "error": "Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo."
+  },
   "footer": {
     "description": "Sitio web oficial de Nuria Iturrioz. Golfista profesional compitiendo al más alto nivel. Pasión, disciplina y dedicación en cada swing.",
     "followMe": "Sígueme",

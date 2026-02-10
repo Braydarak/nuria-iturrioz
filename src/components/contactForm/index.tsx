@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
+import { useTranslation } from "react-i18next";
 
 const ContactForm = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     contactType: "",
     name: "",
@@ -30,17 +32,17 @@ const ContactForm = () => {
     let errorMsg = "";
     if (name === "email") {
       if (!value) {
-        errorMsg = "El correo electrónico es obligatorio";
+        errorMsg = t("contactForm.email.errorRequired");
       } else if (!validateEmail(value)) {
-        errorMsg = "Por favor, introduce un correo electrónico válido";
+        errorMsg = t("contactForm.email.errorInvalid");
       }
     } else if (name === "name") {
       if (!value.trim()) {
-        errorMsg = "El nombre es obligatorio";
+        errorMsg = t("contactForm.name.error");
       }
     } else if (name === "contactType") {
       if (!value) {
-        errorMsg = "Debes seleccionar un motivo de contacto";
+        errorMsg = t("contactForm.contactType.error");
       }
     }
     return errorMsg;
@@ -97,7 +99,7 @@ const ContactForm = () => {
 
     if (Object.values(newErrors).some((err) => err !== "")) {
       setGeneralError(
-        "Por favor, corrige los errores marcados antes de enviar.",
+        t("contactForm.errors.general"),
       );
       return;
     }
@@ -135,11 +137,10 @@ const ContactForm = () => {
     <div className="w-full max-w-3xl mx-auto h-full bg-white rounded-2xl overflow-hidden">
       <div className="p-8 md:p-12">
         <h2 className="text-3xl font-header font-bold text-[#2A579E] mb-2 text-center">
-          Envíame un mensaje
+          {t("contactForm.title")}
         </h2>
         <p className="text-gray-500 text-center mb-10 max-w-lg mx-auto">
-          Rellena el formulario a continuación y me pondré en contacto contigo
-          lo antes posible.
+          {t("contactForm.subtitle")}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -149,7 +150,7 @@ const ContactForm = () => {
               htmlFor="contactType"
               className="block text-sm font-semibold text-gray-700 mb-2"
             >
-              Motivo del contacto <span className="text-red-500">*</span>
+              {t("contactForm.contactType.label")} <span className="text-red-500">*</span>
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
@@ -181,12 +182,12 @@ const ContactForm = () => {
                 }`}
               >
                 <option value="" disabled>
-                  Selecciona una opción
+                  {t("contactForm.contactType.placeholder")}
                 </option>
-                <option value="sponsor">Patrocinio / Sponsor</option>
-                <option value="press">Prensa / Medios</option>
-                <option value="fan">Fan / Seguidor</option>
-                <option value="other">Otro</option>
+                <option value="sponsor">{t("contactForm.contactType.options.sponsor")}</option>
+                <option value="press">{t("contactForm.contactType.options.press")}</option>
+                <option value="fan">{t("contactForm.contactType.options.fan")}</option>
+                <option value="other">{t("contactForm.contactType.options.other")}</option>
               </select>
               <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400">
                 <svg
@@ -219,7 +220,7 @@ const ContactForm = () => {
                 htmlFor="name"
                 className="block text-sm font-semibold text-gray-700 mb-2"
               >
-                Nombre completo <span className="text-red-500">*</span>
+                {t("contactForm.name.label")} <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
@@ -245,7 +246,7 @@ const ContactForm = () => {
                   value={formData.name}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  placeholder="Tu nombre"
+                  placeholder={t("contactForm.name.placeholder")}
                   className={`w-full pl-12 pr-4 py-3.5 bg-gray-50 border rounded-xl focus:ring-2 outline-none transition-all placeholder-gray-400 hover:bg-gray-100 focus:bg-white ${
                     errors.name
                       ? "border-red-500 focus:ring-red-200 focus:border-red-500"
@@ -266,7 +267,7 @@ const ContactForm = () => {
                 htmlFor="email"
                 className="block text-sm font-semibold text-gray-700 mb-2"
               >
-                Correo electrónico <span className="text-red-500">*</span>
+                {t("contactForm.email.label")} <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
@@ -292,7 +293,7 @@ const ContactForm = () => {
                   value={formData.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  placeholder="ejemplo@correo.com"
+                  placeholder={t("contactForm.email.placeholder")}
                   className={`w-full pl-12 pr-4 py-3.5 bg-gray-50 border rounded-xl focus:ring-2 outline-none transition-all placeholder-gray-400 hover:bg-gray-100 focus:bg-white ${
                     errors.email
                       ? "border-red-500 focus:ring-red-200 focus:border-red-500"
@@ -314,9 +315,9 @@ const ContactForm = () => {
               htmlFor="message"
               className="block text-sm font-semibold text-gray-700 mb-2"
             >
-              Tu mensaje{" "}
+              {t("contactForm.message.label")}{" "}
               <span className="text-gray-400 font-normal ml-1 text-xs">
-                (Opcional)
+                {t("contactForm.message.optional")}
               </span>
             </label>
             <div className="relative">
@@ -342,7 +343,7 @@ const ContactForm = () => {
                 rows={5}
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="¿En qué puedo ayudarte?"
+                placeholder={t("contactForm.message.placeholder")}
                 className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2A579E]/20 focus:border-[#2A579E] outline-none transition-all placeholder-gray-400 hover:bg-gray-100 focus:bg-white resize-none"
               />
             </div>
@@ -380,11 +381,11 @@ const ContactForm = () => {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                Enviando...
+                {t("contactForm.submit.sending")}
               </>
             ) : (
               <>
-                Enviar mensaje
+                {t("contactForm.submit.default")}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -442,7 +443,7 @@ const ContactForm = () => {
                 />
               </svg>
               <p className="font-medium">
-                ¡Mensaje enviado correctamente! Gracias por contactar.
+                {t("contactForm.success")}
               </p>
             </div>
           )}
@@ -463,8 +464,7 @@ const ContactForm = () => {
                 />
               </svg>
               <p className="font-medium">
-                Hubo un error al enviar el mensaje. Por favor, inténtalo de
-                nuevo.
+                {t("contactForm.error")}
               </p>
             </div>
           )}

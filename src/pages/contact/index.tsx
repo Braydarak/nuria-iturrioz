@@ -1,8 +1,11 @@
 import ContactForm from "../../components/contactForm";
 import nuriaImg from "../../assets/nuri.png";
 import bgTexture from "../../assets/Nuria-golfing.png";
+import { useTranslation } from "react-i18next";
 
 const ContactPage = () => {
+  const { t } = useTranslation();
+
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero Section con Imagen de Fondo Parallax o Overlay */}
@@ -20,7 +23,7 @@ const ContactPage = () => {
 
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-header font-bold text-white mb-6 drop-shadow-md">
-            Únete al Equipo
+            {t("contactPage.title")}
           </h1>
         </div>
       </section>
@@ -32,13 +35,10 @@ const ContactPage = () => {
             {/* Tarjeta de Información */}
             <div className="bg-white rounded-2xl shadow-xl p-8 border-t-4 border-[#2A579E]">
               <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                ¿Por qué colaborar?
+                {t("contactPage.whyCollaborate")}
               </h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Formar parte de mi equipo es más que un patrocinio; es una
-                alianza estratégica. Juntos podemos alcanzar nuevas metas,
-                llevar tu marca a los mejores campos del mundo y conectar con
-                una audiencia apasionada y fiel.
+                {t("contactPage.description")}
               </p>
 
               <div className="space-y-4">
@@ -70,7 +70,7 @@ const ContactPage = () => {
                   <div>
                     <h3 className="text-2xl font-bold text-gray-900">+10k</h3>
                     <p className="text-sm text-gray-500 font-medium uppercase">
-                      Seguidores en Instagram
+                      {t("contactPage.stats.followers")}
                     </p>
                   </div>
                 </div>
@@ -94,10 +94,10 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-gray-900">
-                      10 Años
+                      {t("contactPage.stats.careerYears")}
                     </h3>
                     <p className="text-sm text-gray-500 font-medium uppercase">
-                      Carrera Profesional
+                      {t("contactPage.stats.career")}
                     </p>
                   </div>
                 </div>
@@ -122,9 +122,11 @@ const ContactPage = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900">Global</h3>
+                    <h3 className="text-2xl font-bold text-gray-900">
+                      {t("contactPage.stats.global")}
+                    </h3>
                     <p className="text-sm text-gray-500 font-medium uppercase">
-                      Presencia Internacional
+                      {t("contactPage.stats.presence")}
                     </p>
                   </div>
                 </div>
@@ -139,7 +141,7 @@ const ContactPage = () => {
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex items-end p-6">
                 <p className="text-white font-signature text-2xl">
-                  Nuria Iturrioz
+                  {t("contactPage.imageCaption")}
                 </p>
               </div>
             </div>
