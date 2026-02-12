@@ -10,7 +10,11 @@
     "viewLiveScores": "Veure resultats en directe"
   },
   "hero": {
-    "logoAria": "Logo de Nuria"
+    "logoAria": "Logo de Nuria",
+    "viewRoundResults": "Veure resultats de Nuria a la Ronda {{round}}",
+    "actualTour": "Torneig actual",
+    "nextTour": "Pròxim torneig",
+    "viewLiveScores": "Veure resultats en viu"
   },
   "aboutMe": {
     "title": "Sobre mi",

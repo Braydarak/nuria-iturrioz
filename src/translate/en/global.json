@@ -10,7 +10,11 @@
     "viewLiveScores": "View live scores"
   },
   "hero": {
-    "logoAria": "Nuria Logo"
+    "logoAria": "Nuria Logo",
+    "viewRoundResults": "View Nuria's results for Round {{round}}",
+    "actualTour": "Current Tournament",
+    "nextTour": "Next Tournament",
+    "viewLiveScores": "View Live Scores"
   },
   "aboutMe": {
     "title": "About me",

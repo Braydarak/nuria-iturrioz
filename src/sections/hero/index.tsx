@@ -11,7 +11,9 @@ const Hero = () => {
   const { t } = useTranslation();
   const { isHeaderOpen } = useLayout();
   const nextTournament = getNextTournament();
-  const { isLive } = useLiveStatus();
+  const { isLive, hasData, round } = useLiveStatus();
+
+  console.log(isLive, hasData, round);
 
   return (
     <section
@@ -130,8 +132,8 @@ const Hero = () => {
         <div className="absolute bottom-28 left-4 right-4 z-20 flex flex-col gap-2 items-center text-center md:bottom-10 md:left-30 md:right-auto md:items-start md:text-left">
           <span className="text-white text-xs md:text-sm uppercase tracking-widest font-bold flex items-center gap-2">
             {nextTournament.isCurrent
-              ? t("header.actualTour")
-              : t("header.nextTour")}
+              ? t("hero.actualTour")
+              : t("hero.nextTour")}
             {nextTournament.isCurrent && isLive && (
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -139,7 +141,7 @@ const Hero = () => {
               </span>
             )}
           </span>
-          {nextTournament.isCurrent && isLive ? (
+          {nextTournament.isCurrent && hasData ? (
             <Link
               to="/live"
               className="group flex flex-col items-center md:items-start"
@@ -147,12 +149,20 @@ const Hero = () => {
               <span className="text-white text-2xl md:text-3xl font-semibold leading-tight group-hover:underline decoration-white underline-offset-4 decoration-2">
                 {nextTournament.name}
               </span>
-              <div className="text-gray-200 text-lg md:text-xl flex items-center gap-2 mt-1 group-hover:text-white transition-colors justify-center md:justify-start">
-                <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                <span className="font-medium text-sm tracking-wide uppercase">
-                  {t("header.viewLiveScores")} &rarr;
-                </span>
-              </div>
+              {isLive ? (
+                <div className="text-gray-200 text-lg md:text-xl flex items-center gap-2 mt-1 group-hover:text-white transition-colors justify-center md:justify-start">
+                  <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                  <span className="font-medium text-sm tracking-wide uppercase">
+                    {t("hero.viewLiveScores")} &rarr;
+                  </span>
+                </div>
+              ) : (
+                <div className="text-gray-200 text-lg md:text-xl flex items-center gap-2 mt-1 group-hover:text-white transition-colors justify-center md:justify-start">
+                  <span className="font-medium text-sm tracking-wide uppercase">
+                    {t("hero.viewRoundResults", { round })} &rarr;
+                  </span>
+                </div>
+              )}
             </Link>
           ) : (
             <>

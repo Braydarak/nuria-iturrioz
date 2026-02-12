@@ -10,7 +10,11 @@
     "viewLiveScores": "Ver resultados en vivo"
   },
   "hero": {
-    "logoAria": "Logo de Nuria"
+    "logoAria": "Logo de Nuria",
+    "viewRoundResults": "Ver resultados de Nuria en la Ronda {{round}}",
+    "actualTour": "Torneo actual",
+    "nextTour": "Próximo torneo",
+    "viewLiveScores": "Ver resultados en vivo"
   },
   "aboutMe": {
     "title": "Sobre mí",
@@ -194,6 +198,13 @@
     },
     "imageCaption": "Nuria Iturrioz"
   },
+  "popUpLive": {
+    "liveNow": "Jugando Ahora",
+    "tournamentFallback": "Torneo",
+    "currentPosition": "Posición actual:",
+    "dontShowAgain": "No mostrar de nuevo",
+    "viewLeaderboard": "Ver Leaderboard"
+  },
   "contactForm": {
     "title": "Envíame un mensaje",
     "subtitle": "Rellena el formulario a continuación y me pondré en contacto contigo lo antes posible.",
@@ -242,12 +253,5 @@
     "privacy": "Política de Privacidad",
     "cookies": "Cookies",
     "contact": "Contacto"
-  },
-  "popUpLive": {
-    "liveNow": "En directo",
-    "tournamentFallback": "Torneo en curso",
-    "currentPosition": "Posición actual:",
-    "dontShowAgain": "No mostrar más",
-    "viewLeaderboard": "Ver Leaderboard"
   }
 }

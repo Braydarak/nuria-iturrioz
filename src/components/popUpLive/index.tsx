@@ -6,7 +6,7 @@ import gsap from "gsap";
 import nuriaImg from "../../assets/nuri.png";
 
 const PopUpLive = () => {
-  const { isLive, position, tournamentName } = useLiveStatus();
+  const { isLive, loading, position, tournamentName } = useLiveStatus();
   const location = useLocation();
   const { t } = useTranslation();
   const [isManuallyClosed, setIsManuallyClosed] = useState(false);
@@ -36,7 +36,15 @@ const PopUpLive = () => {
   const isHomePage = location.pathname === "/";
 
   // Determine visibility
+  // Only show if:
+  // 1. Not loading
+  // 2. isLive is explicitly true (checked by useLiveStatus which handles finished/retired logic)
+  // 3. Not hidden by user preference
+  // 4. Not on live page
+  // 5. Not manually closed in this session
+  // 6. On homepage only after scroll, or immediately on other pages
   const shouldShow =
+    !loading &&
     isLive &&
     !isHidden &&
     !isLivePage &&

@@ -3,6 +3,7 @@ import nuriImg from "../../assets/nuri.png";
 import { useTranslation } from "react-i18next";
 import AnimatedLoader from "../../components/animatedLoader";
 import { LET_API_URL } from "../../utils/constants";
+import { useLiveStatus } from "../../hooks/useLiveStatus";
 
 const BASE_API_URL = LET_API_URL;
 
@@ -37,6 +38,7 @@ interface LiveTournamentData {
 
 const LivePage = () => {
   const { t } = useTranslation("global");
+  const { isLive } = useLiveStatus();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [liveData, setLiveData] = useState<LiveTournamentData | null>(null);
@@ -289,10 +291,12 @@ const LivePage = () => {
             </p>
           </div>
           <div className="flex flex-col items-center md:items-end">
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-red-50 text-red-600 text-sm font-bold tracking-wider animate-pulse border border-red-100 mb-2">
-              <span className="w-2 h-2 mr-2 bg-red-500 rounded-full"></span>
-              {t("livePage.live")}
-            </div>
+            {isLive && (
+              <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-red-50 text-red-600 text-sm font-bold tracking-wider animate-pulse border border-red-100 mb-2">
+                <span className="w-2 h-2 mr-2 bg-red-500 rounded-full"></span>
+                {t("livePage.live")}
+              </div>
+            )}
             <div className="text-sm text-gray-400 font-medium">
               {liveData.date}
             </div>
