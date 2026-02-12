@@ -18,7 +18,7 @@
       "country": "Australia",
       "date_end": "01/03/26",
       "type": "Ladies",
-      "confirmed": true
+      "confirmed": false
     },
     {
       "id": 3,
@@ -28,7 +28,7 @@
       "country": "Australia",
       "date_end": "08/03/26",
       "type": "Ladies",
-      "confirmed": true
+      "confirmed": false
     },
     {
       "id": 4,
@@ -38,7 +38,7 @@
       "location": "Kooyonga Golf Club",
       "date_end": "15/03/26",
       "type": "Ladies",
-      "confirmed": true
+      "confirmed": false
     },
     {
       "id": 5,
@@ -48,7 +48,7 @@
       "location": "Sanctuary Cave Golf and Country Club",
       "type": "Ladies", 
       "date_end": "22/03/26",
-      "confirmed": true
+      "confirmed": false
     },
     {
       "id": 6,
