@@ -1,5 +1,5 @@
 import ContactForm from "../../components/contactForm";
-import nuriaImg from "../../assets/nuri.png";
+import nuriaImg from "../../assets/nuria/Nuria9.jpg";
 import bgTexture from "../../assets/Nuria-golfing.png";
 import { useTranslation } from "react-i18next";
 

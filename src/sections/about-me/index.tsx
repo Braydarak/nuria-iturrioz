@@ -1,8 +1,32 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import nuri from "../../assets/nuri.png";
 import { useLetStatistics } from "../../data/useLetStatistics";
+
+// Import all images
+import nuria1 from "../../assets/nuria/Nuria1.jpg";
+import nuria2 from "../../assets/nuria/Nuria2.jpg";
+import nuria3 from "../../assets/nuria/Nuria3.JPG";
+import nuria4 from "../../assets/nuria/Nuria4.JPG";
+import nuria5 from "../../assets/nuria/Nuria5.jpg";
+import nuria6 from "../../assets/nuria/Nuria6.JPG";
+import nuria8 from "../../assets/nuria/Nuria8.JPG";
+import nuria10 from "../../assets/nuria/Nuria10.jpg";
+import nuria11 from "../../assets/nuria/Nuria11.JPG";
+import nuria12 from "../../assets/nuria/Nuria12.JPG";
+
+const nuriaImages = [
+  nuria1,
+  nuria2,
+  nuria3,
+  nuria4,
+  nuria5,
+  nuria6,
+  nuria8,
+  nuria10,
+  nuria11,
+  nuria12,
+];
 
 function useCountUp(target: number | null, duration = 1200) {
   const [value, setValue] = useState(0);
@@ -71,6 +95,16 @@ const AboutMe = () => {
   const tournaments = useCountUp(tournamentsRaw ?? null);
   const visited = useCountUp(VISITED_COUNRTIES);
 
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % nuriaImages.length);
+    }, 4000); // Change image every 4 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative bg-linear-to-br from-[#1B3A75] via-[#2A579E] to-[#3C7BEA] text-white">
       <div className="pointer-events-none absolute -top-10 -left-10 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
@@ -84,15 +118,20 @@ const AboutMe = () => {
           <div className="relative">
             <div className="absolute -top-4 -left-4 h-24 w-24 rounded-xl bg-[#A8D0FF]/20 blur-md" />
             <div
-              className="overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/20 w-full max-w-[380px] md:max-w-[460px]"
+              className="relative overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/20 w-full max-w-[380px] md:max-w-[460px]"
               style={{ aspectRatio: "3 / 4" }}
             >
-              <img
-                src={nuri}
-                alt="Nuria Iturrioz"
-                className="h-full w-full object-cover"
-                style={{ filter: "saturate(1.1) contrast(1.05)" }}
-              />
+              {nuriaImages.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`Nuria Iturrioz ${index + 1}`}
+                  className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+                    index === currentImageIndex ? "opacity-100" : "opacity-0"
+                  }`}
+                  style={{ filter: "saturate(1.1) contrast(1.05)" }}
+                />
+              ))}
             </div>
           </div>
 

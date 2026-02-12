@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import nuriImg from "../../assets/nuri.png";
+import nuriImg from "../../assets/nuria/Nuria9.jpg";
 import { useTranslation } from "react-i18next";
 import AnimatedLoader from "../../components/animatedLoader";
 import { LET_API_URL } from "../../utils/constants";
