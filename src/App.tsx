@@ -8,6 +8,7 @@ import ScrollToTop from "./components/scrollToTop";
 import StatsPage from "./pages/stats-page";
 import ContactPage from "./pages/contact";
 import LivePage from "./pages/live";
+import PopUpLive from "./components/popUpLive";
 
 import { LayoutProvider } from "./context/LayoutContext";
 import Footer from "./components/footer";
@@ -26,6 +27,7 @@ function App() {
           <Route path="/live" element={<LivePage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
+        <PopUpLive />
         <Footer />
       </BrowserRouter>
     </LayoutProvider>

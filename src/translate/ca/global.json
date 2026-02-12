@@ -242,5 +242,12 @@
     "privacy": "Política de Privacitat",
     "cookies": "Cookies",
     "contact": "Contacte"
+  },
+  "popUpLive": {
+    "liveNow": "En directe",
+    "tournamentFallback": "Torneig en curs",
+    "currentPosition": "Posició actual:",
+    "dontShowAgain": "No tornar a mostrar",
+    "viewLeaderboard": "Veure Leaderboard"
   }
 }

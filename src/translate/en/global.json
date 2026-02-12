@@ -242,5 +242,12 @@
     "privacy": "Privacy Policy",
     "cookies": "Cookies",
     "contact": "Contact"
+  },
+  "popUpLive": {
+    "liveNow": "Live Now",
+    "tournamentFallback": "Tournament in progress",
+    "currentPosition": "Current position:",
+    "dontShowAgain": "Don't show again",
+    "viewLeaderboard": "View Leaderboard"
   }
 }
