@@ -200,7 +200,7 @@ const LivePage = () => {
   const renderHoleSet = (holes: typeof liveData.holes) => (
     <div className="mb-8 last:mb-0">
       {/* Holes Row */}
-      <div className="grid grid-cols-[repeat(9,minmax(0,1fr))_60px] sm:grid-cols-[repeat(9,minmax(0,1fr))_80px] gap-1 sm:gap-2 mb-2">
+      <div className="grid grid-cols-[repeat(9,minmax(0,1fr))_72px] sm:grid-cols-[repeat(9,minmax(0,1fr))_80px] gap-1 sm:gap-2 mb-2">
         {holes.map((hole) => (
           <div
             key={hole.number}
@@ -209,13 +209,13 @@ const LivePage = () => {
             {hole.number}
           </div>
         ))}
-        <div className="flex items-center text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider pl-2">
+        <div className="flex items-center text-[9px] sm:text-xs font-bold text-gray-400 uppercase tracking-tight sm:tracking-wider pl-1 sm:pl-2">
           {t("livePage.hole")}
         </div>
       </div>
 
       {/* Par Row */}
-      <div className="grid grid-cols-[repeat(9,minmax(0,1fr))_60px] sm:grid-cols-[repeat(9,minmax(0,1fr))_80px] gap-1 sm:gap-2 mb-2">
+      <div className="grid grid-cols-[repeat(9,minmax(0,1fr))_72px] sm:grid-cols-[repeat(9,minmax(0,1fr))_80px] gap-1 sm:gap-2 mb-2">
         {holes.map((hole) => (
           <div
             key={hole.number}
@@ -224,13 +224,13 @@ const LivePage = () => {
             {hole.par}
           </div>
         ))}
-        <div className="flex items-center text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider pl-2">
+        <div className="flex items-center text-[9px] sm:text-xs font-bold text-gray-400 uppercase tracking-tight sm:tracking-wider pl-1 sm:pl-2">
           {t("livePage.par")}
         </div>
       </div>
 
       {/* Score Row */}
-      <div className="grid grid-cols-[repeat(9,minmax(0,1fr))_60px] sm:grid-cols-[repeat(9,minmax(0,1fr))_80px] gap-1 sm:gap-2">
+      <div className="grid grid-cols-[repeat(9,minmax(0,1fr))_72px] sm:grid-cols-[repeat(9,minmax(0,1fr))_80px] gap-1 sm:gap-2">
         {holes.map((hole) => {
           const isCompleted = hole.strokes !== null;
           const scoreDiff = isCompleted ? hole.strokes! - hole.par : 0;
@@ -268,7 +268,7 @@ const LivePage = () => {
             </div>
           );
         })}
-        <div className="flex items-center text-[10px] sm:text-xs font-black text-gray-900 uppercase tracking-wider pl-2">
+        <div className="flex items-center text-[9px] sm:text-xs font-black text-gray-900 uppercase tracking-tight sm:tracking-wider pl-1 sm:pl-2">
           {t("livePage.score")}
         </div>
       </div>

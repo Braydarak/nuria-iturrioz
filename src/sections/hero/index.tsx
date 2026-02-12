@@ -127,8 +127,8 @@ const Hero = () => {
       </div>
 
       {nextTournament && (
-        <div className="hidden md:flex absolute bottom-10 left-30 z-20 flex-col gap-2 text-left">
-          <span className="text-white text-sm uppercase tracking-widest font-bold flex items-center gap-2">
+        <div className="absolute bottom-28 left-4 right-4 z-20 flex flex-col gap-2 items-center text-center md:bottom-10 md:left-30 md:right-auto md:items-start md:text-left">
+          <span className="text-white text-xs md:text-sm uppercase tracking-widest font-bold flex items-center gap-2">
             {nextTournament.isCurrent
               ? t("header.actualTour")
               : t("header.nextTour")}
@@ -140,11 +140,14 @@ const Hero = () => {
             )}
           </span>
           {nextTournament.isCurrent && isLive ? (
-            <Link to="/live" className="group">
-              <span className="text-white text-3xl font-semibold leading-tight group-hover:underline decoration-white underline-offset-4 decoration-2">
+            <Link
+              to="/live"
+              className="group flex flex-col items-center md:items-start"
+            >
+              <span className="text-white text-2xl md:text-3xl font-semibold leading-tight group-hover:underline decoration-white underline-offset-4 decoration-2">
                 {nextTournament.name}
               </span>
-              <div className="text-gray-200 text-xl flex items-center gap-2 mt-1 group-hover:text-white transition-colors">
+              <div className="text-gray-200 text-lg md:text-xl flex items-center gap-2 mt-1 group-hover:text-white transition-colors justify-center md:justify-start">
                 <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                 <span className="font-medium text-sm tracking-wide uppercase">
                   {t("header.viewLiveScores")} &rarr;
@@ -153,10 +156,10 @@ const Hero = () => {
             </Link>
           ) : (
             <>
-              <span className="text-white text-3xl font-semibold leading-tight">
+              <span className="text-white text-2xl md:text-3xl font-semibold leading-tight">
                 {nextTournament.name}
               </span>
-              <span className="text-gray-200 text-xl">
+              <span className="text-gray-200 text-lg md:text-xl">
                 {nextTournament.date} - {nextTournament.country}
               </span>
             </>
