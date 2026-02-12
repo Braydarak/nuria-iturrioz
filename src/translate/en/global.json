@@ -172,7 +172,7 @@
     "bogey": "Bogey",
     "country": "Spain",
     "viewFullStats": "View full stats on LET",
-    "dataSimulated": "Data is simulated for demonstration",
+    "autoUpdate": "Data updated automatically every minute",
     "refreshData": "Refresh Data",
     "status": {
       "inProgress": "In Progress",

@@ -1,59 +1,198 @@
+import { useState, useEffect } from "react";
 import nuriImg from "../../assets/nuri.png";
 import { useTranslation } from "react-i18next";
+import AnimatedLoader from "../../components/animatedLoader";
+
+const BASE_API_URL =
+  "https://api.euro.ocs-software.com/let/cache/let/2026/2026-2016-scores-P*2ESC02.json";
+
+interface HoleData {
+  number: number;
+  par: number;
+  strokes: number | null;
+}
+
+interface RoundHistory {
+  id: number;
+  name: string;
+  strokes: number | null;
+  par: number | null;
+  isCurrent: boolean;
+}
+
+interface LiveTournamentData {
+  tournamentName: string;
+  location: string;
+  date: string;
+  currentRound: number;
+  currentHole: number;
+  currentHoleStrokes?: number;
+  status: string;
+  scoreToPar: number;
+  todayScore: number;
+  rank: string;
+  holes: HoleData[];
+  rounds: RoundHistory[];
+}
 
 const LivePage = () => {
   const { t } = useTranslation("global");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [liveData, setLiveData] = useState<LiveTournamentData | null>(null);
+  const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
+  const [timeAgo, setTimeAgo] = useState<string>("");
 
-  // Mock data - easy to update or replace with API later
-  const liveData = {
-    tournamentName: "Aramco Team Series - Tampa",
-    location: "Feather Sound Country Club",
-    date: "March 8 - 10, 2024",
-    currentRound: 2,
-    currentHole: 14,
-    status: "ON COURSE", // PLAYING, FINISHED, TEE TIME
-    scoreToPar: -5, // The big number
-    todayScore: -2, // Score for the current day
-    rank: "T3",
-    holes: [
-      { number: 1, par: 4, strokes: 4 },
-      { number: 2, par: 3, strokes: 2 }, // Birdie
-      { number: 3, par: 4, strokes: 4 },
-      { number: 4, par: 5, strokes: 4 }, // Birdie
-      { number: 5, par: 4, strokes: 5 }, // Bogey
-      { number: 6, par: 3, strokes: 3 },
-      { number: 7, par: 5, strokes: 5 },
-      { number: 8, par: 4, strokes: 4 },
-      { number: 9, par: 4, strokes: 3 }, // Birdie
-      { number: 10, par: 4, strokes: 4 },
-      { number: 11, par: 3, strokes: 3 },
-      { number: 12, par: 5, strokes: 4 }, // Birdie
-      { number: 13, par: 4, strokes: 4 },
-      { number: 14, par: 4, strokes: null }, // Current
-      { number: 15, par: 3, strokes: null },
-      { number: 16, par: 5, strokes: null },
-      { number: 17, par: 4, strokes: null },
-      { number: 18, par: 5, strokes: null },
-    ],
-    rounds: [
-      { id: 1, name: "Round 1", strokes: 69, par: -3, date: "Fri, Mar 8" },
-      {
-        id: 2,
-        name: "Round 2",
-        strokes: null,
-        par: -2,
-        date: "Sat, Mar 9",
-        isCurrent: true,
-      },
-      { id: 3, name: "Round 3", strokes: null, par: null, date: "Sun, Mar 10" },
-    ],
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${BASE_API_URL}?randomadd=${Date.now()}`);
+        if (!response.ok) throw new Error("Failed to fetch data");
+        const data = await response.json();
+
+        // Find Nuria Iturrioz
+        const nuria = data.scores.scores_entry.find(
+          (p: { playing_name: string }) => p.playing_name === "Nuria Iturrioz",
+        );
+
+        if (!nuria) {
+          throw new Error("Nuria not found in tournament data");
+        }
+
+        // Parse tournament-wide data
+        const pars = data.course_par
+          .split(",")
+          .filter((p: string) => p !== "")
+          .map(Number);
+        const lastRound = parseInt(data.last_round_with_scores) || 1;
+
+        // Parse Nuria's current round data
+        const currentRoundScores = nuria[`hole_scores_R${lastRound}`]
+          ? nuria[`hole_scores_R${lastRound}`]
+              .split(",")
+              .map((s: string) => (s === "" ? null : parseInt(s)))
+          : Array(18).fill(null);
+
+        // Parse live hole status (e.g. "strokes_R2": "16,2,")
+        let currentHole = parseInt(nuria.holes) || 0;
+        let currentHoleStrokes = 0;
+        const strokesKey = `strokes_R${lastRound}`;
+        if (nuria[strokesKey]) {
+          const parts = nuria[strokesKey].split(",");
+          if (parts.length >= 2) {
+            currentHole = parseInt(parts[0]) || currentHole;
+            currentHoleStrokes = parseInt(parts[1]) || 0;
+          }
+        }
+
+        const holes: HoleData[] = pars.map((par: number, index: number) => ({
+          number: index + 1,
+          par,
+          strokes: currentRoundScores[index],
+        }));
+
+        // Parse rounds history
+        const rounds: RoundHistory[] = [];
+        for (let i = 1; i <= 4; i++) {
+          const score = nuria[`score_R${i}`];
+          const vspar = nuria[`vspar_R${i}`];
+          if (score || vspar) {
+            rounds.push({
+              id: i,
+              name: `Round ${i}`,
+              strokes: score && parseInt(score) > 0 ? parseInt(score) : null,
+              par: vspar ? (vspar === "Par" ? 0 : parseInt(vspar)) : null,
+              isCurrent: i === lastRound,
+            });
+          }
+        }
+
+        setLiveData({
+          tournamentName: data.full_name,
+          location: data.course_name,
+          date: data.course_dates,
+          currentRound: lastRound,
+          currentHole: currentHole,
+          currentHoleStrokes: currentHoleStrokes,
+          status:
+            nuria[`status_R${lastRound}`] === "S" ? "ON COURSE" : "FINISHED",
+          scoreToPar: nuria.vspar === "Par" ? 0 : parseInt(nuria.vspar),
+          todayScore:
+            nuria[`vspar_R${lastRound}`] === "Par"
+              ? 0
+              : parseInt(nuria[`vspar_R${lastRound}`]),
+          rank: nuria.pos,
+          holes,
+          rounds,
+        });
+        setLastUpdated(new Date());
+        setLoading(false);
+      } catch (err: unknown) {
+        console.error("Error fetching live data:", err);
+        setError(
+          err instanceof Error ? err.message : "An unknown error occurred",
+        );
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+    const interval = setInterval(fetchData, 60000); // Update every 1 minute
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const updateTimeAgo = () => {
+      const now = new Date();
+      const diffInSeconds = Math.floor(
+        (now.getTime() - lastUpdated.getTime()) / 1000,
+      );
+
+      if (diffInSeconds < 60) {
+        setTimeAgo("hace unos segundos");
+      } else {
+        const minutes = Math.floor(diffInSeconds / 60);
+        setTimeAgo(`hace ${minutes} ${minutes === 1 ? "minuto" : "minutos"}`);
+      }
+    };
+
+    updateTimeAgo();
+    const interval = setInterval(updateTimeAgo, 10000); // Update time ago text every 10 seconds
+    return () => clearInterval(interval);
+  }, [lastUpdated]);
 
   const getScoreColor = (score: number) => {
     if (score < 0) return "text-red-500";
     if (score > 0) return "text-blue-900";
     return "text-gray-700";
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-neutral-50">
+        <AnimatedLoader />
+      </div>
+    );
+  }
+
+  if (error || !liveData) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-neutral-50 p-4">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Oops!</h2>
+          <p className="text-gray-600 mb-4">
+            {error || "Could not load live data"}
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-6 py-2 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-colors"
+          >
+            {t("livePage.refreshData")}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const frontNine = liveData.holes.slice(0, 9);
   const backNine = liveData.holes.slice(9, 18);
@@ -112,8 +251,12 @@ const LivePage = () => {
               displayScore = `${hole.par}`;
             }
           } else if (hole.number === liveData.currentHole) {
-            bgClass = "bg-yellow-400";
-            textClass = "text-yellow-900";
+            bgClass = "bg-yellow-100";
+            textClass =
+              "text-yellow-800 italic font-bold border-2 border-yellow-400";
+            if (liveData.currentHoleStrokes) {
+              displayScore = `${liveData.currentHoleStrokes}`;
+            }
           }
 
           return (
@@ -230,8 +373,22 @@ const LivePage = () => {
                     <div className="text-xs text-gray-400 uppercase font-bold mb-1">
                       {t("livePage.hole")}
                     </div>
-                    <div className="text-xl font-bold text-gray-800">
-                      {liveData.currentHole}
+                    <div className="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
+                      {liveData.status === "FINISHED" ? (
+                        <span>F</span>
+                      ) : (
+                        <>
+                          <span>{liveData.currentHole}</span>
+                          {liveData.currentHoleStrokes ? (
+                            <span className="text-sm font-bold italic text-yellow-700 bg-yellow-50 border border-yellow-200 px-2 py-0.5 rounded-md">
+                              {liveData.currentHoleStrokes}{" "}
+                              {liveData.currentHoleStrokes === 1
+                                ? "golpe"
+                                : "golpes"}
+                            </span>
+                          ) : null}
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -360,9 +517,12 @@ const LivePage = () => {
 
         <div className="mt-12 text-center">
           <p className="text-gray-400 text-sm">
-            Data is simulated for demonstration •{" "}
-            <span className="underline cursor-pointer hover:text-gray-600">
-              Refresh Data
+            {t("livePage.autoUpdate")} ({timeAgo}) •{" "}
+            <span
+              onClick={() => window.location.reload()}
+              className="underline cursor-pointer hover:text-gray-600"
+            >
+              {t("livePage.refreshData")}
             </span>
           </p>
         </div>

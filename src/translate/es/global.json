@@ -172,7 +172,7 @@
     "bogey": "Bogey",
     "country": "España",
     "viewFullStats": "Ver estadísticas completas en LET",
-    "dataSimulated": "Los datos son simulados para demostración",
+    "autoUpdate": "Datos actualizados automáticamente cada minuto",
     "refreshData": "Actualizar datos",
     "status": {
       "inProgress": "En curso",

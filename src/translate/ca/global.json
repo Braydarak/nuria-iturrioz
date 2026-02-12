@@ -171,8 +171,8 @@
     "birdie": "Birdie",
     "bogey": "Bogey",
     "country": "Espanya",
-    "viewFullStats": "Veure estadístiques completes al LET",
-    "dataSimulated": "Les dades són simulades per demostració",
+    "viewFullStats": "Veure estadístiques completes en LET",
+    "autoUpdate": "Dades actualitzades automàticament cada minut",
     "refreshData": "Actualitzar dades",
     "status": {
       "inProgress": "En curs",
