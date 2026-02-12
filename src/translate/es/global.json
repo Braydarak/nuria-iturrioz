@@ -6,7 +6,8 @@
     "news": "Noticias",
     "contact": "Contacto",
     "actualTour": "Torneo actual",
-    "nextTour": "Próximo torneo"
+    "nextTour": "Próximo torneo",
+    "viewLiveScores": "Ver resultados en vivo"
   },
   "hero": {
     "logoAria": "Logo de Nuria"

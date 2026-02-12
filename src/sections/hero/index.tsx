@@ -1,14 +1,17 @@
+import { Link } from "react-router-dom";
 import bg from "../../assets/Nuria-golfing.png";
 import LogoLoop from "../../components/logoLoopDesktop";
 import LogoLoopMobile from "../../components/LogoLoopMobile";
 import { useLayout } from "../../context/LayoutContext";
 import { getNextTournament } from "../../utils/tournamentDate";
 import { useTranslation } from "react-i18next";
+import { useLiveStatus } from "../../hooks/useLiveStatus";
 
 const Hero = () => {
   const { t } = useTranslation();
   const { isHeaderOpen } = useLayout();
   const nextTournament = getNextTournament();
+  const { isLive } = useLiveStatus();
 
   return (
     <section
@@ -34,7 +37,7 @@ const Hero = () => {
           role="img"
           aria-label={t("hero.logoAria")}
         >
-          <title>NuriaLogo.ok</title>
+          <title>Nuria Iturrioz</title>
           <path
             d="M674,171.33c-.38,1-.8,2-1.14,3l-21.48,65.15q-7.32,22.17-14.62,44.34c-.1.3-.18.61-.3,1,.37,0,.67.09,1,.09h36.23a2,2,0,0,0,.35,0v10.08H624.38c.26-2.27.16-4.5.81-6.47Q642.5,236.2,660,184c.86-2.6,1.71-5.21,2.62-8h-36v-9.94c.35,0,.66-.08,1-.08H673.3c.24,0,.48,0,.71,0Z"
             transform="translate(0)"
@@ -125,17 +128,39 @@ const Hero = () => {
 
       {nextTournament && (
         <div className="hidden md:flex absolute bottom-10 left-30 z-20 flex-col gap-2 text-left">
-          <span className="text-white text-sm uppercase tracking-widest font-bold">
+          <span className="text-white text-sm uppercase tracking-widest font-bold flex items-center gap-2">
             {nextTournament.isCurrent
               ? t("header.actualTour")
               : t("header.nextTour")}
+            {nextTournament.isCurrent && isLive && (
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              </span>
+            )}
           </span>
-          <span className="text-white text-3xl font-semibold leading-tight">
-            {nextTournament.name}
-          </span>
-          <span className="text-gray-200 text-xl">
-            {nextTournament.date} - {nextTournament.country}
-          </span>
+          {nextTournament.isCurrent && isLive ? (
+            <Link to="/live" className="group">
+              <span className="text-white text-3xl font-semibold leading-tight group-hover:underline decoration-white underline-offset-4 decoration-2">
+                {nextTournament.name}
+              </span>
+              <div className="text-gray-200 text-xl flex items-center gap-2 mt-1 group-hover:text-white transition-colors">
+                <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span className="font-medium text-sm tracking-wide uppercase">
+                  {t("header.viewLiveScores")} &rarr;
+                </span>
+              </div>
+            </Link>
+          ) : (
+            <>
+              <span className="text-white text-3xl font-semibold leading-tight">
+                {nextTournament.name}
+              </span>
+              <span className="text-gray-200 text-xl">
+                {nextTournament.date} - {nextTournament.country}
+              </span>
+            </>
+          )}
         </div>
       )}
 

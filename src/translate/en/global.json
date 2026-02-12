@@ -6,7 +6,8 @@
     "news": "News",
     "contact": "Contact",
     "actualTour": "Current tournament",
-    "nextTour": "Next tournament"
+    "nextTour": "Next tournament",
+    "viewLiveScores": "View live scores"
   },
   "hero": {
     "logoAria": "Nuria Logo"

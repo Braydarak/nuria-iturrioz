@@ -5,12 +5,14 @@ import LogoLoopMobile from "../LogoLoopMobile";
 import { getNextTournament } from "../../utils/tournamentDate";
 import LanguageSelector from "../languageSelector";
 import { useTranslation } from "react-i18next";
+import { useLiveStatus } from "../../hooks/useLiveStatus";
 
 const Header = () => {
   const { isHeaderOpen: open, setIsHeaderOpen: setOpen } = useLayout();
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { t } = useTranslation();
+  const { isLive } = useLiveStatus();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 0);
@@ -178,17 +180,41 @@ const Header = () => {
 
               {nextTournament && (
                 <div className="flex flex-col justify-center items-center gap-2 text-center">
-                  <span className="text-[#2A579E] text-sm uppercase tracking-widest font-bold">
+                  <span className="text-[#2A579E] text-sm uppercase tracking-widest font-bold flex items-center gap-2">
                     {nextTournament.isCurrent
                       ? t("header.actualTour")
                       : t("header.nextTour")}
+                    {nextTournament.isCurrent && isLive && (
+                      <span className="relative flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                      </span>
+                    )}
                   </span>
-                  <span className="text-black text-2xl font-semibold leading-tight px-4">
-                    {nextTournament.name}
-                  </span>
-                  <span className="text-gray-500 text-lg">
-                    {nextTournament.date} - {nextTournament.country}
-                  </span>
+                  {nextTournament.isCurrent && isLive ? (
+                    <Link
+                      to="/live"
+                      className="group flex flex-col items-center"
+                      onClick={() => setOpen(false)}
+                    >
+                      <span className="text-black text-2xl font-semibold leading-tight px-4 group-hover:text-[#2A579E] transition-colors">
+                        {nextTournament.name}
+                      </span>
+                      <span className="text-green-600 text-lg font-medium mt-1 flex items-center gap-1">
+                        <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        {t("header.viewLiveScores")} &rarr;
+                      </span>
+                    </Link>
+                  ) : (
+                    <>
+                      <span className="text-black text-2xl font-semibold leading-tight px-4">
+                        {nextTournament.name}
+                      </span>
+                      <span className="text-gray-500 text-lg">
+                        {nextTournament.date} - {nextTournament.country}
+                      </span>
+                    </>
+                  )}
                 </div>
               )}
             </div>

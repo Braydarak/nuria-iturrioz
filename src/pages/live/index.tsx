@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import nuriImg from "../../assets/nuri.png";
 import { useTranslation } from "react-i18next";
 import AnimatedLoader from "../../components/animatedLoader";
+import { LET_API_URL } from "../../utils/constants";
 
-const BASE_API_URL =
-  "https://api.euro.ocs-software.com/let/cache/let/2026/2026-2016-scores-P*2ESC02.json";
+const BASE_API_URL = LET_API_URL;
 
 interface HoleData {
   number: number;
