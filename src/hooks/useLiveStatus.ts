@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { LET_API_URL } from "../utils/constants";
+import { getLetApiUrl } from "../utils/constants";
+import tournamentsData from "../data/tournaments.json";
 
 interface LiveStatus {
   isLive: boolean;
@@ -23,10 +24,55 @@ export const useLiveStatus = (): LiveStatus => {
 
     const checkStatus = async () => {
       try {
-        const response = await fetch(`${LET_API_URL}?randomadd=${Date.now()}`);
-        if (!response.ok) throw new Error("Failed to fetch");
+        // Determine current tournament
+        const now = new Date();
+        const activeTournament = tournamentsData.tournaments.find((t) => {
+          // Parse tournament dates (format: DD/MM/YY)
+          const [startDay, startMonth, startYear] = t.date.split("/");
+          const [endDay, endMonth, endYear] = t.date_end.split("/");
 
-        const data = await response.json();
+          const startDate = new Date(
+            2000 + parseInt(startYear),
+            parseInt(startMonth) - 1,
+            parseInt(startDay),
+          );
+          const endDate = new Date(
+            2000 + parseInt(endYear),
+            parseInt(endMonth) - 1,
+            parseInt(endDay),
+          );
+
+          // Set endDate to end of day
+          endDate.setHours(23, 59, 59, 999);
+
+          return now >= startDate && now <= endDate && t.code;
+        });
+
+        // Use active tournament code or default to latest if none active (or specific fallback)
+        // If no active tournament, we might not want to show live status or show the last one?
+        // For now, let's use the active one if found, otherwise maybe the first one or null
+        const tournamentCode = activeTournament
+          ? activeTournament.code
+          : "2016"; // Defaulting to 2016 for now as fallback
+
+        let data = null;
+        for (let r = 4; r >= 1; r--) {
+          try {
+            const url = getLetApiUrl(r, tournamentCode!);
+            const response = await fetch(`${url}?randomadd=${Date.now()}`);
+            if (response.ok) {
+              const jsonData = await response.json();
+              if (jsonData && jsonData.full_name) {
+                data = jsonData;
+                break;
+              }
+            }
+          } catch {
+            // ignore
+          }
+        }
+
+        if (!data) throw new Error("No data available");
 
         if (isMounted) {
           setTournamentName(data.full_name || data.short_name || "Tournament");
@@ -48,10 +94,10 @@ export const useLiveStatus = (): LiveStatus => {
             // En algunos casos holes está vacío "" cuando ha terminado, así que verificamos también eso si status_RX es "F" o "RTD" (Retirado) o "C" (Cut)
             const statusKey = `status_R${currentRound}`;
             const roundStatus = nuria[statusKey];
-            
+
             // Si status es 'F' (Finished) o holes es 'F' o holes está vacío pero tenemos status de finalización
-            const isFinished = 
-              nuria.holes === "F" || 
+            const isFinished =
+              nuria.holes === "F" ||
               ["F", "RTD", "C", "WD", "DQ"].includes(roundStatus);
 
             if (!isFinished) {

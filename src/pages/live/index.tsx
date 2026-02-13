@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import nuriImg from "../../assets/nuria/Nuria9.jpg";
 import { useTranslation } from "react-i18next";
 import AnimatedLoader from "../../components/animatedLoader";
-import { LET_API_URL } from "../../utils/constants";
+import { getLetApiUrl } from "../../utils/constants";
+import tournamentsData from "../../data/tournaments.json";
 import { useLiveStatus } from "../../hooks/useLiveStatus";
-
-const BASE_API_URL = LET_API_URL;
 
 interface HoleData {
   number: number;
@@ -19,6 +18,7 @@ interface RoundHistory {
   strokes: number | null;
   par: number | null;
   isCurrent: boolean;
+  date?: string;
 }
 
 interface LiveTournamentData {
@@ -48,9 +48,56 @@ const LivePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${BASE_API_URL}?randomadd=${Date.now()}`);
-        if (!response.ok) throw new Error("Failed to fetch data");
-        const data = await response.json();
+        // Determine current tournament
+        const now = new Date();
+        const activeTournament = tournamentsData.tournaments.find((t) => {
+          // Parse tournament dates (format: DD/MM/YY)
+          const [startDay, startMonth, startYear] = t.date.split("/");
+          const [endDay, endMonth, endYear] = t.date_end.split("/");
+
+          const startDate = new Date(
+            2000 + parseInt(startYear),
+            parseInt(startMonth) - 1,
+            parseInt(startDay),
+          );
+          const endDate = new Date(
+            2000 + parseInt(endYear),
+            parseInt(endMonth) - 1,
+            parseInt(endDay),
+          );
+
+          // Set endDate to end of day
+          endDate.setHours(23, 59, 59, 999);
+
+          return now >= startDate && now <= endDate && t.code;
+        });
+
+        const tournamentCode = activeTournament
+          ? activeTournament.code
+          : "2016";
+
+        // Strategy: Try to fetch data starting from round 4 down to 1
+        // to ensure we get the latest tournament status
+        let data = null;
+        for (let r = 4; r >= 1; r--) {
+          try {
+            const url = getLetApiUrl(r, tournamentCode!);
+            const response = await fetch(`${url}?randomadd=${Date.now()}`);
+            if (response.ok) {
+              const jsonData = await response.json();
+              // Basic validation
+              if (jsonData && jsonData.full_name) {
+                data = jsonData;
+                break; // Stop once we find the latest available data
+              }
+            }
+          } catch (e) {
+            // Continue to previous round if current fails
+            console.warn(`Failed to fetch round ${r} data`, e);
+          }
+        }
+
+        if (!data) throw new Error("Failed to fetch data");
 
         // Find Nuria Iturrioz
         const nuria = data.scores.scores_entry.find(
@@ -96,15 +143,20 @@ const LivePage = () => {
         // Parse rounds history
         const rounds: RoundHistory[] = [];
         for (let i = 1; i <= 4; i++) {
-          const score = nuria[`score_R${i}`];
-          const vspar = nuria[`vspar_R${i}`];
-          if (score || vspar) {
+          const dateKey = `date_R${i}`;
+          const roundDate = data[dateKey];
+          // We check if the round date exists to include future rounds
+          if (roundDate) {
+            const score = nuria[`score_R${i}`];
+            const vspar = nuria[`vspar_R${i}`];
+
             rounds.push({
               id: i,
               name: `Round ${i}`,
               strokes: score && parseInt(score) > 0 ? parseInt(score) : null,
               par: vspar ? (vspar === "Par" ? 0 : parseInt(vspar)) : null,
               isCurrent: i === lastRound,
+              date: roundDate,
             });
           }
         }
@@ -469,12 +521,19 @@ const LivePage = () => {
                         {t("livePage.roundAbbr")}
                         {round.id}
                       </div>
-                      <div className="text-sm font-semibold">
-                        {round.isCurrent
-                          ? t("livePage.status.inProgress")
-                          : round.strokes
-                            ? t("livePage.status.finished")
-                            : t("livePage.status.upcoming")}
+                      <div className="flex flex-col">
+                        <div className="text-sm font-semibold">
+                          {round.isCurrent
+                            ? t("livePage.status.inProgress")
+                            : round.strokes
+                              ? t("livePage.status.finished")
+                              : t("livePage.status.upcoming")}
+                        </div>
+                        {round.date && (
+                          <div className="text-[10px] sm:text-xs font-medium text-gray-400 mt-0.5">
+                            {round.date}
+                          </div>
+                        )}
                       </div>
                     </div>
 
