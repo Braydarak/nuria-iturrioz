@@ -138,7 +138,7 @@ const Trophies = ({ variant = "home" }: TrophiesProps) => {
                 onClick={handleLoadMore}
                 className="group relative inline-flex items-center gap-3 px-8 py-4 bg-transparent border-2 border-[#1B3A75] text-[#1B3A75] rounded-full font-bold uppercase tracking-widest text-xs hover:bg-[#1B3A75] hover:text-white transition-all duration-300"
               >
-                <span>Cargar más</span>
+                <span>{t("trophies.loadMore")}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
