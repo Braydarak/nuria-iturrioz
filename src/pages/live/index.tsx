@@ -296,13 +296,13 @@ const LivePage = () => {
             if (scoreDiff < 0) {
               bgClass = "bg-blue-600";
               textClass = "text-white";
-              displayScore = `${scoreDiff}`;
+              displayScore = `${hole.strokes}`;
             } else if (scoreDiff > 0) {
               bgClass = "bg-red-500";
               textClass = "text-white";
-              displayScore = `+${scoreDiff}`;
+              displayScore = `${hole.strokes}`;
             } else {
-              displayScore = `${hole.par}`;
+              displayScore = `${hole.strokes}`;
             }
           } else if (hole.number === liveData.currentHole) {
             bgClass = "bg-yellow-100";
@@ -322,9 +322,6 @@ const LivePage = () => {
             </div>
           );
         })}
-        <div className="flex items-center text-[9px] sm:text-xs font-black text-gray-900 uppercase tracking-tight sm:tracking-wider pl-1 sm:pl-2">
-          {t("livePage.score")}
-        </div>
       </div>
     </div>
   );
@@ -339,7 +336,22 @@ const LivePage = () => {
               {liveData.tournamentName}
             </h1>
             <p className="mt-1 text-gray-500 font-light flex items-center justify-center md:justify-start">
-              <span className="mr-2">📍</span> {liveData.location}
+              <svg
+                className="w-4 h-4 mr-2 text-gray-500"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              {liveData.location}
             </p>
           </div>
           <div className="flex flex-col items-center md:items-end">

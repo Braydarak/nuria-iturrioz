@@ -119,9 +119,9 @@ export default function StatsSection() {
             {featured.map((item) => (
               <div
                 key={item.label}
-                className="rounded-2xl bg-white/60 backdrop-blur-sm shadow-sm border border-white/50 p-5"
+                className="rounded-2xl bg-white/80 backdrop-blur-sm shadow-sm border border-white/50 p-5"
               >
-                <div className="text-sm text-neutral-500">{item.label}</div>
+                <div className="text-sm text-neutral-900">{item.label}</div>
                 <div className="mt-1 text-2xl font-semibold text-neutral-900">
                   {item.value ?? "—"}
                 </div>
@@ -129,15 +129,15 @@ export default function StatsSection() {
             ))}
           </div>
 
-          <div className="rounded-2xl bg-white/40 backdrop-blur-sm border border-white/50 p-5">
+          <div className="rounded-2xl bg-white/60 backdrop-blur-sm border border-white/50 p-5">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-lg font-semibold text-neutral-900">
+              <h3 className="text-lg font-semibold uppercase text-neutral-900">
                 {t("statsComponent.otherStats")}
               </h3>
               <button
                 type="button"
                 onClick={() => setShowAll((v) => !v)}
-                className="text-sm font-medium text-[#2A579E] hover:text-[#1f4a8f]"
+                className="text-md uppercase font-medium text-[#2A579E] cursor-pointer hover:underline hover:text-[#1f4a8f]"
               >
                 {showAll
                   ? t("statsComponent.hideAll")
@@ -155,9 +155,9 @@ export default function StatsSection() {
                   {filteredEntries.map((e: StatEntry) => (
                     <div
                       key={`${e.code ?? e.description}`}
-                      className="rounded-xl bg-white/60 backdrop-blur-sm shadow-sm border border-white/50 p-4"
+                      className="rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-white/50 p-4"
                     >
-                      <div className="text-xs text-neutral-500">
+                      <div className="text-xs text-neutral-900">
                         {getStatLabel(e.description)}
                       </div>
                       <div className="mt-1 text-xl font-semibold text-neutral-900">

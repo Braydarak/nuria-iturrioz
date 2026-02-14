@@ -12,8 +12,21 @@ const Hero = () => {
   const { isHeaderOpen } = useLayout();
   const nextTournament = getNextTournament();
   const { isLive, hasData, round } = useLiveStatus();
-
-  console.log(isLive, hasData, round);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const daysUntilStart =
+    nextTournament && nextTournament.parsedDate
+      ? Math.ceil(
+          (nextTournament.parsedDate.getTime() - today.getTime()) /
+            (1000 * 60 * 60 * 24),
+        )
+      : null;
+  const showNextTournament =
+    !!nextTournament &&
+    (nextTournament.isCurrent ||
+      (typeof daysUntilStart === "number" &&
+        daysUntilStart >= 0 &&
+        daysUntilStart <= 7));
 
   return (
     <section
@@ -128,7 +141,7 @@ const Hero = () => {
         </svg>
       </div>
 
-      {nextTournament && (
+      {showNextTournament && nextTournament && (
         <div className="absolute bottom-28 left-4 right-4 z-20 flex flex-col gap-2 items-center text-center md:bottom-10 md:left-30 md:right-auto md:items-start md:text-left">
           <span className="text-white text-xs md:text-sm uppercase tracking-widest font-bold flex items-center gap-2">
             {nextTournament.isCurrent

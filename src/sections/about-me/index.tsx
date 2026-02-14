@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLetStatistics } from "../../data/useLetStatistics";
@@ -28,7 +28,7 @@ const nuriaImages = [
   nuria12,
 ];
 
-function useCountUp(target: number | null, duration = 1200) {
+function useCountUp(target: number | null, duration = 2500) {
   const [value, setValue] = useState(0);
   useEffect(() => {
     if (
@@ -62,6 +62,27 @@ function toNumberSafe(v: unknown): number | null {
 const AboutMe = () => {
   const { t } = useTranslation();
   const { data, entries, loading, error, memberAge } = useLetStatistics();
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [statsVisible, setStatsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || statsVisible) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setStatsVisible(true);
+            observer.disconnect();
+            break;
+          }
+        }
+      },
+      { root: null, rootMargin: "0px", threshold: 0.2 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [statsVisible]);
 
   const tournamentsRaw = useMemo(() => {
     const byCode = entries.find((e) => e.code === "B010");
@@ -88,12 +109,14 @@ const AboutMe = () => {
     return toNumberSafe(fromEntries?.value);
   }, [data, entries]);
 
-  const VISITED_COUNRTIES = 20;
+  const VISITED_COUNRTIES = 50;
 
-  const age = useCountUp(memberAge ?? null);
-  const wins = useCountUp(winsRaw ?? null);
-  const tournaments = useCountUp(tournamentsRaw ?? null);
-  const visited = useCountUp(VISITED_COUNRTIES);
+  const age = useCountUp(statsVisible ? (memberAge ?? null) : null);
+  const wins = useCountUp(statsVisible ? (winsRaw ?? null) : null);
+  const tournaments = useCountUp(
+    statsVisible ? (tournamentsRaw ?? null) : null,
+  );
+  const visited = useCountUp(statsVisible ? VISITED_COUNRTIES : null);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -106,7 +129,10 @@ const AboutMe = () => {
   }, []);
 
   return (
-    <section className="relative bg-linear-to-br from-[#1B3A75] via-[#2A579E] to-[#3C7BEA] text-white">
+    <section
+      ref={sectionRef as React.RefObject<HTMLElement>}
+      className="relative bg-linear-to-br from-[#1B3A75] via-[#2A579E] to-[#3C7BEA] text-white"
+    >
       <div className="pointer-events-none absolute -top-10 -left-10 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
       <div className="pointer-events-none absolute bottom-0 right-0 h-56 w-56 rounded-full bg-[#3C7BEA]/20 blur-3xl" />
       <style>{`
@@ -222,7 +248,7 @@ const AboutMe = () => {
               </div>
               <div>
                 <div className="font-signature text-6xl sm:text-7xl text-white leading-tight tracking-tight">
-                  {visited}
+                  + {visited}
                 </div>
                 <div className="mt-2 text-xl sm:text-2xl text-white">
                   {t("aboutMe.stats.countries")}
