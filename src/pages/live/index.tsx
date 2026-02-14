@@ -215,12 +215,6 @@ const LivePage = () => {
     return () => clearInterval(interval);
   }, [lastUpdated]);
 
-  const getScoreColor = (score: number) => {
-    if (score < 0) return "text-red-500";
-    if (score > 0) return "text-blue-900";
-    return "text-gray-700";
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-neutral-50">
@@ -250,6 +244,7 @@ const LivePage = () => {
 
   const frontNine = liveData.holes.slice(0, 9);
   const backNine = liveData.holes.slice(9, 18);
+  const coursePar = liveData.holes.reduce((sum, h) => sum + h.par, 0);
 
   const renderHoleSet = (holes: typeof liveData.holes) => (
     <div className="mb-8 last:mb-0">
@@ -549,14 +544,15 @@ const LivePage = () => {
                       </div>
                     </div>
 
-                    <div
-                      className={`font-bold text-lg ${round.par ? getScoreColor(round.par) : "text-gray-300"}`}
-                    >
-                      {round.par
-                        ? round.par > 0
-                          ? `+${round.par}`
-                          : round.par
-                        : "--"}
+                    <div className="flex flex-col items-end">
+                      <div
+                        className={`font-bold text-lg ${round.strokes ? "text-gray-900" : "text-gray-300"}`}
+                      >
+                        {round.strokes ?? "--"}
+                      </div>
+                      <div className="text-[10px] text-gray-400 font-medium">
+                        Par {coursePar}
+                      </div>
                     </div>
                   </div>
                 ))}

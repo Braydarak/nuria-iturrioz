@@ -35,6 +35,22 @@ const Header = () => {
   const visible = location.pathname !== "/" || scrolled || open;
 
   const nextTournament = getNextTournament();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const parsedDate = (
+    nextTournament as { parsedDate?: Date } | null | undefined
+  )?.parsedDate;
+  const daysUntilStart = parsedDate
+    ? Math.ceil(
+        (parsedDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24),
+      )
+    : null;
+  const showNextTournament =
+    !!nextTournament &&
+    (nextTournament.isCurrent ||
+      (typeof daysUntilStart === "number" &&
+        daysUntilStart >= 0 &&
+        daysUntilStart <= 7));
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -178,7 +194,7 @@ const Header = () => {
               </Link>
               <div className="w-3/4 h-0.5 bg-[#E6E6E6]" />
 
-              {nextTournament && (
+              {showNextTournament && nextTournament && (
                 <div className="flex flex-col justify-center items-center gap-2 text-center">
                   <span className="text-[#2A579E] text-sm uppercase tracking-widest font-bold flex items-center gap-2">
                     {nextTournament.isCurrent
