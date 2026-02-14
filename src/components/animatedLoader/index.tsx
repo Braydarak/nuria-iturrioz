@@ -1,7 +1,13 @@
-
 export default function AnimatedLoader() {
   return (
-    <div style={{ display: 'grid', placeItems: 'center', width: '100%', padding: '24px 0' }}>
+    <div
+      style={{
+        display: "grid",
+        placeItems: "center",
+        width: "100%",
+        padding: "24px 0",
+      }}
+    >
       <style>
         {`
           .loader-svg { width: 320px; height: auto; }
@@ -26,17 +32,23 @@ export default function AnimatedLoader() {
       <svg
         className="loader-svg"
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 674.02 296.87"
+        viewBox="0 0 200 296.87"
         preserveAspectRatio="xMinYMin meet"
       >
         <defs>
           {/* Caja que limita verticalmente la barra */}
           <clipPath id="barBox" clipPathUnits="userSpaceOnUse">
-            <rect x="0" y="240" width="197" height="64" />
+            <rect x="0" y="240" width="120" height="64" />
           </clipPath>
           {/* Reveal/hide dentro de la caja: aparece desde izquierda y se oculta hacia derecha */}
           <clipPath id="barReveal" clipPathUnits="userSpaceOnUse">
-            <rect className="revealRect" x="0" y="240" width="197" height="64" />
+            <rect
+              className="revealRect"
+              x="0"
+              y="240"
+              width="120"
+              height="64"
+            />
           </clipPath>
         </defs>
 
