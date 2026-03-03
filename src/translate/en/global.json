@@ -2,7 +2,7 @@
   "header": {
     "home": "Home",
     "career": "Career",
-    "stats": "Statistics",
+    "stats": "Stats",
     "news": "News",
     "contact": "Contact",
     "actualTour": "Current tournament",
@@ -116,7 +116,7 @@
     "topTen": "Tournament Top Ten Finishes",
     "drivingDistance": "Driving Distance",
     "error": "Error: {{error}}",
-    "noData": "No statistics available for now.",
+    "noData": "No stats available for now.",
     "otherStats": "Other statistics",
     "hideAll": "hide full statistics",
     "showAll": "show full statistics",
