@@ -69,5 +69,5 @@ function cleanDescription(html: string): string {
 function extractImageFromDescription(html: string): string {
   const doc = new DOMParser().parseFromString(html, 'text/html');
   const img = doc.querySelector('img');
-  return img ? img.src : '/NuriaLogo.blue.svg'; // Fallback a logo si no hay imagen
+  return img ? img.src : '';
 }

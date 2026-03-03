@@ -18,13 +18,9 @@
   },
   "aboutMe": {
     "title": "Sobre mi",
-    "p1_prefix": "Em dic Nuria Iturrioz i ",
-    "p1_highlight": "vull arribar al més alt del golf femení mundial",
-    "p1_suffix": ".",
-    "p2": "Aquí podreu saber una mica més de mi, del meu passat, el meu present i el meu futur.",
-    "p3": "Espero que us agradi i pugueu gaudir de la meva carrera acompanyant-me per tot el món!",
-    "p4": "Gràcies pel vostre suport.",
-    "cta": "Anima't a conèixer més sobre mi",
+    "p1_prefix": "Em dic Nuria Iturrioz, benvinguts al meu espai, on em podreu seguir, contactar, animar i conèixer millor, entre moltes coses.",
+    "p4": "Us convido a gaudir amb mi!",
+    "cta": "Vols saber més sobre mi?",
     "stats": {
       "age": "Edat",
       "wins": "Victòries LET",
@@ -80,12 +76,13 @@
   },
   "career": {
     "title": "La Meva Carrera",
-    "p1": "Tota la vida he estat una apassionada de l'esport: tennis, futbol, natació... als 12 anys vaig decidir seguir el meu camí esportiu només amb el golf, gràcies al meu entrenador que em va empènyer a fer-ho.",
-    "p2": "Amb 14 anys la meva vida es va traslladar a Madrid, pels 5 anys següents, al CAR (Centre d'Alt Rendiment). Allà vaig créixer, vaig aprendre i em vaig formar com a persona, acumulant tornejos i trofeus.",
-    "p3": "La mort del meu pare va significar una gran pèrdua, amb total seguretat la situació més complicada que he hagut de viure. Tot el que sóc ara, li ho dec al seu esforç i la seva visió per involucrar-me en el golf amb tan sols 6 anys.",
-    "p4": "Una altra decisió a la meva vida va ser no anar als EUA a cursar una carrera universitària, ja que el meu objectiu era convertir-me en professional aviat. El meu futur es trunca amb una pancreatitis que em limita totalment d'anar a la 2a fase de les classificatòries per competir a Lliga Professional de Golf havent superat la primera fase un mes abans.",
-    "p5": "El 2016, després de classificar-me al desembre al LET, comença la meva aventura sense oblidar-me del meu objectiu principal, ser de les millors a la LPGA.",
-    "p6": "Segueixo perseguint el meu objectiu principal, ser la millor golfista del món, tot i que també m'agradaria remarcar la meva focalització en classificar-me per a la Solheim Cup i les Olimpíades.",
+    "p1": "Tota la vida he estat una apassionada de l'esport: tennis, futbol, natació... de petita els practicava tots, però als 12 anys vaig decidir seguir el meu camí esportiu només amb el golf, gràcies al fet que el meu entrenador (Chiqui) em va empènyer a fer-ho.",
+    "p2": "Amb 14 anys em van donar una beca per anar a Madrid, al CAR (Centre d'Alt Rendiment), on vaig passar els següents 5 anys de la meva carrera, i on em van ajudar a créixer com a jugadora i persona.",
+    "p3": "Quan vaig acabar els meus estudis a Madrid vaig tenir l'oportunitat de ser becada per estudiar a una universitat als EUA, però en les meves últimes setmanes vaig decidir que no era per a mi, em vaig quedar a Madrid i vaig estudiar un grau superior (TAFAD).",
+    "p4": "Als 19 anys vaig fer el salt al golf professional.",
+    "p5": "Aquest mateix any (2015) aconsegueixo la targeta del Ladies European Tour (LET) i comença la meva carrera professional, vaig guanyar el meu primer títol en el segon torneig de la temporada, al Marroc, la Lalla Meryem Cup 2016.",
+    "p6": "Segueixo perseguint la pilota pel món, segueixo complint somnis, segueixo creant-me oportunitats per obtenir més trofeus, segueixo volent ser millor dia a dia, segueixo volent més.",
+    "p7": "Anem a per més!",
     "video": {
       "rewind": "Retrocedir 10s",
       "restart": "Reiniciar",
@@ -156,7 +153,9 @@
     "title": "Notícies",
     "description": "Mantigues-te al dia amb els meus últims tornejos, resultats i novetats del Ladies European Tour.",
     "loadMore": "Carregar més notícies",
-    "viewOnLet": "Veure notícia al web del LET"
+    "viewOnLet": "Veure notícia al web del LET",
+    "readMore": "Veure més",
+    "readLess": "Veure menys"
   },
   "livePage": {
     "live": "EN DIRECTE",

@@ -10,7 +10,7 @@ export default function AnimatedLoader() {
     >
       <style>
         {`
-          .loader-svg { width: 320px; height: auto; }
+          .loader-svg { width: 50px; height: auto; }
           /* La barra permanece fija; sin salto ni movimiento horizontal */
           .bar { }
           /* El rect del reveal controla el recorte para aparecer desde izquierda y ocultarse hacia derecha */

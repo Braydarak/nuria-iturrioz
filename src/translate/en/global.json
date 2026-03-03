@@ -18,13 +18,9 @@
   },
   "aboutMe": {
     "title": "About me",
-    "p1_prefix": "My name is Nuria Iturrioz and ",
-    "p1_highlight": "I want to reach the top of world women's golf",
-    "p1_suffix": ".",
-    "p2": "Here you can learn a little more about me, my past, my present, and my future.",
-    "p3": "I hope you like it and can enjoy my career accompanying me around the world!",
-    "p4": "Thanks for your support.",
-    "cta": "Get to know more about me",
+    "p1_prefix": "My name is Nuria Iturrioz, welcome to my space, where you can follow, contact, cheer and get to know me better, among many things.",
+    "p4": "I invite you to enjoy with me!",
+    "cta": "Do you want to know more about me?",
     "stats": {
       "age": "Age",
       "wins": "LET Wins",
@@ -80,12 +76,13 @@
   },
   "career": {
     "title": "My Career",
-    "p1": "I have always been passionate about sports: tennis, football, swimming... at 12 years old I decided to follow my sports path only with golf, thanks to my coach who pushed me to it.",
-    "p2": "At 14, my life moved to Madrid for the next 5 years at the CAR (High Performance Center). There I grew, learned, and formed myself as a person, accumulating tournaments and trophies.",
-    "p3": "The death of my father meant a great loss, certainly the most complicated situation I have had to live. Everything I am now, I owe to his effort and his vision to involve me in golf at just 6 years old.",
-    "p4": "Another decision in my life was not to go to the USA to pursue a university degree, as my goal was to become a professional soon. My future was cut short by pancreatitis that totally limited me from going to the 2nd stage of the qualifiers to compete in the Professional Golf League having passed the first stage a month earlier.",
-    "p5": "In 2016, after qualifying in December in the LET, my adventure begins without forgetting my main goal, to be one of the best in the LPGA.",
-    "p6": "I continue to pursue my main goal, to be the best golfer in the world, although I would also like to highlight my focus on qualifying for the Solheim Cup and the Olympics.",
+    "p1": "I have always been passionate about sports: tennis, football, swimming... I practiced them all when I was little, but at 12 I decided to follow my sports path only with golf, thanks to my coach (Chiqui) who pushed me to it.",
+    "p2": "At 14, I was given a scholarship to go to Madrid, to the CAR (High Performance Center), where I spent the next 5 years of my career, and where they helped me grow as a player and person.",
+    "p3": "When I finished my studies in Madrid I had the opportunity to get a scholarship to study at a university in the USA, but in my last weeks I decided it wasn't for me, I stayed in Madrid and studied a higher degree (TAFAD).",
+    "p4": "At 19, I made the leap to professional golf.",
+    "p5": "That same year (2015) I got the Ladies European Tour (LET) card and my professional career began, I won my first title in the second tournament of the season, in Morocco, the Lalla Meryem Cup 2016.",
+    "p6": "I continue chasing the ball around the world, fulfilling dreams, creating opportunities to get more trophies, wanting to be better day by day, wanting more.",
+    "p7": "Let's go for more!",
     "video": {
       "rewind": "Rewind 10s",
       "restart": "Restart",
@@ -156,7 +153,9 @@
     "title": "News",
     "description": "Stay up to date with my latest tournaments, results, and news from the Ladies European Tour.",
     "loadMore": "Load more news",
-    "viewOnLet": "View news on LET website"
+    "viewOnLet": "View news on LET website",
+    "readMore": "Read more",
+    "readLess": "Read less"
   },
   "livePage": {
     "live": "LIVE",

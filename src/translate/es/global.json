@@ -18,13 +18,9 @@
   },
   "aboutMe": {
     "title": "Sobre mí",
-    "p1_prefix": "Me llamo Nuria Iturrioz y ",
-    "p1_highlight": "quiero llegar a lo más alto del golf femenino mundial",
-    "p1_suffix": ".",
-    "p2": "Aquí podréis saber un poco más de mí, de mi pasado, mi presente y mi futuro.",
-    "p3": "¡Espero que os guste y podáis disfrutar de mi carrera acompañándome por todo el mundo!",
-    "p4": "Gracias por vuestro apoyo.",
-    "cta": "Anímate a conocer más sobre mí",
+    "p1_prefix": "Me llamo Nuria Iturrioz, bienvenidos a mi espacio, donde me podréis seguir, contactar, animar y conocer mejor, entre muchas cosas.",
+    "p4": "¡Os invito a disfrutar conmigo!",
+    "cta": "¿Quieres saber más sobre mí?",
     "stats": {
       "age": "Edad",
       "wins": "Victorias LET",
@@ -80,12 +76,13 @@
   },
   "career": {
     "title": "Mi Carrera",
-    "p1": "Toda la vida he sido una apasionada del deporte: tenis, fútbol, natación… a los 12 años decidí seguir mi camino deportivo solo con el golf, gracias a mi entrenador que me empujó a ello.",
-    "p2": "Con 14 años mi vida se trasladó a Madrid, por los 5 siguientes años, en el CAR (Centro de Alto Rendimiento). Ahí crecí, aprendí y me formé como persona, acumulando torneos y trofeos.",
-    "p3": "La muerte de mi padre significó una gran pérdida, con total seguridad la situación más complicada que he tenido que vivir. Todo lo que soy ahora, se lo debo a su esfuerzo y su visión por involucrarme en el golf con tan solo 6 años.",
-    "p4": "Otra decisión en mi vida fue no ir a EE. UU. a cursar una carrera universitaria, ya que mi objetivo era convertirme en profesional pronto. Mi futuro se trunca con una pancreatitis que me limita totalmente de ir a la 2ª fase de las clasificatorias para competir a Liga Profesional de Golf habiendo superado la primera fase un mes antes.",
-    "p5": "En 2016, después de clasificarme en diciembre en la LET, empieza mi aventura sin olvidarme de mi objetivo principal, ser de las mejores en la LPGA.",
-    "p6": "Sigo persiguiendo mi principal objetivo, ser la mejor golfista del mundo, aunque también me gustaría remarcar mi focalización en clasificarme para la Solheim Cup y las Olimpiadas.",
+    "p1": "Toda la vida he sido una apasionada del deporte: tenis, fútbol, natación… de pequeña los practicaba todos, pero a los 12 años decidí seguir mi camino deportivo solo con el golf, gracias a que mi entrenador (Chiqui) me empujó a ello.",
+    "p2": "Con 14 años me dieron una beca para ir a Madrid, al CAR (Centro de Alto Rendimiento), donde pasé los siguientes 5 años de mi carrera, y donde me ayudaron a crecer como jugadora y persona.",
+    "p3": "Cuando terminé mis estudios en Madrid tuve la oportunidad de ser becada para estudiar en una universidad en EEUU, pero en mis últimas semanas decidí que no era para mí, me quedé en Madrid y estudié un grado superior (TAFAD).",
+    "p4": "A los 19 años di el salto al golf profesional.",
+    "p5": "Este mismo año (2015) consigo la tarjeta del Ladies European Tour (LET) y empieza mi carrera profesional, gané mi primer título en el segundo torneo de la temporada, en Marruecos, el Lalla Merme Cup 2016.",
+    "p6": "Sigo persiguiendo la pelota por el mundo, sigo cumpliendo sueños, sigo creándome oportunidades para obtener más trofeos, sigo queriendo ser mejor día a día, sigo queriendo más.",
+    "p7": "¡Vamos a por más!",
     "video": {
       "rewind": "Retroceder 10s",
       "restart": "Reiniciar",
@@ -156,7 +153,9 @@
     "title": "Noticias",
     "description": "Mantente al día con mis últimos torneos, resultados y novedades del Ladies European Tour.",
     "loadMore": "Cargar más noticias",
-    "viewOnLet": "Ver noticia en la web del LET"
+    "viewOnLet": "Ver noticia en la web del LET",
+    "readMore": "Ver más",
+    "readLess": "Ver menos"
   },
   "livePage": {
     "live": "EN VIVO",

@@ -8,7 +8,7 @@ export default function StatsPage() {
     <main className="mx-auto max-w-screen mt-40">
       {/* Bloque superior: Season Stats con fondo blanco */}
       <section className="bg-white">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 pt-0">
           <header className="mb-8">
             <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-neutral-900">
               {t("statsPage.title")}

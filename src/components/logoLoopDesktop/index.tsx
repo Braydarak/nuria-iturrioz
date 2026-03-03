@@ -1,33 +1,43 @@
-import { useMemo } from 'react'
+import { useMemo } from "react";
 
 type LogoLoopProps = {
-  heightClass?: string
-  className?: string
-}
+  heightClass?: string;
+  className?: string;
+};
 
-const LogoLoop = ({ heightClass = 'h-50', className = '' }: LogoLoopProps) => {
+const LogoLoop = ({ heightClass = "h-50", className = "" }: LogoLoopProps) => {
   // Carga dinámica de imágenes desde la carpeta sponsors
   const logos = useMemo(() => {
-    const modules = import.meta.glob('../../assets/sponsors/*.{png,jpg,jpeg,svg,avif,webp}', {
-      eager: true,
-      query: '?url',
-      import: 'default',
-    }) as Record<string, string>
+    const modules = import.meta.glob(
+      "../../assets/sponsors/*.{png,jpg,jpeg,svg,avif,webp}",
+      {
+        eager: true,
+        query: "?url",
+        import: "default",
+      },
+    ) as Record<string, string>;
     // Ordena por nombre para un orden estable
     return Object.entries(modules)
       .sort(([a], [b]) => a.localeCompare(b))
-      .map(([, url]) => url)
-  }, [])
+      .map(([, url]) => url);
+  }, []);
 
   // Duplicamos la lista para crear el bucle continuo
-  const loopList = [...logos, ...logos]
+  const loopList = [...logos, ...logos];
+
+  const getLogoClasses = (src: string, baseHeight: string) =>
+    `w-auto object-contain ${baseHeight} ${
+      src.includes("7.avif") ? "p-6" : ""
+    }`;
 
   return (
-    <div className={`logo-loop relative overflow-hidden bg-[#2A579E] ${heightClass} w-60 ${className}`}>
+    <div
+      className={`logo-loop relative overflow-hidden bg-[#2A579E] ${heightClass} w-60 ${className}`}
+    >
       {/* Estilos del componente: animación y difuminado */}
       <style>
         {`
-          .logo-loop .loop-inner { will-change: transform; animation: scrollY 18s linear infinite; }
+          .logo-loop .loop-inner { will-change: transform; animation: scrollY 35s linear infinite; }
           @keyframes scrollY { 100% { transform: translateY(0); } 0% { transform: translateY(-50%); } }
           .logo-loop::before { content: ''; position: absolute; inset: 0; pointer-events: none;
             background: linear-gradient(to bottom,
@@ -48,8 +58,8 @@ const LogoLoop = ({ heightClass = 'h-50', className = '' }: LogoLoopProps) => {
                 key={`logo-1-${idx}`}
                 src={src}
                 alt={`Sponsor ${idx + 1}`}
-                className="h-60 w-auto object-contain"
-                style={{ filter: 'grayscale(1) brightness(0) invert(1)' }}
+                className={getLogoClasses(src, "h-60 w-60")}
+                style={{ filter: "grayscale(1) brightness(0) invert(1)" }}
               />
             ))}
           </div>
@@ -60,15 +70,15 @@ const LogoLoop = ({ heightClass = 'h-50', className = '' }: LogoLoopProps) => {
                 key={`logo-2-${idx}`}
                 src={src}
                 alt={`Sponsor ${idx + 1}`}
-                className="h-20 w-auto object-contain"
-                style={{ filter: 'grayscale(1) brightness(0) invert(1)' }}
+                className={getLogoClasses(src, "h-20")}
+                style={{ filter: "grayscale(1) brightness(0) invert(1)" }}
               />
             ))}
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LogoLoop
+export default LogoLoop;

@@ -92,7 +92,7 @@ export default function CareerPage() {
   };
 
   return (
-    <main className="relative mx-auto max-w-screen px-4 pt-50 pb-16 min-h-screen flex items-center justify-center">
+    <main className="relative mx-auto max-w-screen px-4 pt-40 pb-16 min-h-screen flex items-center justify-center">
       <style>{`
         .golf-texture {
           background:
@@ -112,24 +112,31 @@ export default function CareerPage() {
 
       <section
         aria-labelledby="career-title"
-        className="relative max-w-full flex flex-col items-center z-10 mx-auto text-center"
+        className="relative w-full max-w-7xl flex flex-col items-center z-10 mx-auto px-4"
       >
-        <div className="max-w-3xl mb-10">
+        <div className="w-full mb-10">
           <h1
             id="career-title"
-            className="font-signature text-4xl md:text-5xl text-[#2A579E] mb-10 tracking-tight"
+            className="font-signature text-4xl md:text-5xl text-[#2A579E] mb-10 tracking-tight text-center"
           >
             {t("career.title")}
           </h1>
 
-          <div className="space-y-6 leading-relaxed text-black/90 text-lg md:text-xl">
-            <p>{t("career.p1")}</p>
-            <p>{t("career.p2")}</p>
-            <p>{t("career.p3")}</p>
-            <p>{t("career.p4")}</p>
-            <p>{t("career.p5")}</p>
-            <p>{t("career.p6")}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-20 text-lg md:text-xl leading-relaxed text-black/90 text-justify">
+            <div className="space-y-6">
+              <p>{t("career.p1")}</p>
+              <p>{t("career.p2")}</p>
+              <p>{t("career.p3")}</p>
+            </div>
+            <div className="space-y-6">
+              <p>{t("career.p4")}</p>
+              <p>{t("career.p5")}</p>
+              <p>{t("career.p6")}</p>
+            </div>
           </div>
+          <p className="mt-10 text-center font-signature text-2xl md:text-3xl text-[#2A579E] font-medium">
+            {t("career.p7")}
+          </p>
 
           <div className="mt-8">
             <div className="relative group rounded-xl overflow-hidden shadow-md">

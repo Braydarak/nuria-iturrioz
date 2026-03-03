@@ -181,17 +181,9 @@ const AboutMe = () => {
                 strokeLinecap="round"
               />
             </svg>
-            <div className="text-2xl leading-relaxed">
-              <p className="mt-4">
-                {t("aboutMe.p1_prefix")}
-                <strong className="bg-clip-text text-transparent bg-linear-to-r from-white to-[#A8D0FF]">
-                  {t("aboutMe.p1_highlight")}
-                </strong>
-                {t("aboutMe.p1_suffix")}
-              </p>
-              <p className="mt-4">{t("aboutMe.p2")}</p>
-              <p className="mt-4">{t("aboutMe.p3")}</p>
-              <p className="mt-4">{t("aboutMe.p4")}</p>
+            <div className="text-2xl md:text-3xl lg:text-4xl leading-relaxed space-y-8 md:space-y-12 font-light">
+              <p>{t("aboutMe.p1_prefix")}</p>
+              <p className="font-medium text-[#A8D0FF]">{t("aboutMe.p4")}</p>
             </div>
 
             <div className="pt-2">

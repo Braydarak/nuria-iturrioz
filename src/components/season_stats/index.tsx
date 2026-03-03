@@ -182,7 +182,7 @@ export default function SeasonStats() {
           <div className="rounded-2xl bg-white/60 backdrop-blur-sm border border-white/50">
             {selectedSeason && (
               <>
-                <div className="px-4 sm:px-6 py-3 border-b border-neutral-200 bg-white/70">
+                <div className="px-4 sm:px-6 py-3 border-b border-neutral-200 bg-white/70 pl-0 md:pl-0">
                   {selectedSeason === "__CURRENT__" ? (
                     <span className="inline-flex items-center gap-2 text-sm text-neutral-700">
                       <span className="px-2 py-1 rounded-full bg-[#2A579E]/10 text-[#2A579E] font-medium">
@@ -208,26 +208,27 @@ export default function SeasonStats() {
                       className="px-4 sm:px-6 py-4 grid grid-cols-1 sm:grid-cols-5 gap-2 sm:gap-4 items-center"
                     >
                       <div className="text-neutral-600">
-                        <div className="text-sm">{item.date ?? "—"}</div>
-                        <div className="text-xs">
-                          {t("seasonStats.position")} {item.position ?? "—"}
+                        <div className="text-md">{item.date ?? "—"}</div>
+                        <div className="text-md">
+                          {t("seasonStats.position")}{" "}
+                          {item.position ? item.position.replace("=", "") : "—"}
                         </div>
                       </div>
                       <div className="sm:col-span-2">
                         <div className="text-neutral-900 font-semibold">
                           {item.name ?? "—"}
                         </div>
-                        <div className="text-xs text-neutral-500">
+                        <div className="text-md text-neutral-500">
                           {t("seasonStats.rounds")} {item.rounds ?? "—"}
                         </div>
                       </div>
                       <div className="text-neutral-900">
-                        <div className="text-sm">
+                        <div className="text-md">
                           {t("seasonStats.score")} {item.score ?? "—"}
                         </div>
                       </div>
-                      <div className="text-neutral-900">
-                        <div className="text-sm">
+                      <div className="text-neutral-900 text-md">
+                        <div className="text-md">
                           {t("seasonStats.vsPar")} {item.vspar ?? "—"}
                         </div>
                       </div>
