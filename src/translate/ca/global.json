@@ -246,11 +246,170 @@
     "cookies": "Cookies",
     "contact": "Contacte"
   },
+  "legals": {
+    "legalNotice": {
+      "title": "Avís legal",
+      "terms": {
+        "p1": "L'accés i ús d'aquest lloc web implica l'acceptació d'aquestes condicions. Si no hi estàs d'acord, si us plau, no facis servir el lloc.",
+        "p2": "L'usuari es compromet a fer un ús adequat dels continguts i serveis i a no emprar-los per a activitats il·lícites o contràries a la bona fe i a l'ordre públic."
+      },
+      "ip": {
+        "p1": "Tots els continguts d'aquest lloc web (textos, imatges, vídeos, logotips, marques i dissenys) estan protegits per drets de propietat intel·lectual i industrial.",
+        "p2": "Queda prohibida la reproducció, distribució o comunicació pública, total o parcial, sense autorització prèvia i expressa del titular."
+      },
+      "liability": {
+        "p1": "El titular no es fa responsable del mal ús de la informació publicada ni dels danys derivats de l'accés o ús del lloc, excepte els establerts per la normativa imperativa.",
+        "p2": "Aquest lloc pot incloure enllaços a pàgines de tercers. El titular no en controla els continguts i no n'assumeix cap responsabilitat."
+      },
+      "law": {
+        "p1": "Aquest avís legal es regeix per la legislació espanyola. Qualsevol controvèrsia se sotmetrà als jutjats i tribunals competents d'acord amb la normativa aplicable."
+      }
+    },
+    "privacy": {
+      "title": "Protecció de dades (Política de privacitat)",
+      "purposes": {
+        "p1": "Tractem dades personals per gestionar les consultes enviades a través del formulari de contacte i mantenir la comunicació amb les persones que ens contactin.",
+        "p2": "Si ens contactes per col·laboracions, patrocinis o premsa, farem servir la informació facilitada únicament per gestionar la teva sol·licitud."
+      },
+      "legalBasis": {
+        "p1": "La base jurídica és el consentiment de l'usuari en enviar formularis i l'interès legítim a atendre consultes i mantenir el funcionament i la seguretat del lloc web."
+      },
+      "recipients": {
+        "p1": "No es cediran dades a tercers excepte per obligació legal o quan sigui necessari per prestar el servei (p. ex., proveïdors de hosting o email), sota els contractes corresponents."
+      },
+      "retention": {
+        "p1": "Les dades es conservaran durant el temps necessari per gestionar la sol·licitud i, si escau, durant els terminis legalment exigits."
+      },
+      "rights": {
+        "p1": "Pots exercir els teus drets d'accés, rectificació, supressió, oposició, limitació i portabilitat contactant a través de l'email indicat, junt amb un document acreditatiu de la teva identitat.",
+        "p2": "També pots presentar una reclamació davant l'Agència Espanyola de Protecció de Dades (AEPD) si consideres que s'han vulnerat els teus drets."
+      },
+      "security": {
+        "p1": "Apliquem mesures tècniques i organitzatives raonables per protegir les dades personals davant pèrdua, mal ús, accés no autoritzat, divulgació, alteració i destrucció."
+      }
+    },
+    "cookies": {
+      "title": "Política de cookies",
+      "what": {
+        "p1": "Les cookies són petits fitxers que es descarreguen al teu dispositiu en accedir a determinades pàgines web. Permeten, entre altres coses, emmagatzemar i recuperar informació sobre els hàbits de navegació o el dispositiu."
+      },
+      "types": {
+        "p1": "Aquest lloc web pot fer servir cookies tècniques (necessàries per al funcionament) i, si escau, cookies de preferències, analítiques o publicitàries.",
+        "p2": "Si s'utilitzen cookies analítiques o publicitàries, podràs acceptar-les o rebutjar-les mitjançant el mecanisme de configuració de cookies quan estigui disponible."
+      },
+      "manage": {
+        "p1": "Pots permetre, bloquejar o eliminar les cookies instal·lades al teu dispositiu mitjançant la configuració del navegador. Deshabilitar cookies pot afectar el funcionament d'algunes funcionalitats.",
+        "p2": "Per a més informació, consulta la secció d'ajuda del teu navegador (Chrome, Safari, Firefox, Edge)."
+      },
+      "contact": {
+        "p1": "Si tens dubtes sobre aquesta política de cookies, pots contactar-nos a través de l'email indicat a l'avís legal / política de privacitat."
+      }
+    },
+    "backHome": "Tornar a l'inici",
+    "updatedAt": "Darrera actualització: {{date}}",
+    "sections": {
+      "owner": "Titular del lloc web",
+      "terms": "Condicions d'ús",
+      "ip": "Propietat intel·lectual i industrial",
+      "liability": "Responsabilitat",
+      "law": "Legislació aplicable i jurisdicció",
+      "dataController": "Responsable del tractament",
+      "purposes": "Finalitats del tractament",
+      "legalBasis": "Base jurídica",
+      "recipients": "Destinataris",
+      "retention": "Termini de conservació",
+      "rights": "Drets",
+      "security": "Seguretat",
+      "whatAreCookies": "Què són les cookies?",
+      "types": "Tipus de cookies",
+      "manage": "Com gestionar les cookies",
+      "contact": "Contacte"
+    },
+    "placeholders": {
+      "ownerName": "Nom/Raó social: [Per completar]",
+      "ownerId": "NIF/CIF: [Per completar]",
+      "ownerAddress": "Domicili: [Per completar]",
+      "ownerEmail": "Email de contacte: [Per completar]"
+    }
+  },
   "popUpLive": {
     "liveNow": "En directe",
     "tournamentFallback": "Torneig en curs",
     "currentPosition": "Posició actual:",
     "dontShowAgain": "No tornar a mostrar",
     "viewLeaderboard": "Veure Leaderboard"
+  },
+  "common": {
+    "yes": "Sí",
+    "no": "No",
+    "next": "Següent",
+    "true": "Vertader",
+    "false": "Fals"
+  },
+  "experience": {
+    "whereAreYouFrom": "D'on ets?",
+    "enterCountry": "Introdueix el teu país...",
+    "welcome": "Benvinguts des de",
+    "introText": "Encantats de tenir-te aquí. Abans de començar, coneixem-nos una mica millor.",
+    "start": "Començar",
+    "questionLabel": "Pregunta",
+    "scoreLabel": "Puntuació",
+    "question1": "Coneixes a Nuria Iturrioz?",
+    "question2": "Com la vas conèixer?",
+    "question3": "Segueixes la seva carrera?",
+    "question4": "Què t'agradaria fer?",
+    "triviaTitle": "Repte de Trivia de la Nuria",
+    "triviaIntro": "Vegem quant saps realment sobre la Nuria!",
+    "startGame": "Iniciar joc",
+    "learnMore": "Conèixer més sobre la Nuria",
+    "backToWebsite": "Tornar al web",
+    "quizComplete": "Quiz completat!",
+    "playAgain": "Tornar a jugar",
+    "results": {
+      "perfect": "Perfecte! Ets un/a súper fan de debò!",
+      "great": "Molt bé! Coneixes força bé la Nuria.",
+      "try": "Bon intent! Continua seguint la Nuria per aprendre'n més."
+    },
+    "options": {
+      "golfTournament": "Torneig de golf",
+      "socialMedia": "Xarxes socials",
+      "newsPress": "Notícies / Premsa",
+      "friendFamily": "Amics / Família",
+      "habitually": "Habitualment",
+      "occasionally": "Ocassionalment",
+      "rarely": "Rarament",
+      "knowMore": "Vull saber més sobre ella",
+      "playQuiz": "Fer un quiz sobre la Nuria"
+    }
+  },
+  "bio": {
+    "chapter": "Capítol",
+    "playTrivia": "Posa a prova els teus coneixements",
+    "beginningsTitle": "Els inicis",
+    "beginningsContent": "La Nuria va néixer a Son Servera, Mallorca, el 16 de novembre de 1995. La seva passió pel golf va començar aviat al seu poble natal.",
+    "amateurTitle": "Èxits amateur",
+    "amateurContent": "Abans de fer-se professional, va dominar l'escena amateur: Campiona de Madrid (2012) i l'Stroke Play Internacional d'Espanya (2013 i 2014).",
+    "proTitle": "Salt al professionalisme",
+    "proContent": "Després d'una carrera amateur brillant, la Nuria es va fer professional el 2015, preparada per al gran escenari després d'acabar 4a a la Q-School.",
+    "rookieTitle": "Victòria com a novata",
+    "rookieContent": "En el seu any de debut al LET (2016), va guanyar la Lalla Meryem Cup al Marroc per sis cops.",
+    "moroccoAgainTitle": "Reina del Marroc",
+    "moroccoAgainContent": "El 2019 va tornar a conquerir la Lalla Meryem Cup, reafirmant el seu domini a Royal Golf Dar Es Salam.",
+    "dubaiTitle": "Màgia a la llum de la lluna",
+    "dubaiContent": "Dies després del Marroc, va triomfar a l'Omega Dubai Moonlight Classic, el primer torneig professional dia/nit.",
+    "laSellaTitle": "Victòria a casa",
+    "laSellaContent": "El 2023 va guanyar el La Sella Open a Espanya després d'un playoff emocionant, celebrant a casa.",
+    "houstonTitle": "Conquesta de Houston",
+    "houstonContent": "El 2025 va aconseguir una gran victòria a l'Aramco Houston Championship, demostrant el seu nivell en territori nord-americà.",
+    "currentTitle": "El camí continua",
+    "currentContent": "Amb 5 títols LET i sumant, la Nuria segueix competint amb passió, representant el golf espanyol arreu del món."
+  },
+  "trivia": {
+    "age": "Quants anys té la Nuria?",
+    "letWins": "Quants títols del LET ha guanyat?",
+    "firstLet": "Quan va guanyar el seu primer títol del LET?",
+    "proYear": "Quan es va fer professional?",
+    "birthplace": "On va néixer la Nuria?",
+    "backToBack": "La Nuria va guanyar dos tornejos seguits: Vertader o Fals?"
   }
 }

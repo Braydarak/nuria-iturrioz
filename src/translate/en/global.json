@@ -246,11 +246,170 @@
     "cookies": "Cookies",
     "contact": "Contact"
   },
+  "legals": {
+    "legalNotice": {
+      "title": "Legal Notice",
+      "terms": {
+        "p1": "Access to and use of this website implies acceptance of these terms. If you do not agree, please refrain from using the site.",
+        "p2": "Users agree to make proper use of the contents and services and not to use them for unlawful activities or those contrary to good faith and public order."
+      },
+      "ip": {
+        "p1": "All content on this website (texts, images, videos, logos, trademarks and designs) is protected by intellectual and industrial property rights.",
+        "p2": "Reproduction, distribution or public communication, in whole or in part, is prohibited without prior express authorisation from the owner."
+      },
+      "liability": {
+        "p1": "The owner is not liable for the misuse of the information published, nor for damages derived from access or use of the website, except those established by mandatory law.",
+        "p2": "This website may include links to third-party sites. The owner has no control over their contents and assumes no responsibility for them."
+      },
+      "law": {
+        "p1": "This legal notice is governed by Spanish law. Any dispute will be submitted to the competent courts and tribunals in accordance with applicable regulations."
+      }
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "purposes": {
+        "p1": "We process personal data to manage enquiries submitted through the contact form and to maintain communication with users who contact us.",
+        "p2": "If you contact us regarding collaborations, sponsorships or press requests, we will use the information you provide solely to handle your request."
+      },
+      "legalBasis": {
+        "p1": "The legal basis is the user’s consent when submitting forms and the legitimate interest in responding to enquiries and maintaining basic website operation and security."
+      },
+      "recipients": {
+        "p1": "Data is not shared with third parties except when required by law or when necessary to provide the service (e.g., hosting or email service providers), under appropriate contracts."
+      },
+      "retention": {
+        "p1": "Data will be retained for the time necessary to manage the request and, if applicable, during the legally required periods."
+      },
+      "rights": {
+        "p1": "You may exercise your rights of access, rectification, erasure, objection, restriction and portability by contacting the email address indicated above, together with proof of identity.",
+        "p2": "You also have the right to lodge a complaint with the Spanish Data Protection Agency (AEPD) if you consider your rights have been infringed."
+      },
+      "security": {
+        "p1": "We apply reasonable technical and organisational measures to protect personal data against loss, misuse, unauthorised access, disclosure, alteration and destruction."
+      }
+    },
+    "cookies": {
+      "title": "Cookies Policy",
+      "what": {
+        "p1": "Cookies are small files that are downloaded to your device when you access certain websites. They allow, among other things, storing and retrieving information about a user’s browsing habits or device."
+      },
+      "types": {
+        "p1": "This website may use technical cookies (necessary for the website to function) and, where applicable, preference, analytics or advertising cookies.",
+        "p2": "If analytics or advertising cookies are used, you will be able to accept or reject them through the cookie settings mechanism when available."
+      },
+      "manage": {
+        "p1": "You can allow, block or delete cookies installed on your device through your browser settings. Disabling cookies may affect the proper functioning of some features.",
+        "p2": "For more information, consult your browser’s help section (Chrome, Safari, Firefox, Edge)."
+      },
+      "contact": {
+        "p1": "If you have questions about this cookies policy, you can contact us using the email address shown in the legal notice / privacy policy."
+      }
+    },
+    "backHome": "Back to home",
+    "updatedAt": "Last updated: {{date}}",
+    "sections": {
+      "owner": "Website Owner",
+      "terms": "Terms of Use",
+      "ip": "Intellectual Property",
+      "liability": "Liability",
+      "law": "Applicable Law and Jurisdiction",
+      "dataController": "Data Controller",
+      "purposes": "Purposes of Processing",
+      "legalBasis": "Legal Basis",
+      "recipients": "Recipients",
+      "retention": "Retention Period",
+      "rights": "Your Rights",
+      "security": "Security",
+      "whatAreCookies": "What are cookies?",
+      "types": "Types of cookies",
+      "manage": "How to manage cookies",
+      "contact": "Contact"
+    },
+    "placeholders": {
+      "ownerName": "Owner name: [To be completed]",
+      "ownerId": "Tax ID: [To be completed]",
+      "ownerAddress": "Address: [To be completed]",
+      "ownerEmail": "Contact email: [To be completed]"
+    }
+  },
   "popUpLive": {
     "liveNow": "Live Now",
     "tournamentFallback": "Tournament in progress",
     "currentPosition": "Current position:",
     "dontShowAgain": "Don't show again",
     "viewLeaderboard": "View Leaderboard"
+  },
+  "common": {
+    "yes": "Yes",
+    "no": "No",
+    "next": "Next",
+    "true": "True",
+    "false": "False"
+  },
+  "experience": {
+    "whereAreYouFrom": "Where are you from?",
+    "enterCountry": "Enter your country...",
+    "welcome": "Welcome from",
+    "introText": "We are glad to have you here. Let's get to know each other a little better before we start.",
+    "start": "Start",
+    "questionLabel": "Question",
+    "scoreLabel": "Score",
+    "question1": "Do you know Nuria Iturrioz?",
+    "question2": "How did you meet her?",
+    "question3": "Do you follow her career?",
+    "question4": "What would you like to do?",
+    "triviaTitle": "Nuria Trivia Challenge",
+    "triviaIntro": "Let's see how much you really know about Nuria!",
+    "startGame": "Start Game",
+    "learnMore": "Learn more about Nuria",
+    "backToWebsite": "Back to the website",
+    "quizComplete": "Quiz Complete!",
+    "playAgain": "Play Again",
+    "results": {
+      "perfect": "Perfect! You are a true super fan!",
+      "great": "Great job! You know Nuria well.",
+      "try": "Nice try! Keep following Nuria to learn more."
+    },
+    "options": {
+      "golfTournament": "Golf Tournament",
+      "socialMedia": "Social Media",
+      "newsPress": "News / Press",
+      "friendFamily": "Friend / Family",
+      "habitually": "Habitually",
+      "occasionally": "Occasionally",
+      "rarely": "Rarely",
+      "knowMore": "I want to know more about her",
+      "playQuiz": "Play a quiz about Nuria"
+    }
+  },
+  "bio": {
+    "chapter": "Chapter",
+    "playTrivia": "Test Your Knowledge",
+    "beginningsTitle": "The Beginning",
+    "beginningsContent": "Nuria was born in Son Servera, Mallorca, on November 16, 1995. Her passion for golf started early in her beautiful hometown.",
+    "amateurTitle": "Amateur Success",
+    "amateurContent": "Before turning pro, she dominated the amateur scene, winning the Madrid Ladies Championship (2012) and the Spanish International Stroke Play (2013, 2014).",
+    "proTitle": "Turning Professional",
+    "proContent": "After a successful amateur career, Nuria turned professional in 2015, ready to take on the world stage after finishing 4th at Q-School.",
+    "rookieTitle": "Rookie Victory",
+    "rookieContent": "In her rookie year on the Ladies European Tour (2016), Nuria stunned the field by winning the Lalla Meryem Cup in Morocco by six strokes.",
+    "moroccoAgainTitle": "Queen of Morocco",
+    "moroccoAgainContent": "Nuria returned to the Lalla Meryem Cup in 2019 and claimed the title for a second time, proving her dominance at Royal Golf Dar Es Salam.",
+    "dubaiTitle": "Moonlight Magic",
+    "dubaiContent": "Just days after her win in Morocco, she triumphed at the Omega Dubai Moonlight Classic, winning the first-ever professional day-night tournament.",
+    "laSellaTitle": "Home Soil Victory",
+    "laSellaContent": "In 2023, Nuria won the La Sella Open in Spain after a thrilling playoff, celebrating an emotional victory in front of her home fans.",
+    "houstonTitle": "Conquering Houston",
+    "houstonContent": "Most recently, in 2025, she secured a massive win at the Aramco Houston Championship, showcasing her world-class talent on American soil.",
+    "currentTitle": "The Journey Continues",
+    "currentContent": "With 5 major LET titles and counting, Nuria continues to compete with passion and determination, representing Spanish golf across the globe."
+  },
+  "trivia": {
+    "age": "How old is Nuria?",
+    "letWins": "How many LET titles has she won?",
+    "firstLet": "When did she win her first LET title?",
+    "proYear": "When did she turn professional?",
+    "birthplace": "Where was Nuria born?",
+    "backToBack": "Nuria won two tournaments in a row: True or False?"
   }
 }

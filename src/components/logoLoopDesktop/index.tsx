@@ -27,7 +27,7 @@ const LogoLoop = ({ heightClass = "h-50", className = "" }: LogoLoopProps) => {
 
   const getLogoClasses = (src: string, baseHeight: string) =>
     `w-auto object-contain ${baseHeight} ${
-      src.includes("7.avif") ? "p-6" : ""
+      src.includes("7.avif") ? "p-8" : ""
     }`;
 
   return (

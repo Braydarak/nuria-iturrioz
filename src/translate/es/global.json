@@ -252,5 +252,164 @@
     "privacy": "Política de Privacidad",
     "cookies": "Cookies",
     "contact": "Contacto"
+  },
+  "legals": {
+    "legalNotice": {
+      "title": "Aviso legal",
+      "terms": {
+        "p1": "El acceso y uso de este sitio web implica la aceptación de las presentes condiciones. Si no estás de acuerdo, por favor, no uses el sitio.",
+        "p2": "El usuario se compromete a hacer un uso adecuado de los contenidos y servicios y a no emplearlos para actividades ilícitas o contrarias a la buena fe y al orden público."
+      },
+      "ip": {
+        "p1": "Todos los contenidos de este sitio web (textos, imágenes, vídeos, logotipos, marcas y diseños) están protegidos por derechos de propiedad intelectual e industrial.",
+        "p2": "Queda prohibida su reproducción, distribución o comunicación pública, total o parcial, sin autorización previa y expresa del titular."
+      },
+      "liability": {
+        "p1": "El titular no se responsabiliza del uso indebido de la información publicada ni de los daños derivados del acceso o uso del sitio, salvo los establecidos por la normativa imperativa.",
+        "p2": "Este sitio puede incluir enlaces a páginas de terceros. El titular no controla sus contenidos y no asume responsabilidad por ellos."
+      },
+      "law": {
+        "p1": "El presente aviso legal se rige por la legislación española. Cualquier controversia se someterá a los juzgados y tribunales competentes conforme a la normativa aplicable."
+      }
+    },
+    "privacy": {
+      "title": "Protección de datos (Política de privacidad)",
+      "purposes": {
+        "p1": "Tratamos datos personales para gestionar las consultas enviadas a través del formulario de contacto y mantener la comunicación con las personas que nos contacten.",
+        "p2": "Si nos contactas por colaboraciones, patrocinios o prensa, usaremos la información facilitada únicamente para gestionar tu solicitud."
+      },
+      "legalBasis": {
+        "p1": "La base jurídica es el consentimiento del usuario al enviar formularios y el interés legítimo en atender consultas y mantener el funcionamiento y la seguridad del sitio web."
+      },
+      "recipients": {
+        "p1": "No se cederán datos a terceros salvo obligación legal o cuando sea necesario para prestar el servicio (p. ej., proveedores de hosting o email), bajo los contratos correspondientes."
+      },
+      "retention": {
+        "p1": "Los datos se conservarán durante el tiempo necesario para gestionar la solicitud y, en su caso, durante los plazos legalmente exigidos."
+      },
+      "rights": {
+        "p1": "Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad contactando a través del email indicado, junto con un documento acreditativo de tu identidad.",
+        "p2": "También puedes presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD) si consideras que se han vulnerado tus derechos."
+      },
+      "security": {
+        "p1": "Aplicamos medidas técnicas y organizativas razonables para proteger los datos personales frente a pérdida, uso indebido, acceso no autorizado, divulgación, alteración y destrucción."
+      }
+    },
+    "cookies": {
+      "title": "Política de cookies",
+      "what": {
+        "p1": "Las cookies son pequeños archivos que se descargan en tu dispositivo al acceder a determinadas páginas web. Permiten, entre otras cosas, almacenar y recuperar información sobre los hábitos de navegación o el dispositivo."
+      },
+      "types": {
+        "p1": "Este sitio web puede usar cookies técnicas (necesarias para su funcionamiento) y, en su caso, cookies de preferencias, analíticas o publicitarias.",
+        "p2": "Si se utilizan cookies analíticas o publicitarias, podrás aceptarlas o rechazarlas mediante el mecanismo de configuración de cookies cuando esté disponible."
+      },
+      "manage": {
+        "p1": "Puedes permitir, bloquear o eliminar las cookies instaladas en tu dispositivo mediante la configuración del navegador. Deshabilitar cookies puede afectar al funcionamiento de algunas funcionalidades.",
+        "p2": "Para más información, consulta la sección de ayuda de tu navegador (Chrome, Safari, Firefox, Edge)."
+      },
+      "contact": {
+        "p1": "Si tienes dudas sobre esta política de cookies, puedes contactarnos a través del email indicado en el aviso legal / política de privacidad."
+      }
+    },
+    "backHome": "Volver al inicio",
+    "updatedAt": "Última actualización: {{date}}",
+    "sections": {
+      "owner": "Titular del sitio web",
+      "terms": "Condiciones de uso",
+      "ip": "Propiedad intelectual e industrial",
+      "liability": "Responsabilidad",
+      "law": "Legislación aplicable y jurisdicción",
+      "dataController": "Responsable del tratamiento",
+      "purposes": "Finalidades del tratamiento",
+      "legalBasis": "Base jurídica",
+      "recipients": "Destinatarios",
+      "retention": "Plazo de conservación",
+      "rights": "Derechos",
+      "security": "Seguridad",
+      "whatAreCookies": "¿Qué son las cookies?",
+      "types": "Tipos de cookies",
+      "manage": "Cómo gestionar las cookies",
+      "contact": "Contacto"
+    },
+    "placeholders": {
+      "ownerName": "Nombre/Razón social: [Por completar]",
+      "ownerId": "NIF/CIF: [Por completar]",
+      "ownerAddress": "Domicilio: [Por completar]",
+      "ownerEmail": "Email de contacto: [Por completar]"
+    }
+  },
+  "common": {
+    "yes": "Sí",
+    "no": "No",
+    "next": "Siguiente",
+    "true": "Verdadero",
+    "false": "Falso"
+  },
+  "experience": {
+    "whereAreYouFrom": "¿De dónde eres?",
+    "enterCountry": "Introduce tu país...",
+    "welcome": "Bienvenidos desde",
+    "introText": "Encantados de tenerte aquí. Antes de empezar, conozcámonos un poco mejor.",
+    "start": "Comenzar",
+    "questionLabel": "Pregunta",
+    "scoreLabel": "Puntuación",
+    "question1": "¿Conoces a Nuria Iturrioz?",
+    "question2": "¿Cómo la conociste?",
+    "question3": "¿Sigues su carrera?",
+    "question4": "¿Qué te gustaría hacer?",
+    "triviaTitle": "Desafío de Trivia de Nuria",
+    "triviaIntro": "¡Vamos a ver cuánto sabes realmente sobre Nuria!",
+    "startGame": "Empezar juego",
+    "learnMore": "Conocer más sobre Nuria",
+    "backToWebsite": "Volver a la web",
+    "quizComplete": "¡Quiz completado!",
+    "playAgain": "Jugar de nuevo",
+    "results": {
+      "perfect": "¡Perfecto! ¡Eres un/a súper fan de verdad!",
+      "great": "¡Muy bien! Conoces a Nuria bastante bien.",
+      "try": "¡Buen intento! Sigue a Nuria para aprender más."
+    },
+    "options": {
+      "golfTournament": "Torneo de golf",
+      "socialMedia": "Redes sociales",
+      "newsPress": "Noticias / Prensa",
+      "friendFamily": "Amigos / Familia",
+      "habitually": "Habitualmente",
+      "occasionally": "Ocasionalmente",
+      "rarely": "Raramente",
+      "knowMore": "Quiero saber más sobre ella",
+      "playQuiz": "Jugar un quiz sobre Nuria"
+    }
+  },
+  "bio": {
+    "chapter": "Capítulo",
+    "playTrivia": "Pon a prueba tus conocimientos",
+    "beginningsTitle": "Los comienzos",
+    "beginningsContent": "Nuria nació en Son Servera, Mallorca, el 16 de noviembre de 1995. Su pasión por el golf empezó pronto en su hermosa tierra natal.",
+    "amateurTitle": "Éxitos amateur",
+    "amateurContent": "Antes de hacerse profesional, dominó la escena amateur: Campeona de Madrid (2012) y el International Stroke Play de España (2013 y 2014).",
+    "proTitle": "Salto al profesionalismo",
+    "proContent": "Tras una carrera amateur brillante, Nuria se hizo profesional en 2015, lista para el gran escenario tras acabar 4ª en la Escuela.",
+    "rookieTitle": "Victoria de novata",
+    "rookieContent": "En su año de debut en el LET (2016), ganó la Lalla Meryem Cup en Marruecos por seis golpes.",
+    "moroccoAgainTitle": "Reina de Marruecos",
+    "moroccoAgainContent": "En 2019 volvió a conquistar la Lalla Meryem Cup, reafirmando su dominio en Royal Golf Dar Es Salam.",
+    "dubaiTitle": "Magia a la luz de la luna",
+    "dubaiContent": "Días después de Marruecos, triunfó en el Omega Dubai Moonlight Classic, el primer torneo profesional día/noche.",
+    "laSellaTitle": "Victoria en casa",
+    "laSellaContent": "En 2023 ganó el La Sella Open en España tras un emocionante playoff, celebrando en casa.",
+    "houstonTitle": "Conquista de Houston",
+    "houstonContent": "En 2025 logró una gran victoria en el Aramco Houston Championship, demostrando su nivel en suelo estadounidense.",
+    "currentTitle": "El camino continúa",
+    "currentContent": "Con 5 títulos LET y sumando, Nuria sigue compitiendo con pasión, representando al golf español por todo el mundo."
+  },
+  "trivia": {
+    "age": "¿Cuántos años tiene Nuria?",
+    "letWins": "¿Cuántos títulos del LET ha ganado?",
+    "firstLet": "¿Cuándo ganó su primer título del LET?",
+    "proYear": "¿Cuándo se hizo profesional?",
+    "birthplace": "¿Dónde nació Nuria?",
+    "backToBack": "Nuria ganó dos torneos seguidos: Verdadero o Falso?"
   }
 }

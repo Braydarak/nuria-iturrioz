@@ -1,12 +1,25 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "NuriaTitle";
+  src: url("./fonts/145d7d15e4d79baa-s.p.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
-  --font-nunito: "Nunito Sans", ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-  --font-open: "Open Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-nunito:
+    "Nunito Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-open:
+    "Open Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   /* Signature font */
   --font-signature: "Momo Signature", cursive, ui-sans-serif, system-ui;
+  --font-title:
+    "NuriaTitle", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 }
 
 html {
@@ -24,6 +37,10 @@ h6 {
 
 .font-header {
   font-family: var(--font-nunito);
+}
+
+.font-title {
+  font-family: var(--font-title);
 }
 
 /* Handwritten signature style */
