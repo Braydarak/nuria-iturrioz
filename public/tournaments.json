@@ -9,7 +9,8 @@
       "type": "Ladies",
       "date_end": "15/02/26",
       "confirmed": true,
-      "code": "2016"
+      "code": "2016",
+      "scores_param": "ESC"
     },
     {
       "id": 2,
@@ -41,7 +42,8 @@
       "location": "Kooyonga Golf Club",
       "date_end": "15/03/26",
       "type": "Ladies",
-      "confirmed": false
+      "confirmed": false,
+      "code": "2022"
     },
     {
       "id": 5,
@@ -49,9 +51,10 @@
       "date": "18/03/26",
       "country": "Australia",
       "location": "Sanctuary Cave Golf and Country Club",
-      "type": "Ladies", 
+      "type": "Ladies",
       "date_end": "22/03/26",
-      "confirmed": false
+      "confirmed": false,
+      "code": "2025"
     },
     {
       "id": 6,
@@ -60,39 +63,43 @@
       "country": "Las vegas, USA",
       "location": "Shadow Creek Golf",
       "type": "Ladies",
-      "date_end": "05/04/26",
+      "date_end": "03/04/26",
       "confirmed": true,
-      "code": "2013"
+      "code": "2013",
+      "scores_param": "ESC"
     },
     {
       "id": 7,
       "name": "Joburg Ladies Open",
-      "date": "15/04/26",
+      "date": "16/04/26",
       "country": "South Africa",
       "location": "Randpark Golf Club",
       "type": "Ladies",
       "date_end": "19/04/26",
-      "confirmed": true
+      "confirmed": true,
+      "code": "2026"
     },
     {
       "id": 8,
       "name": "Investec SA Women's Open",
-      "date": "22/04/26",
+      "date": "23/04/26",
       "country": "South Africa",
       "location": "Royal Cape Golf Club",
       "type": "Ladies",
-      "date_end": "26/04/26",   
-      "confirmed": true
+      "date_end": "26/04/26",
+      "confirmed": true,
+      "code": "2005"
     },
     {
       "id": 9,
       "name": "MCB Ladies Classic - Mauritius",
-      "date": "30/05/26",
+      "date": "01/05/26",
       "country": "Mauritius Islands",
       "location": "The Legend Course at Con Mare Plage",
       "type": "Ladies",
-      "date_end": "03/05/26",   
-      "confirmed": true
+      "date_end": "03/05/26",
+      "confirmed": true,
+      "code": "1217"
     },
     {
       "id": 10,
@@ -101,8 +108,9 @@
       "country": "Germany",
       "location": "Green Eagle Golf Courses",
       "type": "Ladies",
-      "date_end": "17/05/26",   
-      "confirmed": true
+      "date_end": "17/05/26",
+      "confirmed": true,
+      "code": "2005"
     },
     {
       "id": 11,
@@ -111,19 +119,86 @@
       "country": "Morocco",
       "location": "Royal Golf Dar Es Salam",
       "type": "Ladies",
-      "date_end": "24/05/26",   
-      "confirmed": true
+      "date_end": "24/05/26",
+      "confirmed": true,
+      "code": "1907"
     },
     {
       "id": 12,
       "name": "Jabra Ladies Open",
-      "date": "27/05/26",
+      "date": "28/05/26",
       "country": "France",
       "location": "Evian Golf Resort",
       "type": "Ladies",
-      "date_end": "31/05/26",   
-      "confirmed": true
+      "date_end": "30/05/26",
+      "confirmed": true,
+      "code": "1909"
+    },
+    {
+      "id": 13,
+      "name": "Dutch Ladies Open",
+      "date": "19/06/26",
+      "country": "Netherlands",
+      "location": "Goyer Golf & Country Club",
+      "type": "Ladies",
+      "date_end": "21/06/26",
+      "confirmed": true,
+      "code": "1928"
+    },
+    {
+      "id": 14,
+      "name": "Czech Ladies Open",
+      "date": "26/06/26",
+      "country": "Czech Republic",
+      "location": "Royal Beroun Golf Club",
+      "type": "Ladies",
+      "date_end": "28/06/26",
+      "confirmed": true,
+      "code": "1919"
+    },
+    {
+      "id": 15,
+      "name": "Hulencourt Women's Open",
+      "date": "02/07/26",
+      "country": "Belgium",
+      "location": "Hulencourt",
+      "type": "Ladies",
+      "date_end": "05/07/26",
+      "confirmed": true,
+      "code": "2024"
+    },
+    {
+      "id": 16,
+      "name": "ISPS HANDA Scottish Open",
+      "date": "23/07/26",
+      "country": "Scotland",
+      "location": "Dundonald Links",
+      "type": "Ladies",
+      "date_end": "26/07/26",
+      "confirmed": true,
+      "code": "1913"
+    },
+    {
+      "id": 17,
+      "name": "PIF London Championship",
+      "date": "06/08/26",
+      "country": "England",
+      "location": "Centurion Club",
+      "type": "Ladies",
+      "date_end": "09/08/26",
+      "confirmed": true,
+      "code": "2014"
+    },
+    {
+      "id": 18,
+      "name": "Swiss Ladies Open",
+      "date": "13/08/26",
+      "country": "Switzerland",
+      "location": "Migros Golfpark Holzhausern",
+      "type": "Ladies",
+      "date_end": "15/08/26",
+      "confirmed": true,
+      "code": "1930"
     }
-
   ]
 }

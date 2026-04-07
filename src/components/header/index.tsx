@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useLayout } from "../../context/LayoutContext";
 import LogoLoopMobile from "../LogoLoopMobile";
-import { getNextTournament } from "../../utils/tournamentDate";
+import {
+  getNextTournament,
+  type NextTournament,
+} from "../../utils/tournamentDate";
 import LanguageSelector from "../languageSelector";
 import { useTranslation } from "react-i18next";
 import { useLiveStatus } from "../../hooks/useLiveStatus";
@@ -13,6 +16,9 @@ const Header = () => {
   const location = useLocation();
   const { t } = useTranslation();
   const { isLive } = useLiveStatus();
+  const [nextTournament, setNextTournament] = useState<NextTournament | null>(
+    null,
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 0);
@@ -34,12 +40,23 @@ const Header = () => {
 
   const visible = location.pathname !== "/" || scrolled || open;
 
-  const nextTournament = getNextTournament();
+  useEffect(() => {
+    let cancelled = false;
+    getNextTournament()
+      .then((tournament) => {
+        if (!cancelled) setNextTournament(tournament);
+      })
+      .catch(() => {
+        if (!cancelled) setNextTournament(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const parsedDate = (
-    nextTournament as { parsedDate?: Date } | null | undefined
-  )?.parsedDate;
+  const parsedDate = nextTournament?.parsedDate;
   const daysUntilStart = parsedDate
     ? Math.ceil(
         (parsedDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24),
@@ -54,6 +71,23 @@ const Header = () => {
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const isActive = (to: string) =>
+    to === "/" ? location.pathname === "/" : location.pathname.startsWith(to);
+
+  const desktopNavLinkClassName = (to: string) => {
+    const active = isActive(to);
+    return `relative text-2xl transition-colors hover:text-[#2A579E] after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-[#2A579E] after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100 ${
+      active ? "text-[#2A579E] after:scale-x-100" : "text-black"
+    }`;
+  };
+
+  const mobileNavLinkClassName = (to: string) => {
+    const active = isActive(to);
+    return `inline-block px-2 py-2 rounded transition relative hover:bg-[#E6E6E6] hover:text-[#2A579E] after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-0.5 after:h-[2px] after:bg-[#2A579E] after:w-0 after:transition-[width] after:duration-300 hover:after:w-full ${
+      active ? "text-[#2A579E] after:w-full" : "text-black"
+    }`;
   };
 
   return (
@@ -83,33 +117,21 @@ const Header = () => {
           <nav className="hidden md:flex items-center gap-8">
             <Link
               to="/"
-              className="text-black text-2xl hover:text-[#2A579E] transition-colors"
+              className={desktopNavLinkClassName("/")}
               onClick={handleScrollToTop}
             >
               {t("header.home")}
             </Link>
-            <Link
-              to="/career"
-              className="text-black text-2xl hover:text-[#2A579E] transition-colors"
-            >
+            <Link to="/career" className={desktopNavLinkClassName("/career")}>
               {t("header.career")}
             </Link>
-            <Link
-              to="/stats"
-              className="text-black text-2xl hover:text-[#2A579E] transition-colors"
-            >
+            <Link to="/stats" className={desktopNavLinkClassName("/stats")}>
               {t("header.stats")}
             </Link>
-            <Link
-              to="/news"
-              className="text-black text-2xl hover:text-[#2A579E] transition-colors"
-            >
+            <Link to="/news" className={desktopNavLinkClassName("/news")}>
               {t("header.news")}
             </Link>
-            <Link
-              to="/contact"
-              className="text-black text-2xl hover:text-[#2A579E] transition-colors"
-            >
+            <Link to="/contact" className={desktopNavLinkClassName("/contact")}>
               {t("header.contact")}
             </Link>
             <LanguageSelector />
@@ -156,7 +178,7 @@ const Header = () => {
             <div className="flex flex-col items-center justify-center text-xl gap-7">
               <Link
                 to="/"
-                className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
+                className={mobileNavLinkClassName("/")}
                 onClick={() => {
                   setOpen(false);
                   handleScrollToTop();
@@ -166,28 +188,28 @@ const Header = () => {
               </Link>
               <Link
                 to="/career"
-                className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
+                className={mobileNavLinkClassName("/career")}
                 onClick={() => setOpen(false)}
               >
                 {t("header.career")}
               </Link>
               <Link
                 to="/stats"
-                className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
+                className={mobileNavLinkClassName("/stats")}
                 onClick={() => setOpen(false)}
               >
                 {t("header.stats")}
               </Link>
               <Link
                 to="/news"
-                className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
+                className={mobileNavLinkClassName("/news")}
                 onClick={() => setOpen(false)}
               >
                 {t("header.news")}
               </Link>
               <Link
                 to="/contact"
-                className="block px-2 py-2 rounded text-black hover:bg-[#E6E6E6] hover:text-[#2A579E] transition"
+                className={mobileNavLinkClassName("/contact")}
                 onClick={() => setOpen(false)}
               >
                 {t("header.contact")}

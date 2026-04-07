@@ -14,7 +14,8 @@
     "viewRoundResults": "Veure resultats de Nuria a la Ronda {{round}}",
     "actualTour": "Torneig actual",
     "nextTour": "Pròxim torneig",
-    "viewLiveScores": "Veure resultats en viu"
+    "viewLiveScores": "Veure resultats en viu",
+    "scrollHint": "Desplaça't per veure'n més"
   },
   "aboutMe": {
     "title": "Sobre mi",
@@ -172,6 +173,8 @@
     "round": "Volta",
     "roundAbbr": "V",
     "strokes": "Cops",
+    "stroke_one": "cop",
+    "stroke_other": "cops",
     "birdie": "Birdie",
     "bogey": "Bogey",
     "country": "Espanya",
@@ -294,11 +297,11 @@
         "p1": "Les cookies són petits fitxers que es descarreguen al teu dispositiu en accedir a determinades pàgines web. Permeten, entre altres coses, emmagatzemar i recuperar informació sobre els hàbits de navegació o el dispositiu."
       },
       "types": {
-        "p1": "Aquest lloc web pot fer servir cookies tècniques (necessàries per al funcionament) i, si escau, cookies de preferències, analítiques o publicitàries.",
-        "p2": "Si s'utilitzen cookies analítiques o publicitàries, podràs acceptar-les o rebutjar-les mitjançant el mecanisme de configuració de cookies quan estigui disponible."
+        "p1": "Aquest lloc web utilitza únicament cookies tècniques, mínimes i indispensables per al funcionament correcte. No s’utilitzen cookies de preferències, analítiques ni publicitàries.",
+        "p2": "Aquestes cookies essencials no es poden rebutjar des del lloc, ja que són necessàries per prestar el servei."
       },
       "manage": {
-        "p1": "Pots permetre, bloquejar o eliminar les cookies instal·lades al teu dispositiu mitjançant la configuració del navegador. Deshabilitar cookies pot afectar el funcionament d'algunes funcionalitats.",
+        "p1": "Pots gestionar les cookies des de la configuració del navegador. Atès que són essencials, deshabilitar-les al navegador pot impedir el funcionament correcte del lloc.",
         "p2": "Per a més informació, consulta la secció d'ajuda del teu navegador (Chrome, Safari, Firefox, Edge)."
       },
       "contact": {
@@ -325,6 +328,7 @@
       "manage": "Com gestionar les cookies",
       "contact": "Contacte"
     },
+    "contactHint": "Per a qualsevol consulta, pots comunicar-te a",
     "placeholders": {
       "ownerName": "Nom/Raó social: [Per completar]",
       "ownerId": "NIF/CIF: [Per completar]",
@@ -386,7 +390,7 @@
     "chapter": "Capítol",
     "playTrivia": "Posa a prova els teus coneixements",
     "beginningsTitle": "Els inicis",
-    "beginningsContent": "La Nuria va néixer a Son Servera, Mallorca, el 16 de novembre de 1995. La seva passió pel golf va començar aviat al seu poble natal.",
+    "beginningsContent": "La Nuria va néixer a Son Servera, Mallorca, el 16 de desembre de 1995. La seva passió pel golf va començar aviat al seu poble natal.",
     "amateurTitle": "Èxits amateur",
     "amateurContent": "Abans de fer-se professional, va dominar l'escena amateur: Campiona de Madrid (2012) i l'Stroke Play Internacional d'Espanya (2013 i 2014).",
     "proTitle": "Salt al professionalisme",

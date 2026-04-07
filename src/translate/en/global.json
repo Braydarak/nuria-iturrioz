@@ -14,7 +14,8 @@
     "viewRoundResults": "View Nuria's results for Round {{round}}",
     "actualTour": "Current Tournament",
     "nextTour": "Next Tournament",
-    "viewLiveScores": "View Live Scores"
+    "viewLiveScores": "View Live Scores",
+    "scrollHint": "Scroll to see more"
   },
   "aboutMe": {
     "title": "About me",
@@ -172,6 +173,8 @@
     "round": "Round",
     "roundAbbr": "R",
     "strokes": "Strokes",
+    "stroke_one": "stroke",
+    "stroke_other": "strokes",
     "birdie": "Birdie",
     "bogey": "Bogey",
     "country": "Spain",
@@ -294,11 +297,11 @@
         "p1": "Cookies are small files that are downloaded to your device when you access certain websites. They allow, among other things, storing and retrieving information about a user’s browsing habits or device."
       },
       "types": {
-        "p1": "This website may use technical cookies (necessary for the website to function) and, where applicable, preference, analytics or advertising cookies.",
-        "p2": "If analytics or advertising cookies are used, you will be able to accept or reject them through the cookie settings mechanism when available."
+        "p1": "This website only uses technical cookies, minimal and essential for proper operation. No preference, analytics or advertising cookies are used.",
+        "p2": "These essential cookies cannot be rejected on the site because they are necessary to provide the service."
       },
       "manage": {
-        "p1": "You can allow, block or delete cookies installed on your device through your browser settings. Disabling cookies may affect the proper functioning of some features.",
+        "p1": "You can manage cookies via your browser settings. Since they are essential, disabling them in the browser may prevent the site from working correctly.",
         "p2": "For more information, consult your browser’s help section (Chrome, Safari, Firefox, Edge)."
       },
       "contact": {
@@ -325,6 +328,7 @@
       "manage": "How to manage cookies",
       "contact": "Contact"
     },
+    "contactHint": "For any inquiry, you can contact",
     "placeholders": {
       "ownerName": "Owner name: [To be completed]",
       "ownerId": "Tax ID: [To be completed]",
@@ -386,7 +390,7 @@
     "chapter": "Chapter",
     "playTrivia": "Test Your Knowledge",
     "beginningsTitle": "The Beginning",
-    "beginningsContent": "Nuria was born in Son Servera, Mallorca, on November 16, 1995. Her passion for golf started early in her beautiful hometown.",
+    "beginningsContent": "Nuria was born in Son Servera, Mallorca, on December 16, 1995. Her passion for golf started early in her beautiful hometown.",
     "amateurTitle": "Amateur Success",
     "amateurContent": "Before turning pro, she dominated the amateur scene, winning the Madrid Ladies Championship (2012) and the Spanish International Stroke Play (2013, 2014).",
     "proTitle": "Turning Professional",

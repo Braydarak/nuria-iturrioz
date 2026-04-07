@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getLetApiUrl } from "../utils/constants";
-import tournamentsData from "../data/tournaments.json";
+import { fetchTournamentsData } from "../utils/tournamentDate";
 
 interface LiveStatus {
   isLive: boolean;
@@ -26,7 +26,9 @@ export const useLiveStatus = (): LiveStatus => {
       try {
         // Determine current tournament
         const now = new Date();
-        const activeTournament = tournamentsData.tournaments.find((t) => {
+        const { tournaments } = await fetchTournamentsData();
+        const activeTournament = tournaments.find((t) => {
+          if (!t.date || !t.date_end) return false;
           // Parse tournament dates (format: DD/MM/YY)
           const [startDay, startMonth, startYear] = t.date.split("/");
           const [endDay, endMonth, endYear] = t.date_end.split("/");
@@ -51,15 +53,21 @@ export const useLiveStatus = (): LiveStatus => {
         // Use active tournament code or default to latest if none active (or specific fallback)
         // If no active tournament, we might not want to show live status or show the last one?
         // For now, let's use the active one if found, otherwise maybe the first one or null
-        const tournamentCode = activeTournament
-          ? activeTournament.code
-          : "2016"; // Defaulting to 2016 for now as fallback
+        const fallbackTournament = tournaments.find((t) => t.code === "2016");
+        const tournamentCode =
+          activeTournament?.code ?? fallbackTournament?.code ?? "2016";
+        const scoresParam =
+          activeTournament?.scores_param ??
+          fallbackTournament?.scores_param ??
+          "SRC";
 
         let data = null;
         for (let r = 4; r >= 1; r--) {
           try {
-            const url = getLetApiUrl(r, tournamentCode!);
-            const response = await fetch(`${url}?randomadd=${Date.now()}`);
+            const url = getLetApiUrl(r, tournamentCode, scoresParam);
+            const requestUrl = new URL(url);
+            requestUrl.searchParams.set("randomadd", Date.now().toString());
+            const response = await fetch(requestUrl.toString());
             if (response.ok) {
               const jsonData = await response.json();
               if (jsonData && jsonData.full_name) {

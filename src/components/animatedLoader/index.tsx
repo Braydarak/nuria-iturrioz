@@ -11,21 +11,6 @@ export default function AnimatedLoader() {
       <style>
         {`
           .loader-svg { width: 50px; height: auto; }
-          /* La barra permanece fija; sin salto ni movimiento horizontal */
-          .bar { }
-          /* El rect del reveal controla el recorte para aparecer desde izquierda y ocultarse hacia derecha */
-          .revealRect { transform-origin: left center; animation: revealMotion 2s ease-in-out infinite; }
-
-          @keyframes revealMotion {
-            /* Aparece desde el lado izquierdo dentro de la caja */
-            0% { transform: scaleX(0); transform-origin: left center; }
-            40% { transform: scaleX(1); transform-origin: left center; }
-            /* Cambio del origen para ocultarse hacia el lado derecho */
-            50% { transform: scaleX(1); transform-origin: right center; }
-            90% { transform: scaleX(0); transform-origin: right center; }
-            /* Reinicia para volver a aparecer desde la izquierda */
-            100% { transform: scaleX(0); transform-origin: left center; }
-          }
         `}
       </style>
 
@@ -38,17 +23,30 @@ export default function AnimatedLoader() {
         <defs>
           {/* Caja que limita verticalmente la barra */}
           <clipPath id="barBox" clipPathUnits="userSpaceOnUse">
-            <rect x="0" y="240" width="120" height="64" />
+            <rect x="0" y="240" width="200" height="64" />
           </clipPath>
           {/* Reveal/hide dentro de la caja: aparece desde izquierda y se oculta hacia derecha */}
           <clipPath id="barReveal" clipPathUnits="userSpaceOnUse">
-            <rect
-              className="revealRect"
-              x="0"
-              y="240"
-              width="120"
-              height="64"
-            />
+            <rect x="0" y="240" width="0" height="64">
+              <animate
+                attributeName="width"
+                dur="2s"
+                repeatCount="indefinite"
+                calcMode="spline"
+                values="0;0;200;200;0;0"
+                keyTimes="0;0.15;0.45;0.55;0.85;1"
+                keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1"
+              />
+              <animate
+                attributeName="x"
+                dur="2s"
+                repeatCount="indefinite"
+                calcMode="spline"
+                values="0;0;0;0;200;0"
+                keyTimes="0;0.15;0.45;0.55;0.85;1"
+                keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1"
+              />
+            </rect>
           </clipPath>
         </defs>
 
@@ -71,7 +69,7 @@ export default function AnimatedLoader() {
 
         {/* Barra inferior: estática (sin movimiento), recortada por caja + reveal */}
         <g clipPath="url(#barBox)">
-          <g clipPath="url(#barReveal)" className="bar">
+          <g clipPath="url(#barReveal)">
             <path
               d="M197.42,243.26v49.59c0,1.63,0,1.64-1.65,1.64H1.71c-1.68,0-1.69,0-1.69-1.65q0-24,0-48.06c0-1.19.28-1.56,1.54-1.55q97.2,0,194.41,0Z"
               transform="translate(0)"

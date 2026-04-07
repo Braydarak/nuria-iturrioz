@@ -1,31 +1,34 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 
 const CookiesPolicyPage = () => {
   const { t } = useTranslation();
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <div className="mx-auto max-w-4xl px-4 pt-28 pb-20">
-        <div className="mb-10 flex items-center justify-between gap-4">
+      <div className="mx-auto max-w-4xl px-4 pt-50 pb-20">
+        <div className="mb-10">
           <h1 className="font-signature text-4xl md:text-5xl text-[#2A579E] font-bold">
             {t("legals.cookies.title", "Cookies Policy")}
           </h1>
-          <Link
-            to="/"
-            className="text-sm font-bold text-[#2A579E] hover:underline"
-          >
-            {t("legals.backHome", "Back to home")}
-          </Link>
         </div>
 
         <div className="space-y-10 text-gray-700 leading-relaxed">
           <p className="text-sm text-gray-500">
             {t(
-              "legals.updatedAt",
-              "Last updated: {{date}}",
-              { date: "2026-03-25" },
-            )}
+              "legals.contactHint",
+              "Para cualquier consulta, puedes comunicarte a",
+            )}{" "}
+            <a
+              href="mailto:info@nuriaiturrioz.com"
+              className="text-[#2A579E] hover:underline"
+            >
+              info@nuriaiturrioz.com
+            </a>
+          </p>
+          <p className="text-sm text-gray-500">
+            {t("legals.updatedAt", "Last updated: {{date}}", {
+              date: "2026-03-25",
+            })}
           </p>
 
           <section className="space-y-3">

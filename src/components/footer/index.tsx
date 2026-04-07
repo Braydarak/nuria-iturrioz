@@ -140,6 +140,9 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center gap-6">
+            <Link to="/legal" className="hover:text-white transition-colors">
+              {t("legals.legalNotice.title", "Aviso legal")}
+            </Link>
             <Link to="/privacy" className="hover:text-white transition-colors">
               {t("footer.privacy")}
             </Link>

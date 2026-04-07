@@ -1,17 +1,37 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import bg from "../../assets/Nuria-golfing.png";
 import LogoLoop from "../../components/logoLoopDesktop";
 import LogoLoopMobile from "../../components/LogoLoopMobile";
 import { useLayout } from "../../context/LayoutContext";
-import { getNextTournament } from "../../utils/tournamentDate";
+import {
+  getNextTournament,
+  type NextTournament,
+} from "../../utils/tournamentDate";
 import { useTranslation } from "react-i18next";
 import { useLiveStatus } from "../../hooks/useLiveStatus";
 
 const Hero = () => {
   const { t } = useTranslation();
   const { isHeaderOpen } = useLayout();
-  const nextTournament = getNextTournament();
+  const [nextTournament, setNextTournament] = useState<NextTournament | null>(
+    null,
+  );
   const { isLive, hasData, round } = useLiveStatus();
+
+  useEffect(() => {
+    let cancelled = false;
+    getNextTournament()
+      .then((tournament) => {
+        if (!cancelled) setNextTournament(tournament);
+      })
+      .catch(() => {
+        if (!cancelled) setNextTournament(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const daysUntilStart =
@@ -194,6 +214,38 @@ const Hero = () => {
       <div className="relative z-10 mx-auto max-w-screen h-full flex items-stretch justify-end">
         <div className="hidden md:block w-64 md:w-72 lg:w-80 h-full drop-shadow-2xl">
           <LogoLoop heightClass="h-full" />
+        </div>
+      </div>
+
+      <div className="absolute left-1/2 -translate-x-1/2 bottom-28 md:bottom-10 z-20 pointer-events-none select-none">
+        <style>
+          {`
+            @keyframes heroScrollHint {
+              0%, 100% { transform: translateY(0); opacity: 0.85; }
+              50% { transform: translateY(8px); opacity: 1; }
+            }
+            .hero-scroll-hint-arrow { animation: heroScrollHint 1.6s ease-in-out infinite; }
+          `}
+        </style>
+        <div className="flex flex-col items-center gap-2">
+          <div className="text-white/90 text-[11px] md:text-xs font-bold uppercase tracking-widest drop-shadow-sm">
+            {t("hero.scrollHint")}
+          </div>
+          <svg
+            className="hero-scroll-hint-arrow w-6 h-6 text-white/90 drop-shadow-sm"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M12 5v14" />
+            <path d="m19 12-7 7-7-7" />
+          </svg>
         </div>
       </div>
       {/* Loop de logos para mobile en el fondo */}

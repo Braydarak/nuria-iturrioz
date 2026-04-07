@@ -26,7 +26,7 @@ const BIO_SECTIONS: BioSection[] = [
     defaultTitle: "The Beginning",
     contentKey: "bio.beginningsContent",
     defaultContent:
-      "Nuria was born in Son Servera, Mallorca, on November 16, 1995. Her passion for golf started early in her beautiful hometown.",
+      "Nuria was born in Son Servera, Mallorca, on December 16, 1995. Her passion for golf started early in her beautiful hometown.",
     image: Nuria1,
     year: "1995",
   },

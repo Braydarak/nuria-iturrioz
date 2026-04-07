@@ -3,7 +3,10 @@ import nuriImg from "../../assets/nuria/Nuria9.jpg";
 import { useTranslation } from "react-i18next";
 import AnimatedLoader from "../../components/animatedLoader";
 import { getLetApiUrl } from "../../utils/constants";
-import tournamentsData from "../../data/tournaments.json";
+import {
+  fetchTournamentsData,
+  type Tournament,
+} from "../../utils/tournamentDate";
 import { useLiveStatus } from "../../hooks/useLiveStatus";
 
 interface HoleData {
@@ -46,11 +49,17 @@ const LivePage = () => {
   const [timeAgo, setTimeAgo] = useState<string>("");
 
   useEffect(() => {
+    let tournamentsCache: Tournament[] | null = null;
+
     const fetchData = async () => {
       try {
         // Determine current tournament
+        const tournaments =
+          tournamentsCache ??
+          (tournamentsCache = (await fetchTournamentsData()).tournaments);
         const now = new Date();
-        const activeTournament = tournamentsData.tournaments.find((t) => {
+        const activeTournament = tournaments.find((t) => {
+          if (!t.date || !t.date_end || !t.code) return false;
           // Parse tournament dates (format: DD/MM/YY)
           const [startDay, startMonth, startYear] = t.date.split("/");
           const [endDay, endMonth, endYear] = t.date_end.split("/");
@@ -75,14 +84,17 @@ const LivePage = () => {
         const tournamentCode = activeTournament
           ? activeTournament.code
           : "2016";
+        const scoresParam = activeTournament?.scores_param ?? "SRC";
 
         // Strategy: Try to fetch data starting from round 4 down to 1
         // to ensure we get the latest tournament status
         let data = null;
         for (let r = 4; r >= 1; r--) {
           try {
-            const url = getLetApiUrl(r, tournamentCode!);
-            const response = await fetch(`${url}?randomadd=${Date.now()}`);
+            const url = getLetApiUrl(r, tournamentCode!, scoresParam);
+            const requestUrl = new URL(url);
+            requestUrl.searchParams.set("randomadd", Date.now().toString());
+            const response = await fetch(requestUrl.toString());
             if (response.ok) {
               const jsonData = await response.json();
               // Basic validation
@@ -445,9 +457,9 @@ const LivePage = () => {
                           {liveData.currentHoleStrokes ? (
                             <span className="text-sm font-bold italic text-yellow-700 bg-yellow-50 border border-yellow-200 px-2 py-0.5 rounded-md">
                               {liveData.currentHoleStrokes}{" "}
-                              {liveData.currentHoleStrokes === 1
-                                ? "golpe"
-                                : "golpes"}
+                              {t("livePage.stroke", {
+                                count: liveData.currentHoleStrokes,
+                              })}
                             </span>
                           ) : null}
                         </>

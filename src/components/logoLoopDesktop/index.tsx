@@ -5,8 +5,12 @@ type LogoLoopProps = {
   className?: string;
 };
 
+type SponsorLogo = {
+  url: string;
+  path: string;
+};
+
 const LogoLoop = ({ heightClass = "h-50", className = "" }: LogoLoopProps) => {
-  // Carga dinámica de imágenes desde la carpeta sponsors
   const logos = useMemo(() => {
     const modules = import.meta.glob(
       "../../assets/sponsors/*.{png,jpg,jpeg,svg,avif,webp}",
@@ -19,15 +23,15 @@ const LogoLoop = ({ heightClass = "h-50", className = "" }: LogoLoopProps) => {
     // Ordena por nombre para un orden estable
     return Object.entries(modules)
       .sort(([a], [b]) => a.localeCompare(b))
-      .map(([, url]) => url);
+      .map(([path, url]) => ({ path, url }));
   }, []);
 
   // Duplicamos la lista para crear el bucle continuo
   const loopList = [...logos, ...logos];
 
-  const getLogoClasses = (src: string, baseHeight: string) =>
+  const getLogoClasses = (logo: SponsorLogo, baseHeight: string) =>
     `w-auto object-contain ${baseHeight} ${
-      src.includes("7.avif") ? "p-8" : ""
+      logo.path.endsWith("/7.avif") ? "p-10" : ""
     }`;
 
   return (
@@ -53,24 +57,24 @@ const LogoLoop = ({ heightClass = "h-50", className = "" }: LogoLoopProps) => {
         <div className="loop-inner">
           {/* Primera columna */}
           <div className="flex flex-col items-center">
-            {loopList.map((src, idx) => (
+            {loopList.map((logo, idx) => (
               <img
                 key={`logo-1-${idx}`}
-                src={src}
+                src={logo.url}
                 alt={`Sponsor ${idx + 1}`}
-                className={getLogoClasses(src, "h-60 w-60")}
+                className={getLogoClasses(logo, "h-60 w-60")}
                 style={{ filter: "grayscale(1) brightness(0) invert(1)" }}
               />
             ))}
           </div>
           {/* Segunda columna para continuidad, misma lista */}
           <div className="flex flex-col items-center">
-            {loopList.map((src, idx) => (
+            {loopList.map((logo, idx) => (
               <img
                 key={`logo-2-${idx}`}
-                src={src}
+                src={logo.url}
                 alt={`Sponsor ${idx + 1}`}
-                className={getLogoClasses(src, "h-20")}
+                className={getLogoClasses(logo, "h-20")}
                 style={{ filter: "grayscale(1) brightness(0) invert(1)" }}
               />
             ))}

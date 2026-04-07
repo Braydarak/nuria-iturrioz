@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Trophies from "../../components/trophies";
 import Recognitions from "../../components/recognitions";
-import { useTranslation } from "react-i18next";
 
 type YouTubePlayer = {
   isMuted: () => boolean;

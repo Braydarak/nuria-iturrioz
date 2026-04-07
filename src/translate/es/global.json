@@ -14,7 +14,8 @@
     "viewRoundResults": "Ver resultados de Nuria en la Ronda {{round}}",
     "actualTour": "Torneo actual",
     "nextTour": "Próximo torneo",
-    "viewLiveScores": "Ver resultados en vivo"
+    "viewLiveScores": "Ver resultados en vivo",
+    "scrollHint": "Desliza para ver más"
   },
   "aboutMe": {
     "title": "Sobre mí",
@@ -172,6 +173,8 @@
     "round": "Vuelta",
     "roundAbbr": "V",
     "strokes": "Golpes",
+    "stroke_one": "golpe",
+    "stroke_other": "golpes",
     "birdie": "Birdie",
     "bogey": "Bogey",
     "country": "España",
@@ -301,11 +304,11 @@
         "p1": "Las cookies son pequeños archivos que se descargan en tu dispositivo al acceder a determinadas páginas web. Permiten, entre otras cosas, almacenar y recuperar información sobre los hábitos de navegación o el dispositivo."
       },
       "types": {
-        "p1": "Este sitio web puede usar cookies técnicas (necesarias para su funcionamiento) y, en su caso, cookies de preferencias, analíticas o publicitarias.",
-        "p2": "Si se utilizan cookies analíticas o publicitarias, podrás aceptarlas o rechazarlas mediante el mecanismo de configuración de cookies cuando esté disponible."
+        "p1": "Este sitio web utiliza únicamente cookies técnicas, mínimas e indispensables para su correcto funcionamiento. No se emplean cookies de preferencias, analíticas ni publicitarias.",
+        "p2": "Estas cookies esenciales no pueden ser rechazadas desde el sitio, ya que son necesarias para prestar el servicio."
       },
       "manage": {
-        "p1": "Puedes permitir, bloquear o eliminar las cookies instaladas en tu dispositivo mediante la configuración del navegador. Deshabilitar cookies puede afectar al funcionamiento de algunas funcionalidades.",
+        "p1": "Puedes gestionar las cookies desde la configuración de tu navegador. Ten en cuenta que, al ser esenciales, deshabilitarlas desde el navegador podría impedir el funcionamiento correcto del sitio.",
         "p2": "Para más información, consulta la sección de ayuda de tu navegador (Chrome, Safari, Firefox, Edge)."
       },
       "contact": {
@@ -332,6 +335,7 @@
       "manage": "Cómo gestionar las cookies",
       "contact": "Contacto"
     },
+    "contactHint": "Para cualquier consulta, puedes comunicarte a",
     "placeholders": {
       "ownerName": "Nombre/Razón social: [Por completar]",
       "ownerId": "NIF/CIF: [Por completar]",
@@ -386,7 +390,7 @@
     "chapter": "Capítulo",
     "playTrivia": "Pon a prueba tus conocimientos",
     "beginningsTitle": "Los comienzos",
-    "beginningsContent": "Nuria nació en Son Servera, Mallorca, el 16 de noviembre de 1995. Su pasión por el golf empezó pronto en su hermosa tierra natal.",
+    "beginningsContent": "Nuria nació en Son Servera, Mallorca, el 16 de diciembre de 1995. Su pasión por el golf empezó pronto en su hermosa tierra natal.",
     "amateurTitle": "Éxitos amateur",
     "amateurContent": "Antes de hacerse profesional, dominó la escena amateur: Campeona de Madrid (2012) y el International Stroke Play de España (2013 y 2014).",
     "proTitle": "Salto al profesionalismo",
