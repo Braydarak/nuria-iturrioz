@@ -2,6 +2,8 @@
 
 A React + TypeScript (Vite) website for Nuria Iturrioz. It includes public pages, React Router navigation, and season statistics fetched from an external API.
 
+Official site: https://nuriaiturrioz.com/
+
 ## English
 
 - Technologies: React, TypeScript, Vite, React Router, utility-first CSS classes (Tailwind-like)
