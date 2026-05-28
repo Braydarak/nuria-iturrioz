@@ -97,8 +97,8 @@
     "video": {
       "rewind": "Retroceder 10s",
       "restart": "Reiniciar",
-      "unmute": "Reactivar sonido",
-      "mute": "Mutear"
+      "unmute": "Activar sonido",
+      "mute": "Silenciar"
     }
   },
   "statsPage": {
@@ -122,7 +122,7 @@
   },
   "statsComponent": {
     "title": "Mis Números en el LET",
-    "description": "Pueden presionar abajo para ver mas datos",
+    "description": "Podéis pulsar abajo para ver más datos",
     "tournamentWins": "Victorias en Torneos",
     "topTen": "Top 10 en Torneos",
     "drivingDistance": "Distancia de Drive",
@@ -191,6 +191,17 @@
     "viewFullStats": "Ver estadísticas completas en LET",
     "autoUpdate": "Datos actualizados automáticamente cada minuto",
     "refreshData": "Actualizar datos",
+    "noLive": {
+      "title": "Nuria no está jugando ahora",
+      "subtitle": "Cuando haya resultados disponibles, esta sección se actualiza automáticamente.",
+      "tournamentDetected": "Torneo detectado: {{name}}.",
+      "noTournament": "No se detectó un torneo activo con resultados en este momento.",
+      "errorTitle": "No pudimos cargar el seguimiento en vivo",
+      "errorSubtitle": "Puede ser un problema temporal con la fuente de datos. Prueba a recargar en unos segundos.",
+      "ctaStats": "Ver estadísticas",
+      "ctaNews": "Ver noticias",
+      "ctaHome": "Volver al inicio"
+    },
     "status": {
       "inProgress": "En curso",
       "finished": "Finalizado",

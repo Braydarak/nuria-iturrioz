@@ -191,6 +191,17 @@
     "viewFullStats": "View full stats on LET",
     "autoUpdate": "Data updated automatically every minute",
     "refreshData": "Refresh Data",
+    "noLive": {
+      "title": "Nuria isn't playing right now",
+      "subtitle": "When results are available, this page updates automatically.",
+      "tournamentDetected": "Tournament detected: {{name}}.",
+      "noTournament": "No active tournament with results was detected right now.",
+      "errorTitle": "We couldn't load live tracking",
+      "errorSubtitle": "This may be a temporary issue with the data source. Try refreshing in a few seconds.",
+      "ctaStats": "View stats",
+      "ctaNews": "View news",
+      "ctaHome": "Back to home"
+    },
     "status": {
       "inProgress": "In Progress",
       "finished": "Finished",

@@ -191,6 +191,17 @@
     "viewFullStats": "Veure estadístiques completes en LET",
     "autoUpdate": "Dades actualitzades automàticament cada minut",
     "refreshData": "Actualitzar dades",
+    "noLive": {
+      "title": "La Nuria no està jugant ara",
+      "subtitle": "Quan hi hagi resultats disponibles, aquesta secció s'actualitza automàticament.",
+      "tournamentDetected": "Torneig detectat: {{name}}.",
+      "noTournament": "Ara mateix no s'ha detectat cap torneig actiu amb resultats.",
+      "errorTitle": "No hem pogut carregar el seguiment en directe",
+      "errorSubtitle": "Pot ser un problema temporal amb la font de dades. Prova d'actualitzar en uns segons.",
+      "ctaStats": "Veure estadístiques",
+      "ctaNews": "Veure notícies",
+      "ctaHome": "Tornar a l'inici"
+    },
     "status": {
       "inProgress": "En curs",
       "finished": "Finalitzat",

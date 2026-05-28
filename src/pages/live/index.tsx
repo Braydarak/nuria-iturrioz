@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import nuriImg from "../../assets/nuria/Nuria9.jpg";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet-async";
@@ -46,7 +47,7 @@ interface LiveTournamentData {
 
 const LivePage = () => {
   const { t } = useTranslation("global");
-  const { isLive } = useLiveStatus();
+  const { isLive, tournamentName, hasData } = useLiveStatus();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [liveData, setLiveData] = useState<LiveTournamentData | null>(null);
@@ -263,6 +264,11 @@ const LivePage = () => {
   }
 
   if (error || !liveData) {
+    const isNotPlayingNow =
+      !hasData ||
+      !error ||
+      /nuria not found|no data available|failed to fetch data/i.test(error);
+
     return (
       <>
         <Helmet>
@@ -281,18 +287,67 @@ const LivePage = () => {
           <meta name="twitter:description" content={description} />
           <meta name="twitter:image" content={DEFAULT_OG_IMAGE_URL} />
         </Helmet>
-        <div className="min-h-screen flex items-center justify-center bg-neutral-50 p-4">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Oops!</h2>
-            <p className="text-gray-600 mb-4">
-              {error || "Could not load live data"}
+        <div className="min-h-screen bg-neutral-50 pt-30 pb-12 px-4 sm:px-6 lg:px-8 font-sans">
+          <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
+            <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-white shadow-lg bg-gray-100">
+              <img
+                src={nuriImg}
+                alt="Nuria Iturrioz"
+                className="w-full h-full object-cover object-top"
+              />
+            </div>
+
+            <h2 className="mt-8 text-3xl md:text-4xl font-bold text-gray-900 font-header tracking-tight">
+              {isNotPlayingNow
+                ? t("livePage.noLive.title")
+                : t("livePage.noLive.errorTitle")}
+            </h2>
+            <p className="mt-3 text-gray-600">
+              {isNotPlayingNow
+                ? t("livePage.noLive.subtitle")
+                : t("livePage.noLive.errorSubtitle")}
             </p>
-            <button
-              onClick={() => window.location.reload()}
-              className="px-6 py-2 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-colors"
-            >
-              {t("livePage.refreshData")}
-            </button>
+
+            <p className="mt-5 text-sm text-gray-400">
+              {isNotPlayingNow
+                ? tournamentName
+                  ? t("livePage.noLive.tournamentDetected", {
+                      name: tournamentName,
+                    })
+                  : t("livePage.noLive.noTournament")
+                : error || ""}
+            </p>
+
+            <div className="mt-8 w-full max-w-md flex flex-col gap-3">
+              <button
+                onClick={() => window.location.reload()}
+                className="w-full px-6 py-2.5 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-colors"
+              >
+                {t("livePage.refreshData")}
+              </button>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <Link
+                  to="/stats"
+                  className="w-full text-center px-4 py-2.5 rounded-full font-semibold border border-[#E6E6E6] text-gray-900 hover:bg-[#F8F8F8] transition-colors"
+                >
+                  {t("livePage.noLive.ctaStats")}
+                </Link>
+                <Link
+                  to="/news"
+                  className="w-full text-center px-4 py-2.5 rounded-full font-semibold border border-[#E6E6E6] text-gray-900 hover:bg-[#F8F8F8] transition-colors"
+                >
+                  {t("livePage.noLive.ctaNews")}
+                </Link>
+              </div>
+
+              <Link
+                to="/"
+                className="w-full text-center px-4 py-2.5 rounded-full font-semibold text-[#2A579E] hover:bg-blue-50 transition-colors"
+              >
+                {t("livePage.noLive.ctaHome")}
+              </Link>
+            </div>
           </div>
         </div>
       </>
@@ -436,241 +491,241 @@ const LivePage = () => {
             </div>
           </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left Column: Player & Main Stats (Rank is now prominent) */}
-          <div className="lg:col-span-1 flex flex-col gap-6">
-            {/* Player Card with Integrated Stats */}
-            <div className="bg-white rounded-3xl shadow-lg overflow-hidden border border-gray-100 relative group">
-              {/* Cover */}
-              <div className="relative h-32 bg-linear-to-br from-blue-900 to-blue-700">
-                <div className="absolute top-0 right-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-              </div>
-
-              {/* Profile Image - Centered and overlapping */}
-              <div className="relative -mt-16 text-center">
-                <div className="inline-block relative">
-                  <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl mx-auto bg-gray-200">
-                    <img
-                      src={nuriImg}
-                      alt="Nuria Iturrioz"
-                      className="w-full h-full object-cover object-top"
-                    />
-                  </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Left Column: Player & Main Stats (Rank is now prominent) */}
+            <div className="lg:col-span-1 flex flex-col gap-6">
+              {/* Player Card with Integrated Stats */}
+              <div className="bg-white rounded-3xl shadow-lg overflow-hidden border border-gray-100 relative group">
+                {/* Cover */}
+                <div className="relative h-32 bg-linear-to-br from-blue-900 to-blue-700">
+                  <div className="absolute top-0 right-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
                 </div>
-              </div>
 
-              {/* Info & Stats */}
-              <div className="pt-4 px-6 pb-8 text-center">
-                <h2 className="text-2xl mb-10 font-bold text-gray-900 font-header">
-                  Nuria Iturrioz
-                </h2>
-
-                {/* KEY STATS: POSITION & SCORE */}
-                <div className="grid grid-cols-2 gap-3 mb-6">
-                  {/* Position - Highlighted */}
-                  <div className="bg-yellow-50 p-4 rounded-2xl border border-yellow-100 flex flex-col items-center justify-center relative overflow-hidden">
-                    <div className="absolute top-0 right-0 -mt-2 -mr-2 w-10 h-10 bg-yellow-200 rounded-full opacity-50 blur-xl"></div>
-                    <div className="text-[10px] text-yellow-800 uppercase font-bold tracking-widest mb-1 z-10">
-                      {t("livePage.position")}
-                    </div>
-                    <div className="text-4xl font-black text-yellow-900 z-10">
-                      {liveData.rank}
-                    </div>
-                  </div>
-
-                  {/* Total Score */}
-                  <div className="bg-blue-900 p-4 rounded-2xl border border-blue-800 flex flex-col items-center justify-center text-white relative overflow-hidden">
-                    <div className="absolute bottom-0 left-0 -mb-2 -ml-2 w-10 h-10 bg-cyan-500 rounded-full opacity-30 blur-xl"></div>
-                    <div className="text-[10px] text-blue-200 uppercase font-bold tracking-widest mb-1 z-10">
-                      {t("livePage.total")}
-                    </div>
-                    <div className="text-4xl font-black text-white z-10">
-                      {liveData.scoreToPar > 0
-                        ? `+${liveData.scoreToPar}`
-                        : liveData.scoreToPar}
+                {/* Profile Image - Centered and overlapping */}
+                <div className="relative -mt-16 text-center">
+                  <div className="inline-block relative">
+                    <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl mx-auto bg-gray-200">
+                      <img
+                        src={nuriImg}
+                        alt="Nuria Iturrioz"
+                        className="w-full h-full object-cover object-top"
+                      />
                     </div>
                   </div>
                 </div>
 
-                {/* Secondary Info: Today & Hole */}
-                <div className="grid grid-cols-2 gap-4 border-t border-gray-100 pt-6">
-                  <div>
-                    <div className="text-xs text-gray-400 uppercase font-bold mb-1">
-                      {t("livePage.today")}
-                    </div>
-                    <div
-                      className={`text-xl font-bold ${liveData.todayScore < 0 ? "text-green-600" : "text-gray-800"}`}
-                    >
-                      {liveData.todayScore > 0
-                        ? `+${liveData.todayScore}`
-                        : liveData.todayScore}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-xs text-gray-400 uppercase font-bold mb-1">
-                      {t("livePage.hole")}
-                    </div>
-                    <div className="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
-                      {liveData.status === "FINISHED" ? (
-                        <span>F</span>
-                      ) : (
-                        <>
-                          <span>{liveData.currentHole}</span>
-                          {liveData.currentHoleStrokes ? (
-                            <span className="text-sm font-bold italic text-yellow-700 bg-yellow-50 border border-yellow-200 px-2 py-0.5 rounded-md">
-                              {liveData.currentHoleStrokes}{" "}
-                              {t("livePage.stroke", {
-                                count: liveData.currentHoleStrokes,
-                              })}
-                            </span>
-                          ) : null}
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                {/* Info & Stats */}
+                <div className="pt-4 px-6 pb-8 text-center">
+                  <h2 className="text-2xl mb-10 font-bold text-gray-900 font-header">
+                    Nuria Iturrioz
+                  </h2>
 
-          {/* Right Column: Scorecard & Compact Rounds */}
-          <div className="lg:col-span-2 flex flex-col gap-6">
-            {/* 18 Holes Scorecard */}
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6">
-              <div className="flex flex-wrap items-center justify-between mb-6 gap-4">
-                <h3 className="text-lg font-bold text-gray-900 flex items-center">
-                  <span className="w-1.5 h-6 bg-blue-600 rounded-full mr-3"></span>
-                  {t("livePage.scorecard")}
-                </h3>
-
-                {/* Compact Legend */}
-                <div className="flex gap-3 text-[10px] sm:text-xs font-medium text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full">
-                  <div className="flex items-center">
-                    <span className="w-2 h-2 rounded-full bg-blue-500 mr-1.5"></span>
-                    {t("livePage.birdie")}
-                  </div>
-                  <div className="flex items-center">
-                    <span className="w-2 h-2 rounded-full bg-gray-300 mr-1.5"></span>
-                    {t("livePage.par")}
-                  </div>
-                  <div className="flex items-center">
-                    <span className="w-2 h-2 rounded-full bg-red-500 mr-1.5"></span>
-                    {t("livePage.bogey")}
-                  </div>
-                </div>
-              </div>
-
-              {/* Scorecard Grid - Stacked Vertically */}
-              <div className="flex flex-col">
-                {/* Front 9 */}
-                <div>
-                  <div className="text-xs text-gray-400 uppercase font-bold mb-3 tracking-widest pl-1">
-                    {t("livePage.frontNine")}
-                  </div>
-                  {renderHoleSet(frontNine)}
-                </div>
-
-                {/* Back 9 */}
-                <div className="mt-15">
-                  <div className="text-xs text-gray-400 uppercase font-bold mb-3 tracking-widest pl-1">
-                    {t("livePage.backNine")}
-                  </div>
-                  {renderHoleSet(backNine)}
-                </div>
-              </div>
-            </div>
-
-            {/* Compact Rounds History */}
-            <div>
-              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 ml-1">
-                {t("livePage.roundsHistory")}
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {liveData.rounds.map((round) => (
-                  <div
-                    key={round.id}
-                    className={`flex items-center justify-between p-3 rounded-xl border transition-all ${
-                      round.isCurrent
-                        ? "bg-white border-blue-200 shadow-sm ring-1 ring-blue-50"
-                        : "bg-white/60 border-gray-100 text-gray-400"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${round.isCurrent ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-400"}`}
-                      >
-                        {t("livePage.roundAbbr")}
-                        {round.id}
+                  {/* KEY STATS: POSITION & SCORE */}
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    {/* Position - Highlighted */}
+                    <div className="bg-yellow-50 p-4 rounded-2xl border border-yellow-100 flex flex-col items-center justify-center relative overflow-hidden">
+                      <div className="absolute top-0 right-0 -mt-2 -mr-2 w-10 h-10 bg-yellow-200 rounded-full opacity-50 blur-xl"></div>
+                      <div className="text-[10px] text-yellow-800 uppercase font-bold tracking-widest mb-1 z-10">
+                        {t("livePage.position")}
                       </div>
-                      <div className="flex flex-col">
-                        <div className="text-sm font-semibold">
-                          {round.isCurrent
-                            ? t("livePage.status.inProgress")
-                            : round.strokes
-                              ? t("livePage.status.finished")
-                              : t("livePage.status.upcoming")}
-                        </div>
-                        {round.date && (
-                          <div className="text-[10px] sm:text-xs font-medium text-gray-400 mt-0.5">
-                            {round.date}
-                          </div>
+                      <div className="text-4xl font-black text-yellow-900 z-10">
+                        {liveData.rank}
+                      </div>
+                    </div>
+
+                    {/* Total Score */}
+                    <div className="bg-blue-900 p-4 rounded-2xl border border-blue-800 flex flex-col items-center justify-center text-white relative overflow-hidden">
+                      <div className="absolute bottom-0 left-0 -mb-2 -ml-2 w-10 h-10 bg-cyan-500 rounded-full opacity-30 blur-xl"></div>
+                      <div className="text-[10px] text-blue-200 uppercase font-bold tracking-widest mb-1 z-10">
+                        {t("livePage.total")}
+                      </div>
+                      <div className="text-4xl font-black text-white z-10">
+                        {liveData.scoreToPar > 0
+                          ? `+${liveData.scoreToPar}`
+                          : liveData.scoreToPar}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Secondary Info: Today & Hole */}
+                  <div className="grid grid-cols-2 gap-4 border-t border-gray-100 pt-6">
+                    <div>
+                      <div className="text-xs text-gray-400 uppercase font-bold mb-1">
+                        {t("livePage.today")}
+                      </div>
+                      <div
+                        className={`text-xl font-bold ${liveData.todayScore < 0 ? "text-green-600" : "text-gray-800"}`}
+                      >
+                        {liveData.todayScore > 0
+                          ? `+${liveData.todayScore}`
+                          : liveData.todayScore}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-xs text-gray-400 uppercase font-bold mb-1">
+                        {t("livePage.hole")}
+                      </div>
+                      <div className="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
+                        {liveData.status === "FINISHED" ? (
+                          <span>F</span>
+                        ) : (
+                          <>
+                            <span>{liveData.currentHole}</span>
+                            {liveData.currentHoleStrokes ? (
+                              <span className="text-sm font-bold italic text-yellow-700 bg-yellow-50 border border-yellow-200 px-2 py-0.5 rounded-md">
+                                {liveData.currentHoleStrokes}{" "}
+                                {t("livePage.stroke", {
+                                  count: liveData.currentHoleStrokes,
+                                })}
+                              </span>
+                            ) : null}
+                          </>
                         )}
                       </div>
                     </div>
-
-                    <div className="flex flex-col items-end">
-                      <div
-                        className={`font-bold text-lg ${round.strokes ? "text-gray-900" : "text-gray-300"}`}
-                      >
-                        {round.strokes ?? "--"}
-                      </div>
-                      <div className="text-[10px] text-gray-400 font-medium">
-                        Par {coursePar}
-                      </div>
-                    </div>
                   </div>
-                ))}
+                </div>
               </div>
             </div>
 
-            {/* LET External Link */}
-            <a
-              href="https://ladieseuropeantour.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-full p-4 bg-gray-900 text-white rounded-2xl shadow-lg hover:bg-gray-800 transition-all group"
-            >
-              <span className="font-bold mr-2">
-                {t("livePage.viewFullStats")}
-              </span>
-              <svg
-                className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
+            {/* Right Column: Scorecard & Compact Rounds */}
+            <div className="lg:col-span-2 flex flex-col gap-6">
+              {/* 18 Holes Scorecard */}
+              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6">
+                <div className="flex flex-wrap items-center justify-between mb-6 gap-4">
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center">
+                    <span className="w-1.5 h-6 bg-blue-600 rounded-full mr-3"></span>
+                    {t("livePage.scorecard")}
+                  </h3>
 
-        <div className="mt-12 text-center">
-          <p className="text-gray-400 text-sm">
-            {t("livePage.autoUpdate")} ({timeAgo}) •{" "}
-            <span
-              onClick={() => window.location.reload()}
-              className="underline cursor-pointer hover:text-gray-600"
-            >
-              {t("livePage.refreshData")}
-            </span>
-          </p>
-        </div>
+                  {/* Compact Legend */}
+                  <div className="flex gap-3 text-[10px] sm:text-xs font-medium text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full">
+                    <div className="flex items-center">
+                      <span className="w-2 h-2 rounded-full bg-blue-500 mr-1.5"></span>
+                      {t("livePage.birdie")}
+                    </div>
+                    <div className="flex items-center">
+                      <span className="w-2 h-2 rounded-full bg-gray-300 mr-1.5"></span>
+                      {t("livePage.par")}
+                    </div>
+                    <div className="flex items-center">
+                      <span className="w-2 h-2 rounded-full bg-red-500 mr-1.5"></span>
+                      {t("livePage.bogey")}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Scorecard Grid - Stacked Vertically */}
+                <div className="flex flex-col">
+                  {/* Front 9 */}
+                  <div>
+                    <div className="text-xs text-gray-400 uppercase font-bold mb-3 tracking-widest pl-1">
+                      {t("livePage.frontNine")}
+                    </div>
+                    {renderHoleSet(frontNine)}
+                  </div>
+
+                  {/* Back 9 */}
+                  <div className="mt-15">
+                    <div className="text-xs text-gray-400 uppercase font-bold mb-3 tracking-widest pl-1">
+                      {t("livePage.backNine")}
+                    </div>
+                    {renderHoleSet(backNine)}
+                  </div>
+                </div>
+              </div>
+
+              {/* Compact Rounds History */}
+              <div>
+                <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 ml-1">
+                  {t("livePage.roundsHistory")}
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {liveData.rounds.map((round) => (
+                    <div
+                      key={round.id}
+                      className={`flex items-center justify-between p-3 rounded-xl border transition-all ${
+                        round.isCurrent
+                          ? "bg-white border-blue-200 shadow-sm ring-1 ring-blue-50"
+                          : "bg-white/60 border-gray-100 text-gray-400"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${round.isCurrent ? "bg-blue-100 text-blue-700" : "bg-gray-100 text-gray-400"}`}
+                        >
+                          {t("livePage.roundAbbr")}
+                          {round.id}
+                        </div>
+                        <div className="flex flex-col">
+                          <div className="text-sm font-semibold">
+                            {round.isCurrent
+                              ? t("livePage.status.inProgress")
+                              : round.strokes
+                                ? t("livePage.status.finished")
+                                : t("livePage.status.upcoming")}
+                          </div>
+                          {round.date && (
+                            <div className="text-[10px] sm:text-xs font-medium text-gray-400 mt-0.5">
+                              {round.date}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col items-end">
+                        <div
+                          className={`font-bold text-lg ${round.strokes ? "text-gray-900" : "text-gray-300"}`}
+                        >
+                          {round.strokes ?? "--"}
+                        </div>
+                        <div className="text-[10px] text-gray-400 font-medium">
+                          Par {coursePar}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* LET External Link */}
+              <a
+                href="https://ladieseuropeantour.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-full p-4 bg-gray-900 text-white rounded-2xl shadow-lg hover:bg-gray-800 transition-all group"
+              >
+                <span className="font-bold mr-2">
+                  {t("livePage.viewFullStats")}
+                </span>
+                <svg
+                  className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div className="mt-12 text-center">
+            <p className="text-gray-400 text-sm">
+              {t("livePage.autoUpdate")} ({timeAgo}) •{" "}
+              <span
+                onClick={() => window.location.reload()}
+                className="underline cursor-pointer hover:text-gray-600"
+              >
+                {t("livePage.refreshData")}
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </>
