@@ -1,8 +1,56 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "NuriaTitle";
-  src: url("./fonts/145d7d15e4d79baa-s.p.woff") format("woff");
+  font-family: "Open Sans";
+  src: url("./assets/fonts/open-sans-latin-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("./assets/fonts/open-sans-latin-600.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("./assets/fonts/open-sans-latin-700.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("./assets/fonts/nunito-sans-latin-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("./assets/fonts/nunito-sans-latin-600.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("./assets/fonts/nunito-sans-latin-700.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Momo Signature";
+  src: url("./assets/fonts/momo-signature-latin-400.woff2") format("woff2");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -18,7 +66,7 @@
   /* Signature font */
   --font-signature: "Momo Signature", cursive, ui-sans-serif, system-ui;
   --font-title:
-    "NuriaTitle", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Nunito Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 }
 

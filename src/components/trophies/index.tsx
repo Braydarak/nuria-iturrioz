@@ -113,7 +113,7 @@ const Trophies = ({ variant = "home" }: TrophiesProps) => {
         <div className="mt-16 flex justify-center">
           {variant === "home" ? (
             <Link
-              to="/career"
+              to="/carrer"
               className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#1B3A75] text-white rounded-full font-bold uppercase tracking-widest text-xs shadow-lg hover:bg-[#2A579E] hover:shadow-blue-900/20 transition-all duration-300 overflow-hidden"
             >
               <span className="relative z-10">{t("trophies.viewAll")}</span>

@@ -1,11 +1,20 @@
-import { useState, useMemo } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLetStatistics, type StatEntry } from "../../data/useLetStatistics";
+import gsap from "gsap";
 
 export default function StatsSection() {
   const { t } = useTranslation();
   const { data, entries, loading, error, hasData } = useLetStatistics();
   const [showAll, setShowAll] = useState(false);
+  const [renderAll, setRenderAll] = useState(false);
+  const detailsRef = useRef<HTMLDivElement | null>(null);
+  const animRef = useRef<gsap.core.Timeline | null>(null);
+
+  const reduceMotion = useMemo(() => {
+    if (typeof window === "undefined") return true;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }, []);
 
   const getStatLabel = (description: string) => {
     const map: Record<string, string> = {
@@ -82,6 +91,84 @@ export default function StatsSection() {
     });
   }, [entries]);
 
+  useLayoutEffect(() => {
+    const el = detailsRef.current;
+    if (!el) return;
+    if (!renderAll) return;
+
+    const items = Array.from(
+      el.querySelectorAll("[data-stats-item]"),
+    ) as HTMLElement[];
+    const message = el.querySelector(
+      "[data-stats-message]",
+    ) as HTMLElement | null;
+
+    animRef.current?.kill();
+    animRef.current = null;
+
+    if (reduceMotion) {
+      if (items.length)
+        gsap.set(items, { autoAlpha: 1, y: 0, clearProps: "all" });
+      if (message) gsap.set(message, { autoAlpha: 1, y: 0, clearProps: "all" });
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      animRef.current = tl;
+
+      if (showAll) {
+        if (message) {
+          tl.fromTo(
+            message,
+            { autoAlpha: 0, y: 12 },
+            { autoAlpha: 1, y: 0, duration: 0.35 },
+          );
+        }
+
+        if (items.length) {
+          tl.fromTo(
+            items,
+            { autoAlpha: 0, y: 16 },
+            { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.04 },
+            message ? "<0.05" : "<",
+          );
+        }
+      } else {
+        const targets: HTMLElement[] = [];
+        if (items.length) targets.push(...items);
+        if (message) targets.push(message);
+
+        if (targets.length) {
+          tl.to(targets, {
+            autoAlpha: 0,
+            y: -12,
+            duration: 0.25,
+            stagger: { each: 0.02, from: "end" },
+            overwrite: "auto",
+          });
+        }
+        tl.add(() => setRenderAll(false));
+      }
+    }, el);
+
+    return () => {
+      animRef.current?.kill();
+      animRef.current = null;
+      ctx.revert();
+    };
+  }, [filteredEntries.length, reduceMotion, renderAll, showAll]);
+
+  const toggleShowAll = () => {
+    if (showAll) {
+      setShowAll(false);
+      if (reduceMotion) setRenderAll(false);
+      return;
+    }
+    setRenderAll(true);
+    setShowAll(true);
+  };
+
   return (
     <section id="stats" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <header className="mb-8">
@@ -129,14 +216,17 @@ export default function StatsSection() {
             ))}
           </div>
 
-          <div className="rounded-2xl bg-white/60 backdrop-blur-sm border border-white/50 p-5">
+          <div
+            ref={detailsRef}
+            className="rounded-2xl bg-white/60 backdrop-blur-sm border border-white/50 p-5"
+          >
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-lg font-semibold uppercase text-neutral-900">
                 {t("statsComponent.otherStats")}
               </h3>
               <button
                 type="button"
-                onClick={() => setShowAll((v) => !v)}
+                onClick={toggleShowAll}
                 className="text-md uppercase font-medium text-[#2A579E] cursor-pointer hover:underline hover:text-[#1f4a8f]"
               >
                 {showAll
@@ -145,9 +235,9 @@ export default function StatsSection() {
               </button>
             </div>
 
-            {showAll &&
+            {renderAll &&
               (filteredEntries.length === 0 ? (
-                <div className="text-sm text-neutral-600">
+                <div data-stats-message className="text-sm text-neutral-600">
                   {t("statsComponent.noMoreStats")}
                 </div>
               ) : (
@@ -155,6 +245,7 @@ export default function StatsSection() {
                   {filteredEntries.map((e: StatEntry) => (
                     <div
                       key={`${e.code ?? e.description}`}
+                      data-stats-item
                       className="rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-white/50 p-4"
                     >
                       <div className="text-xs text-neutral-900">

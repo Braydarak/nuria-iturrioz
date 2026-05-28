@@ -122,7 +122,7 @@ const Header = () => {
             >
               {t("header.home")}
             </Link>
-            <Link to="/career" className={desktopNavLinkClassName("/career")}>
+            <Link to="/carrer" className={desktopNavLinkClassName("/carrer")}>
               {t("header.career")}
             </Link>
             <Link to="/stats" className={desktopNavLinkClassName("/stats")}>
@@ -187,8 +187,8 @@ const Header = () => {
                 {t("header.home")}
               </Link>
               <Link
-                to="/career"
-                className={mobileNavLinkClassName("/career")}
+                to="/carrer"
+                className={mobileNavLinkClassName("/carrer")}
                 onClick={() => setOpen(false)}
               >
                 {t("header.career")}

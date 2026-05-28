@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLetStatistics } from "../../data/useLetStatistics";
+import { AnimateOnScroll } from "../../components/animation";
 
 // Import all images
 import nuria1 from "../../assets/nuria/Nuria1.jpg";
@@ -141,7 +142,13 @@ const AboutMe = () => {
 
       <div className="mx-auto max-w-screen px-8 md:px-16 lg:px-24 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <div className="relative">
+          <AnimateOnScroll
+            as="div"
+            className="relative"
+            x={-80}
+            y={0}
+            scale={1}
+          >
             <div className="absolute -top-4 -left-4 h-24 w-24 rounded-xl bg-[#A8D0FF]/20 blur-md" />
             <div
               className="relative overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/20 w-full max-w-[380px] md:max-w-[460px]"
@@ -159,9 +166,15 @@ const AboutMe = () => {
                 />
               ))}
             </div>
-          </div>
+          </AnimateOnScroll>
 
-          <div className="space-y-4">
+          <AnimateOnScroll
+            as="div"
+            className="space-y-4"
+            x={80}
+            y={0}
+            scale={1}
+          >
             <h2 className="inline-block font-signature text-4xl md:text-5xl font-semibold -rotate-2 drop-shadow">
               {t("aboutMe.title")}
             </h2>
@@ -188,7 +201,7 @@ const AboutMe = () => {
 
             <div className="pt-2">
               <Link
-                to="/career"
+                to="/carrer"
                 className="group inline-flex items-center gap-3 rounded-full bg-white text-[#1B3A75] px-8 py-4 text-lg md:text-xl font-bold shadow-lg ring-1 ring-white/60 hover:bg-[#E6F0FF] hover:shadow-xl hover:ring-white transition-all duration-200"
               >
                 {t("aboutMe.cta")}
@@ -209,43 +222,43 @@ const AboutMe = () => {
                 </svg>
               </Link>
             </div>
-          </div>
+          </AnimateOnScroll>
         </div>
         {!loading && !error && (
           <div className="pt-30">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-items-center text-center">
-              <div>
+              <AnimateOnScroll as="div" x={0} y={40} scale={1} delay={0}>
                 <div className="font-signature text-6xl sm:text-7xl text-white leading-tight tracking-tight">
                   {age}
                 </div>
                 <div className="mt-2 text-xl sm:text-2xl text-white">
                   {t("aboutMe.stats.age")}
                 </div>
-              </div>
-              <div>
+              </AnimateOnScroll>
+              <AnimateOnScroll as="div" x={0} y={40} scale={1} delay={0.05}>
                 <div className="font-signature text-6xl sm:text-7xl text-white leading-tight tracking-tight">
                   {wins ?? 0}
                 </div>
                 <div className="mt-2 text-xl sm:text-2xl text-white">
                   {t("aboutMe.stats.wins")}
                 </div>
-              </div>
-              <div>
+              </AnimateOnScroll>
+              <AnimateOnScroll as="div" x={0} y={40} scale={1} delay={0.1}>
                 <div className="font-signature text-6xl sm:text-7xl text-white leading-tight tracking-tight">
                   {tournaments ?? 0}
                 </div>
                 <div className="mt-2 text-xl sm:text-2xl text-white">
                   {t("aboutMe.stats.played")}
                 </div>
-              </div>
-              <div>
+              </AnimateOnScroll>
+              <AnimateOnScroll as="div" x={0} y={40} scale={1} delay={0.15}>
                 <div className="font-signature text-6xl sm:text-7xl text-white leading-tight tracking-tight">
                   + {visited}
                 </div>
                 <div className="mt-2 text-xl sm:text-2xl text-white">
                   {t("aboutMe.stats.countries")}
                 </div>
-              </div>
+              </AnimateOnScroll>
             </div>
           </div>
         )}

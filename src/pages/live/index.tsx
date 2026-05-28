@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import nuriImg from "../../assets/nuria/Nuria9.jpg";
 import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet-async";
 import AnimatedLoader from "../../components/animatedLoader";
-import { getLetApiUrl } from "../../utils/constants";
+import {
+  DEFAULT_OG_IMAGE_URL,
+  getLetApiUrl,
+  SITE_URL,
+} from "../../utils/constants";
 import {
   fetchTournamentsData,
   type Tournament,
@@ -47,6 +52,10 @@ const LivePage = () => {
   const [liveData, setLiveData] = useState<LiveTournamentData | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
   const [timeAgo, setTimeAgo] = useState<string>("");
+  const title = "En vivo – Nuria Iturrioz";
+  const description =
+    "Seguimiento en vivo de torneos y estado competitivo de Nuria Iturrioz cuando haya información disponible.";
+  const url = `${SITE_URL}/live`;
 
   useEffect(() => {
     let tournamentsCache: Tournament[] | null = null;
@@ -229,28 +238,64 @@ const LivePage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-neutral-50">
-        <AnimatedLoader />
-      </div>
+      <>
+        <Helmet>
+          <title>{title}</title>
+          <meta name="description" content={description} />
+          <link rel="canonical" href={url} />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content={url} />
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={description} />
+          <meta property="og:image" content={DEFAULT_OG_IMAGE_URL} />
+          <meta property="og:site_name" content="Nuria Iturrioz" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:url" content={url} />
+          <meta name="twitter:title" content={title} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:image" content={DEFAULT_OG_IMAGE_URL} />
+        </Helmet>
+        <div className="min-h-screen flex items-center justify-center bg-neutral-50">
+          <AnimatedLoader />
+        </div>
+      </>
     );
   }
 
   if (error || !liveData) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-neutral-50 p-4">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Oops!</h2>
-          <p className="text-gray-600 mb-4">
-            {error || "Could not load live data"}
-          </p>
-          <button
-            onClick={() => window.location.reload()}
-            className="px-6 py-2 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-colors"
-          >
-            {t("livePage.refreshData")}
-          </button>
+      <>
+        <Helmet>
+          <title>{title}</title>
+          <meta name="description" content={description} />
+          <link rel="canonical" href={url} />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content={url} />
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={description} />
+          <meta property="og:image" content={DEFAULT_OG_IMAGE_URL} />
+          <meta property="og:site_name" content="Nuria Iturrioz" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:url" content={url} />
+          <meta name="twitter:title" content={title} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:image" content={DEFAULT_OG_IMAGE_URL} />
+        </Helmet>
+        <div className="min-h-screen flex items-center justify-center bg-neutral-50 p-4">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Oops!</h2>
+            <p className="text-gray-600 mb-4">
+              {error || "Could not load live data"}
+            </p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-6 py-2 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-colors"
+            >
+              {t("livePage.refreshData")}
+            </button>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -334,45 +379,62 @@ const LivePage = () => {
   );
 
   return (
-    <div className="min-h-screen bg-neutral-50 pt-40 pb-12 px-4 sm:px-6 lg:px-8 font-sans">
-      <div className="max-w-5xl mx-auto">
-        {/* Tournament Header */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-          <div className="text-center md:text-left mb-4 md:mb-0">
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 font-header tracking-tight">
-              {liveData.tournamentName}
-            </h1>
-            <p className="mt-1 text-gray-500 font-light flex items-center justify-center md:justify-start">
-              <svg
-                className="w-4 h-4 mr-2 text-gray-500"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              {liveData.location}
-            </p>
-          </div>
-          <div className="flex flex-col items-center md:items-end">
-            {isLive && (
-              <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-red-50 text-red-600 text-sm font-bold tracking-wider animate-pulse border border-red-100 mb-2">
-                <span className="w-2 h-2 mr-2 bg-red-500 rounded-full"></span>
-                {t("livePage.live")}
+    <>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={url} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={url} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={DEFAULT_OG_IMAGE_URL} />
+        <meta property="og:site_name" content="Nuria Iturrioz" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={url} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={DEFAULT_OG_IMAGE_URL} />
+      </Helmet>
+      <div className="min-h-screen bg-neutral-50 pt-40 pb-12 px-4 sm:px-6 lg:px-8 font-sans">
+        <div className="max-w-5xl mx-auto">
+          {/* Tournament Header */}
+          <div className="flex flex-col md:flex-row justify-between items-center mb-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+            <div className="text-center md:text-left mb-4 md:mb-0">
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 font-header tracking-tight">
+                {liveData.tournamentName}
+              </h1>
+              <p className="mt-1 text-gray-500 font-light flex items-center justify-center md:justify-start">
+                <svg
+                  className="w-4 h-4 mr-2 text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                {liveData.location}
+              </p>
+            </div>
+            <div className="flex flex-col items-center md:items-end">
+              {isLive && (
+                <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-red-50 text-red-600 text-sm font-bold tracking-wider animate-pulse border border-red-100 mb-2">
+                  <span className="w-2 h-2 mr-2 bg-red-500 rounded-full"></span>
+                  {t("livePage.live")}
+                </div>
+              )}
+              <div className="text-sm text-gray-400 font-medium">
+                {liveData.date}
               </div>
-            )}
-            <div className="text-sm text-gray-400 font-medium">
-              {liveData.date}
             </div>
           </div>
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Column: Player & Main Stats (Rank is now prominent) */}
@@ -609,8 +671,9 @@ const LivePage = () => {
             </span>
           </p>
         </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

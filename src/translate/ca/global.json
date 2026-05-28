@@ -17,6 +17,16 @@
     "viewLiveScores": "Veure resultats en viu",
     "scrollHint": "Desplaça't per veure'n més"
   },
+  "movistar": {
+    "kicker": "Sueños de Golf",
+    "title": "Nuria Iturrioz a Movistar+",
+    "description": "Mira el capítol “Nuria Iturrioz con Z de raza” i coneix més la seva història.",
+    "cta": "Veure el capítol a Movistar+",
+    "ctaAria": "Obrir el capítol de Sueños de Golf a Movistar+ (s'obre en una pestanya nova)",
+    "episodeLabel": "Episodi",
+    "episodeTitle": "Nuria Iturrioz con Z de raza",
+    "episodeDescription": "Una relliscada burocràtica li va fer perdre la “z” del cognom argentí del seu pare. Però no la Z de la raça que té aquesta golfista."
+  },
   "aboutMe": {
     "title": "Sobre mi",
     "p1_prefix": "Em dic Nuria Iturrioz, benvinguts al meu espai, on em podreu seguir, contactar, animar i conèixer millor, entre moltes coses.",

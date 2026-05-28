@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import bg from "../../assets/Nuria-golfing.png";
 import LogoLoop from "../../components/logoLoopDesktop";
@@ -10,6 +10,7 @@ import {
 } from "../../utils/tournamentDate";
 import { useTranslation } from "react-i18next";
 import { useLiveStatus } from "../../hooks/useLiveStatus";
+import gsap from "gsap";
 
 const Hero = () => {
   const { t } = useTranslation();
@@ -18,6 +19,16 @@ const Hero = () => {
     null,
   );
   const { isLive, hasData, round } = useLiveStatus();
+  const logoSvgRef = useRef<SVGSVGElement | null>(null);
+  const nextTournamentRef = useRef<HTMLDivElement | null>(null);
+  const scrollHintRef = useRef<HTMLDivElement | null>(null);
+  const startedRef = useRef(false);
+  const nextStartedRef = useRef(false);
+
+  const reduceMotion = useMemo(() => {
+    if (typeof window === "undefined") return true;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -48,6 +59,99 @@ const Hero = () => {
         daysUntilStart >= 0 &&
         daysUntilStart <= 7));
 
+  useLayoutEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const logoEl = logoSvgRef.current;
+    const hintEl = scrollHintRef.current;
+
+    if (!logoEl && !hintEl) return;
+
+    startedRef.current = false;
+
+    if (reduceMotion) {
+      if (logoEl) gsap.set(logoEl, { autoAlpha: 1, y: 0, clearProps: "all" });
+      if (hintEl) gsap.set(hintEl, { autoAlpha: 1, y: 0, clearProps: "all" });
+      return;
+    }
+
+    if (logoEl) gsap.set(logoEl, { autoAlpha: 0, y: -24 });
+    if (hintEl) gsap.set(hintEl, { autoAlpha: 0, y: 24 });
+
+    const tl = gsap.timeline({
+      paused: true,
+      defaults: { duration: 0.8, ease: "power3.out" },
+    });
+
+    if (logoEl) tl.to(logoEl, { autoAlpha: 1, y: 0, clearProps: "transform" });
+    if (hintEl)
+      tl.to(hintEl, { autoAlpha: 1, y: 0, clearProps: "transform" }, "<0.15");
+
+    const playOnce = () => {
+      if (startedRef.current) return;
+      startedRef.current = true;
+      tl.play(0);
+    };
+
+    if (document.documentElement.dataset.pageIntro === "hidden") {
+      playOnce();
+      return () => {
+        tl.kill();
+      };
+    }
+
+    window.addEventListener("page-intro:hidden", playOnce, { once: true });
+
+    return () => {
+      window.removeEventListener("page-intro:hidden", playOnce);
+      tl.kill();
+    };
+  }, [reduceMotion]);
+
+  useLayoutEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const nextEl = nextTournamentRef.current;
+    nextStartedRef.current = false;
+
+    if (!nextEl) return;
+
+    if (reduceMotion) {
+      gsap.set(nextEl, { autoAlpha: 1, x: 0, clearProps: "all" });
+      return;
+    }
+
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+    gsap.set(nextEl, { autoAlpha: 0, x: isDesktop ? -56 : 0 });
+
+    const animateIn = () => {
+      if (nextStartedRef.current) return;
+      nextStartedRef.current = true;
+      gsap.to(nextEl, {
+        autoAlpha: 1,
+        x: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        overwrite: "auto",
+        clearProps: "transform",
+      });
+    };
+
+    if (document.documentElement.dataset.pageIntro === "hidden") {
+      animateIn();
+      return () => {
+        gsap.killTweensOf(nextEl);
+      };
+    }
+
+    window.addEventListener("page-intro:hidden", animateIn, { once: true });
+
+    return () => {
+      window.removeEventListener("page-intro:hidden", animateIn);
+      gsap.killTweensOf(nextEl);
+    };
+  }, [reduceMotion, showNextTournament]);
+
   return (
     <section
       className="relative h-screen bg-cover bg-center drop-shadow-2xl"
@@ -66,6 +170,7 @@ const Hero = () => {
         }`}
       >
         <svg
+          ref={logoSvgRef}
           className="w-30 md:w-45 h-auto drop-shadow-lg"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 674.02 296.87"
@@ -162,7 +267,10 @@ const Hero = () => {
       </div>
 
       {showNextTournament && nextTournament && (
-        <div className="absolute bottom-28 left-4 right-4 z-20 flex flex-col gap-2 items-center text-center md:bottom-10 md:left-30 md:right-auto md:items-start md:text-left">
+        <div
+          ref={nextTournamentRef}
+          className="absolute bottom-44 left-4 right-4 z-20 flex flex-col gap-2 items-center text-center md:bottom-10 md:left-30 md:right-auto md:items-start md:text-left"
+        >
           <span className="text-white text-xs md:text-sm uppercase tracking-widest font-bold flex items-center gap-2">
             {nextTournament.isCurrent
               ? t("hero.actualTour")
@@ -217,7 +325,10 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute left-1/2 -translate-x-1/2 bottom-28 md:bottom-10 z-20 pointer-events-none select-none">
+      <div
+        ref={scrollHintRef}
+        className="absolute left-1/2 -translate-x-1/2 bottom-28 md:bottom-10 z-20 pointer-events-none select-none"
+      >
         <style>
           {`
             @keyframes heroScrollHint {

@@ -7,6 +7,7 @@ export default function PageIntro() {
 
   useEffect(() => {
     const collapseDurationMs = 1200;
+    document.documentElement.dataset.pageIntro = "active";
 
     const tBlueEnd = setTimeout(() => setStage("collapse"), 2000);
     const tFadeStart = setTimeout(
@@ -14,7 +15,11 @@ export default function PageIntro() {
       2000 + collapseDurationMs,
     );
     const tHidden = setTimeout(
-      () => setStage("hidden"),
+      () => {
+        document.documentElement.dataset.pageIntro = "hidden";
+        window.dispatchEvent(new CustomEvent("page-intro:hidden"));
+        setStage("hidden");
+      },
       2000 + collapseDurationMs + 300,
     );
     return () => {

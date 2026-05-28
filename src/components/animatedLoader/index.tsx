@@ -33,18 +33,18 @@ export default function AnimatedLoader() {
                 dur="2s"
                 repeatCount="indefinite"
                 calcMode="spline"
-                values="0;0;200;200;0;0"
-                keyTimes="0;0.15;0.45;0.55;0.85;1"
-                keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1"
+                values="0;200;200;0"
+                keyTimes="0;0.25;0.65;1"
+                keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"
               />
               <animate
                 attributeName="x"
                 dur="2s"
                 repeatCount="indefinite"
                 calcMode="spline"
-                values="0;0;0;0;200;0"
-                keyTimes="0;0.15;0.45;0.55;0.85;1"
-                keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1;0 0 1 1"
+                values="0;0;0;200"
+                keyTimes="0;0.25;0.65;1"
+                keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"
               />
             </rect>
           </clipPath>

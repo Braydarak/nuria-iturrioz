@@ -17,6 +17,16 @@
     "viewLiveScores": "View Live Scores",
     "scrollHint": "Scroll to see more"
   },
+  "movistar": {
+    "kicker": "Sueños de Golf",
+    "title": "Nuria Iturrioz on Movistar+",
+    "description": "Watch the episode “Nuria Iturrioz con Z de raza” and learn more about her story.",
+    "cta": "Watch on Movistar+",
+    "ctaAria": "Open the Sueños de Golf episode on Movistar+ (opens in a new tab)",
+    "episodeLabel": "Episode",
+    "episodeTitle": "Nuria Iturrioz con Z de raza",
+    "episodeDescription": "A bureaucratic slip made her lose the “z” from her father's Argentine surname. But not the Z of grit this golfer has."
+  },
   "aboutMe": {
     "title": "About me",
     "p1_prefix": "My name is Nuria Iturrioz, welcome to my space, where you can follow, contact, cheer and get to know me better, among many things.",

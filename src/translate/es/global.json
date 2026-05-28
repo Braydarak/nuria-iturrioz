@@ -17,6 +17,16 @@
     "viewLiveScores": "Ver resultados en vivo",
     "scrollHint": "Desliza para ver más"
   },
+  "movistar": {
+    "kicker": "Sueños de Golf",
+    "title": "Nuria Iturrioz en Movistar+",
+    "description": "Mira el capítulo “Nuria Iturrioz con Z de raza” y conoce más sobre su historia.",
+    "cta": "Ver capítulo en Movistar+",
+    "ctaAria": "Abrir el capítulo de Sueños de Golf en Movistar+ (se abre en una nueva pestaña)",
+    "episodeLabel": "Episodio",
+    "episodeTitle": "Nuria Iturrioz con Z de raza",
+    "episodeDescription": "Un desliz burocrático le hizo perder la “z” del apellido argentino de su padre. Pero también la Z de la raza que tiene esta golfista."
+  },
   "aboutMe": {
     "title": "Sobre mí",
     "p1_prefix": "Me llamo Nuria Iturrioz, bienvenidos a mi espacio, donde me podréis seguir, contactar, animar y conocer mejor, entre muchas cosas.",
