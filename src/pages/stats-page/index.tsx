@@ -29,7 +29,7 @@ export default function StatsPage() {
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={DEFAULT_OG_IMAGE_URL} />
       </Helmet>
-      <main className="mx-auto max-w-screen mt-40">
+      <main className="mx-auto max-w-screen mt-30">
         {/* Bloque superior: Season Stats con fondo blanco */}
         <section className="bg-white">
           <Animation start="top bottom">

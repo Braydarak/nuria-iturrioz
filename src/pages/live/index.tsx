@@ -396,7 +396,7 @@ const LivePage = () => {
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={DEFAULT_OG_IMAGE_URL} />
       </Helmet>
-      <div className="min-h-screen bg-neutral-50 pt-40 pb-12 px-4 sm:px-6 lg:px-8 font-sans">
+      <div className="min-h-screen bg-neutral-50 pt-30 pb-12 px-4 sm:px-6 lg:px-8 font-sans">
         <div className="max-w-5xl mx-auto">
           {/* Tournament Header */}
           <div className="flex flex-col md:flex-row justify-between items-center mb-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">

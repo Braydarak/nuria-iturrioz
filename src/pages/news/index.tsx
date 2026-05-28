@@ -30,7 +30,7 @@ const NewsPage = () => {
       </Helmet>
       <main className="relative min-h-screen bg-gray-50">
         <Animation start="top bottom">
-          <div className="mx-auto max-w-7xl px-4 pt-40 pb-16 md:px-8 lg:px-12">
+          <div className="mx-auto max-w-7xl px-4 pt-30 pb-16 md:px-8 lg:px-12">
             <div className="mb-12 text-center">
               <AnimateOnScroll as="h1" y={20} x={0} scale={1} delay={0}>
                 <span className="font-signature text-5xl md:text-6xl text-[#2A579E] font-bold drop-shadow-sm mb-4 block">

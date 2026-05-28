@@ -27,7 +27,7 @@ const PrivacyPolicyPage = () => {
         <meta name="twitter:image" content={DEFAULT_OG_IMAGE_URL} />
       </Helmet>
       <main className="min-h-screen bg-gray-50">
-        <div className="mx-auto max-w-4xl px-4 pt-50 pb-20">
+        <div className="mx-auto max-w-4xl px-4 pt-30 pb-20">
           <div className="mb-10">
             <h1 className="font-signature text-4xl md:text-5xl text-[#2A579E] font-bold">
               {t("legals.privacy.title", "Privacy Policy")}
