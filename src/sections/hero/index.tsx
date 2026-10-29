@@ -1,23 +1,21 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import bg from "../../assets/Nuria-golfing.png";
+import bg from "../../assets/Nuria-golfing.webp";
 import LogoLoop from "../../components/logoLoopDesktop";
 import LogoLoopMobile from "../../components/LogoLoopMobile";
 import { useLayout } from "../../context/LayoutContext";
-import {
-  getNextTournament,
-  type NextTournament,
-} from "../../utils/tournamentDate";
 import { useTranslation } from "react-i18next";
 import { useLiveStatus } from "../../hooks/useLiveStatus";
+import { useNextTournament } from "../../hooks/useNextTournament";
 import gsap from "gsap";
 
 const Hero = () => {
   const { t } = useTranslation();
   const { isHeaderOpen } = useLayout();
-  const [nextTournament, setNextTournament] = useState<NextTournament | null>(
-    null,
-  );
+  // El header aparece apenas se hace scroll: en desktop el logo del hero se
+  // oculta para no mostrar dos logos a la vez
+  const [scrolled, setScrolled] = useState(false);
+  const { nextTournament, showNextTournament } = useNextTournament();
   const { isLive, hasData, round } = useLiveStatus();
   const logoSvgRef = useRef<SVGSVGElement | null>(null);
   const nextTournamentRef = useRef<HTMLDivElement | null>(null);
@@ -31,33 +29,11 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
-    let cancelled = false;
-    getNextTournament()
-      .then((tournament) => {
-        if (!cancelled) setNextTournament(tournament);
-      })
-      .catch(() => {
-        if (!cancelled) setNextTournament(null);
-      });
-    return () => {
-      cancelled = true;
-    };
+    const onScroll = () => setScrolled(window.scrollY > 0);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const daysUntilStart =
-    nextTournament && nextTournament.parsedDate
-      ? Math.ceil(
-          (nextTournament.parsedDate.getTime() - today.getTime()) /
-            (1000 * 60 * 60 * 24),
-        )
-      : null;
-  const showNextTournament =
-    !!nextTournament &&
-    (nextTournament.isCurrent ||
-      (typeof daysUntilStart === "number" &&
-        daysUntilStart >= 0 &&
-        daysUntilStart <= 7));
 
   useLayoutEffect(() => {
     if (typeof window === "undefined") return;
@@ -154,7 +130,7 @@ const Hero = () => {
 
   return (
     <section
-      className="relative h-screen bg-cover bg-center drop-shadow-2xl"
+      className="relative h-screen bg-cover bg-center shadow-2xl"
       style={{ backgroundImage: `url(${bg})` }}
     >
       {/* Overlay de oscurecimiento */}
@@ -166,7 +142,11 @@ const Hero = () => {
       {/* Logo arriba a la izquierda */}
       <div
         className={`absolute top-15 left-1/2 -translate-x-1/2 md:left-30 md:translate-x-0 z-10 transition-opacity duration-300 ${
-          isHeaderOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+          isHeaderOpen
+            ? "opacity-0 pointer-events-none"
+            : scrolled
+              ? "opacity-100 md:opacity-0 md:pointer-events-none"
+              : "opacity-100"
         }`}
       >
         <svg
@@ -320,7 +300,7 @@ const Hero = () => {
 
       {/* Contenido principal del Hero */}
       <div className="relative z-10 mx-auto max-w-screen h-full flex items-stretch justify-end">
-        <div className="hidden md:block w-64 md:w-72 lg:w-80 h-full drop-shadow-2xl">
+        <div className="hidden md:block w-64 md:w-72 lg:w-80 h-full shadow-2xl">
           <LogoLoop heightClass="h-full" />
         </div>
       </div>

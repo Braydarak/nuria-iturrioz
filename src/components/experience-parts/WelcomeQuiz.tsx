@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import nuriaGolfing from "../../assets/Nuria-golfing.png";
+import nuriaGolfing from "../../assets/Nuria-golfing.webp";
 import gsap from "gsap";
 
 interface WelcomeQuizProps {

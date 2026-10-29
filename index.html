@@ -16,6 +16,22 @@
     </script>
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8" />
+    <!-- Cada HTML prerenderizado guarda su ruta en data-route. Si se abre otra
+         ruta (p. ej. /news/... sirve el HTML de Inicio), se oculta hasta que
+         React muestre la página correcta. -->
+    <style>
+      html.route-pending #root {
+        visibility: hidden;
+      }
+    </style>
+    <script>
+      (function () {
+        var d = document.documentElement;
+        var route = d.getAttribute("data-route");
+        var path = location.pathname.replace(/\/+$/, "") || "/";
+        if (route && route !== path) d.classList.add("route-pending");
+      })();
+    </script>
     <link rel="icon" type="image/png" href="%BASE_URL%nuria.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link

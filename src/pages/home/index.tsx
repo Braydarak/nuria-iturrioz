@@ -41,7 +41,7 @@ export default function HomePage() {
             <MovistarSection />
           </AnimateOnScroll>
           <AnimateOnScroll as="section" y={40} x={0} scale={1}>
-            <Trophies variant="home" />
+            <Trophies />
           </AnimateOnScroll>
           <AnimateOnScroll as="section">
             <MasonryGallery />

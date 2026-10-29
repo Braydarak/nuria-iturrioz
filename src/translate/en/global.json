@@ -7,7 +7,9 @@
     "contact": "Contact",
     "actualTour": "Current tournament",
     "nextTour": "Next tournament",
-    "viewLiveScores": "View live scores"
+    "viewLiveScores": "View live scores",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "hero": {
     "logoAria": "Nuria Logo",
@@ -68,7 +70,10 @@
       "t22": "2014 Madrid Amateur Open Runner-up",
       "t23": "2015 Madrid Amateur Open Runner-up",
       "t24": "2019 Santander Golf Tour Champion"
-    }
+    },
+    "eyebrow": "Trophy room",
+    "pieces": "{{count}} pieces in the collection",
+    "plaqueNumber": "No. {{number}}"
   },
   "recognitions": {
     "title": "Recognitions",
@@ -83,7 +88,8 @@
       "r6": "Recognition by the Spanish Golf Federation 2019",
       "r7": "Recognition by the Balearic Golf Federation 2016",
       "r8": "Diploma for achieving the LET card 2016"
-    }
+    },
+    "eyebrow": "Hall of honour"
   },
   "career": {
     "title": "My Career",
@@ -99,39 +105,77 @@
       "restart": "Restart",
       "unmute": "Unmute",
       "mute": "Mute"
-    }
+    },
+    "eyebrow": "Career path",
+    "videoEyebrow": "My story on video",
+    "milestones": [
+      "Age 14",
+      "Madrid",
+      "Age 19",
+      "2015 – 2016",
+      "Today"
+    ]
   },
   "statsPage": {
     "title": "Stats",
     "subtitle": "Season summary and key metrics.",
-    "description": "In this section we show you a little about my statistics on the Ladies European Tour: first, the results by season; below, other outstanding metrics."
+    "description": "My numbers on the Ladies European Tour: a summary of my career, my results season by season and what my game looks like.",
+    "eyebrow": "Ladies European Tour",
+    "kpis": {
+      "wins": "LET wins",
+      "top10": "Top 10s",
+      "tournaments": "Tournaments played",
+      "seasons": "Seasons"
+    },
+    "game": {
+      "title": "My game",
+      "subtitle": "Career averages on the LET",
+      "tee": "Off the tee",
+      "approach": "Approach",
+      "shortGame": "Short game",
+      "scoring": "Scoring",
+      "yards": "yards",
+      "labels": {
+        "S155": "Driving distance",
+        "S150": "Driving accuracy",
+        "S160": "Greens in regulation",
+        "S170": "Putts per round",
+        "S175": "Putts per hole",
+        "S165": "Sand saves",
+        "S178": "Scrambling",
+        "S177": "Bounce back",
+        "S100": "Stroke average",
+        "S105": "Average vs par",
+        "S116": "Birdies per round",
+        "S115": "Total birdies",
+        "S110": "Eagles",
+        "S120": "Total pars"
+      }
+    },
+    "records": {
+      "title": "Moments to remember",
+      "lastWin": "Latest win",
+      "holeInOne": "Hole in one",
+      "albatross": "Albatross",
+      "comeback": "Biggest comeback",
+      "strokes_one": "{{count}} stroke",
+      "strokes_other": "{{count}} strokes",
+      "round": "Round {{round}}",
+      "hole": "Hole {{hole}}",
+      "comebackDetail": "Strokes behind before coming back to win"
+    }
   },
   "seasonStats": {
     "title": "Season Results",
     "description": "Explore tournaments from each year and the current season.",
     "errorUnknown": "Unknown error",
     "currentSeason": "Current Season",
-    "season": "Season {{year}}",
     "position": "Position:",
-    "rounds": "Rounds:",
     "score": "Score:",
     "vsPar": "Vs Par:",
     "showLess": "Show less",
     "showAll": "Show all",
     "noData": "No highlight tournament data available for now."
-  },
-  "statsComponent": {
-    "title": "My Numbers on the LET",
-    "description": "You can press below to see more data",
-    "tournamentWins": "Tournament Wins",
-    "topTen": "Tournament Top Ten Finishes",
-    "drivingDistance": "Driving Distance",
-    "error": "Error: {{error}}",
-    "noData": "No stats available for now.",
-    "otherStats": "Other statistics",
-    "hideAll": "hide full statistics",
-    "showAll": "show full statistics",
-    "noMoreStats": "No more statistics available."
   },
   "statsMetrics": {
     "biggestComebackMargin": "Biggest Comeback Margin",
@@ -158,15 +202,24 @@
     "puttsPerRound": "Putts per Round",
     "sandSaves": "Sand Saves",
     "drivingAccuracy": "Driving Accuracy",
-    "roundsUnderPar": "Rounds Under Par"
+    "roundsUnderPar": "Rounds Under Par",
+    "drivingDistance": "Driving distance"
   },
   "newsPage": {
     "title": "News",
-    "description": "Stay up to date with my latest tournaments, results, and news from the Ladies European Tour.",
+    "description": "What the Ladies European Tour is saying about my tournaments, results and news.",
     "loadMore": "Load more news",
     "viewOnLet": "View news on LET website",
-    "readMore": "Read more",
-    "readLess": "Read less"
+    "aboutNuria": "About Nuria",
+    "mentions": "Mentions on the LET",
+    "featured": "Latest story",
+    "readArticle": "Read story",
+    "minRead": "{{count}} min read",
+    "back": "Back to news",
+    "source": "Original article published by the Ladies European Tour.",
+    "related": "More news",
+    "notFound": "We couldn't find this story.",
+    "error": "We couldn't load the news. Please try again later."
   },
   "livePage": {
     "live": "LIVE",
@@ -218,15 +271,13 @@
       "careerYears": "10 Years",
       "presence": "International Presence",
       "global": "Global"
-    },
-    "imageCaption": "Nuria Iturrioz"
+    }
   },
   "contactForm": {
     "title": "Send me a message",
     "subtitle": "Fill out the form below and I will get back to you as soon as possible.",
     "contactType": {
       "label": "Reason for contact",
-      "placeholder": "Select an option",
       "options": {
         "sponsor": "Sponsorship / Sponsor",
         "press": "Press / Media",
@@ -255,11 +306,10 @@
       "sending": "Sending...",
       "default": "Send message"
     },
-    "errors": {
-      "general": "Please correct the marked errors before sending."
-    },
-    "success": "Message sent successfully! Thanks for contacting.",
-    "error": "There was an error sending the message. Please try again."
+    "success": "Thanks for reaching out. I'll get back to you as soon as possible.",
+    "error": "There was an error sending the message. Please try again.",
+    "successTitle": "Message sent!",
+    "sendAnother": "Send another message"
   },
   "footer": {
     "description": "Official website of Nuria Iturrioz. Professional golfer competing at the highest level. Passion, discipline, and dedication in every swing.",

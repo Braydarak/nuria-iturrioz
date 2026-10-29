@@ -93,3 +93,27 @@ Sitio en React + TypeScript (Vite) para Nuria Iturrioz. Incluye páginas públic
 - Notas:
   - Si cambia el endpoint o el esquema, actualiza el parser en `season_stats`
   - Ajustes de estilo (colores, fuentes) en `index.css` y clases utilitarias
+
+### Torneos (DB en Ferozo)
+
+Los torneos ya no salen de `tournaments.json`: todo el backend está en la carpeta `ferozo/`. `api-web/sync-tournaments.php` lee el calendario del LET (`api.euro.ocs-software.com`), revisa el listado de *Entries* de cada torneo próximo y guarda en MySQL si Nuria (ID `200899`) está inscrita. La web los lee desde `/api-web/tournaments.php`.
+
+```
+ferozo/
+  schema.sql            → ejecutar una vez en phpMyAdmin (no se sube a la web)
+  api-web/              → subir a public_html/api-web/
+    .htaccess
+    config.example.php  → copiar como config.php con los datos de la DB
+    lib.php
+    sync-tournaments.php
+    tournaments.php
+```
+
+1. Crear la base MySQL en Ferozo y ejecutar `ferozo/schema.sql` (phpMyAdmin).
+2. Copiar `ferozo/api-web/config.example.php` a `ferozo/api-web/config.php` con los datos de la DB y un `sync_token` (está en `.gitignore`).
+3. Subir la carpeta `ferozo/api-web/` a `public_html/api-web/`. Al subir `dist/` en futuros deploys, no borrar `public_html/api-web/`.
+4. Lanzar la primera sincronización: `https://nuriaiturrioz.com/api-web/sync-tournaments.php?token=TU_TOKEN`.
+5. Tarea programada (cron) en Ferozo, p. ej. días 1 y 15 de cada mes: `0 6 1,15 * * php /home/USUARIO/public_html/api-web/sync-tournaments.php`.
+
+`confirmed` = inscrita (`Entered`); si es reserva queda en `false` y en `status` aparece `Reserve #N`. Para forzarlo a mano: columna `confirmed_override` (1 juega, 0 no juega, NULL automático).
+En local, para usar la API de producción: `VITE_TOURNAMENTS_API_URL=https://nuriaiturrioz.com/api-web/tournaments.php npm run dev`.

@@ -116,6 +116,7 @@ const BitsLogoLoop = ({
             }
           }
 
+          @media (prefers-reduced-motion: reduce) { .bits-logo-loop .row { animation-play-state: paused !important; } }
           @keyframes marqueeLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
           @keyframes marqueeRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
           @keyframes marqueeUp { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }

@@ -1,5 +1,4 @@
-const PROFILE_URL =
-  "https://api.euro.ocs-software.com/let/cache/let/profiles/200899?randomadd=1769433522174";
+import { fetchLetProfile } from "./letProfile";
 
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === "object" && v !== null;
@@ -156,11 +155,7 @@ export interface SeasonStatsData {
 }
 
 export async function fetchSeasonStats(): Promise<SeasonStatsData> {
-  const res = await fetch(PROFILE_URL, {
-    headers: { Accept: "application/json" },
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const json = (await res.json()) as unknown;
+  const json = await fetchLetProfile();
   const hs = getCareerHighlights(json);
   const ts = getThisSeasonRecord(json);
   const ls = getLastSeasonHighlightsLatest(json);

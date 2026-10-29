@@ -4,17 +4,17 @@ import { useTranslation } from "react-i18next";
 import { useLetStatistics } from "../../data/useLetStatistics";
 import { AnimateOnScroll } from "../../components/animation";
 
-// Import all images
-import nuria1 from "../../assets/nuria/Nuria1.jpg";
-import nuria2 from "../../assets/nuria/Nuria2.jpg";
-import nuria3 from "../../assets/nuria/Nuria3.JPG";
-import nuria4 from "../../assets/nuria/Nuria4.JPG";
-import nuria5 from "../../assets/nuria/Nuria5.jpg";
-import nuria6 from "../../assets/nuria/Nuria6.JPG";
-import nuria8 from "../../assets/nuria/Nuria8.JPG";
-import nuria10 from "../../assets/nuria/Nuria10.jpg";
-import nuria11 from "../../assets/nuria/Nuria11.JPG";
-import nuria12 from "../../assets/nuria/Nuria12.JPG";
+// Versiones redimensionadas a WebP (el recuadro mide como mucho 460px de ancho)
+import nuria1 from "../../assets/nuria/web/Nuria1.webp";
+import nuria2 from "../../assets/nuria/web/Nuria2.webp";
+import nuria3 from "../../assets/nuria/web/Nuria3.webp";
+import nuria4 from "../../assets/nuria/web/Nuria4.webp";
+import nuria5 from "../../assets/nuria/web/Nuria5.webp";
+import nuria6 from "../../assets/nuria/web/Nuria6.webp";
+import nuria8 from "../../assets/nuria/web/Nuria8.webp";
+import nuria10 from "../../assets/nuria/web/Nuria10.webp";
+import nuria11 from "../../assets/nuria/web/Nuria11.webp";
+import nuria12 from "../../assets/nuria/web/Nuria12.webp";
 
 const nuriaImages = [
   nuria1,
@@ -120,14 +120,27 @@ const AboutMe = () => {
   const visited = useCountUp(statsVisible ? VISITED_COUNRTIES : null);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [sectionInView, setSectionInView] = useState(false);
+
+  // El carrusel de fotos solo corre mientras la sección está en pantalla
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) =>
+      setSectionInView(entry.isIntersecting),
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
+    if (!sectionInView) return;
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % nuriaImages.length);
     }, 4000); // Change image every 4 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [sectionInView]);
 
   return (
     <section
@@ -159,6 +172,8 @@ const AboutMe = () => {
                   key={index}
                   src={img}
                   alt={`Nuria Iturrioz ${index + 1}`}
+                  loading="lazy"
+                  decoding="async"
                   className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
                     index === currentImageIndex ? "opacity-100" : "opacity-0"
                   }`}
