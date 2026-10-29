@@ -9,7 +9,8 @@
     "nextTour": "Próximo torneo",
     "viewLiveScores": "Ver resultados en vivo",
     "openMenu": "Abrir menú",
-    "closeMenu": "Cerrar menú"
+    "closeMenu": "Cerrar menú",
+    "gallery": "Galería"
   },
   "hero": {
     "logoAria": "Logo de Nuria",
@@ -42,7 +43,7 @@
     }
   },
   "gallery": {
-    "viewMoreFlickr": "Ver más en Flickr"
+    "viewAll": "Ver galería completa"
   },
   "trophies": {
     "title": "Mis Trofeos",
@@ -489,5 +490,19 @@
   "latestNews": {
     "title": "Últimas noticias",
     "viewAll": "Ver todas las noticias"
+  },
+  "galleryPage": {
+    "title": "Galería",
+    "description": "Fotos de Nuria Iturrioz en los torneos del Ladies European Tour.",
+    "all": "Todas",
+    "photos_one": "{{count}} foto",
+    "photos_other": "{{count}} fotos",
+    "download": "Descargar en Flickr",
+    "viewOnFlickr": "Ver en Flickr",
+    "close": "Cerrar",
+    "previous": "Foto anterior",
+    "next": "Foto siguiente",
+    "open": "Ver foto",
+    "error": "No pudimos cargar las fotos. Inténtalo de nuevo más tarde."
   }
 }

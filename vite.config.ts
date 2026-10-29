@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => {
       tailwindcss(),
       vitePrerender({
         staticDir: path.join(__dirname, "dist"),
-        routes: ["/", "/carrer", "/stats", "/contact"],
+        routes: ["/", "/carrer", "/stats", "/contact", "/gallery"],
         renderer: new vitePrerender.PuppeteerRenderer({
           executablePath:
             "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",

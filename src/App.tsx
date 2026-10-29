@@ -17,6 +17,7 @@ import Footer from "./components/footer";
 import HomePage from "./pages/home";
 import NewsPage from "./pages/news";
 import ArticlePage from "./pages/news/article";
+import GalleryPage from "./pages/gallery";
 import CareerPage from "./pages/carrer";
 import StatsPage from "./pages/stats-page";
 import ContactPage from "./pages/contact";
@@ -67,6 +68,7 @@ function AppContent() {
         <Route path="/" element={<HomePage />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/news/:slug" element={<ArticlePage />} />
+        <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/career" element={<Navigate to="/carrer" replace />} />
         <Route path="/carrer" element={<CareerPage />} />
         <Route path="/stats" element={<StatsPage />} />

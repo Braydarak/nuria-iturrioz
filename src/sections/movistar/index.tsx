@@ -35,7 +35,7 @@ export default function MovistarSection() {
   const [hasPoster, setHasPoster] = useState(true);
 
   return (
-    <section className="relative overflow-hidden bg-linear-to-br from-[#1B3A75] via-[#24508f] to-[#2A579E] pb-24 pt-16 text-white md:pb-36 md:pt-24">
+    <section className="relative overflow-hidden bg-linear-to-br from-[#1B3A75] via-[#24508f] to-[#2A579E] py-16 text-white md:py-24">
       {/* Halo de color detrás del póster */}
       <div className="pointer-events-none absolute -left-32 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-[#3C7BEA]/35 blur-3xl" />
       <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
@@ -115,8 +115,6 @@ export default function MovistarSection() {
           </a>
         </AnimateOnScroll>
       </div>
-      {/* Fundido a blanco para entrar suave en la galería */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-linear-to-b from-transparent to-white md:h-28" />
     </section>
   );
 }

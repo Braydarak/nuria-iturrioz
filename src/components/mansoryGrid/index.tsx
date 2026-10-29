@@ -120,7 +120,7 @@ export default function Masonry({
       stagger: stagger,
       ease: ease,
       paused: true,
-      clearProps: blurToFocus ? "filter" : undefined,
+      ...(blurToFocus ? { clearProps: "filter" } : {}),
     });
     const trigger = ScrollTrigger.create({
       trigger: containerRef.current,
@@ -164,10 +164,13 @@ export default function Masonry({
     <div ref={containerRef} className="flex gap-4 w-full">
       {columnItems.map((col, colIndex) => (
         <div key={colIndex} className="flex flex-col gap-4 flex-1">
-          {col.map((item) => (
+          {col.map((item, rowIndex) => (
             <div
               key={item.id}
-              className="masonry-item relative overflow-hidden rounded-lg cursor-pointer"
+              // La primera foto de cada columna va con las esquinas de arriba rectas
+              className={`masonry-item relative overflow-hidden cursor-pointer ${
+                rowIndex === 0 ? "rounded-b-lg" : "rounded-lg"
+              }`}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               onClick={() => item.url && window.open(item.url, "_blank")}
