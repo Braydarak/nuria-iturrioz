@@ -35,7 +35,7 @@ export default function MasonryGallery() {
 
   return (
     <section className="bg-white pb-6 pt-16 md:pb-10 md:pt-24">
-      <div className="mx-auto max-w-6xl px-5 sm:px-6">
+      <div className="w-full px-4 md:px-8">
         <header className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <h2 className="font-signature text-4xl text-[#2A579E] md:text-5xl">
             {t("gallery.title")}

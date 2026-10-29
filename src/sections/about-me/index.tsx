@@ -242,7 +242,7 @@ const AboutMe = () => {
                 <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.age")}
                 </dt>
-                <dd className="order-first text-5xl font-semibold tracking-tight text-white md:text-6xl">
+                <dd className="order-first font-signature text-6xl leading-tight tracking-tight text-white sm:text-7xl">
                   {age}
                 </dd>
               </div>
@@ -250,7 +250,7 @@ const AboutMe = () => {
                 <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.wins")}
                 </dt>
-                <dd className="order-first text-5xl font-semibold tracking-tight text-white md:text-6xl">
+                <dd className="order-first font-signature text-6xl leading-tight tracking-tight text-white sm:text-7xl">
                   {wins ?? 0}
                 </dd>
               </div>
@@ -258,7 +258,7 @@ const AboutMe = () => {
                 <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.played")}
                 </dt>
-                <dd className="order-first text-5xl font-semibold tracking-tight text-white md:text-6xl">
+                <dd className="order-first font-signature text-6xl leading-tight tracking-tight text-white sm:text-7xl">
                   {tournaments ?? 0}
                 </dd>
               </div>
@@ -266,7 +266,7 @@ const AboutMe = () => {
                 <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.countries")}
                 </dt>
-                <dd className="order-first text-5xl font-semibold tracking-tight text-white md:text-6xl">
+                <dd className="order-first font-signature text-6xl leading-tight tracking-tight text-white sm:text-7xl">
                   +{visited}
                 </dd>
               </div>
