@@ -9,7 +9,8 @@
     "nextTour": "Proper torneig",
     "viewLiveScores": "Veure resultats en directe",
     "openMenu": "Obrir menú",
-    "closeMenu": "Tancar menú"
+    "closeMenu": "Tancar menú",
+    "gallery": "Galeria"
   },
   "hero": {
     "logoAria": "Logo de Nuria",
@@ -42,11 +43,10 @@
     }
   },
   "gallery": {
-    "viewMoreFlickr": "Veure més a Flickr"
+    "viewAll": "Veure la galeria completa"
   },
   "trophies": {
     "title": "Els meus trofeus",
-    "viewAll": "Veure tots els trofeus",
     "loadMore": "Carregar més",
     "noImage": "Sense imatge",
     "items": {
@@ -486,5 +486,23 @@
     "proYear": "Quan es va fer professional?",
     "birthplace": "On va néixer la Nuria?",
     "backToBack": "La Nuria va guanyar dos tornejos seguits: Vertader o Fals?"
+  },
+  "latestNews": {
+    "title": "Últimes notícies",
+    "viewAll": "Veure totes les notícies"
+  },
+  "galleryPage": {
+    "title": "Galeria",
+    "description": "Fotos de Nuria Iturrioz als tornejos del Ladies European Tour.",
+    "all": "Totes",
+    "photos_one": "{{count}} foto",
+    "photos_other": "{{count}} fotos",
+    "download": "Descarregar a Flickr",
+    "viewOnFlickr": "Veure a Flickr",
+    "close": "Tancar",
+    "previous": "Foto anterior",
+    "next": "Foto següent",
+    "open": "Veure foto",
+    "error": "No hem pogut carregar les fotos. Torna-ho a provar més tard."
   }
 }

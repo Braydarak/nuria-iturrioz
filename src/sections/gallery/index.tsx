@@ -3,7 +3,11 @@ import AnimatedLoader from "../../components/animatedLoader";
 import Masonry from "../../components/mansoryGrid";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function MasonryGallery() {
   const { t } = useTranslation();
@@ -11,16 +15,25 @@ export default function MasonryGallery() {
   const buttonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!loading && !error && photos.length > 0 && buttonRef.current) {
-      gsap.from(buttonRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.5,
-        ease: "power3.out",
-        clearProps: "all", // Ensures clean state after animation
-      });
-    }
+    if (loading || error || !photos.length || !buttonRef.current) return;
+    // El botón aparece cuando la galería llega a pantalla
+    const tween = gsap.from(buttonRef.current, {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      delay: 0.4,
+      ease: "power3.out",
+      clearProps: "all",
+      scrollTrigger: {
+        trigger: buttonRef.current,
+        start: "top 95%",
+        once: true,
+      },
+    });
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
   }, [loading, error, photos]);
 
   if (loading) {
@@ -70,32 +83,28 @@ export default function MasonryGallery() {
         ref={buttonRef}
         className="absolute bottom-12 left-1/2 -translate-x-1/2 z-50 pointer-events-auto"
       >
-        <a
-          href="https://www.flickr.com/photos/99039037@N06/"
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-2 bg-white text-[#2A579E] px-8 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 font-bold text-sm uppercase tracking-wide"
+        <Link
+          to="/gallery"
+          className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 text-sm font-bold uppercase tracking-wide text-[#2A579E] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
         >
-          {t("gallery.viewMoreFlickr")}
+          {t("gallery.viewAll")}
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
+            className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWidth="2.2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden="true"
           >
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-            <polyline points="15 3 21 3 21 9"></polyline>
-            <line x1="10" y1="14" x2="21" y2="3"></line>
+            <path d="M5 12h14M13 6l6 6-6 6" />
           </svg>
-        </a>
+        </Link>
       </div>
 
-      {/* Bottom Fade/Shadow Effect - Section Level */}
+      {/* Degradado: las fotos se funden antes del footer */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-40 h-40 bg-linear-to-t from-white via-white/70 to-transparent md:h-56" />
     </section>
   );
 }

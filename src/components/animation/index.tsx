@@ -89,31 +89,10 @@ export default function Animation({
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const elements = Array.from(
-      scope.querySelectorAll(revealSelector),
-    ) as HTMLElement[];
-
-    if (!elements.length) return;
-
     const triggers: ScrollTrigger[] = [];
-
-    if (reduceMotion) {
-      gsap.set(elements, {
-        autoAlpha: 1,
-        x: 0,
-        y: 0,
-        scale: 1,
-        clearProps: "transform",
-      });
-      return;
-    }
-
+    const registered = new WeakSet<HTMLElement>();
     const animated = new WeakSet<HTMLElement>();
-    const entries: Array<{
-      el: HTMLElement;
-      trigger: ScrollTrigger;
-      animateIn: () => void;
-    }> = [];
+    const rafs: number[] = [];
 
     const startThreshold = (() => {
       const parts = start.trim().split(/\s+/);
@@ -132,72 +111,115 @@ export default function Animation({
       return rect.top <= thresholdY && rect.bottom >= 0;
     };
 
-    const ctx = gsap.context(() => {
-      for (const el of elements) {
-        const initX = toNumber(el.dataset.animateX) ?? x;
-        const initY = toNumber(el.dataset.animateY) ?? y;
-        const initScale = toNumber(el.dataset.animateScale) ?? scale;
-        const elDelay = toNumber(el.dataset.animateDelay) ?? 0;
-        const elDuration = toNumber(el.dataset.animateDuration) ?? duration;
+    const ctx = gsap.context(() => {}, scope);
 
-        gsap.set(el, { autoAlpha: 0, x: initX, y: initY, scale: initScale });
+    // Prepara los elementos que todavía no tienen animación. Se llama al
+    // montar y cada vez que aparece contenido nuevo (p. ej. datos de una API).
+    const setup = (elements: HTMLElement[]) => {
+      const fresh = elements.filter((el) => !registered.has(el));
+      if (!fresh.length) return;
+      fresh.forEach((el) => registered.add(el));
 
-        const animateIn = () => {
-          if (once && animated.has(el)) return;
-          animated.add(el);
-          gsap.to(el, {
-            autoAlpha: 1,
-            x: 0,
-            y: 0,
-            scale: 1,
-            duration: elDuration,
-            delay: elDelay,
-            ease,
-            overwrite: "auto",
-            clearProps: "transform",
-          });
-        };
-
-        const trigger = ScrollTrigger.create({
-          trigger: el,
-          start,
-          once,
-          invalidateOnRefresh: true,
-          onEnter: animateIn,
-          onLeaveBack: once
-            ? undefined
-            : () => {
-                animated.delete(el);
-                gsap.set(el, {
-                  autoAlpha: 0,
-                  x: initX,
-                  y: initY,
-                  scale: initScale,
-                });
-              },
+      if (reduceMotion) {
+        gsap.set(fresh, {
+          autoAlpha: 1,
+          x: 0,
+          y: 0,
+          scale: 1,
+          clearProps: "transform",
         });
-
-        triggers.push(trigger);
-        entries.push({ el, trigger, animateIn });
+        return;
       }
-    }, scope);
 
-    ScrollTrigger.refresh();
-    for (const { el, trigger, animateIn } of entries) {
-      if (trigger.isActive || trigger.progress > 0 || isStartInView(el))
-        animateIn();
-    }
+      const entries: Array<{
+        el: HTMLElement;
+        trigger: ScrollTrigger;
+        animateIn: () => void;
+      }> = [];
 
-    const raf = requestAnimationFrame(() => {
-      ScrollTrigger.refresh();
-      for (const { el, trigger, animateIn } of entries) {
-        if (trigger.isActive || trigger.progress > 0 || isStartInView(el))
-          animateIn();
+      ctx.add(() => {
+        for (const el of fresh) {
+          const initX = toNumber(el.dataset.animateX) ?? x;
+          const initY = toNumber(el.dataset.animateY) ?? y;
+          const initScale = toNumber(el.dataset.animateScale) ?? scale;
+          const elDelay = toNumber(el.dataset.animateDelay) ?? 0;
+          const elDuration = toNumber(el.dataset.animateDuration) ?? duration;
+
+          gsap.set(el, { autoAlpha: 0, x: initX, y: initY, scale: initScale });
+
+          const animateIn = () => {
+            if (once && animated.has(el)) return;
+            animated.add(el);
+            gsap.to(el, {
+              autoAlpha: 1,
+              x: 0,
+              y: 0,
+              scale: 1,
+              duration: elDuration,
+              delay: elDelay,
+              ease,
+              overwrite: "auto",
+              clearProps: "transform",
+            });
+          };
+
+          const trigger = ScrollTrigger.create({
+            trigger: el,
+            start,
+            once,
+            invalidateOnRefresh: true,
+            onEnter: animateIn,
+            onLeaveBack: once
+              ? undefined
+              : () => {
+                  animated.delete(el);
+                  gsap.set(el, {
+                    autoAlpha: 0,
+                    x: initX,
+                    y: initY,
+                    scale: initScale,
+                  });
+                },
+          });
+
+          triggers.push(trigger);
+          entries.push({ el, trigger, animateIn });
+        }
+      });
+
+      const revealVisible = () => {
+        ScrollTrigger.refresh();
+        for (const { el, trigger, animateIn } of entries) {
+          if (trigger.isActive || trigger.progress > 0 || isStartInView(el))
+            animateIn();
+        }
+      };
+      revealVisible();
+      rafs.push(requestAnimationFrame(revealVisible));
+    };
+
+    const matches = (root: Element) =>
+      [
+        ...(root.matches(revealSelector) ? [root] : []),
+        ...Array.from(root.querySelectorAll(revealSelector)),
+      ] as HTMLElement[];
+
+    setup(matches(scope));
+
+    const observer = new MutationObserver((mutations) => {
+      const added: HTMLElement[] = [];
+      for (const mutation of mutations) {
+        mutation.addedNodes.forEach((node) => {
+          if (node instanceof Element) added.push(...matches(node));
+        });
       }
+      if (added.length) setup(added);
     });
+    observer.observe(scope, { childList: true, subtree: true });
 
     return () => {
-      cancelAnimationFrame(raf);
+      observer.disconnect();
+      rafs.forEach(cancelAnimationFrame);
       for (const t of triggers) t.kill();
       ctx.revert();
     };

@@ -149,9 +149,6 @@ const AboutMe = () => {
     >
       <div className="pointer-events-none absolute -top-10 -left-10 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
       <div className="pointer-events-none absolute bottom-0 right-0 h-56 w-56 rounded-full bg-[#3C7BEA]/20 blur-3xl" />
-      <style>{`
-        @keyframes arrowNudge { 0% { transform: translateX(0); } 50% { transform: translateX(6px); } 100% { transform: translateX(0); } }
-      `}</style>
 
       <div className="mx-auto max-w-screen px-8 md:px-16 lg:px-24 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
@@ -209,7 +206,7 @@ const AboutMe = () => {
                 strokeLinecap="round"
               />
             </svg>
-            <div className="text-2xl md:text-3xl lg:text-4xl leading-relaxed space-y-8 md:space-y-12 font-light">
+            <div className="space-y-6 text-xl font-light leading-relaxed md:text-2xl lg:text-3xl">
               <p>{t("aboutMe.p1_prefix")}</p>
               <p className="font-medium text-[#A8D0FF]">{t("aboutMe.p4")}</p>
             </div>
@@ -217,7 +214,7 @@ const AboutMe = () => {
             <div className="pt-2">
               <Link
                 to="/carrer"
-                className="group inline-flex items-center gap-3 rounded-full bg-white text-[#1B3A75] px-8 py-4 text-lg md:text-xl font-bold shadow-lg ring-1 ring-white/60 hover:bg-[#E6F0FF] hover:shadow-xl hover:ring-white transition-all duration-200"
+                className="group inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-base font-bold text-[#1B3A75] shadow-lg transition-colors hover:bg-[#E6F0FF] md:text-lg"
               >
                 {t("aboutMe.cta")}
                 <svg
@@ -226,8 +223,7 @@ const AboutMe = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={2}
                   stroke="currentColor"
-                  className="h-7 w-7 transform transition-transform group-hover:translate-x-1"
-                  style={{ animation: "arrowNudge 1.4s ease-in-out infinite" }}
+                  className="h-6 w-6 transition-transform group-hover:translate-x-1"
                 >
                   <path
                     strokeLinecap="round"
@@ -240,41 +236,69 @@ const AboutMe = () => {
           </AnimateOnScroll>
         </div>
         {!loading && !error && (
-          <div className="pt-30">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-items-center text-center">
-              <AnimateOnScroll as="div" x={0} y={40} scale={1} delay={0}>
-                <div className="font-signature text-6xl sm:text-7xl text-white leading-tight tracking-tight">
-                  {age}
-                </div>
-                <div className="mt-2 text-xl sm:text-2xl text-white">
+          <div className="mt-16 md:mt-20">
+            <dl className="grid grid-cols-2 gap-y-10 md:grid-cols-4">
+              <AnimateOnScroll
+                as="div"
+                x={0}
+                y={30}
+                scale={0.9}
+                delay={0.0}
+                className="flex flex-col items-center gap-2 text-center"
+              >
+                <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.age")}
-                </div>
+                </dt>
+                <dd className="order-first font-signature text-6xl leading-tight tracking-tight text-white sm:text-7xl">
+                  {age}
+                </dd>
               </AnimateOnScroll>
-              <AnimateOnScroll as="div" x={0} y={40} scale={1} delay={0.05}>
-                <div className="font-signature text-6xl sm:text-7xl text-white leading-tight tracking-tight">
-                  {wins ?? 0}
-                </div>
-                <div className="mt-2 text-xl sm:text-2xl text-white">
+              <AnimateOnScroll
+                as="div"
+                x={0}
+                y={30}
+                scale={0.9}
+                delay={0.12}
+                className="flex flex-col items-center gap-2 text-center"
+              >
+                <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.wins")}
-                </div>
+                </dt>
+                <dd className="order-first font-signature text-6xl leading-tight tracking-tight text-white sm:text-7xl">
+                  {wins ?? 0}
+                </dd>
               </AnimateOnScroll>
-              <AnimateOnScroll as="div" x={0} y={40} scale={1} delay={0.1}>
-                <div className="font-signature text-6xl sm:text-7xl text-white leading-tight tracking-tight">
-                  {tournaments ?? 0}
-                </div>
-                <div className="mt-2 text-xl sm:text-2xl text-white">
+              <AnimateOnScroll
+                as="div"
+                x={0}
+                y={30}
+                scale={0.9}
+                delay={0.24}
+                className="flex flex-col items-center gap-2 text-center"
+              >
+                <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.played")}
-                </div>
+                </dt>
+                <dd className="order-first font-signature text-6xl leading-tight tracking-tight text-white sm:text-7xl">
+                  {tournaments ?? 0}
+                </dd>
               </AnimateOnScroll>
-              <AnimateOnScroll as="div" x={0} y={40} scale={1} delay={0.15}>
-                <div className="font-signature text-6xl sm:text-7xl text-white leading-tight tracking-tight">
-                  + {visited}
-                </div>
-                <div className="mt-2 text-xl sm:text-2xl text-white">
+              <AnimateOnScroll
+                as="div"
+                x={0}
+                y={30}
+                scale={0.9}
+                delay={0.36}
+                className="flex flex-col items-center gap-2 text-center"
+              >
+                <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.countries")}
-                </div>
+                </dt>
+                <dd className="order-first font-signature text-6xl leading-tight tracking-tight text-white sm:text-7xl">
+                  +{visited}
+                </dd>
               </AnimateOnScroll>
-            </div>
+            </dl>
           </div>
         )}
       </div>

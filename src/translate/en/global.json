@@ -9,7 +9,8 @@
     "nextTour": "Next tournament",
     "viewLiveScores": "View live scores",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "gallery": "Gallery"
   },
   "hero": {
     "logoAria": "Nuria Logo",
@@ -42,11 +43,10 @@
     }
   },
   "gallery": {
-    "viewMoreFlickr": "View more on Flickr"
+    "viewAll": "See full gallery"
   },
   "trophies": {
     "title": "My Trophies",
-    "viewAll": "View all trophies",
     "loadMore": "Load more",
     "noImage": "No image",
     "items": {
@@ -486,5 +486,23 @@
     "proYear": "When did she turn professional?",
     "birthplace": "Where was Nuria born?",
     "backToBack": "Nuria won two tournaments in a row: True or False?"
+  },
+  "latestNews": {
+    "title": "Latest news",
+    "viewAll": "See all news"
+  },
+  "galleryPage": {
+    "title": "Gallery",
+    "description": "Photos of Nuria Iturrioz at Ladies European Tour events.",
+    "all": "All",
+    "photos_one": "{{count}} photo",
+    "photos_other": "{{count}} photos",
+    "download": "Download on Flickr",
+    "viewOnFlickr": "View on Flickr",
+    "close": "Close",
+    "previous": "Previous photo",
+    "next": "Next photo",
+    "open": "View photo",
+    "error": "We couldn't load the photos. Please try again later."
   }
 }

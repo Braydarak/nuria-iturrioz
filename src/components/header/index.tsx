@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { to: "/carrer", label: "header.career" },
   { to: "/stats", label: "header.stats" },
   { to: "/news", label: "header.news" },
+  { to: "/gallery", label: "header.gallery" },
 ] as const;
 
 const BRAND_BLUE = "#2A579E";
