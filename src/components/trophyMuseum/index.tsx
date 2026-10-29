@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import trophiesData from "../../data/trophies.json";
 
@@ -18,10 +19,36 @@ const getImagePath = (jsonPath: string) => {
 const PAGE_SIZE = 10;
 const GOLD = "#D4B26A";
 
-export default function TrophyMuseum() {
+// Cuántos trofeos muestra el adelanto de la home
+const PREVIEW_SIZE = 4;
+
+const pickRandom = <T,>(items: T[], count: number) =>
+  [...items].sort(() => Math.random() - 0.5).slice(0, count);
+
+/**
+ * Sala de trofeos completa (Carrera) o un adelanto con algunos trofeos al
+ * azar y un enlace a la sala (home).
+ */
+export default function TrophyMuseum({
+  preview = false,
+}: {
+  preview?: boolean;
+}) {
   const { t } = useTranslation();
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const trophies = trophiesData.trophies;
+  // Se guarda el número original de cada trofeo para su placa
+  const [previewItems] = useState(() =>
+    pickRandom(
+      trophies.map((trophy, index) => ({ trophy, index })),
+      PREVIEW_SIZE,
+    ),
+  );
+  const shown = preview
+    ? previewItems
+    : trophies
+        .slice(0, visibleCount)
+        .map((trophy, index) => ({ trophy, index }));
 
   return (
     <section
@@ -89,8 +116,14 @@ export default function TrophyMuseum() {
           </div>
         </header>
 
-        <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-y-16">
-          {trophies.slice(0, visibleCount).map((trophy, index) => {
+        <ul
+          className={`grid gap-y-16 ${
+            preview
+              ? "grid-cols-2 lg:grid-cols-4"
+              : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5"
+          }`}
+        >
+          {shown.map(({ trophy, index }) => {
             const src = getImagePath(trophy.image);
             const number = String(index + 1).padStart(2, "0");
             const name = trophy.name ? t(trophy.name) : "";
@@ -133,7 +166,33 @@ export default function TrophyMuseum() {
           })}
         </ul>
 
-        {visibleCount < trophies.length && (
+        {preview && (
+          <div className="mt-16 flex justify-center">
+            <Link
+              to="/carrer"
+              className="group inline-flex items-center gap-3 rounded-full border px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors hover:bg-[#D4B26A] hover:text-[#081430]"
+              style={{ borderColor: GOLD, color: GOLD }}
+            >
+              {t("trophies.viewAll")}
+              <svg
+                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 12h14M13 6l6 6-6 6"
+                />
+              </svg>
+            </Link>
+          </div>
+        )}
+
+        {!preview && visibleCount < trophies.length && (
           <div className="mt-16 flex justify-center">
             <button
               type="button"

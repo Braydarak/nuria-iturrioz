@@ -42,7 +42,8 @@
     }
   },
   "gallery": {
-    "viewMoreFlickr": "View more on Flickr"
+    "viewMoreFlickr": "View more on Flickr",
+    "title": "Gallery"
   },
   "trophies": {
     "title": "My Trophies",
@@ -486,5 +487,9 @@
     "proYear": "When did she turn professional?",
     "birthplace": "Where was Nuria born?",
     "backToBack": "Nuria won two tournaments in a row: True or False?"
+  },
+  "latestNews": {
+    "title": "Latest news",
+    "viewAll": "See all news"
   }
 }

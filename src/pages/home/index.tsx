@@ -2,7 +2,8 @@ import { Helmet } from "react-helmet-async";
 import Hero from "../../sections/hero";
 import AboutMe from "../../sections/about-me";
 import PageIntro from "../../components/page-intro";
-import Trophies from "../../components/trophies";
+import TrophyMuseum from "../../components/trophyMuseum";
+import LatestNews from "../../sections/latest-news";
 import MasonryGallery from "../../sections/gallery";
 import MovistarSection from "../../sections/movistar";
 import Animation, { AnimateOnScroll } from "../../components/animation";
@@ -38,13 +39,16 @@ export default function HomePage() {
         <Animation>
           <AboutMe />
           <AnimateOnScroll y={40} x={0} scale={1}>
+            <LatestNews />
+          </AnimateOnScroll>
+          <AnimateOnScroll y={40} x={0} scale={1}>
             <MovistarSection />
           </AnimateOnScroll>
-          <AnimateOnScroll as="section" y={40} x={0} scale={1}>
-            <Trophies />
-          </AnimateOnScroll>
-          <AnimateOnScroll as="section">
+          <AnimateOnScroll y={40} x={0} scale={1}>
             <MasonryGallery />
+          </AnimateOnScroll>
+          <AnimateOnScroll y={40} x={0} scale={1}>
+            <TrophyMuseum preview />
           </AnimateOnScroll>
         </Animation>
       </main>

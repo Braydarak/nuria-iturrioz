@@ -42,7 +42,8 @@
     }
   },
   "gallery": {
-    "viewMoreFlickr": "Veure més a Flickr"
+    "viewMoreFlickr": "Veure més a Flickr",
+    "title": "Galeria"
   },
   "trophies": {
     "title": "Els meus trofeus",
@@ -486,5 +487,9 @@
     "proYear": "Quan es va fer professional?",
     "birthplace": "On va néixer la Nuria?",
     "backToBack": "La Nuria va guanyar dos tornejos seguits: Vertader o Fals?"
+  },
+  "latestNews": {
+    "title": "Últimes notícies",
+    "viewAll": "Veure totes les notícies"
   }
 }

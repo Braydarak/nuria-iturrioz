@@ -42,7 +42,8 @@
     }
   },
   "gallery": {
-    "viewMoreFlickr": "Ver más en Flickr"
+    "viewMoreFlickr": "Ver más en Flickr",
+    "title": "Galería"
   },
   "trophies": {
     "title": "Mis Trofeos",
@@ -486,5 +487,9 @@
     "proYear": "¿Cuándo se hizo profesional?",
     "birthplace": "¿Dónde nació Nuria?",
     "backToBack": "Nuria ganó dos torneos seguidos: Verdadero o Falso?"
+  },
+  "latestNews": {
+    "title": "Últimas noticias",
+    "viewAll": "Ver todas las noticias"
   }
 }
