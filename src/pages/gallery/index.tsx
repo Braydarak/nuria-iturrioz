@@ -4,22 +4,75 @@ import { Helmet } from "react-helmet-async";
 import Lightbox from "../../components/gallery/Lightbox";
 import { fetchLetPhotos, type LetPhoto } from "../../data/letPhotos";
 import { useArticleDate } from "../../hooks/useArticleDate";
+import { useInView } from "../../hooks/useInView";
 import { DEFAULT_OG_IMAGE_URL, SITE_URL } from "../../utils/constants";
 
 const PAGE_SIZE = 36;
 
-function PhotoTile({ photo, onOpen }: { photo: LetPhoto; onOpen: () => void }) {
+// Columnas según el ancho (mismos cortes que Tailwind: sm, lg, 2xl)
+const columnCountFor = (width: number) =>
+  width >= 1536 ? 5 : width >= 1024 ? 4 : width >= 640 ? 3 : 2;
+
+function useColumnCount() {
+  const [count, setCount] = useState(() =>
+    typeof window === "undefined" ? 4 : columnCountFor(window.innerWidth),
+  );
+  useEffect(() => {
+    const onResize = () => setCount(columnCountFor(window.innerWidth));
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  return count;
+}
+
+/**
+ * Reparte las fotos en columnas, cada una a la columna más corta según sus
+ * proporciones. Es determinista: al sumar fotos al final, las anteriores no
+ * cambian de lugar (a diferencia de las columnas CSS, que se reequilibran).
+ */
+function toColumns(photos: LetPhoto[], count: number) {
+  const columns = Array.from({ length: count }, () => [] as number[]);
+  const heights = new Array(count).fill(0);
+  photos.forEach((photo, index) => {
+    const shortest = heights.indexOf(Math.min(...heights));
+    columns[shortest].push(index);
+    heights[shortest] += photo.thumbHeight / photo.thumbWidth;
+  });
+  return columns;
+}
+
+function PhotoTile({
+  photo,
+  onOpen,
+  column,
+}: {
+  photo: LetPhoto;
+  onOpen: () => void;
+  column: number;
+}) {
   const { t } = useTranslation();
   const formatDate = useArticleDate();
   const [loaded, setLoaded] = useState(false);
+  // Entra con animación al llegar a pantalla
+  const { ref, inView } = useInView<HTMLElement>(0.1);
 
   return (
-    <figure className="group relative mb-3 break-inside-avoid overflow-hidden rounded-xl bg-neutral-100 md:mb-4">
+    <figure
+      ref={ref}
+      className={`group relative overflow-hidden rounded-xl bg-neutral-100 transition-[opacity,translate] duration-700 ease-out ${
+        inView
+          ? "translate-y-0 opacity-100"
+          : "opacity-0 motion-safe:translate-y-8"
+      }`}
+      style={{ transitionDelay: inView ? `${column * 70}ms` : "0ms" }}
+    >
       <button
         type="button"
         onClick={onOpen}
         aria-label={`${t("galleryPage.open")}: ${photo.title}`}
-        className="block w-full cursor-zoom-in focus:outline-none focus-visible:ring-4 focus-visible:ring-[#2A579E]/40"
+        className="relative block w-full cursor-zoom-in focus:outline-none focus-visible:ring-4 focus-visible:ring-[#2A579E]/40"
+        // El lugar de la foto queda reservado antes de que cargue
+        style={{ aspectRatio: `${photo.thumbWidth} / ${photo.thumbHeight}` }}
       >
         <img
           src={photo.thumb}
@@ -29,7 +82,7 @@ function PhotoTile({ photo, onOpen }: { photo: LetPhoto; onOpen: () => void }) {
           loading="lazy"
           decoding="async"
           onLoad={() => setLoaded(true)}
-          className={`h-auto w-full transition-[opacity,transform] duration-700 group-hover:scale-105 ${
+          className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-700 group-hover:scale-105 ${
             loaded ? "opacity-100" : "opacity-0"
           }`}
         />
@@ -93,6 +146,11 @@ export default function GalleryPage() {
     [photos, year],
   );
   const shown = filtered.slice(0, visible);
+  const columnCount = useColumnCount();
+  const columns = useMemo(
+    () => toColumns(shown, columnCount),
+    [shown, columnCount],
+  );
 
   // Carga más fotos al acercarse al final de la grilla
   useEffect(() => {
@@ -150,12 +208,11 @@ export default function GalleryPage() {
       <main className="min-h-screen bg-white pt-[68px] md:pt-[84px]">
         <div className="w-full px-4 pb-16 pt-8 md:px-8 md:pb-24 md:pt-12">
           <div>
-            <h1 className="font-signature text-5xl text-[#2A579E] md:text-7xl">
-              {t("galleryPage.title")}
-            </h1>
+            {/* Sin título visible: solo para lectores de pantalla */}
+            <h1 className="sr-only">{t("galleryPage.title")}</h1>
 
             {photos && (
-              <div className="-mx-4 mt-8 flex items-center gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:mt-10 md:flex-wrap md:px-0">
+              <div className="-mx-4 flex items-center gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:flex-wrap md:px-0">
                 <button
                   type="button"
                   onClick={() => selectYear(null)}
@@ -187,27 +244,38 @@ export default function GalleryPage() {
             )}
             {!photos && !error && (
               // Marcadores con proporciones variadas mientras llegan las fotos
-              <div
-                aria-hidden="true"
-                className="columns-2 gap-3 sm:columns-3 md:gap-4 lg:columns-4 2xl:columns-5"
-              >
-                {Array.from({ length: 12 }, (_, i) => (
-                  <div
-                    key={i}
-                    className="mb-3 animate-pulse break-inside-avoid rounded-xl bg-neutral-100 md:mb-4"
-                    style={{ aspectRatio: i % 3 === 1 ? "2 / 3" : "3 / 2" }}
-                  />
+              <div aria-hidden="true" className="flex gap-3 md:gap-4">
+                {Array.from({ length: columnCount }, (_, c) => (
+                  <div key={c} className="flex flex-1 flex-col gap-3 md:gap-4">
+                    {Array.from({ length: 4 }, (_, i) => (
+                      <div
+                        key={i}
+                        className="animate-pulse rounded-xl bg-neutral-100"
+                        style={{
+                          aspectRatio: (c + i) % 3 === 1 ? "2 / 3" : "3 / 2",
+                        }}
+                      />
+                    ))}
+                  </div>
                 ))}
               </div>
             )}
             {photos && (
-              <div className="columns-2 gap-3 sm:columns-3 md:gap-4 lg:columns-4 2xl:columns-5">
-                {shown.map((photo, index) => (
-                  <PhotoTile
-                    key={photo.id}
-                    photo={photo}
-                    onOpen={() => setOpenIndex(index)}
-                  />
+              <div className="flex items-start gap-3 md:gap-4">
+                {columns.map((indexes, column) => (
+                  <div
+                    key={column}
+                    className="flex min-w-0 flex-1 flex-col gap-3 md:gap-4"
+                  >
+                    {indexes.map((index) => (
+                      <PhotoTile
+                        key={shown[index].id}
+                        photo={shown[index]}
+                        column={column}
+                        onOpen={() => setOpenIndex(index)}
+                      />
+                    ))}
+                  </div>
                 ))}
               </div>
             )}
