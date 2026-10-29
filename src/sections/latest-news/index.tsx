@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import ArticleCard from "../../components/news/ArticleCard";
+import { AnimateOnScroll } from "../../components/animation";
 import { fetchNuriaNews, type LetArticle } from "../../data/letNews";
 
 // Las 3 noticias más recientes del LET sobre Nuria
@@ -25,7 +26,13 @@ export default function LatestNews() {
   return (
     <section className="bg-[#F8FAFD] py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <header className="mb-10 flex flex-wrap items-end justify-between gap-4">
+        <AnimateOnScroll
+          as="header"
+          y={24}
+          x={0}
+          scale={1}
+          className="mb-10 flex flex-wrap items-end justify-between gap-4"
+        >
           <h2 className="font-signature text-4xl text-[#2A579E] md:text-5xl">
             {t("latestNews.title")}
           </h2>
@@ -47,15 +54,20 @@ export default function LatestNews() {
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
           </Link>
-        </header>
+        </AnimateOnScroll>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {articles.map((article, index) => (
-            <div
+            <AnimateOnScroll
               key={article.id}
+              as="div"
+              y={50}
+              x={0}
+              scale={1}
+              delay={index * 0.12}
               className={index === 2 ? "hidden lg:block" : ""}
             >
               <ArticleCard article={article} />
-            </div>
+            </AnimateOnScroll>
           ))}
         </div>
       </div>

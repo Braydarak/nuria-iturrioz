@@ -4,6 +4,9 @@ import Masonry from "../../components/mansoryGrid";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function MasonryGallery() {
   const { t } = useTranslation();
@@ -11,16 +14,25 @@ export default function MasonryGallery() {
   const buttonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!loading && !error && photos.length > 0 && buttonRef.current) {
-      gsap.from(buttonRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.5,
-        ease: "power3.out",
-        clearProps: "all", // Ensures clean state after animation
-      });
-    }
+    if (loading || error || !photos.length || !buttonRef.current) return;
+    // El botón aparece cuando la galería llega a pantalla
+    const tween = gsap.from(buttonRef.current, {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      delay: 0.4,
+      ease: "power3.out",
+      clearProps: "all",
+      scrollTrigger: {
+        trigger: buttonRef.current,
+        start: "top 95%",
+        once: true,
+      },
+    });
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
   }, [loading, error, photos]);
 
   if (loading) {
@@ -95,7 +107,10 @@ export default function MasonryGallery() {
         </a>
       </div>
 
-      {/* Bottom Fade/Shadow Effect - Section Level */}
+      {/* Degradados: las fotos salen del blanco que deja la sección de
+          arriba y se funden de nuevo antes del footer */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-linear-to-b from-white via-white/70 to-transparent md:h-36" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-40 h-40 bg-linear-to-t from-white via-white/70 to-transparent md:h-56" />
     </section>
   );
 }

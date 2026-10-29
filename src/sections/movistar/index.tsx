@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { AnimateOnScroll } from "../../components/animation";
 
 const MOVISTAR_URL =
   "https://www.movistarplus.es/deportes/programa/suenos-de-golf-2022/nuria-iturrioz-con-z-de-raza/ficha?tipo=E&id=2033923";
@@ -34,47 +35,49 @@ export default function MovistarSection() {
   const [hasPoster, setHasPoster] = useState(true);
 
   return (
-    <section className="relative overflow-hidden bg-linear-to-br from-[#1B3A75] via-[#24508f] to-[#2A579E] py-16 text-white md:py-24">
+    <section className="relative overflow-hidden bg-linear-to-br from-[#1B3A75] via-[#24508f] to-[#2A579E] pb-24 pt-16 text-white md:pb-36 md:pt-24">
       {/* Halo de color detrás del póster */}
       <div className="pointer-events-none absolute -left-32 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-[#3C7BEA]/35 blur-3xl" />
       <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
-        <a
-          href={MOVISTAR_URL}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={t("movistar.ctaAria")}
-          className="group relative block aspect-video overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10"
-        >
-          {hasPoster ? (
-            <img
-              src={posterSrc}
-              alt={t("movistar.episodeTitle")}
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy"
-              decoding="async"
-              onError={() => setHasPoster(false)}
-            />
-          ) : (
-            <div className="absolute inset-0 bg-linear-to-br from-[#1B3A75] to-[#3C7BEA]" />
-          )}
-          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-black/20" />
-          <MovistarPlusLogo className="absolute left-5 top-5 h-7 w-auto text-white drop-shadow" />
-          {/* Botón de reproducción */}
-          <span className="absolute inset-0 flex items-center justify-center">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-[#1B3A75] shadow-xl transition-transform duration-300 group-hover:scale-110">
-              <svg
-                viewBox="0 0 24 24"
-                className="ml-1 h-7 w-7"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" />
-              </svg>
+        <AnimateOnScroll x={-60} y={0} scale={1}>
+          <a
+            href={MOVISTAR_URL}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={t("movistar.ctaAria")}
+            className="group relative block aspect-video overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10"
+          >
+            {hasPoster ? (
+              <img
+                src={posterSrc}
+                alt={t("movistar.episodeTitle")}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
+                onError={() => setHasPoster(false)}
+              />
+            ) : (
+              <div className="absolute inset-0 bg-linear-to-br from-[#1B3A75] to-[#3C7BEA]" />
+            )}
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-black/20" />
+            <MovistarPlusLogo className="absolute left-5 top-5 h-7 w-auto text-white drop-shadow" />
+            {/* Botón de reproducción */}
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-[#1B3A75] shadow-xl transition-transform duration-300 group-hover:scale-110">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="ml-1 h-7 w-7"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" />
+                </svg>
+              </span>
             </span>
-          </span>
-        </a>
+          </a>
+        </AnimateOnScroll>
 
-        <div>
+        <AnimateOnScroll x={60} y={0} scale={1} delay={0.1}>
           <p className="text-xs font-bold uppercase tracking-[0.35em] text-blue-200/80">
             {t("movistar.kicker")}
           </p>
@@ -110,8 +113,10 @@ export default function MovistarSection() {
               <path d="M21 14v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
             </svg>
           </a>
-        </div>
+        </AnimateOnScroll>
       </div>
+      {/* Fundido a blanco para entrar suave en la galería */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-linear-to-b from-transparent to-white md:h-28" />
     </section>
   );
 }

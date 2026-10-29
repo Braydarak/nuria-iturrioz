@@ -236,42 +236,70 @@ const AboutMe = () => {
           </AnimateOnScroll>
         </div>
         {!loading && !error && (
-          <AnimateOnScroll x={0} y={30} scale={1} className="mt-16 md:mt-20">
+          <div className="mt-16 md:mt-20">
             <dl className="grid grid-cols-2 gap-y-10 md:grid-cols-4">
-              <div className="flex flex-col items-center gap-2 text-center">
+              <AnimateOnScroll
+                as="div"
+                x={0}
+                y={30}
+                scale={0.9}
+                delay={0.0}
+                className="flex flex-col items-center gap-2 text-center"
+              >
                 <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.age")}
                 </dt>
                 <dd className="order-first font-signature text-6xl leading-tight tracking-tight text-white sm:text-7xl">
                   {age}
                 </dd>
-              </div>
-              <div className="flex flex-col items-center gap-2 text-center">
+              </AnimateOnScroll>
+              <AnimateOnScroll
+                as="div"
+                x={0}
+                y={30}
+                scale={0.9}
+                delay={0.12}
+                className="flex flex-col items-center gap-2 text-center"
+              >
                 <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.wins")}
                 </dt>
                 <dd className="order-first font-signature text-6xl leading-tight tracking-tight text-white sm:text-7xl">
                   {wins ?? 0}
                 </dd>
-              </div>
-              <div className="flex flex-col items-center gap-2 text-center">
+              </AnimateOnScroll>
+              <AnimateOnScroll
+                as="div"
+                x={0}
+                y={30}
+                scale={0.9}
+                delay={0.24}
+                className="flex flex-col items-center gap-2 text-center"
+              >
                 <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.played")}
                 </dt>
                 <dd className="order-first font-signature text-6xl leading-tight tracking-tight text-white sm:text-7xl">
                   {tournaments ?? 0}
                 </dd>
-              </div>
-              <div className="flex flex-col items-center gap-2 text-center">
+              </AnimateOnScroll>
+              <AnimateOnScroll
+                as="div"
+                x={0}
+                y={30}
+                scale={0.9}
+                delay={0.36}
+                className="flex flex-col items-center gap-2 text-center"
+              >
                 <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.countries")}
                 </dt>
                 <dd className="order-first font-signature text-6xl leading-tight tracking-tight text-white sm:text-7xl">
                   +{visited}
                 </dd>
-              </div>
+              </AnimateOnScroll>
             </dl>
-          </AnimateOnScroll>
+          </div>
         )}
       </div>
     </section>

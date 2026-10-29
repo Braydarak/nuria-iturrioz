@@ -5,7 +5,7 @@ import PageIntro from "../../components/page-intro";
 import LatestNews from "../../sections/latest-news";
 import MasonryGallery from "../../sections/gallery";
 import MovistarSection from "../../sections/movistar";
-import Animation, { AnimateOnScroll } from "../../components/animation";
+import Animation from "../../components/animation";
 import { DEFAULT_OG_IMAGE_URL, SITE_URL } from "../../utils/constants";
 
 export default function HomePage() {
@@ -37,15 +37,9 @@ export default function HomePage() {
         <Hero />
         <Animation>
           <AboutMe />
-          <AnimateOnScroll y={40} x={0} scale={1}>
-            <LatestNews />
-          </AnimateOnScroll>
-          <AnimateOnScroll y={40} x={0} scale={1}>
-            <MovistarSection />
-          </AnimateOnScroll>
-          <AnimateOnScroll y={40} x={0} scale={1}>
-            <MasonryGallery />
-          </AnimateOnScroll>
+          <LatestNews />
+          <MovistarSection />
+          <MasonryGallery />
         </Animation>
       </main>
     </>
