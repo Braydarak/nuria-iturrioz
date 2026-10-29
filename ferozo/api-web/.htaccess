@@ -1,0 +1,4 @@
+# Solo los endpoints son accesibles desde la web
+<FilesMatch "^(config|config\.example|lib)\.php$">
+  Require all denied
+</FilesMatch>

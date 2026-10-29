@@ -9,6 +9,8 @@ export type Tournament = {
   confirmed?: boolean;
   code?: string;
   scores_param?: string;
+  /** Estado de Nuria en el listado de Entries del LET ("Entered", "Reserve #44"...) */
+  status?: string | null;
 };
 
 export type NextTournament = Tournament & {
@@ -31,9 +33,13 @@ function parseDate(dateStr: string): Date {
 }
 
 export async function fetchTournamentsData(): Promise<TournamentsPayload> {
+  // En local se puede apuntar a la API de producción con VITE_TOURNAMENTS_API_URL
   const baseUrl = new URL(import.meta.env.BASE_URL, document.baseURI);
-  const url = new URL("tournaments.json", baseUrl);
-  const res = await fetch(url, { cache: "no-store" });
+  const url = new URL(
+    import.meta.env.VITE_TOURNAMENTS_API_URL ?? "api-web/tournaments.php",
+    baseUrl,
+  );
+  const res = await fetch(url);
   if (!res.ok)
     throw new Error(`No se pudo cargar ${url.toString()} (HTTP ${res.status})`);
 

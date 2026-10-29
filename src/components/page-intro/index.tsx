@@ -1,32 +1,108 @@
 import { useEffect, useState } from "react";
 
+// Tiempo mínimo que se ve el logo (contado desde que el navegador empieza a
+// pintar la página en la primera carga, porque el HTML prerenderizado ya
+// muestra el fondo azul antes de que arranque React).
+const MIN_VISIBLE_MS = 1800;
+// Si alguna imagen tarda demasiado, no bloqueamos la web indefinidamente.
+const MAX_WAIT_MS = 8000;
+const COLLAPSE_DURATION_MS = 1200;
+const FADE_DURATION_MS = 300;
+
+// El intro solo se muestra al entrar a la web por la home: si se entra por
+// otra página, o si ya se vio, navegar a Inicio no lo vuelve a mostrar.
+function isHomePath(pathname: string) {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const path = pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
+  return path === "" || path === "/" || path === "/index.html";
+}
+
+let introPending =
+  typeof window !== "undefined" && isHomePath(window.location.pathname);
+
+if (!introPending && typeof document !== "undefined") {
+  document.documentElement.dataset.pageIntro = "hidden";
+}
+
+function waitForWindowLoad() {
+  if (document.readyState === "complete") return Promise.resolve();
+  return new Promise<void>((resolve) =>
+    window.addEventListener("load", () => resolve(), { once: true }),
+  );
+}
+
+function preloadImage(src: string) {
+  return new Promise<void>((resolve) => {
+    const img = new Image();
+    img.onload = img.onerror = () => resolve();
+    img.src = src;
+    if (img.complete) resolve();
+  });
+}
+
+// Espera a las imágenes visibles al cargar: <img> que no son lazy y fondos
+// definidos con style="background-image: url(...)" (p. ej. el hero).
+function waitForImages() {
+  const sources = new Set<string>();
+  document
+    .querySelectorAll<HTMLImageElement>('img:not([loading="lazy"])')
+    .forEach((img) => {
+      if (img.currentSrc || img.src) sources.add(img.currentSrc || img.src);
+    });
+  document
+    .querySelectorAll<HTMLElement>('[style*="background-image"]')
+    .forEach((el) => {
+      const match = el.style.backgroundImage.match(/url\(["']?(.*?)["']?\)/);
+      if (match?.[1]) sources.add(match[1]);
+    });
+  return Promise.all([waitForWindowLoad(), ...[...sources].map(preloadImage)]);
+}
+
+function wait(ms: number) {
+  return new Promise<void>((resolve) => setTimeout(resolve, Math.max(0, ms)));
+}
+
 export default function PageIntro() {
   const [stage, setStage] = useState<"blue" | "collapse" | "fading" | "hidden">(
-    "blue",
+    () => (introPending ? "blue" : "hidden"),
   );
 
   useEffect(() => {
-    const collapseDurationMs = 1200;
+    if (stage === "hidden") return;
     document.documentElement.dataset.pageIntro = "active";
 
-    const tBlueEnd = setTimeout(() => setStage("collapse"), 2000);
-    const tFadeStart = setTimeout(
-      () => setStage("fading"),
-      2000 + collapseDurationMs,
-    );
-    const tHidden = setTimeout(
-      () => {
-        document.documentElement.dataset.pageIntro = "hidden";
-        window.dispatchEvent(new CustomEvent("page-intro:hidden"));
-        setStage("hidden");
-      },
-      2000 + collapseDurationMs + 300,
-    );
+    // Durante el prerender (Puppeteer) dejamos el intro en azul para que el
+    // HTML estático arranque igual que React y no se vea la web antes de tiempo.
+    if (navigator.webdriver) return;
+
+    let cancelled = false;
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    // Contado desde el inicio de la carga: el HTML prerenderizado ya mostraba el azul
+    const minVisible = MIN_VISIBLE_MS - performance.now();
+
+    Promise.race([
+      Promise.all([wait(minVisible), waitForImages()]),
+      wait(MAX_WAIT_MS),
+    ]).then(() => {
+      if (cancelled) return;
+      setStage("collapse");
+      timers.push(
+        setTimeout(() => setStage("fading"), COLLAPSE_DURATION_MS),
+        setTimeout(() => {
+          introPending = false;
+          document.documentElement.dataset.pageIntro = "hidden";
+          window.dispatchEvent(new CustomEvent("page-intro:hidden"));
+          setStage("hidden");
+        }, COLLAPSE_DURATION_MS + FADE_DURATION_MS),
+      );
+    });
+
     return () => {
-      clearTimeout(tBlueEnd);
-      clearTimeout(tFadeStart);
-      clearTimeout(tHidden);
+      cancelled = true;
+      timers.forEach(clearTimeout);
     };
+    // Solo se decide al montar; los cambios de stage los maneja este efecto
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (stage === "hidden") return null;

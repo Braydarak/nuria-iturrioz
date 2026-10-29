@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface MasonryItem {
   id: string | number;
@@ -30,7 +33,7 @@ export default function Masonry({
   animateFrom = "bottom",
   scaleOnHover = true,
   hoverScale = 1.05,
-  blurToFocus = true,
+  blurToFocus = false,
   colorShiftOnHover = false,
 }: MasonryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -105,16 +108,33 @@ export default function Masonry({
         break;
     }
 
-    gsap.fromTo(elements, initialVars, {
+    // Entrada escalonada cuando la galería aparece en pantalla (antes corría
+    // al montar, mientras la usuaria todavía estaba en el hero)
+    const tween = gsap.fromTo(elements, initialVars, {
       opacity: 1,
       x: 0,
       y: 0,
       scale: 1,
-      filter: "blur(0px)",
+      ...(blurToFocus ? { filter: "blur(0px)" } : {}),
       duration: duration,
       stagger: stagger,
       ease: ease,
+      paused: true,
+      clearProps: blurToFocus ? "filter" : undefined,
     });
+    const trigger = ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: "top 85%",
+      once: true,
+      onEnter: () => tween.play(),
+    });
+    // Si las fotos llegan cuando ya se pasó por la galería, mostrarlas igual
+    if (trigger.progress > 0) tween.play();
+
+    return () => {
+      trigger.kill();
+      tween.kill();
+    };
   }, [items, columns, animateFrom, duration, stagger, ease, blurToFocus]);
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -155,8 +175,9 @@ export default function Masonry({
               <img
                 src={item.img}
                 alt={`Masonry item ${item.id}`}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto block"
-                style={{ willChange: "transform" }}
               />
 
               {/* Overlay with title (preserved from previous design) */}

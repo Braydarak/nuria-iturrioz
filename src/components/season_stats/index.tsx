@@ -111,155 +111,162 @@ export default function SeasonStats() {
   }, [selectedSeason]);
 
   const hasAnyData = currentItems.length > 0 || highlights.length > 0;
+  const visible = showAll ? listForSelected : listForSelected.slice(0, 6);
+
+  const seasonButtonClass = (active: boolean) =>
+    `shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
+      active
+        ? "border-[#2A579E] bg-[#2A579E] text-white"
+        : "border-neutral-200 bg-white text-neutral-700 hover:border-[#2A579E]/40 hover:text-[#2A579E]"
+    }`;
 
   return (
-    <section className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10">
-      <header className="mb-6">
-        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-900">
-          {t("seasonStats.title")}
-        </h2>
-        <p className="mt-1 text-sm text-neutral-600">
-          {t("seasonStats.description")}
-        </p>
-      </header>
-
+    <div>
       {loading && (
-        <div className="rounded-xl border flex justify-center items-center w-full border-white/50 bg-white/40 p-4 animate-pulse">
+        <div className="flex w-full items-center justify-center rounded-2xl border border-neutral-200 p-6">
           <AnimatedLoader />
         </div>
       )}
 
       {!loading && error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 text-red-700 p-4">
+        <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-red-700">
           {error}
         </div>
       )}
 
       {!loading && !error && hasAnyData && (
         <div className="space-y-6">
-          <div className="flex flex-wrap items-center gap-2">
+          {/* Selector de temporada (scroll horizontal en móvil) */}
+          <div className="-mx-6 flex items-center gap-2 overflow-x-auto px-6 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
             {currentSeason && currentItems.length > 0 && (
               <>
                 <button
-                  key="__CURRENT__"
                   type="button"
                   onClick={() => setSelectedSeason("__CURRENT__")}
-                  className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
-                    selectedSeason === "__CURRENT__"
-                      ? "bg-[#2A579E] text-white border-[#2A579E]"
-                      : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"
-                  }`}
+                  className={seasonButtonClass(
+                    selectedSeason === "__CURRENT__",
+                  )}
                 >
                   {t("seasonStats.currentSeason")}
                 </button>
                 {seasons.length > 0 && (
                   <span
                     aria-hidden="true"
-                    className="mx-1 w-px h-6 bg-neutral-300"
+                    className="mx-1 h-6 w-px shrink-0 bg-neutral-300"
                   />
                 )}
               </>
             )}
-            {seasons.map((s) => {
-              const active = s === selectedSeason;
-              return (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => setSelectedSeason(s)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
-                    active
-                      ? "bg-[#2A579E] text-white border-[#2A579E]"
-                      : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"
-                  }`}
-                >
-                  {s}
-                </button>
-              );
-            })}
+            {seasons.map((s) => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => setSelectedSeason(s)}
+                className={seasonButtonClass(s === selectedSeason)}
+              >
+                {s}
+              </button>
+            ))}
           </div>
 
-          <div className="rounded-2xl bg-white/60 backdrop-blur-sm border border-white/50">
-            {selectedSeason && (
-              <>
-                <div className="px-4 sm:px-6 py-3 border-b border-neutral-200 bg-white/70 pl-0 md:pl-0">
-                  {selectedSeason === "__CURRENT__" ? (
-                    <span className="inline-flex items-center gap-2 text-sm text-neutral-700">
-                      <span className="px-2 py-1 rounded-full bg-[#2A579E]/10 text-[#2A579E] font-medium">
-                        {t("seasonStats.currentSeason")}
-                      </span>
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center gap-2 text-sm text-neutral-700">
-                      <span className="px-2 py-1 rounded-full bg-neutral-800/10 text-neutral-800 font-medium">
-                        {t("seasonStats.season", { year: selectedSeason })}
-                      </span>
-                    </span>
-                  )}
-                </div>
-
-                <ul className="divide-y divide-neutral-200">
-                  {(showAll
-                    ? listForSelected
-                    : listForSelected.slice(0, 4)
-                  ).map((item, idx) => (
-                    <li
-                      key={idx}
-                      className="px-4 sm:px-6 py-4 grid grid-cols-1 sm:grid-cols-5 gap-2 sm:gap-4 items-center"
+          {selectedSeason && (
+            <ul className="divide-y divide-neutral-100 overflow-hidden rounded-2xl border border-neutral-200 bg-white">
+              {visible.map((item, idx) => {
+                const pos = item.position
+                  ? item.position.replace("=", "")
+                  : null;
+                const posNum = pos ? Number(pos) : NaN;
+                const isWin = posNum === 1;
+                const isTop10 = posNum > 1 && posNum <= 10;
+                const tied = item.position?.includes("=");
+                return (
+                  <li
+                    key={`${item.date}-${idx}`}
+                    className="grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-3 px-4 py-4 sm:grid-cols-[auto_1fr_auto] sm:px-6"
+                  >
+                    {/* Posición */}
+                    <div
+                      className={`flex h-12 w-12 flex-col items-center justify-center rounded-full text-center leading-none ${
+                        isWin
+                          ? "bg-[#C9A24A] text-white"
+                          : isTop10
+                            ? "bg-[#2A579E] text-white"
+                            : "bg-neutral-100 text-neutral-700"
+                      }`}
+                      title={`${t("seasonStats.position")} ${item.position ?? "—"}`}
                     >
-                      <div className="text-neutral-600">
-                        <div className="text-md">{item.date ?? "—"}</div>
-                        <div className="text-md">
-                          {t("seasonStats.position")}{" "}
-                          {item.position ? item.position.replace("=", "") : "—"}
-                        </div>
-                      </div>
-                      <div className="sm:col-span-2">
-                        <div className="text-neutral-900 font-semibold">
-                          {item.name ?? "—"}
-                        </div>
-                        <div className="text-md text-neutral-500">
-                          {t("seasonStats.rounds")} {item.rounds ?? "—"}
-                        </div>
-                      </div>
-                      <div className="text-neutral-900">
-                        <div className="text-md">
-                          {t("seasonStats.score")} {item.score ?? "—"}
-                        </div>
-                      </div>
-                      <div className="text-neutral-900 text-md">
-                        <div className="text-md">
-                          {t("seasonStats.vsPar")} {item.vspar ?? "—"}
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                      <span className="text-[9px] font-bold uppercase opacity-80">
+                        {tied ? "T" : "Pos"}
+                      </span>
+                      <span className="text-base font-bold">{pos ?? "—"}</span>
+                    </div>
 
-                {listForSelected.length > 4 && (
-                  <div className="px-4 sm:px-6 py-3">
-                    <button
-                      type="button"
-                      onClick={() => setShowAll((v) => !v)}
-                      className="text-sm font-medium text-[#2A579E] hover:underline"
-                    >
-                      {showAll
-                        ? t("seasonStats.showLess")
-                        : t("seasonStats.showAll")}
-                    </button>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
+                    {/* Torneo */}
+                    <div className="min-w-0">
+                      <div className="truncate font-semibold text-neutral-900">
+                        {item.name ?? "—"}
+                      </div>
+                      <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-neutral-500">
+                        <span>{item.date ?? "—"}</span>
+                        {item.rounds && (
+                          <span className="flex flex-wrap gap-1">
+                            {item.rounds.split(/\s+/).map((r, i) => (
+                              <span
+                                key={i}
+                                className="rounded-md bg-neutral-100 px-1.5 py-0.5 text-xs font-medium text-neutral-700 tabular-nums"
+                              >
+                                {r}
+                              </span>
+                            ))}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Resultado */}
+                    <div className="col-span-2 flex gap-6 border-t border-neutral-100 pt-3 text-sm sm:col-span-1 sm:border-0 sm:pt-0 sm:text-right">
+                      <div>
+                        <div className="text-xs uppercase tracking-wider text-neutral-500">
+                          {t("seasonStats.score").replace(":", "")}
+                        </div>
+                        <div className="text-lg font-semibold text-neutral-900 tabular-nums">
+                          {item.score ?? "—"}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-xs uppercase tracking-wider text-neutral-500">
+                          {t("seasonStats.vsPar").replace(":", "")}
+                        </div>
+                        <div className="text-lg font-semibold text-neutral-900 tabular-nums">
+                          {item.vspar ?? "—"}
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+
+          {listForSelected.length > 6 && (
+            <div className="flex justify-center">
+              <button
+                type="button"
+                onClick={() => setShowAll((v) => !v)}
+                className="rounded-full border-2 border-[#1B3A75] px-6 py-2.5 text-xs font-bold uppercase tracking-widest text-[#1B3A75] transition-colors hover:bg-[#1B3A75] hover:text-white"
+              >
+                {showAll ? t("seasonStats.showLess") : t("seasonStats.showAll")}
+              </button>
+            </div>
+          )}
         </div>
       )}
 
       {!loading && !error && !hasAnyData && (
-        <div className="rounded-xl border border-yellow-200 bg-yellow-50 text-yellow-800 p-4">
+        <div className="rounded-xl border border-yellow-200 bg-yellow-50 p-4 text-yellow-800">
           {t("seasonStats.noData")}
         </div>
       )}
-    </section>
+    </div>
   );
 }

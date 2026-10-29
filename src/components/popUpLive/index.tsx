@@ -17,17 +17,13 @@ const PopUpLive = () => {
   // Scroll detection
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setHasScrolled(true);
-      } else {
-        setHasScrolled(false);
-      }
+      setHasScrolled(window.scrollY > 100);
     };
 
     // Initial check
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 

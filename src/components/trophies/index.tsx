@@ -12,13 +12,10 @@ const trophyImages = import.meta.glob(
   },
 );
 
-interface TrophiesProps {
-  variant?: "home" | "career";
-}
-
-const Trophies = ({ variant = "home" }: TrophiesProps) => {
+// Selección aleatoria de trofeos para la home (la colección completa está en
+// la sala de trofeos de Carrera: components/trophyMuseum)
+const Trophies = () => {
   const { t } = useTranslation();
-  const [visibleCount, setVisibleCount] = useState(4);
 
   const getImagePath = (jsonPath: string) => {
     const filename = jsonPath.split("/").pop();
@@ -31,33 +28,19 @@ const Trophies = ({ variant = "home" }: TrophiesProps) => {
     return imageKey ? (trophyImages[imageKey] as string) : "";
   };
 
-  const totalItems = trophiesData.trophies.length;
-
   const [homeItems, setHomeItems] = useState<typeof trophiesData.trophies>([]);
 
   useEffect(() => {
-    if (variant === "home") {
-      const timeout = setTimeout(() => {
-        setHomeItems(
-          [...trophiesData.trophies]
-            .sort(() => 0.5 - Math.random())
-            .slice(0, 4),
-        );
-      }, 0);
-      return () => clearTimeout(timeout);
-    }
-  }, [variant]);
+    const timeout = setTimeout(() => {
+      setHomeItems(
+        [...trophiesData.trophies].sort(() => 0.5 - Math.random()).slice(0, 4),
+      );
+    }, 0);
+    return () => clearTimeout(timeout);
+  }, []);
 
   const itemsToRender =
-    variant === "home"
-      ? homeItems.length > 0
-        ? homeItems
-        : trophiesData.trophies.slice(0, 4)
-      : trophiesData.trophies.slice(0, visibleCount);
-
-  const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + 4);
-  };
+    homeItems.length > 0 ? homeItems : trophiesData.trophies.slice(0, 4);
 
   return (
     <section className="w-full bg-transparent py-20 relative overflow-hidden">
@@ -67,10 +50,7 @@ const Trophies = ({ variant = "home" }: TrophiesProps) => {
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
           {itemsToRender.map((trophy, index) => {
-            const isHiddenOnMobile =
-              index >= 2 &&
-              index < 4 &&
-              (variant === "home" || visibleCount <= 4);
+            const isHiddenOnMobile = index >= 2;
 
             return (
               <div
@@ -109,53 +89,27 @@ const Trophies = ({ variant = "home" }: TrophiesProps) => {
           })}
         </div>
 
-        {/* Buttons */}
         <div className="mt-16 flex justify-center">
-          {variant === "home" ? (
-            <Link
-              to="/carrer"
-              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#1B3A75] text-white rounded-full font-bold uppercase tracking-widest text-xs shadow-lg hover:bg-[#2A579E] hover:shadow-blue-900/20 transition-all duration-300 overflow-hidden"
+          <Link
+            to="/carrer"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#1B3A75] text-white rounded-full font-bold uppercase tracking-widest text-xs shadow-lg hover:bg-[#2A579E] hover:shadow-blue-900/20 transition-all duration-300 overflow-hidden"
+          >
+            <span className="relative z-10">{t("trophies.viewAll")}</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:translate-x-1"
             >
-              <span className="relative z-10">{t("trophies.viewAll")}</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:translate-x-1"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                />
-              </svg>
-            </Link>
-          ) : (
-            visibleCount < totalItems && (
-              <button
-                onClick={handleLoadMore}
-                className="group relative inline-flex items-center gap-3 px-8 py-4 bg-transparent border-2 border-[#1B3A75] text-[#1B3A75] rounded-full font-bold uppercase tracking-widest text-xs hover:bg-[#1B3A75] hover:text-white transition-all duration-300"
-              >
-                <span>{t("trophies.loadMore")}</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-1"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                  />
-                </svg>
-              </button>
-            )
-          )}
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+              />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

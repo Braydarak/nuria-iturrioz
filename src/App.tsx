@@ -16,6 +16,7 @@ import { LayoutProvider } from "./context/LayoutContext";
 import Footer from "./components/footer";
 import HomePage from "./pages/home";
 import NewsPage from "./pages/news";
+import ArticlePage from "./pages/news/article";
 import CareerPage from "./pages/carrer";
 import StatsPage from "./pages/stats-page";
 import ContactPage from "./pages/contact";
@@ -40,7 +41,7 @@ function AppContent() {
   const location = useLocation();
   const pathname = stripRouterBasename(location.pathname || "/");
   const hideHeader = pathname === "/experience";
-  const hideFooter = pathname === "/experience" || pathname === "/carrer";
+  const hideFooter = pathname === "/experience";
   const { i18n } = useTranslation();
 
   useEffect(() => {
@@ -51,6 +52,13 @@ function AppContent() {
     document.documentElement.lang = lang;
   }, [i18n.language, i18n.resolvedLanguage]);
 
+  // Ver index.html: el prerender guarda la ruta y React muestra la página
+  useEffect(() => {
+    const path = location.pathname.replace(/\/+$/, "") || "/";
+    document.documentElement.dataset.route = path;
+    document.documentElement.classList.remove("route-pending");
+  }, [location.pathname]);
+
   return (
     <>
       {!hideHeader && <Header />}
@@ -58,6 +66,7 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/news" element={<NewsPage />} />
+        <Route path="/news/:slug" element={<ArticlePage />} />
         <Route path="/career" element={<Navigate to="/carrer" replace />} />
         <Route path="/carrer" element={<CareerPage />} />
         <Route path="/stats" element={<StatsPage />} />

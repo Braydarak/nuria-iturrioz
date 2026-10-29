@@ -7,7 +7,9 @@
     "contact": "Contacto",
     "actualTour": "Torneo actual",
     "nextTour": "Próximo torneo",
-    "viewLiveScores": "Ver resultados en vivo"
+    "viewLiveScores": "Ver resultados en vivo",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
   },
   "hero": {
     "logoAria": "Logo de Nuria",
@@ -68,7 +70,10 @@
       "t22": "Subcampeona del Open de madrid amateur 2014",
       "t23": "Subcampeona del Open de madrid amateur 2015 marco",
       "t24": "Campeona del Santander Golf Tour 2019"
-    }
+    },
+    "eyebrow": "Sala de trofeos",
+    "pieces": "{{count}} piezas en la colección",
+    "plaqueNumber": "Nº {{number}}"
   },
   "recognitions": {
     "title": "Reconocimientos",
@@ -83,7 +88,8 @@
       "r6": "Reconocimiento de la federación española de golf 2019",
       "r7": "Reconocimiento federación balear de golf 2016",
       "r8": "Diploma de haber conseguido el pase al LET 2016"
-    }
+    },
+    "eyebrow": "Galería de honor"
   },
   "career": {
     "title": "Mi Carrera",
@@ -99,39 +105,77 @@
       "restart": "Reiniciar",
       "unmute": "Activar sonido",
       "mute": "Silenciar"
-    }
+    },
+    "eyebrow": "Trayectoria",
+    "videoEyebrow": "Mi historia en vídeo",
+    "milestones": [
+      "A los 14 años",
+      "Madrid",
+      "A los 19 años",
+      "2015 – 2016",
+      "Hoy"
+    ]
   },
   "statsPage": {
     "title": "Estadísticas",
     "subtitle": "Resumen por temporadas y métricas destacadas.",
-    "description": "En esta sección os mostramos un poco sobre mis estadísticas en el Ladies European Tour: primero, los resultados por temporada; debajo, otras métricas destacadas."
+    "description": "Mis números en el Ladies European Tour: un resumen de mi carrera, mis resultados por temporada y cómo es mi juego.",
+    "eyebrow": "Ladies European Tour",
+    "kpis": {
+      "wins": "Victorias LET",
+      "top10": "Top 10",
+      "tournaments": "Torneos jugados",
+      "seasons": "Temporadas"
+    },
+    "game": {
+      "title": "Mi juego",
+      "subtitle": "Medias de toda mi carrera en el LET",
+      "tee": "Desde el tee",
+      "approach": "Al green",
+      "shortGame": "Juego corto",
+      "scoring": "Puntuación",
+      "yards": "yardas",
+      "labels": {
+        "S155": "Distancia de drive",
+        "S150": "Precisión de drive",
+        "S160": "Greens en regulación",
+        "S170": "Putts por vuelta",
+        "S175": "Putts por hoyo",
+        "S165": "Salidas de bunker",
+        "S178": "Scrambling",
+        "S177": "Recuperación tras bogey",
+        "S100": "Media de golpes",
+        "S105": "Media vs par",
+        "S116": "Birdies por vuelta",
+        "S115": "Birdies totales",
+        "S110": "Eagles",
+        "S120": "Pares totales"
+      }
+    },
+    "records": {
+      "title": "Momentos para recordar",
+      "lastWin": "Última victoria",
+      "holeInOne": "Hoyo en uno",
+      "albatross": "Albatros",
+      "comeback": "Mayor remontada",
+      "strokes_one": "{{count}} golpe",
+      "strokes_other": "{{count}} golpes",
+      "round": "Ronda {{round}}",
+      "hole": "Hoyo {{hole}}",
+      "comebackDetail": "Golpes de desventaja remontados para ganar"
+    }
   },
   "seasonStats": {
     "title": "Resultados por temporada",
     "description": "Explora los torneos de cada año y de la temporada actual.",
     "errorUnknown": "Error desconocido",
     "currentSeason": "Temporada actual",
-    "season": "Temporada {{year}}",
     "position": "Posición:",
-    "rounds": "Rondas:",
     "score": "Score:",
     "vsPar": "Vs Par:",
     "showLess": "Ver menos",
     "showAll": "Ver todos",
     "noData": "No hay datos de torneos destacados por ahora."
-  },
-  "statsComponent": {
-    "title": "Mis Números en el LET",
-    "description": "Podéis pulsar abajo para ver más datos",
-    "tournamentWins": "Victorias en Torneos",
-    "topTen": "Top 10 en Torneos",
-    "drivingDistance": "Distancia de Drive",
-    "error": "Error: {{error}}",
-    "noData": "No hay estadísticas disponibles por ahora.",
-    "otherStats": "Otras estadísticas",
-    "hideAll": "ocultar estadísticas completas",
-    "showAll": "ver estadísticas completas",
-    "noMoreStats": "No hay más estadísticas disponibles."
   },
   "statsMetrics": {
     "biggestComebackMargin": "Mayor margen de remontada",
@@ -158,15 +202,24 @@
     "puttsPerRound": "Putts por vuelta",
     "sandSaves": "Recuperaciones desde bunker",
     "drivingAccuracy": "Precisión de Drive",
-    "roundsUnderPar": "Vueltas bajo par"
+    "roundsUnderPar": "Vueltas bajo par",
+    "drivingDistance": "Distancia de drive"
   },
   "newsPage": {
     "title": "Noticias",
-    "description": "Mantente al día con mis últimos torneos, resultados y novedades del Ladies European Tour.",
+    "description": "Lo que cuenta el Ladies European Tour sobre mis torneos, resultados y novedades.",
     "loadMore": "Cargar más noticias",
     "viewOnLet": "Ver noticia en la web del LET",
-    "readMore": "Ver más",
-    "readLess": "Ver menos"
+    "aboutNuria": "Sobre Nuria",
+    "mentions": "Menciones en el LET",
+    "featured": "Última noticia",
+    "readArticle": "Leer noticia",
+    "minRead": "{{count}} min de lectura",
+    "back": "Volver a noticias",
+    "source": "Artículo original publicado por el Ladies European Tour (en inglés).",
+    "related": "Más noticias",
+    "notFound": "No encontramos esta noticia.",
+    "error": "No pudimos cargar las noticias. Inténtalo de nuevo más tarde."
   },
   "livePage": {
     "live": "EN VIVO",
@@ -218,8 +271,7 @@
       "careerYears": "10 Años",
       "presence": "Presencia Internacional",
       "global": "Global"
-    },
-    "imageCaption": "Nuria Iturrioz"
+    }
   },
   "popUpLive": {
     "liveNow": "Jugando Ahora",
@@ -233,7 +285,6 @@
     "subtitle": "Rellena el formulario a continuación y me pondré en contacto contigo lo antes posible.",
     "contactType": {
       "label": "Motivo del contacto",
-      "placeholder": "Selecciona una opción",
       "options": {
         "sponsor": "Patrocinio / Sponsor",
         "press": "Prensa / Medios",
@@ -262,11 +313,10 @@
       "sending": "Enviando...",
       "default": "Enviar mensaje"
     },
-    "errors": {
-      "general": "Por favor, corrige los errores marcados antes de enviar."
-    },
-    "success": "¡Mensaje enviado correctamente! Gracias por contactar.",
-    "error": "Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo."
+    "success": "Gracias por escribirme. Te responderé lo antes posible.",
+    "error": "Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.",
+    "successTitle": "¡Mensaje enviado!",
+    "sendAnother": "Enviar otro mensaje"
   },
   "footer": {
     "description": "Sitio web oficial de Nuria Iturrioz. Golfista profesional compitiendo al más alto nivel. Pasión, disciplina y dedicación en cada swing.",

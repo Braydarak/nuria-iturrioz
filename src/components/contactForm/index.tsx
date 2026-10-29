@@ -1,113 +1,131 @@
-import React, { useState } from "react";
+import React, { useState, type ReactNode } from "react";
 import emailjs from "@emailjs/browser";
 import { useTranslation } from "react-i18next";
 
+type ContactType = "sponsor" | "press" | "fan" | "other";
+type Field = "contactType" | "name" | "email";
+
+const EMPTY_FORM = { contactType: "", name: "", email: "", message: "" };
+const EMPTY_ERRORS: Record<Field, string> = {
+  contactType: "",
+  name: "",
+  email: "",
+};
+
+const icon = (d: string) => (
+  <svg
+    viewBox="0 0 24 24"
+    className="h-5 w-5"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d={d} />
+  </svg>
+);
+
+const CONTACT_TYPES: { value: ContactType; icon: ReactNode }[] = [
+  {
+    value: "sponsor",
+    icon: icon(
+      "M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8-4.3-4.1 5.9-.9L12 3Z",
+    ),
+  },
+  {
+    value: "press",
+    icon: icon(
+      "M4 5h12v14H6a2 2 0 0 1-2-2V5Zm12 4h4v8a2 2 0 0 1-2 2h-2M8 9h4M8 13h4",
+    ),
+  },
+  {
+    value: "fan",
+    icon: icon(
+      "M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z",
+    ),
+  },
+  {
+    value: "other",
+    icon: icon(
+      "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-5l-5 5v-5Z",
+    ),
+  },
+];
+
+const inputClass = (hasError: boolean) =>
+  `w-full rounded-xl border bg-neutral-50 px-4 py-3.5 text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:bg-white focus:ring-4 ${
+    hasError
+      ? "border-red-400 focus:border-red-500 focus:ring-red-100"
+      : "border-neutral-200 hover:border-neutral-300 focus:border-[#2A579E] focus:ring-[#2A579E]/10"
+  }`;
+
 const ContactForm = () => {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    contactType: "",
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const [errors, setErrors] = useState({
-    contactType: "",
-    name: "",
-    email: "",
-    message: "",
-  });
-
+  const [formData, setFormData] = useState(EMPTY_FORM);
+  const [errors, setErrors] = useState(EMPTY_ERRORS);
+  // Campo trampa: invisible para personas, los bots suelen completarlo
+  const [website, setWebsite] = useState("");
   const [status, setStatus] = useState<
     "idle" | "submitting" | "success" | "error"
   >("idle");
-  const [generalError, setGeneralError] = useState("");
 
-  const validateEmail = (email: string) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
+  const validateField = (name: Field, value: string) => {
+    if (name === "email") {
+      if (!value) return t("contactForm.email.errorRequired");
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+        return t("contactForm.email.errorInvalid");
+    }
+    if (name === "name" && !value.trim()) return t("contactForm.name.error");
+    if (name === "contactType" && !value)
+      return t("contactForm.contactType.error");
+    return "";
   };
 
-  const validateField = (name: string, value: string) => {
-    let errorMsg = "";
-    if (name === "email") {
-      if (!value) {
-        errorMsg = t("contactForm.email.errorRequired");
-      } else if (!validateEmail(value)) {
-        errorMsg = t("contactForm.email.errorInvalid");
-      }
-    } else if (name === "name") {
-      if (!value.trim()) {
-        errorMsg = t("contactForm.name.error");
-      }
-    } else if (name === "contactType") {
-      if (!value) {
-        errorMsg = t("contactForm.contactType.error");
-      }
+  const update = (name: keyof typeof EMPTY_FORM, value: string) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name !== "message" && errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
-    return errorMsg;
   };
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => update(e.target.name as keyof typeof EMPTY_FORM, e.target.value);
 
-    // Clear error when user types
-    if (errors[name as keyof typeof errors]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: "",
-      }));
-    }
-    if (generalError) {
-      setGeneralError("");
-    }
-  };
-
-  const handleBlur = (
-    e: React.FocusEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    const { name, value } = e.target;
-    const errorMsg = validateField(name, value);
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const name = e.target.name as Field;
     setErrors((prev) => ({
       ...prev,
-      [name]: errorMsg,
+      [name]: validateField(name, e.target.value),
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate all fields before submission
-    const newErrors = {
+    const newErrors: Record<Field, string> = {
       contactType: validateField("contactType", formData.contactType),
       name: validateField("name", formData.name),
       email: validateField("email", formData.email),
-      message: "",
     };
-
     setErrors(newErrors);
-
-    if (Object.values(newErrors).some((err) => err !== "")) {
-      setGeneralError(
-        t("contactForm.errors.general"),
-      );
+    const firstError = (Object.keys(newErrors) as Field[]).find(
+      (k) => newErrors[k],
+    );
+    if (firstError) {
+      document.getElementById(`field-${firstError}`)?.focus();
       return;
     }
 
-    setGeneralError("");
-    setStatus("submitting");
+    if (website) {
+      // Bot: se simula el envío sin mandar nada
+      setStatus("success");
+      return;
+    }
 
-    // Send email using EmailJS
+    setStatus("submitting");
     try {
       await emailjs.send(
         "service_uqe39ik",
@@ -120,356 +138,271 @@ const ContactForm = () => {
         },
         "mIzxSsy4oAw6-JJXk",
       );
-
       setStatus("success");
-      setFormData({ contactType: "", name: "", email: "", message: "" });
-
-      // Reset status after 5 seconds
-      setTimeout(() => setStatus("idle"), 5000);
+      setFormData(EMPTY_FORM);
     } catch (error) {
       console.error(error);
       setStatus("error");
-      setTimeout(() => setStatus("idle"), 5000);
     }
   };
 
-  return (
-    <div className="w-full max-w-3xl mx-auto h-full bg-white rounded-2xl overflow-hidden">
-      <div className="p-8 md:p-12">
-        <h2 className="text-3xl font-header font-bold text-[#2A579E] mb-2 text-center">
-          {t("contactForm.title")}
+  if (status === "success") {
+    return (
+      <div
+        role="status"
+        className="flex min-h-[420px] flex-col items-center justify-center px-6 py-16 text-center"
+      >
+        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#2A579E] text-white shadow-lg">
+          <svg
+            className="h-8 w-8"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 13l4 4L19 7" />
+          </svg>
+        </span>
+        <h2 className="mt-6 text-2xl font-bold text-neutral-900">
+          {t("contactForm.successTitle")}
         </h2>
-        <p className="text-gray-500 text-center mb-10 max-w-lg mx-auto">
-          {t("contactForm.subtitle")}
+        <p className="mt-2 max-w-sm text-neutral-600">
+          {t("contactForm.success")}
         </p>
+        <button
+          type="button"
+          onClick={() => setStatus("idle")}
+          className="mt-8 rounded-full border-2 border-[#1B3A75] px-6 py-2.5 text-xs font-bold uppercase tracking-widest text-[#1B3A75] transition-colors hover:bg-[#1B3A75] hover:text-white"
+        >
+          {t("contactForm.sendAnother")}
+        </button>
+      </div>
+    );
+  }
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Contact Type */}
-          <div className="relative">
-            <label
-              htmlFor="contactType"
-              className="block text-sm font-semibold text-gray-700 mb-2"
-            >
-              {t("contactForm.contactType.label")} <span className="text-red-500">*</span>
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
-                  />
-                </svg>
-              </div>
-              <select
-                id="contactType"
-                name="contactType"
-                value={formData.contactType}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className={`w-full pl-12 pr-10 py-3.5 bg-gray-50 border rounded-xl focus:ring-2 outline-none transition-all appearance-none cursor-pointer hover:bg-gray-100 focus:bg-white text-gray-700 ${
-                  errors.contactType
-                    ? "border-red-500 focus:ring-red-200 focus:border-red-500"
-                    : "border-gray-200 focus:ring-[#2A579E]/20 focus:border-[#2A579E]"
-                }`}
-              >
-                <option value="" disabled>
-                  {t("contactForm.contactType.placeholder")}
-                </option>
-                <option value="sponsor">{t("contactForm.contactType.options.sponsor")}</option>
-                <option value="press">{t("contactForm.contactType.options.press")}</option>
-                <option value="fan">{t("contactForm.contactType.options.fan")}</option>
-                <option value="other">{t("contactForm.contactType.options.other")}</option>
-              </select>
-              <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </div>
-            </div>
-            {errors.contactType && (
-              <p className="mt-1 text-xs text-red-500 font-medium">
-                {errors.contactType}
-              </p>
-            )}
-          </div>
+  const errorText = (field: Field) =>
+    errors[field] ? (
+      <p
+        id={`error-${field}`}
+        className="mt-1.5 text-xs font-medium text-red-600"
+      >
+        {errors[field]}
+      </p>
+    ) : null;
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Name Input */}
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-semibold text-gray-700 mb-2"
-              >
-                {t("contactForm.name.label")} <span className="text-red-500">*</span>
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
-                </div>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder={t("contactForm.name.placeholder")}
-                  className={`w-full pl-12 pr-4 py-3.5 bg-gray-50 border rounded-xl focus:ring-2 outline-none transition-all placeholder-gray-400 hover:bg-gray-100 focus:bg-white ${
-                    errors.name
-                      ? "border-red-500 focus:ring-red-200 focus:border-red-500"
-                      : "border-gray-200 focus:ring-[#2A579E]/20 focus:border-[#2A579E]"
+  return (
+    <div className="p-6 sm:p-8 md:p-10">
+      <h2 className="text-2xl font-bold text-[#1B3A75] md:text-3xl">
+        {t("contactForm.title")}
+      </h2>
+      <p className="mt-2 text-neutral-600">{t("contactForm.subtitle")}</p>
+
+      <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-6">
+        {/* Motivo */}
+        <fieldset>
+          <legend className="mb-3 text-sm font-semibold text-neutral-800">
+            {t("contactForm.contactType.label")}{" "}
+            <span className="text-red-500" aria-hidden="true">
+              *
+            </span>
+          </legend>
+          <div
+            id="field-contactType"
+            tabIndex={-1}
+            role="radiogroup"
+            aria-invalid={!!errors.contactType}
+            aria-describedby={
+              errors.contactType ? "error-contactType" : undefined
+            }
+            className="grid grid-cols-2 gap-3 outline-none sm:grid-cols-4"
+          >
+            {CONTACT_TYPES.map((type) => {
+              const selected = formData.contactType === type.value;
+              return (
+                <label
+                  key={type.value}
+                  className={`flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 px-3 py-4 text-center text-sm font-semibold transition-colors has-focus-visible:ring-4 has-focus-visible:ring-[#2A579E]/20 ${
+                    selected
+                      ? "border-[#2A579E] bg-[#2A579E]/5 text-[#1B3A75]"
+                      : errors.contactType
+                        ? "border-red-300 text-neutral-700 hover:border-red-400"
+                        : "border-neutral-200 text-neutral-700 hover:border-[#2A579E]/40"
                   }`}
-                />
-              </div>
-              {errors.name && (
-                <p className="mt-1 text-xs text-red-500 font-medium">
-                  {errors.name}
-                </p>
-              )}
-            </div>
-
-            {/* Email Input */}
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-semibold text-gray-700 mb-2"
-              >
-                {t("contactForm.email.label")} <span className="text-red-500">*</span>
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                >
+                  <input
+                    type="radio"
+                    name="contactType"
+                    value={type.value}
+                    checked={selected}
+                    onChange={() => update("contactType", type.value)}
+                    className="sr-only"
+                  />
+                  <span
+                    className={selected ? "text-[#2A579E]" : "text-neutral-400"}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder={t("contactForm.email.placeholder")}
-                  className={`w-full pl-12 pr-4 py-3.5 bg-gray-50 border rounded-xl focus:ring-2 outline-none transition-all placeholder-gray-400 hover:bg-gray-100 focus:bg-white ${
-                    errors.email
-                      ? "border-red-500 focus:ring-red-200 focus:border-red-500"
-                      : "border-gray-200 focus:ring-[#2A579E]/20 focus:border-[#2A579E]"
-                  }`}
-                />
-              </div>
-              {errors.email && (
-                <p className="mt-1 text-xs text-red-500 font-medium">
-                  {errors.email}
-                </p>
-              )}
-            </div>
+                    {type.icon}
+                  </span>
+                  {t(`contactForm.contactType.options.${type.value}`)}
+                </label>
+              );
+            })}
           </div>
+          {errorText("contactType")}
+        </fieldset>
 
-          {/* Message Input */}
+        <div className="grid gap-6 md:grid-cols-2">
           <div>
             <label
-              htmlFor="message"
-              className="block text-sm font-semibold text-gray-700 mb-2"
+              htmlFor="field-name"
+              className="mb-2 block text-sm font-semibold text-neutral-800"
             >
-              {t("contactForm.message.label")}{" "}
-              <span className="text-gray-400 font-normal ml-1 text-xs">
-                {t("contactForm.message.optional")}
+              {t("contactForm.name.label")}{" "}
+              <span className="text-red-500" aria-hidden="true">
+                *
               </span>
             </label>
-            <div className="relative">
-              <div className="absolute top-4 left-4 pointer-events-none text-gray-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-                  />
-                </svg>
-              </div>
-              <textarea
-                id="message"
-                name="message"
-                rows={5}
-                value={formData.message}
-                onChange={handleChange}
-                placeholder={t("contactForm.message.placeholder")}
-                className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2A579E]/20 focus:border-[#2A579E] outline-none transition-all placeholder-gray-400 hover:bg-gray-100 focus:bg-white resize-none"
-              />
-            </div>
+            <input
+              id="field-name"
+              type="text"
+              name="name"
+              autoComplete="name"
+              value={formData.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder={t("contactForm.name.placeholder")}
+              aria-invalid={!!errors.name}
+              aria-describedby={errors.name ? "error-name" : undefined}
+              className={inputClass(!!errors.name)}
+            />
+            {errorText("name")}
           </div>
+          <div>
+            <label
+              htmlFor="field-email"
+              className="mb-2 block text-sm font-semibold text-neutral-800"
+            >
+              {t("contactForm.email.label")}{" "}
+              <span className="text-red-500" aria-hidden="true">
+                *
+              </span>
+            </label>
+            <input
+              id="field-email"
+              type="email"
+              name="email"
+              autoComplete="email"
+              inputMode="email"
+              value={formData.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder={t("contactForm.email.placeholder")}
+              aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? "error-email" : undefined}
+              className={inputClass(!!errors.email)}
+            />
+            {errorText("email")}
+          </div>
+        </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={status === "submitting"}
-            className={`w-full py-4 px-6 bg-[#2A579E] text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl hover:bg-[#1e4075] transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 focus:outline-none focus:ring-4 focus:ring-[#2A579E]/30 ${
-              status === "submitting"
-                ? "opacity-80 cursor-not-allowed transform-none"
-                : ""
-            }`}
+        <div>
+          <label
+            htmlFor="field-message"
+            className="mb-2 block text-sm font-semibold text-neutral-800"
           >
-            {status === "submitting" ? (
-              <>
-                <svg
-                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-                {t("contactForm.submit.sending")}
-              </>
-            ) : (
-              <>
-                {t("contactForm.submit.default")}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
+            {t("contactForm.message.label")}{" "}
+            <span className="ml-1 text-xs font-normal text-neutral-400">
+              {t("contactForm.message.optional")}
+            </span>
+          </label>
+          <textarea
+            id="field-message"
+            name="message"
+            rows={5}
+            value={formData.message}
+            onChange={handleChange}
+            placeholder={t("contactForm.message.placeholder")}
+            className={`${inputClass(false)} resize-y`}
+          />
+        </div>
+
+        {/* Campo trampa anti-spam, fuera de la vista y del foco */}
+        <div
+          aria-hidden="true"
+          className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+        >
+          <label>
+            Website
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
+          </label>
+        </div>
+
+        {status === "error" && (
+          <p
+            role="alert"
+            className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-700"
+          >
+            {t("contactForm.error")}
+          </p>
+        )}
+
+        <button
+          type="submit"
+          disabled={status === "submitting"}
+          className="group flex w-full items-center justify-center gap-3 rounded-full bg-[#1B3A75] px-6 py-4 text-sm font-bold uppercase tracking-widest text-white shadow-lg transition-colors hover:bg-[#2A579E] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#2A579E]/30 disabled:cursor-not-allowed disabled:opacity-80"
+        >
+          {status === "submitting" ? (
+            <>
+              <svg
+                className="h-5 w-5 animate-spin"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
                   stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
-              </>
-            )}
-          </button>
-
-          {/* General Error Message */}
-          {generalError && (
-            <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl flex items-center gap-3 animate-fade-in">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+                  strokeWidth="4"
+                  className="opacity-25"
+                />
                 <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  fill="currentColor"
+                  className="opacity-75"
+                  d="M4 12a8 8 0 0 1 8-8V0C5.4 0 0 5.4 0 12h4Z"
                 />
               </svg>
-              <p className="font-medium text-sm">{generalError}</p>
-            </div>
-          )}
-
-          {/* Status Messages */}
-          {status === "success" && (
-            <div className="p-4 bg-green-50 border border-green-200 text-green-700 rounded-xl flex items-center gap-3 animate-fade-in">
+              {t("contactForm.submit.sending")}
+            </>
+          ) : (
+            <>
+              {t("contactForm.submit.default")}
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 shrink-0"
-                fill="none"
+                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <p className="font-medium">
-                {t("contactForm.success")}
-              </p>
-            </div>
-          )}
-          {status === "error" && (
-            <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl flex items-center gap-3 animate-fade-in">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 shrink-0"
                 fill="none"
-                viewBox="0 0 24 24"
                 stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
+                <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
-              <p className="font-medium">
-                {t("contactForm.error")}
-              </p>
-            </div>
+            </>
           )}
-        </form>
-      </div>
+        </button>
+      </form>
     </div>
   );
 };

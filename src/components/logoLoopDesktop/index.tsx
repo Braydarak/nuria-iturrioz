@@ -43,6 +43,7 @@ const LogoLoop = ({ heightClass = "h-50", className = "" }: LogoLoopProps) => {
         {`
           .logo-loop .loop-inner { will-change: transform; animation: scrollY 35s linear infinite; }
           @keyframes scrollY { 100% { transform: translateY(0); } 0% { transform: translateY(-50%); } }
+          @media (prefers-reduced-motion: reduce) { .logo-loop .loop-inner { animation-play-state: paused; } }
           .logo-loop::before { content: ''; position: absolute; inset: 0; pointer-events: none;
             background: linear-gradient(to bottom,
               rgba(42, 87, 158, 0.85) 0%,
@@ -55,7 +56,7 @@ const LogoLoop = ({ heightClass = "h-50", className = "" }: LogoLoopProps) => {
 
       <div className="absolute inset-0">
         <div className="loop-inner">
-          {/* Primera columna */}
+          {/* La lista está duplicada: desplazar el 50% hace el bucle continuo */}
           <div className="flex flex-col items-center">
             {loopList.map((logo, idx) => (
               <img
@@ -63,18 +64,6 @@ const LogoLoop = ({ heightClass = "h-50", className = "" }: LogoLoopProps) => {
                 src={logo.url}
                 alt={`Sponsor ${idx + 1}`}
                 className={getLogoClasses(logo, "h-60 w-60")}
-                style={{ filter: "grayscale(1) brightness(0) invert(1)" }}
-              />
-            ))}
-          </div>
-          {/* Segunda columna para continuidad, misma lista */}
-          <div className="flex flex-col items-center">
-            {loopList.map((logo, idx) => (
-              <img
-                key={`logo-2-${idx}`}
-                src={logo.url}
-                alt={`Sponsor ${idx + 1}`}
-                className={getLogoClasses(logo, "h-20")}
                 style={{ filter: "grayscale(1) brightness(0) invert(1)" }}
               />
             ))}

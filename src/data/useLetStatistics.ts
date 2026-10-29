@@ -1,3 +1,6 @@
+import { useEffect, useMemo, useState } from 'react'
+import { fetchLetProfile } from './letProfile'
+
 export type LetStatistics = {
   tournamentWins: number | null
   tournamentTopTenFinishes: number | null
@@ -15,7 +18,6 @@ export type StatEntry = {
   tournaments?: number | null
 }
 
-const PROFILE_URL = 'https://api.euro.ocs-software.com/let/cache/let/profiles/200899?randomadd=1769433522174'
 
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null
@@ -181,7 +183,6 @@ function getAllStatisticEntries(obj: unknown): StatEntry[] {
   return entries
 }
 
-import { useEffect, useMemo, useState } from 'react'
 
 function getMemberAge(obj: unknown): number | null {
   function num(v: unknown): number | null {
@@ -237,9 +238,7 @@ export function useLetStatistics() {
       setLoading(true)
       setError(null)
       try {
-        const res = await fetch(PROFILE_URL, { headers: { Accept: 'application/json' } })
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        const json = (await res.json()) as unknown
+        const json = await fetchLetProfile()
         const extracted = getLetStatistics(json)
         const list = getAllStatisticEntries(json)
         if (!extracted && list.length === 0) throw new Error('No se encontró STATISTICS del TOUR LET')

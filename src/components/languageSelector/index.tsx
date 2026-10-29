@@ -43,15 +43,15 @@ export default function LanguageSelector() {
     <div className="relative font-header" ref={containerRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1.5 text-black text-xl font-medium hover:text-[#2A579E] transition-colors focus:outline-none"
+        className="flex items-center gap-1.5 rounded-full px-2 py-1.5 text-sm font-bold tracking-widest text-[#1B3A75]/80 hover:text-[#2A579E] transition-colors focus-visible:outline-2 focus-visible:outline-[#2A579E]"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
       >
         <span>{currentLang.toUpperCase()}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
+          width="14"
+          height="14"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -59,7 +59,7 @@ export default function LanguageSelector() {
           strokeLinecap="round"
           strokeLinejoin="round"
           className={`transition-transform duration-300 ${
-            isOpen ? "rotate-180 text-[#2A579E]" : "text-black/60"
+            isOpen ? "rotate-180 text-[#2A579E]" : "text-[#1B3A75]/50"
           }`}
         >
           <path d="m6 9 6 6 6-6" />

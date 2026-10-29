@@ -7,7 +7,9 @@
     "contact": "Contacte",
     "actualTour": "Torneig actual",
     "nextTour": "Proper torneig",
-    "viewLiveScores": "Veure resultats en directe"
+    "viewLiveScores": "Veure resultats en directe",
+    "openMenu": "Obrir menú",
+    "closeMenu": "Tancar menú"
   },
   "hero": {
     "logoAria": "Logo de Nuria",
@@ -68,7 +70,10 @@
       "t22": "Subcampiona de l'Open de Madrid amateur 2014",
       "t23": "Subcampiona de l'Open de Madrid amateur 2015 marco",
       "t24": "Campiona del Santander Golf Tour 2019"
-    }
+    },
+    "eyebrow": "Sala de trofeus",
+    "pieces": "{{count}} peces a la col·lecció",
+    "plaqueNumber": "Núm. {{number}}"
   },
   "recognitions": {
     "title": "Reconeixements",
@@ -83,7 +88,8 @@
       "r6": "Reconeixement de la Federació Espanyola de Golf 2019",
       "r7": "Reconeixement Federació Balear de Golf 2016",
       "r8": "Diploma d'haver aconseguit el passi al LET 2016"
-    }
+    },
+    "eyebrow": "Galeria d'honor"
   },
   "career": {
     "title": "La Meva Carrera",
@@ -99,39 +105,77 @@
       "restart": "Reiniciar",
       "unmute": "Reactivar so",
       "mute": "Silenciar"
-    }
+    },
+    "eyebrow": "Trajectòria",
+    "videoEyebrow": "La meva història en vídeo",
+    "milestones": [
+      "Als 14 anys",
+      "Madrid",
+      "Als 19 anys",
+      "2015 – 2016",
+      "Avui"
+    ]
   },
   "statsPage": {
     "title": "Estadístiques",
     "subtitle": "Resum per temporades i mètriques destacades.",
-    "description": "En aquesta secció us mostrem una mica sobre les meves estadístiques al Ladies European Tour: primer, els resultats per temporada; a sota, altres mètriques destacades."
+    "description": "Els meus números al Ladies European Tour: un resum de la meva carrera, els meus resultats per temporada i com és el meu joc.",
+    "eyebrow": "Ladies European Tour",
+    "kpis": {
+      "wins": "Victòries LET",
+      "top10": "Top 10",
+      "tournaments": "Tornejos jugats",
+      "seasons": "Temporades"
+    },
+    "game": {
+      "title": "El meu joc",
+      "subtitle": "Mitjanes de tota la meva carrera al LET",
+      "tee": "Des del tee",
+      "approach": "Al green",
+      "shortGame": "Joc curt",
+      "scoring": "Puntuació",
+      "yards": "iardes",
+      "labels": {
+        "S155": "Distància de drive",
+        "S150": "Precisió de drive",
+        "S160": "Greens en regulació",
+        "S170": "Putts per volta",
+        "S175": "Putts per forat",
+        "S165": "Sortides de búnquer",
+        "S178": "Scrambling",
+        "S177": "Recuperació després de bogey",
+        "S100": "Mitjana de cops",
+        "S105": "Mitjana vs par",
+        "S116": "Birdies per volta",
+        "S115": "Birdies totals",
+        "S110": "Eagles",
+        "S120": "Pars totals"
+      }
+    },
+    "records": {
+      "title": "Moments per recordar",
+      "lastWin": "Última victòria",
+      "holeInOne": "Forat en un",
+      "albatross": "Albatros",
+      "comeback": "Remuntada més gran",
+      "strokes_one": "{{count}} cop",
+      "strokes_other": "{{count}} cops",
+      "round": "Ronda {{round}}",
+      "hole": "Forat {{hole}}",
+      "comebackDetail": "Cops de desavantatge remuntats per guanyar"
+    }
   },
   "seasonStats": {
     "title": "Resultats per temporada",
     "description": "Explora els tornejos de cada any i de la temporada actual.",
     "errorUnknown": "Error desconegut",
     "currentSeason": "Temporada actual",
-    "season": "Temporada {{year}}",
     "position": "Posició:",
-    "rounds": "Rondes:",
     "score": "Score:",
     "vsPar": "Vs Par:",
     "showLess": "Veure menys",
     "showAll": "Veure tots",
     "noData": "No hi ha dades de tornejos destacats per ara."
-  },
-  "statsComponent": {
-    "title": "Els meus números al LET",
-    "description": "Podeu prémer a sota per veure més dades",
-    "tournamentWins": "Victòries en Tornejos",
-    "topTen": "Top 10 en Tornejos",
-    "drivingDistance": "Distància de Drive",
-    "error": "Error: {{error}}",
-    "noData": "No hi ha estadístiques disponibles per ara.",
-    "otherStats": "Altres estadístiques",
-    "hideAll": "amagar estadístiques completes",
-    "showAll": "veure estadístiques completes",
-    "noMoreStats": "No hi ha més estadístiques disponibles."
   },
   "statsMetrics": {
     "biggestComebackMargin": "Major marge de remuntada",
@@ -158,15 +202,24 @@
     "puttsPerRound": "Putts per ronda",
     "sandSaves": "Salvades des de búnquer",
     "drivingAccuracy": "Precisió de Drive",
-    "roundsUnderPar": "Rondes sota par"
+    "roundsUnderPar": "Rondes sota par",
+    "drivingDistance": "Distància de drive"
   },
   "newsPage": {
     "title": "Notícies",
-    "description": "Mantigues-te al dia amb els meus últims tornejos, resultats i novetats del Ladies European Tour.",
+    "description": "El que explica el Ladies European Tour sobre els meus tornejos, resultats i novetats.",
     "loadMore": "Carregar més notícies",
     "viewOnLet": "Veure notícia al web del LET",
-    "readMore": "Veure més",
-    "readLess": "Veure menys"
+    "aboutNuria": "Sobre la Nuria",
+    "mentions": "Mencions al LET",
+    "featured": "Última notícia",
+    "readArticle": "Llegir notícia",
+    "minRead": "{{count}} min de lectura",
+    "back": "Tornar a notícies",
+    "source": "Article original publicat pel Ladies European Tour (en anglès).",
+    "related": "Més notícies",
+    "notFound": "No hem trobat aquesta notícia.",
+    "error": "No hem pogut carregar les notícies. Torna-ho a provar més tard."
   },
   "livePage": {
     "live": "EN DIRECTE",
@@ -218,15 +271,13 @@
       "careerYears": "10 Anys",
       "presence": "Presència Internacional",
       "global": "Global"
-    },
-    "imageCaption": "Nuria Iturrioz"
+    }
   },
   "contactForm": {
     "title": "Envia'm un missatge",
     "subtitle": "Omple el formulari a continuació i em posaré en contacte amb tu el més aviat possible.",
     "contactType": {
       "label": "Motiu del contacte",
-      "placeholder": "Selecciona una opció",
       "options": {
         "sponsor": "Patrocini / Sponsor",
         "press": "Premsa / Mitjans",
@@ -255,11 +306,10 @@
       "sending": "Enviant...",
       "default": "Enviar missatge"
     },
-    "errors": {
-      "general": "Si us plau, corregeix els errors marcats abans d'enviar."
-    },
-    "success": "Missatge enviat correctament! Gràcies per contactar.",
-    "error": "Hi ha hagut un error en enviar el missatge. Si us plau, torna-ho a provar."
+    "success": "Gràcies per escriure'm. Et respondré tan aviat com pugui.",
+    "error": "Hi ha hagut un error en enviar el missatge. Si us plau, torna-ho a provar.",
+    "successTitle": "Missatge enviat!",
+    "sendAnother": "Envia un altre missatge"
   },
   "footer": {
     "description": "Lloc web oficial de Nuria Iturrioz. Golfista professional competint al més alt nivell. Passió, disciplina i dedicació en cada swing.",
