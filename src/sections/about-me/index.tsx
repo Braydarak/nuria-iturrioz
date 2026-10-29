@@ -237,36 +237,36 @@ const AboutMe = () => {
         </div>
         {!loading && !error && (
           <AnimateOnScroll x={0} y={30} scale={1} className="mt-16 md:mt-20">
-            <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/15 bg-white/15 md:grid-cols-4">
-              <div className="flex flex-col bg-[#24508f]/80 items-center gap-1 px-3 py-6 text-center md:py-8">
+            <dl className="grid grid-cols-2 gap-y-10 md:grid-cols-4">
+              <div className="flex flex-col items-center gap-2 text-center">
                 <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.age")}
                 </dt>
-                <dd className="order-first text-4xl font-semibold tracking-tight text-white md:text-5xl">
+                <dd className="order-first text-5xl font-semibold tracking-tight text-white md:text-6xl">
                   {age}
                 </dd>
               </div>
-              <div className="flex flex-col bg-[#24508f]/80 items-center gap-1 px-3 py-6 text-center md:py-8">
+              <div className="flex flex-col items-center gap-2 text-center">
                 <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.wins")}
                 </dt>
-                <dd className="order-first text-4xl font-semibold tracking-tight text-white md:text-5xl">
+                <dd className="order-first text-5xl font-semibold tracking-tight text-white md:text-6xl">
                   {wins ?? 0}
                 </dd>
               </div>
-              <div className="flex flex-col bg-[#24508f]/80 items-center gap-1 px-3 py-6 text-center md:py-8">
+              <div className="flex flex-col items-center gap-2 text-center">
                 <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.played")}
                 </dt>
-                <dd className="order-first text-4xl font-semibold tracking-tight text-white md:text-5xl">
+                <dd className="order-first text-5xl font-semibold tracking-tight text-white md:text-6xl">
                   {tournaments ?? 0}
                 </dd>
               </div>
-              <div className="flex flex-col bg-[#24508f]/80 items-center gap-1 px-3 py-6 text-center md:py-8">
+              <div className="flex flex-col items-center gap-2 text-center">
                 <dt className="text-[11px] font-bold uppercase tracking-widest text-blue-100/80 md:text-xs">
                   {t("aboutMe.stats.countries")}
                 </dt>
-                <dd className="order-first text-4xl font-semibold tracking-tight text-white md:text-5xl">
+                <dd className="order-first text-5xl font-semibold tracking-tight text-white md:text-6xl">
                   +{visited}
                 </dd>
               </div>
