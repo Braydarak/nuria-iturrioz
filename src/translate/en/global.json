@@ -504,5 +504,11 @@
     "next": "Next photo",
     "open": "View photo",
     "error": "We couldn't load the photos. Please try again later."
+  },
+  "updateNotice": {
+    "title": "A new version of the site is available",
+    "text": "Refresh to see the latest changes.",
+    "reload": "Refresh",
+    "close": "Close"
   }
 }

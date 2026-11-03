@@ -504,5 +504,11 @@
     "next": "Foto següent",
     "open": "Veure foto",
     "error": "No hem pogut carregar les fotos. Torna-ho a provar més tard."
+  },
+  "updateNotice": {
+    "title": "Hi ha una versió nova del web",
+    "text": "Actualitza per veure els últims canvis.",
+    "reload": "Actualitzar",
+    "close": "Tancar"
   }
 }

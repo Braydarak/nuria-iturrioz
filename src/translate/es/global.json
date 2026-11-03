@@ -504,5 +504,11 @@
     "next": "Foto siguiente",
     "open": "Ver foto",
     "error": "No pudimos cargar las fotos. Inténtalo de nuevo más tarde."
+  },
+  "updateNotice": {
+    "title": "Hay una versión nueva de la web",
+    "text": "Actualiza para ver los últimos cambios.",
+    "reload": "Actualizar",
+    "close": "Cerrar"
   }
 }
