@@ -31,7 +31,7 @@ export default function LatestNews() {
           y={24}
           x={0}
           scale={1}
-          className="mb-10 flex flex-wrap items-end justify-between gap-4"
+          className="mb-10 flex flex-col items-center gap-4 text-center md:flex-row md:flex-wrap md:items-end md:justify-between md:text-left"
         >
           <h2 className="font-signature text-4xl text-[#2A579E] md:text-5xl">
             {t("latestNews.title")}
