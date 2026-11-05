@@ -25,6 +25,26 @@ export type RoundState =
 
 export type HoleScore = { number: number; par: number; strokes: number | null };
 
+export type RoundStats = {
+  /** Calles en par 4 y par 5 */
+  fairways: { hit: number; total: number } | null;
+  /** Greens en regulación */
+  gir: { hit: number; total: number } | null;
+  putts: number | null;
+  birdies: number;
+  pars: number;
+  bogeys: number;
+};
+
+/** Tarjeta de una vuelta: hoyos, salida y estadísticas */
+export type RoundCard = {
+  id: number;
+  holes: HoleScore[];
+  startTee: number;
+  holesPlayed: number;
+  stats: RoundStats | null;
+};
+
 export type RoundSummary = {
   id: number;
   date: string | null;
@@ -58,6 +78,8 @@ export type LiveSnapshot = {
   /** Hora de salida de la vuelta, en hora local del torneo */
   teeTime: string | null;
   rounds: RoundSummary[];
+  /** Tarjetas de las vueltas con al menos un hoyo jugado */
+  cards: RoundCard[];
   /** Cuándo actualizó el LET sus resultados por última vez */
   updatedAt: Date | null;
 };
@@ -151,6 +173,63 @@ export type ParseOptions = {
   expectedRounds?: number;
 };
 
+// "Y" / "N" / "" por hoyo → aciertos sobre los hoyos que cuentan
+const countYes = (value: unknown, played: boolean[]) => {
+  const list = splitList(value);
+  let hit = 0;
+  let total = 0;
+  list.forEach((v, i) => {
+    if (!played[i]) return;
+    const flag = v.trim().toUpperCase();
+    if (flag === "Y" || flag === "N") total++;
+    if (flag === "Y") hit++;
+  });
+  return total > 0 ? { hit, total } : null;
+};
+
+const buildCard = (
+  nuria: Entry,
+  id: number,
+  pars: number[],
+  holeCount: number,
+): RoundCard => {
+  const scores = splitList(nuria[`hole_scores_R${id}`]);
+  const holes: HoleScore[] = Array.from({ length: holeCount }, (_, i) => ({
+    number: i + 1,
+    par: pars[i] ?? 4,
+    strokes: parsePositiveInt(scores[i]),
+  }));
+  const played = holes.map((h) => h.strokes !== null);
+  const holesPlayed = played.filter(Boolean).length;
+  const diffs = holes
+    .filter((h) => h.strokes !== null)
+    .map((h) => h.strokes! - h.par);
+
+  const putts = splitList(nuria[`putts_R${id}`])
+    .map((v, i) => (played[i] ? parsePositiveInt(v) : null))
+    .filter((v): v is number => v !== null);
+
+  const stats: RoundStats | null =
+    holesPlayed > 0
+      ? {
+          fairways: countYes(nuria[`fairway_R${id}`], played),
+          gir: countYes(nuria[`gir_R${id}`], played),
+          putts: putts.length ? putts.reduce((a, b) => a + b, 0) : null,
+          birdies: diffs.filter((d) => d < 0).length,
+          pars: diffs.filter((d) => d === 0).length,
+          bogeys: diffs.filter((d) => d > 0).length,
+        }
+      : null;
+
+  return {
+    id,
+    holes,
+    startTee: parsePositiveInt(nuria[`tee_R${id}`]) ?? 1,
+    holesPlayed,
+    stats,
+  };
+};
+
 export const parseLetData = (
   data: unknown,
   { fileRound, expectedRounds }: ParseOptions = {},
@@ -229,6 +308,10 @@ export const parseLetData = (
     };
   });
 
+  const cards = roundIds
+    .map((id) => buildCard(nuria, id, pars, holeCount))
+    .filter((c) => c.holesPlayed > 0 || c.id === round);
+
   const updatedJulian = parsePositiveInt(data.last_scores_update_julian);
 
   return {
@@ -253,6 +336,7 @@ export const parseLetData = (
     position: positionOf(nuria, entries),
     teeTime: (nuria[`time_R${round}`] ?? "").trim() || null,
     rounds,
+    cards,
     // last_scores_update_julian es un timestamp Unix en segundos
     updatedAt: updatedJulian ? new Date(updatedJulian * 1000) : null,
   };

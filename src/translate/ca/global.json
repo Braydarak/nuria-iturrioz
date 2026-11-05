@@ -274,6 +274,27 @@
       "roundFinished": "Volta {{round}} acabada. La propera volta apareixerà aquí quan comenci.",
       "tournamentFinished": "Torneig acabat",
       "out": "Fora del torneig ({{label}})"
+    },
+    "eyebrow": "Ladies European Tour",
+    "title": "En directe",
+    "roundOf": "Volta {{round}} de {{total}}",
+    "teeTimeLabel": "Sortida",
+    "onHole": "Al forat {{hole}}",
+    "fromTee": "Pel forat {{tee}} · hora local",
+    "byHole": "Forat a forat",
+    "totalShort": "Tot",
+    "nuriaShort": "Nuria",
+    "eagle": "Eagle o millor",
+    "doubleBogey": "Doble bogey o pitjor",
+    "vsPar": "Vs par",
+    "stats": {
+      "fairways": "Carrers",
+      "gir": "Greens en regulació",
+      "putts": "Putts",
+      "scoring": "Resultat per forat",
+      "birdies": "birdies",
+      "pars": "pars",
+      "bogeys": "bogeys"
     }
   },
   "contactPage": {

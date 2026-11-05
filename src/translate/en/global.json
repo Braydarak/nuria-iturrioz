@@ -274,6 +274,27 @@
       "roundFinished": "Round {{round}} finished. The next round will show up here when it starts.",
       "tournamentFinished": "Tournament finished",
       "out": "Out of the tournament ({{label}})"
+    },
+    "eyebrow": "Ladies European Tour",
+    "title": "Live",
+    "roundOf": "Round {{round}} of {{total}}",
+    "teeTimeLabel": "Tee time",
+    "onHole": "On hole {{hole}}",
+    "fromTee": "From hole {{tee}} · local time",
+    "byHole": "Hole by hole",
+    "totalShort": "Tot",
+    "nuriaShort": "Nuria",
+    "eagle": "Eagle or better",
+    "doubleBogey": "Double bogey or worse",
+    "vsPar": "Vs par",
+    "stats": {
+      "fairways": "Fairways",
+      "gir": "Greens in regulation",
+      "putts": "Putts",
+      "scoring": "Scoring",
+      "birdies": "birdies",
+      "pars": "pars",
+      "bogeys": "bogeys"
     }
   },
   "contactPage": {

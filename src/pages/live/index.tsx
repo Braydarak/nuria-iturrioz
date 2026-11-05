@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import nuriImg from "../../assets/nuria/Nuria9.jpg";
 import { useTranslation } from "react-i18next";
@@ -6,10 +6,18 @@ import { Helmet } from "react-helmet-async";
 import AnimatedLoader from "../../components/animatedLoader";
 import { DEFAULT_OG_IMAGE_URL, SITE_URL } from "../../utils/constants";
 import { refresh, useLive } from "../../live/liveStore";
-import type { HoleScore, LiveSnapshot } from "../../live/parse";
+import type { HoleScore, LiveSnapshot, RoundCard } from "../../live/parse";
+
+const BLUE = "#2A579E";
 
 const formatToPar = (value: number | null) =>
-  value === null ? "–" : value === 0 ? "E" : value > 0 ? `+${value}` : `${value}`;
+  value === null
+    ? "–"
+    : value === 0
+      ? "E"
+      : value > 0
+        ? `+${value}`
+        : `${value}`;
 
 // "hace 2 minutos" en el idioma de la web
 const useTimeAgo = (date: Date | null, lang: string) => {
@@ -26,6 +34,46 @@ const useTimeAgo = (date: Date | null, lang: string) => {
   if (Math.abs(minutes) < 60) return rtf.format(minutes, "minute");
   return rtf.format(Math.round(minutes / 60), "hour");
 };
+
+const Dots = () => (
+  <div
+    aria-hidden="true"
+    className="pointer-events-none absolute inset-0 opacity-40"
+    style={{
+      background:
+        "radial-gradient(circle, rgba(255,255,255,0.12) 1.6px, transparent 2px) 0 0/26px 26px, radial-gradient(circle, rgba(255,255,255,0.12) 1.6px, transparent 2px) 13px 13px/26px 26px",
+    }}
+  />
+);
+
+const Container = ({ children }: { children: ReactNode }) => (
+  <div className="relative mx-auto max-w-6xl px-5 sm:px-6">{children}</div>
+);
+
+const SectionTitle = ({
+  title,
+  subtitle,
+  light = false,
+}: {
+  title: string;
+  subtitle?: string;
+  light?: boolean;
+}) => (
+  <header className="mb-6 text-center md:mb-8 md:text-left">
+    <h2
+      className={`font-signature text-3xl sm:text-4xl md:text-5xl ${
+        light ? "text-white" : "text-[#2A579E]"
+      }`}
+    >
+      {title}
+    </h2>
+    {subtitle && (
+      <p className={`mt-2 ${light ? "text-blue-100/80" : "text-neutral-600"}`}>
+        {subtitle}
+      </p>
+    )}
+  </header>
+);
 
 const LivePage = () => {
   const { t, i18n } = useTranslation("global");
@@ -69,87 +117,18 @@ const LivePage = () => {
     return (
       <>
         {seo}
-        <div className="min-h-screen flex items-center justify-center bg-neutral-50">
+        <main className="flex min-h-screen items-center justify-center bg-white">
           <AnimatedLoader />
-        </div>
+        </main>
       </>
     );
   }
 
-  // Sin datos de Nuria: no hay torneo, todavía no hay resultados, no está en
-  // el campo, o falló la conexión sin datos previos
   if (!snap) {
-    const failed = !!live.error && !live.tournament;
-    const tournamentName = live.tournament?.name;
     return (
       <>
         {seo}
-        <div className="min-h-screen bg-neutral-50 pt-30 pb-12 px-4 sm:px-6 lg:px-8 font-sans">
-          <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
-            <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-white shadow-lg bg-gray-100">
-              <img
-                src={nuriImg}
-                alt="Nuria Iturrioz"
-                className="w-full h-full object-cover object-top"
-              />
-            </div>
-
-            <h2 className="mt-8 text-3xl md:text-4xl font-bold text-gray-900 font-header tracking-tight">
-              {failed
-                ? t("livePage.noLive.errorTitle")
-                : t("livePage.noLive.title")}
-            </h2>
-            <p className="mt-3 text-gray-600">
-              {failed
-                ? t("livePage.noLive.errorSubtitle")
-                : live.notInField
-                  ? t("livePage.noLive.notInField")
-                  : t("livePage.noLive.subtitle")}
-            </p>
-
-            {!failed && (
-              <p className="mt-5 text-sm text-gray-400">
-                {tournamentName
-                  ? t("livePage.noLive.tournamentDetected", {
-                      name: tournamentName,
-                    })
-                  : t("livePage.noLive.noTournament")}
-              </p>
-            )}
-
-            <div className="mt-8 w-full max-w-md flex flex-col gap-3">
-              <button
-                onClick={onRefresh}
-                disabled={refreshing}
-                className="w-full px-6 py-2.5 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-colors disabled:opacity-60"
-              >
-                {t("livePage.refreshData")}
-              </button>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <Link
-                  to="/stats"
-                  className="w-full text-center px-4 py-2.5 rounded-full font-semibold border border-[#E6E6E6] text-gray-900 hover:bg-[#F8F8F8] transition-colors"
-                >
-                  {t("livePage.noLive.ctaStats")}
-                </Link>
-                <Link
-                  to="/news"
-                  className="w-full text-center px-4 py-2.5 rounded-full font-semibold border border-[#E6E6E6] text-gray-900 hover:bg-[#F8F8F8] transition-colors"
-                >
-                  {t("livePage.noLive.ctaNews")}
-                </Link>
-              </div>
-
-              <Link
-                to="/"
-                className="w-full text-center px-4 py-2.5 rounded-full font-semibold text-[#2A579E] hover:bg-blue-50 transition-colors"
-              >
-                {t("livePage.noLive.ctaHome")}
-              </Link>
-            </div>
-          </div>
-        </div>
+        <NoLive refreshing={refreshing} onRefresh={onRefresh} />
       </>
     );
   }
@@ -157,431 +136,722 @@ const LivePage = () => {
   return (
     <>
       {seo}
-      <div className="min-h-screen bg-neutral-50 pt-30 pb-12 px-4 sm:px-6 lg:px-8 font-sans">
-        <div className="max-w-5xl mx-auto">
-          {live.error && (
-            <div
-              role="status"
-              className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-3 text-sm text-amber-900"
-            >
-              <span>{t("livePage.staleWarning")}</span>
-              <button
-                onClick={onRefresh}
-                disabled={refreshing}
-                className="self-start sm:self-auto font-bold underline disabled:opacity-60"
-              >
-                {t("livePage.refreshData")}
-              </button>
-            </div>
-          )}
+      <main className="w-full bg-white pt-[68px] md:pt-[84px]">
+        <LiveHero snap={snap} stale={!!live.error} />
+        <ScorecardSection snap={snap} />
+        <RoundsSection snap={snap} />
 
-          <TournamentHeader snap={snap} />
-          <StatusBanner snap={snap} />
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-1 flex flex-col gap-6">
-              <PlayerCard snap={snap} />
-            </div>
-
-            <div className="lg:col-span-2 flex flex-col gap-6">
-              <Scorecard snap={snap} />
-              <RoundsHistory snap={snap} />
-
-              <a
-                href="https://ladieseuropeantour.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-full p-4 bg-gray-900 text-white rounded-2xl shadow-lg hover:bg-gray-800 transition-all group"
-              >
-                <span className="font-bold mr-2">
-                  {t("livePage.viewFullStats")}
-                </span>
-                <svg
-                  className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
+        <section className="border-t border-[#E6E6E6] bg-white py-8">
+          <Container>
+            <div className="flex flex-col items-center justify-between gap-4 text-sm text-neutral-500 md:flex-row">
+              <p className="text-center md:text-left">
+                {t("livePage.autoUpdate")}
+                {updatedAgo &&
+                  ` · ${t("livePage.updatedAgo", { ago: updatedAgo })}`}
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <button
+                  onClick={onRefresh}
+                  disabled={refreshing}
+                  className="rounded-full border border-[#E6E6E6] px-4 py-2 font-semibold text-neutral-800 transition-colors hover:bg-[#F8F8F8] disabled:opacity-60"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
-              </a>
+                  {refreshing ? "…" : t("livePage.refreshData")}
+                </button>
+                <a
+                  href="https://ladieseuropeantour.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#1d3f78] px-4 py-2 font-bold uppercase tracking-wider text-white text-xs transition-colors hover:bg-[#2A579E]"
+                >
+                  {t("livePage.viewFullStats")}{" "}
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
             </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <p className="text-gray-400 text-sm">
-              {t("livePage.autoUpdate")}
-              {updatedAgo && ` · ${t("livePage.updatedAgo", { ago: updatedAgo })}`}{" "}
-              •{" "}
-              <button
-                onClick={onRefresh}
-                disabled={refreshing}
-                className="underline hover:text-gray-600 disabled:opacity-60"
-              >
-                {t("livePage.refreshData")}
-              </button>
-            </p>
-          </div>
-        </div>
-      </div>
+          </Container>
+        </section>
+      </main>
     </>
   );
 };
 
-const TournamentHeader = ({ snap }: { snap: LiveSnapshot }) => {
-  const { t } = useTranslation("global");
-  return (
-    <div className="flex flex-col md:flex-row justify-between items-center mb-6 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-      <div className="text-center md:text-left mb-4 md:mb-0">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 font-header tracking-tight">
-          {snap.tournamentName}
-        </h1>
-        <p className="mt-1 text-gray-500 font-light flex items-center justify-center md:justify-start">
-          <svg
-            className="w-4 h-4 mr-2 text-gray-500"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0" />
-            <circle cx="12" cy="10" r="3" />
-          </svg>
-          {snap.location}
-        </p>
-      </div>
-      <div className="flex flex-col items-center md:items-end">
-        {snap.state === "on-course" && (
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-red-50 text-red-600 text-sm font-bold tracking-wider animate-pulse border border-red-100 mb-2">
-            <span className="w-2 h-2 mr-2 bg-red-500 rounded-full"></span>
-            {t("livePage.live")}
-          </div>
-        )}
-        <div className="text-sm text-gray-400 font-medium">{snap.dates}</div>
-      </div>
-    </div>
-  );
-};
+/* ---------- Encabezado tipo transmisión ---------- */
 
-// Qué está pasando ahora, en una línea
-const StatusBanner = ({ snap }: { snap: LiveSnapshot }) => {
+const LiveHero = ({ snap, stale }: { snap: LiveSnapshot; stale: boolean }) => {
   const { t } = useTranslation("global");
-  let text: string | null = null;
+  const onCourse = snap.state === "on-course";
+
+  let status: string;
   if (snap.state === "not-started") {
-    text = snap.teeTime
+    status = snap.teeTime
       ? t("livePage.state.teeTime", {
           round: snap.round,
           time: snap.teeTime,
           tee: snap.startTee,
         })
       : t("livePage.state.notStarted", { round: snap.round });
-  } else if (snap.state === "on-course") {
-    text = t("livePage.state.onCourse", {
+  } else if (onCourse) {
+    status = t("livePage.state.onCourse", {
       round: snap.round,
       count: snap.holesPlayed,
     });
   } else if (snap.state === "round-finished") {
-    text = t("livePage.state.roundFinished", { round: snap.round });
+    status = t("livePage.state.roundFinished", { round: snap.round });
   } else if (snap.state === "tournament-finished") {
-    text = t("livePage.state.tournamentFinished");
-  } else if (snap.state === "out") {
-    text = t("livePage.state.out", { label: snap.outLabel });
+    status = t("livePage.state.tournamentFinished");
+  } else {
+    status = t("livePage.state.out", { label: snap.outLabel });
   }
-  if (!text) return null;
-  return (
-    <p className="mb-6 rounded-2xl bg-[#2A579E]/5 border border-[#2A579E]/15 px-5 py-3 text-center md:text-left text-sm font-semibold text-[#2A579E]">
-      {text}
-    </p>
-  );
-};
 
-const PlayerCard = ({ snap }: { snap: LiveSnapshot }) => {
-  const { t } = useTranslation("global");
-  return (
-    <div className="bg-white rounded-3xl shadow-lg overflow-hidden border border-gray-100 relative group">
-      <div className="relative h-32 bg-linear-to-br from-blue-900 to-blue-700" />
+  const thruValue =
+    snap.state === "on-course"
+      ? String(snap.holesPlayed)
+      : snap.state === "not-started"
+        ? (snap.teeTime ?? "–")
+        : "F";
 
-      <div className="relative -mt-16 text-center">
-        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl mx-auto bg-gray-200">
-          <img
-            src={nuriImg}
-            alt="Nuria Iturrioz"
-            className="w-full h-full object-cover object-top"
-          />
+  return (
+    <section className="relative overflow-hidden bg-linear-to-br from-[#173a70] via-[#2A579E] to-[#1f4a8f] py-10 text-white md:py-16">
+      <Dots />
+      <Container>
+        {/* Torneo */}
+        <div className="text-center md:text-left">
+          <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.35em] text-blue-100/80">
+            {onCourse ? (
+              <>
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500" />
+                </span>
+                <span className="text-white">{t("livePage.live")}</span>
+              </>
+            ) : (
+              t("livePage.eyebrow")
+            )}
+          </p>
+          <h1 className="mt-3 font-title text-3xl font-extrabold leading-tight md:text-5xl">
+            {snap.tournamentName}
+          </h1>
+          <p className="mt-2 text-sm text-blue-100/80 md:text-base">
+            {snap.location}
+            {snap.dates && <span className="mx-2 opacity-60">·</span>}
+            {snap.dates}
+          </p>
         </div>
-      </div>
 
-      <div className="pt-4 px-6 pb-8 text-center">
-        <h2 className="text-2xl mb-10 font-bold text-gray-900 font-header">
-          Nuria Iturrioz
-        </h2>
-
-        <div className="grid grid-cols-2 gap-3 mb-6">
-          <div className="bg-yellow-50 p-4 rounded-2xl border border-yellow-100 flex flex-col items-center justify-center relative overflow-hidden">
-            <div className="text-[10px] text-yellow-800 uppercase font-bold tracking-widest mb-1">
-              {t("livePage.position")}
+        {/* Jugadora + marcador */}
+        <div className="mt-8 grid grid-cols-1 items-center gap-6 md:mt-12 md:grid-cols-[auto_minmax(0,1fr)] md:gap-10">
+          <div className="flex items-center justify-center gap-4 md:flex-col md:items-start">
+            <div className="h-20 w-20 shrink-0 overflow-hidden rounded-full border-2 border-white/80 shadow-xl md:h-36 md:w-36">
+              <img
+                src={nuriImg}
+                alt="Nuria Iturrioz"
+                className="h-full w-full object-cover object-top"
+              />
             </div>
-            <div className="text-4xl font-black text-yellow-900">
-              {snap.position?.label ?? "–"}
+            <div className="md:mt-1">
+              <p className="font-signature text-3xl leading-none md:text-4xl">
+                Nuria Iturrioz
+              </p>
+              <p className="mt-2 text-xs font-bold uppercase tracking-[0.25em] text-blue-100/80">
+                {t("livePage.roundOf", {
+                  round: snap.round,
+                  total: snap.totalRounds,
+                })}
+              </p>
             </div>
           </div>
 
-          <div className="bg-blue-900 p-4 rounded-2xl border border-blue-800 flex flex-col items-center justify-center text-white relative overflow-hidden">
-            <div className="text-[10px] text-blue-200 uppercase font-bold tracking-widest mb-1">
-              {t("livePage.total")}
-            </div>
-            <div className="text-4xl font-black text-white">
-              {formatToPar(snap.totalToPar)}
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4 border-t border-gray-100 pt-6">
           <div>
-            <div className="text-xs text-gray-400 uppercase font-bold mb-1">
-              {t("livePage.today")}
-            </div>
-            <div
-              className={`text-xl font-bold ${
-                (snap.roundToPar ?? 0) < 0 ? "text-green-600" : "text-gray-800"
-              }`}
-            >
-              {snap.state === "not-started" ? "–" : formatToPar(snap.roundToPar)}
-            </div>
-          </div>
-          <div>
-            <div className="text-xs text-gray-400 uppercase font-bold mb-1">
-              {snap.state === "on-course"
-                ? t("livePage.thru")
-                : t("livePage.hole")}
-            </div>
-            <div className="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
-              {snap.state === "on-course" ? (
-                <>
-                  <span>{snap.holesPlayed}</span>
-                  {snap.currentHoleStrokes ? (
-                    <span className="text-sm font-bold italic text-yellow-700 bg-yellow-50 border border-yellow-200 px-2 py-0.5 rounded-md">
-                      {t("livePage.holeShort")}
-                      {snap.currentHole} · {snap.currentHoleStrokes}{" "}
-                      {t("livePage.stroke", { count: snap.currentHoleStrokes })}
-                    </span>
-                  ) : null}
-                </>
-              ) : snap.state === "not-started" ? (
-                <span>{snap.startTee}</span>
-              ) : (
-                <span>F</span>
-              )}
-            </div>
+            <dl className="grid grid-cols-2 gap-3 md:grid-cols-4">
+              <ScoreTile
+                label={t("livePage.position")}
+                value={snap.position?.label ?? "–"}
+                accent
+              />
+              <ScoreTile
+                label={t("livePage.total")}
+                value={formatToPar(snap.totalToPar)}
+              />
+              <ScoreTile
+                label={t("livePage.today")}
+                value={
+                  snap.state === "not-started"
+                    ? "–"
+                    : formatToPar(snap.roundToPar)
+                }
+              />
+              <ScoreTile
+                label={
+                  snap.state === "not-started"
+                    ? t("livePage.teeTimeLabel")
+                    : t("livePage.thru")
+                }
+                value={thruValue}
+                hint={
+                  snap.state === "on-course" && snap.currentHole
+                    ? `${t("livePage.onHole", { hole: snap.currentHole })}${
+                        snap.currentHoleStrokes
+                          ? ` · ${snap.currentHoleStrokes} ${t(
+                              "livePage.stroke",
+                              {
+                                count: snap.currentHoleStrokes,
+                              },
+                            )}`
+                          : ""
+                      }`
+                    : snap.state === "not-started"
+                      ? t("livePage.fromTee", { tee: snap.startTee })
+                      : undefined
+                }
+              />
+            </dl>
+
+            <p className="mt-4 rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-center text-sm font-semibold md:text-left">
+              {status}
+            </p>
+            {stale && (
+              <p
+                role="status"
+                className="mt-3 rounded-xl border border-amber-300/40 bg-amber-400/15 px-4 py-3 text-center text-sm text-amber-50 md:text-left"
+              >
+                {t("livePage.staleWarning")}
+              </p>
+            )}
           </div>
         </div>
-      </div>
-    </div>
+      </Container>
+    </section>
   );
 };
 
-const Scorecard = ({ snap }: { snap: LiveSnapshot }) => {
-  const { t } = useTranslation("global");
-  const front = snap.holes.slice(0, 9);
-  const back = snap.holes.slice(9, 18);
+const ScoreTile = ({
+  label,
+  value,
+  hint,
+  accent = false,
+}: {
+  label: string;
+  value: string;
+  hint?: string;
+  accent?: boolean;
+}) => (
+  <div
+    className={`rounded-xl border p-4 ${
+      accent
+        ? "border-white/40 bg-white text-[#173a70]"
+        : "border-white/15 bg-white/10"
+    }`}
+  >
+    <dt
+      className={`text-[10px] font-bold uppercase tracking-[0.25em] ${
+        accent ? "text-[#2A579E]/70" : "text-blue-100/80"
+      }`}
+    >
+      {label}
+    </dt>
+    <dd className="mt-1 font-title text-4xl font-extrabold tabular-nums leading-none md:text-5xl">
+      {value}
+    </dd>
+    {hint && (
+      <dd
+        className={`mt-2 text-xs ${accent ? "text-neutral-500" : "text-blue-100/80"}`}
+      >
+        {hint}
+      </dd>
+    )}
+  </div>
+);
 
-  const renderHoleSet = (holes: HoleScore[]) => (
-    <div className="mb-8 last:mb-0">
-      <div className="grid grid-cols-[repeat(9,minmax(0,1fr))_72px] sm:grid-cols-[repeat(9,minmax(0,1fr))_80px] gap-1 sm:gap-2 mb-2">
-        {holes.map((hole) => (
-          <div
-            key={hole.number}
-            className={`h-8 sm:h-10 flex items-center justify-center rounded-lg text-xs sm:text-sm font-bold ${
-              hole.number === snap.currentHole
-                ? "bg-yellow-100 text-yellow-800"
-                : "text-gray-400 bg-gray-50"
-            }`}
-          >
-            {hole.number}
-          </div>
-        ))}
-        <div className="flex items-center text-[9px] sm:text-xs font-bold text-gray-400 uppercase tracking-tight sm:tracking-wider pl-1 sm:pl-2">
-          {t("livePage.hole")}
-        </div>
-      </div>
+/* ---------- Tarjeta hoyo a hoyo ---------- */
 
-      <div className="grid grid-cols-[repeat(9,minmax(0,1fr))_72px] sm:grid-cols-[repeat(9,minmax(0,1fr))_80px] gap-1 sm:gap-2 mb-2">
-        {holes.map((hole) => (
-          <div
-            key={hole.number}
-            className={`h-8 sm:h-10 flex items-center justify-center rounded-lg text-xs sm:text-sm font-medium text-gray-500 ${
-              hole.number === snap.currentHole
-                ? "ring-2 ring-yellow-100 bg-yellow-50"
-                : "bg-gray-50"
-            }`}
-          >
-            {hole.par}
-          </div>
-        ))}
-        <div className="flex items-center text-[9px] sm:text-xs font-bold text-gray-400 uppercase tracking-tight sm:tracking-wider pl-1 sm:pl-2">
-          {t("livePage.par")}
-        </div>
-      </div>
-
-      <div className="grid grid-cols-[repeat(9,minmax(0,1fr))_72px] sm:grid-cols-[repeat(9,minmax(0,1fr))_80px] gap-1 sm:gap-2">
-        {holes.map((hole) => {
-          let bgClass = "bg-gray-100";
-          let textClass = "text-gray-800";
-          let display = "-";
-          if (hole.strokes !== null) {
-            const diff = hole.strokes - hole.par;
-            display = `${hole.strokes}`;
-            if (diff < 0) {
-              bgClass = "bg-blue-600";
-              textClass = "text-white";
-            } else if (diff > 0) {
-              bgClass = "bg-red-500";
-              textClass = "text-white";
-            }
-          } else if (hole.number === snap.currentHole) {
-            bgClass = "bg-yellow-100";
-            textClass =
-              "text-yellow-800 italic font-bold border-2 border-yellow-400";
-            if (snap.currentHoleStrokes) display = `${snap.currentHoleStrokes}`;
-          }
-          return (
-            <div
-              key={hole.number}
-              className={`h-10 sm:h-12 flex items-center justify-center rounded-lg text-sm sm:text-xl font-black ${bgClass} ${textClass}`}
-            >
-              {display}
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-
-  return (
-    <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6">
-      <div className="flex flex-wrap items-center justify-between mb-6 gap-4">
-        <h3 className="text-lg font-bold text-gray-900 flex items-center">
-          <span className="w-1.5 h-6 bg-blue-600 rounded-full mr-3"></span>
-          {t("livePage.scorecard")} · {t("livePage.roundAbbr")}
-          {snap.round}
-        </h3>
-
-        <div className="flex gap-3 text-[10px] sm:text-xs font-medium text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full">
-          <div className="flex items-center">
-            <span className="w-2 h-2 rounded-full bg-blue-500 mr-1.5"></span>
-            {t("livePage.birdie")}
-          </div>
-          <div className="flex items-center">
-            <span className="w-2 h-2 rounded-full bg-gray-300 mr-1.5"></span>
-            {t("livePage.par")}
-          </div>
-          <div className="flex items-center">
-            <span className="w-2 h-2 rounded-full bg-red-500 mr-1.5"></span>
-            {t("livePage.bogey")}
-          </div>
-        </div>
-      </div>
-
-      {snap.startTee !== 1 && (
-        <p className="-mt-2 mb-5 text-xs font-semibold text-gray-500">
-          {t("livePage.startTee", { tee: snap.startTee })}
-        </p>
-      )}
-
-      <div className="flex flex-col">
-        <div>
-          <div className="text-xs text-gray-400 uppercase font-bold mb-3 tracking-widest pl-1">
-            {t("livePage.frontNine")}
-          </div>
-          {renderHoleSet(front)}
-        </div>
-        {back.length > 0 && (
-          <div className="mt-15">
-            <div className="text-xs text-gray-400 uppercase font-bold mb-3 tracking-widest pl-1">
-              {t("livePage.backNine")}
-            </div>
-            {renderHoleSet(back)}
-          </div>
-        )}
-      </div>
-    </div>
-  );
+// Notación de golf: birdie = círculo, eagle = doble círculo,
+// bogey = cuadrado, doble bogey o peor = doble cuadrado
+const ScoreMark = ({
+  hole,
+  current,
+}: {
+  hole: HoleScore;
+  current: boolean;
+}) => {
+  if (hole.strokes === null) {
+    return (
+      <span
+        className={`flex h-7 w-7 items-center justify-center rounded-md text-sm font-bold sm:h-10 sm:w-10 ${
+          current
+            ? "animate-pulse border-2 border-dashed border-[#2A579E] text-[#2A579E]"
+            : "text-neutral-300"
+        }`}
+      >
+        {current ? "●" : "·"}
+      </span>
+    );
+  }
+  const diff = hole.strokes - hole.par;
+  const base =
+    "flex h-7 w-7 items-center justify-center text-xs font-extrabold tabular-nums sm:h-10 sm:w-10 sm:text-base";
+  if (diff <= -2)
+    return (
+      <span
+        className={`${base} rounded-full bg-[#2A579E] text-white ring-2 ring-[#2A579E] ring-offset-1 sm:ring-offset-2`}
+      >
+        {hole.strokes}
+      </span>
+    );
+  if (diff === -1)
+    return (
+      <span
+        className={`${base} rounded-full border-2 border-[#2A579E] text-[#2A579E]`}
+      >
+        {hole.strokes}
+      </span>
+    );
+  if (diff === 1)
+    return (
+      <span
+        className={`${base} rounded-sm border-2 border-neutral-800 text-neutral-900`}
+      >
+        {hole.strokes}
+      </span>
+    );
+  if (diff >= 2)
+    return (
+      <span
+        className={`${base} rounded-sm bg-neutral-900 text-white ring-2 ring-neutral-900 ring-offset-1 sm:ring-offset-2`}
+      >
+        {hole.strokes}
+      </span>
+    );
+  return <span className={`${base} text-neutral-900`}>{hole.strokes}</span>;
 };
 
-const RoundsHistory = ({ snap }: { snap: LiveSnapshot }) => {
+const NineTable = ({
+  holes,
+  label,
+  currentHole,
+}: {
+  holes: HoleScore[];
+  label: string;
+  currentHole: number | null;
+}) => {
   const { t } = useTranslation("global");
+  const parTotal = holes.reduce((s, h) => s + h.par, 0);
+  const played = holes.filter((h) => h.strokes !== null);
+  const strokesTotal = played.reduce((s, h) => s + (h.strokes ?? 0), 0);
+  const cols =
+    "grid grid-cols-[2.6rem_repeat(9,minmax(0,1fr))_2.6rem] sm:grid-cols-[4rem_repeat(9,minmax(0,1fr))_3.5rem] items-center";
+
   return (
     <div>
-      <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 ml-1">
-        {t("livePage.roundsHistory")}
-      </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {snap.rounds.map((round) => {
-          const current = round.id === snap.round;
-          return (
-            <div
-              key={round.id}
-              className={`flex items-center justify-between p-3 rounded-xl border transition-all ${
-                current
-                  ? "bg-white border-blue-200 shadow-sm ring-1 ring-blue-50"
-                  : "bg-white/60 border-gray-100 text-gray-400"
-              }`}
+      <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.3em] text-neutral-400">
+        {label}
+      </p>
+      <div className="overflow-hidden rounded-xl border border-[#E6E6E6]">
+        <div
+          className={`${cols} bg-[#F8FAFD] py-2 text-center text-xs font-bold text-neutral-500`}
+        >
+          <span className="text-left pl-2 sm:pl-3 text-[10px] uppercase tracking-wider">
+            {t("livePage.hole")}
+          </span>
+          {holes.map((h) => (
+            <span
+              key={h.number}
+              className={h.number === currentHole ? "text-[#2A579E]" : ""}
             >
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${
-                    current
-                      ? "bg-blue-100 text-blue-700"
-                      : "bg-gray-100 text-gray-400"
-                  }`}
-                >
-                  {t("livePage.roundAbbr")}
-                  {round.id}
-                </div>
-                <div className="flex flex-col">
-                  <div className="text-sm font-semibold">
-                    {round.state === "in-progress"
-                      ? t("livePage.status.inProgress")
-                      : round.state === "finished"
-                        ? t("livePage.status.finished")
-                        : t("livePage.status.upcoming")}
-                  </div>
-                  {round.date && (
-                    <div className="text-[10px] sm:text-xs font-medium text-gray-400 mt-0.5">
-                      {round.date}
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="flex flex-col items-end">
-                <div
-                  className={`font-bold text-lg ${round.strokes ? "text-gray-900" : "text-gray-300"}`}
-                >
-                  {round.strokes ?? "--"}
-                </div>
-                <div className="text-[10px] text-gray-400 font-medium">
-                  {round.state === "finished"
-                    ? formatToPar(round.toPar)
-                    : `Par ${snap.coursePar}`}
-                </div>
-              </div>
-            </div>
-          );
-        })}
+              {h.number}
+            </span>
+          ))}
+          <span className="text-[10px] uppercase tracking-wider">
+            {t("livePage.totalShort")}
+          </span>
+        </div>
+        <div
+          className={`${cols} border-t border-[#E6E6E6] py-1.5 text-center text-xs text-neutral-500`}
+        >
+          <span className="text-left pl-2 sm:pl-3 text-[10px] font-bold uppercase tracking-wider">
+            {t("livePage.par")}
+          </span>
+          {holes.map((h) => (
+            <span key={h.number}>{h.par}</span>
+          ))}
+          <span className="font-bold">{parTotal}</span>
+        </div>
+        <div className={`${cols} border-t border-[#E6E6E6] py-2`}>
+          <span className="text-left pl-2 sm:pl-3 text-[10px] font-bold uppercase tracking-wider text-[#2A579E]">
+            {t("livePage.nuriaShort")}
+          </span>
+          {holes.map((h) => (
+            <span key={h.number} className="flex justify-center">
+              <ScoreMark hole={h} current={h.number === currentHole} />
+            </span>
+          ))}
+          <span className="text-center font-title text-base font-extrabold text-neutral-900 sm:text-lg">
+            {played.length ? strokesTotal : "–"}
+          </span>
+        </div>
       </div>
     </div>
+  );
+};
+
+const Legend = () => {
+  const { t } = useTranslation("global");
+  const item = (mark: ReactNode, text: string) => (
+    <span className="inline-flex items-center gap-2">
+      {mark}
+      {text}
+    </span>
+  );
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-neutral-500 md:justify-start">
+      {item(
+        <span className="h-3.5 w-3.5 rounded-full bg-[#2A579E] ring-1 ring-[#2A579E] ring-offset-1" />,
+        t("livePage.eagle"),
+      )}
+      {item(
+        <span className="h-3.5 w-3.5 rounded-full border-2 border-[#2A579E]" />,
+        t("livePage.birdie"),
+      )}
+      {item(
+        <span className="h-3.5 w-3.5 rounded-sm border-2 border-neutral-800" />,
+        t("livePage.bogey"),
+      )}
+      {item(
+        <span className="h-3.5 w-3.5 rounded-sm bg-neutral-900 ring-1 ring-neutral-900 ring-offset-1" />,
+        t("livePage.doubleBogey"),
+      )}
+    </div>
+  );
+};
+
+const StatBar = ({
+  label,
+  value,
+  of,
+}: {
+  label: string;
+  value: number;
+  of: number;
+}) => (
+  <div>
+    <div className="flex items-baseline justify-between gap-3">
+      <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-neutral-500">
+        {label}
+      </span>
+      <span className="font-title text-xl font-extrabold text-neutral-900">
+        {value}
+        <span className="text-sm font-semibold text-neutral-400">/{of}</span>
+      </span>
+    </div>
+    <div className="mt-2 h-1.5 rounded-full bg-[#E9EEF6]">
+      <div
+        className="h-full rounded-full bg-[#2A579E]"
+        style={{ width: `${of ? Math.round((value / of) * 100) : 0}%` }}
+      />
+    </div>
+  </div>
+);
+
+const RoundStatsGrid = ({ card }: { card: RoundCard }) => {
+  const { t } = useTranslation("global");
+  const s = card.stats;
+  if (!s) return null;
+  return (
+    <div className="mt-6 grid grid-cols-1 gap-5 rounded-xl border border-[#E6E6E6] p-5 sm:grid-cols-2 lg:grid-cols-4">
+      {s.fairways && (
+        <StatBar
+          label={t("livePage.stats.fairways")}
+          value={s.fairways.hit}
+          of={s.fairways.total}
+        />
+      )}
+      {s.gir && (
+        <StatBar
+          label={t("livePage.stats.gir")}
+          value={s.gir.hit}
+          of={s.gir.total}
+        />
+      )}
+      {s.putts !== null && (
+        <div>
+          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-neutral-500">
+            {t("livePage.stats.putts")}
+          </span>
+          <p className="font-title text-xl font-extrabold text-neutral-900">
+            {s.putts}
+          </p>
+        </div>
+      )}
+      <div>
+        <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-neutral-500">
+          {t("livePage.stats.scoring")}
+        </span>
+        <p className="mt-1 flex gap-3 text-sm text-neutral-600">
+          <span>
+            <b className="font-title text-xl text-[#2A579E]">{s.birdies}</b>{" "}
+            {t("livePage.stats.birdies")}
+          </span>
+          <span>
+            <b className="font-title text-xl text-neutral-900">{s.pars}</b>{" "}
+            {t("livePage.stats.pars")}
+          </span>
+          <span>
+            <b className="font-title text-xl text-neutral-900">{s.bogeys}</b>{" "}
+            {t("livePage.stats.bogeys")}
+          </span>
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const ScorecardSection = ({ snap }: { snap: LiveSnapshot }) => {
+  const { t } = useTranslation("global");
+  // Vuelta elegida a mano, recordando en qué vuelta se eligió: cuando empieza
+  // una vuelta nueva la elección se descarta y se muestra la actual
+  const [choice, setChoice] = useState<{ id: number; during: number } | null>(
+    null,
+  );
+  const selected =
+    choice && choice.during === snap.round ? choice.id : snap.round;
+  const setSelected = (id: number) => setChoice({ id, during: snap.round });
+
+  const card = snap.cards.find((c) => c.id === selected) ?? snap.cards.at(-1);
+  if (!card) return null;
+  const isCurrentRound = card.id === snap.round;
+  const currentHole = isCurrentRound ? snap.currentHole : null;
+
+  return (
+    <section className="py-12 md:py-20">
+      <Container>
+        <SectionTitle
+          title={t("livePage.byHole")}
+          subtitle={
+            card.startTee !== 1
+              ? `${t("livePage.roundOf", { round: card.id, total: snap.totalRounds })} · ${t("livePage.startTee", { tee: card.startTee })}`
+              : t("livePage.roundOf", {
+                  round: card.id,
+                  total: snap.totalRounds,
+                })
+          }
+        />
+
+        {snap.cards.length > 1 && (
+          <div
+            role="tablist"
+            className="mb-6 flex flex-wrap justify-center gap-2 md:justify-start"
+          >
+            {snap.cards.map((c) => (
+              <button
+                key={c.id}
+                role="tab"
+                aria-selected={c.id === card.id}
+                onClick={() => setSelected(c.id)}
+                className={`rounded-full px-4 py-1.5 text-sm font-bold transition-colors ${
+                  c.id === card.id
+                    ? "bg-[#2A579E] text-white"
+                    : "border border-[#E6E6E6] text-neutral-700 hover:bg-[#F8F8F8]"
+                }`}
+              >
+                {t("livePage.round")} {c.id}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <div className="flex flex-col gap-6">
+          {/* Los nueve que jugó primero van arriba (sale por el 1 o por el 10) */}
+          {(card.startTee >= 10 ? ["back", "front"] : ["front", "back"]).map(
+            (nine) =>
+              nine === "front" ? (
+                <NineTable
+                  key={nine}
+                  holes={card.holes.slice(0, 9)}
+                  label={t("livePage.frontNine")}
+                  currentHole={currentHole}
+                />
+              ) : (
+                card.holes.length > 9 && (
+                  <NineTable
+                    key={nine}
+                    holes={card.holes.slice(9, 18)}
+                    label={t("livePage.backNine")}
+                    currentHole={currentHole}
+                  />
+                )
+              ),
+          )}
+          <Legend />
+        </div>
+
+        <RoundStatsGrid card={card} />
+      </Container>
+    </section>
+  );
+};
+
+/* ---------- Vueltas ---------- */
+
+const RoundsSection = ({ snap }: { snap: LiveSnapshot }) => {
+  const { t } = useTranslation("global");
+  return (
+    <section className="bg-[#F8FAFD] py-12 md:py-20">
+      <Container>
+        <SectionTitle title={t("livePage.roundsHistory")} />
+        <ul className="overflow-hidden rounded-xl border border-[#E6E6E6] bg-white">
+          {snap.rounds.map((round) => {
+            const current = round.id === snap.round;
+            return (
+              <li
+                key={round.id}
+                className="flex items-center justify-between gap-4 border-t border-[#E6E6E6] px-4 py-4 first:border-t-0 sm:px-5"
+              >
+                <div className="flex items-center gap-4">
+                  <span
+                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-extrabold ${
+                      current
+                        ? "bg-[#2A579E] text-white"
+                        : "bg-[#F1F4F9] text-neutral-500"
+                    }`}
+                  >
+                    {t("livePage.roundAbbr")}
+                    {round.id}
+                  </span>
+                  <div>
+                    <p className="font-semibold text-neutral-900">
+                      {round.state === "in-progress"
+                        ? t("livePage.status.inProgress")
+                        : round.state === "finished"
+                          ? t("livePage.status.finished")
+                          : t("livePage.status.upcoming")}
+                    </p>
+                    {round.date && (
+                      <p className="text-xs text-neutral-500">{round.date}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="flex gap-6 text-right">
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
+                      {t("livePage.strokes")}
+                    </p>
+                    <p className="font-title text-lg font-extrabold text-neutral-900">
+                      {round.strokes ?? "–"}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
+                      {t("livePage.vsPar")}
+                    </p>
+                    <p className="font-title text-lg font-extrabold text-neutral-900">
+                      {round.state === "upcoming"
+                        ? "–"
+                        : formatToPar(round.toPar)}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </Container>
+    </section>
+  );
+};
+
+/* ---------- Sin datos ---------- */
+
+const NoLive = ({
+  refreshing,
+  onRefresh,
+}: {
+  refreshing: boolean;
+  onRefresh: () => void;
+}) => {
+  const { t } = useTranslation("global");
+  const live = useLive();
+  const failed = !!live.error && !live.tournament;
+  const tournamentName = live.tournament?.name;
+
+  return (
+    <main className="w-full bg-white pt-[68px] md:pt-[84px]">
+      <section className="relative overflow-hidden bg-linear-to-br from-[#173a70] via-[#2A579E] to-[#1f4a8f] py-12 text-white md:py-20">
+        <Dots />
+        <Container>
+          <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[minmax(0,1fr)_auto]">
+            <div className="text-center md:text-left">
+              <p className="text-xs font-bold uppercase tracking-[0.35em] text-blue-100/80">
+                {t("livePage.eyebrow")}
+              </p>
+              <h1 className="mt-3 font-signature text-[clamp(2.5rem,12vw,3.5rem)] leading-tight md:text-7xl">
+                {t("livePage.title")}
+              </h1>
+              <p className="mt-4 font-title text-xl font-bold md:text-2xl">
+                {failed
+                  ? t("livePage.noLive.errorTitle")
+                  : t("livePage.noLive.title")}
+              </p>
+              <p className="mx-auto mt-2 max-w-xl text-blue-100/80 md:mx-0">
+                {failed
+                  ? t("livePage.noLive.errorSubtitle")
+                  : live.notInField
+                    ? t("livePage.noLive.notInField")
+                    : t("livePage.noLive.subtitle")}
+              </p>
+              {!failed && (
+                <p className="mt-5 inline-block rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm">
+                  {tournamentName
+                    ? t("livePage.noLive.tournamentDetected", {
+                        name: tournamentName,
+                      })
+                    : t("livePage.noLive.noTournament")}
+                </p>
+              )}
+            </div>
+            <div className="mx-auto h-40 w-40 overflow-hidden rounded-full border-2 border-white/80 shadow-xl md:h-52 md:w-52">
+              <img
+                src={nuriImg}
+                alt="Nuria Iturrioz"
+                className="h-full w-full object-cover object-top"
+              />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-10 md:py-14">
+        <Container>
+          <div className="flex flex-wrap items-center justify-center gap-3 md:justify-start">
+            <button
+              onClick={onRefresh}
+              disabled={refreshing}
+              className="rounded-full bg-[#1d3f78] px-5 py-2.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#2A579E] disabled:opacity-60"
+            >
+              {t("livePage.refreshData")}
+            </button>
+            <Link
+              to="/stats"
+              className="rounded-full border border-[#E6E6E6] px-5 py-2.5 text-sm font-semibold text-neutral-800 hover:bg-[#F8F8F8]"
+            >
+              {t("livePage.noLive.ctaStats")}
+            </Link>
+            <Link
+              to="/news"
+              className="rounded-full border border-[#E6E6E6] px-5 py-2.5 text-sm font-semibold text-neutral-800 hover:bg-[#F8F8F8]"
+            >
+              {t("livePage.noLive.ctaNews")}
+            </Link>
+            <Link
+              to="/"
+              className="rounded-full px-5 py-2.5 text-sm font-semibold hover:bg-blue-50"
+              style={{ color: BLUE }}
+            >
+              {t("livePage.noLive.ctaHome")}
+            </Link>
+          </div>
+        </Container>
+      </section>
+    </main>
   );
 };
 
