@@ -20,6 +20,9 @@ describe("parseLetData con la respuesta real (Aramco China, vuelta 1)", () => {
     expect(snap.tournamentName).toBe("Aramco China Championship");
     expect(snap.tournamentCode).toBe("2019");
     expect(snap.dates).toBe("5th - 8th November 2026");
+    expect(snap.logoUrl).toBe(
+      "https://tms-images.ams3.cdn.digitaloceanspaces.com/let/logos/2026/2019/2019.png",
+    );
   });
 
   it("vuelta 1 terminada: 74 golpes, +1, sin hoyo actual", () => {

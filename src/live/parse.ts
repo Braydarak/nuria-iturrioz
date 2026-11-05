@@ -75,6 +75,8 @@ export type LiveSnapshot = {
   totalToPar: number | null;
   roundToPar: number | null;
   position: { label: string; pos: number | null } | null;
+  /** Logo del torneo que publica el LET (event_sponsor_logo) */
+  logoUrl: string | null;
   /** Hora de salida de la vuelta, en hora local del torneo */
   teeTime: string | null;
   rounds: RoundSummary[];
@@ -107,6 +109,12 @@ const parsePositiveInt = (value: unknown): number | null => {
 
 const splitList = (value: unknown): string[] =>
   typeof value === "string" ? value.split(",") : [];
+
+/** Solo URLs https, para no mezclar contenido inseguro */
+const httpsUrl = (value: unknown): string | null =>
+  typeof value === "string" && /^https:\/\/\S+$/.test(value.trim())
+    ? value.trim()
+    : null;
 
 /** ¿El JSON tiene la forma de un archivo de resultados válido? */
 export const isValidLetData = (data: unknown): data is LetData => {
@@ -334,6 +342,7 @@ export const parseLetData = (
     totalToPar: parseToPar(nuria.vspar),
     roundToPar: parseToPar(nuria[`vspar_R${round}`]),
     position: positionOf(nuria, entries),
+    logoUrl: httpsUrl(data.event_sponsor_logo),
     teeTime: (nuria[`time_R${round}`] ?? "").trim() || null,
     rounds,
     cards,
