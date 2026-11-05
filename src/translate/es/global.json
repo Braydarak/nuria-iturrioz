@@ -283,7 +283,6 @@
     "fromTee": "Por el hoyo {{tee}} · hora local",
     "byHole": "Hoyo a hoyo",
     "totalShort": "Tot",
-    "nuriaShort": "Nuria",
     "eagle": "Eagle o mejor",
     "doubleBogey": "Doble bogey o peor",
     "vsPar": "Vs par",
@@ -291,10 +290,9 @@
       "fairways": "Calles",
       "gir": "Greens en regulación",
       "putts": "Putts",
-      "scoring": "Resultado por hoyo",
-      "birdies": "birdies",
-      "pars": "pares",
-      "bogeys": "bogeys"
+      "perHole": "{{value}} por hoyo",
+      "birdiesTitle": "Birdies",
+      "parsBogeys": "{{pars}} pares · {{bogeys}} bogeys"
     }
   },
   "contactPage": {

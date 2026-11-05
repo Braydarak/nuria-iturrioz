@@ -283,7 +283,6 @@
     "fromTee": "Pel forat {{tee}} · hora local",
     "byHole": "Forat a forat",
     "totalShort": "Tot",
-    "nuriaShort": "Nuria",
     "eagle": "Eagle o millor",
     "doubleBogey": "Doble bogey o pitjor",
     "vsPar": "Vs par",
@@ -291,10 +290,9 @@
       "fairways": "Carrers",
       "gir": "Greens en regulació",
       "putts": "Putts",
-      "scoring": "Resultat per forat",
-      "birdies": "birdies",
-      "pars": "pars",
-      "bogeys": "bogeys"
+      "perHole": "{{value}} per forat",
+      "birdiesTitle": "Birdies",
+      "parsBogeys": "{{pars}} pars · {{bogeys}} bogeys"
     }
   },
   "contactPage": {
