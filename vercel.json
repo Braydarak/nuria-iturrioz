@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/api-web/:path*",
+      "destination": "https://nuriaiturrioz.com/api-web/:path*"
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
