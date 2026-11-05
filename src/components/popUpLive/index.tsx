@@ -113,7 +113,7 @@ const PopUpLive = () => {
             <p className="text-sm text-gray-600 leading-tight">
               {t("popUpLive.currentPosition")}{" "}
               <span className="font-bold text-black text-lg">
-                {position ? `T${position}` : "-"}
+                {position ?? "-"}
               </span>
             </p>
           </div>

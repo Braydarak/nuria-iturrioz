@@ -253,12 +253,27 @@
       "errorSubtitle": "Puede ser un problema temporal con la fuente de datos. Prueba a recargar en unos segundos.",
       "ctaStats": "Ver estadísticas",
       "ctaNews": "Ver noticias",
-      "ctaHome": "Volver al inicio"
+      "ctaHome": "Volver al inicio",
+      "notInField": "Nuria no figura entre las jugadoras de este torneo."
     },
     "status": {
       "inProgress": "En curso",
       "finished": "Finalizado",
       "upcoming": "Próximo"
+    },
+    "staleWarning": "No pudimos actualizar los datos. Mostramos los últimos disponibles y seguimos intentando.",
+    "updatedAgo": "actualizado {{ago}}",
+    "thru": "Hoyos jugados",
+    "holeShort": "H",
+    "startTee": "Salió por el hoyo {{tee}}",
+    "state": {
+      "teeTime": "Vuelta {{round}}: sale a las {{time}} (hora local) por el hoyo {{tee}}",
+      "notStarted": "Vuelta {{round}}: todavía no salió",
+      "onCourse_one": "Vuelta {{round}} en juego · {{count}} hoyo jugado",
+      "onCourse_other": "Vuelta {{round}} en juego · {{count}} hoyos jugados",
+      "roundFinished": "Vuelta {{round}} terminada. La próxima vuelta aparece acá cuando empiece.",
+      "tournamentFinished": "Torneo terminado",
+      "out": "Fuera del torneo ({{label}})"
     }
   },
   "contactPage": {

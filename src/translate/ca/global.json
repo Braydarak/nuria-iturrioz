@@ -253,12 +253,27 @@
       "errorSubtitle": "Pot ser un problema temporal amb la font de dades. Prova d'actualitzar en uns segons.",
       "ctaStats": "Veure estadístiques",
       "ctaNews": "Veure notícies",
-      "ctaHome": "Tornar a l'inici"
+      "ctaHome": "Tornar a l'inici",
+      "notInField": "La Nuria no figura entre les jugadores d'aquest torneig."
     },
     "status": {
       "inProgress": "En curs",
       "finished": "Finalitzat",
       "upcoming": "Pròxim"
+    },
+    "staleWarning": "No hem pogut actualitzar les dades. Mostrem les últimes disponibles i ho continuem intentant.",
+    "updatedAgo": "actualitzat {{ago}}",
+    "thru": "Forats jugats",
+    "holeShort": "F",
+    "startTee": "Va sortir pel forat {{tee}}",
+    "state": {
+      "teeTime": "Volta {{round}}: surt a les {{time}} (hora local) pel forat {{tee}}",
+      "notStarted": "Volta {{round}}: encara no ha sortit",
+      "onCourse_one": "Volta {{round}} en joc · {{count}} forat jugat",
+      "onCourse_other": "Volta {{round}} en joc · {{count}} forats jugats",
+      "roundFinished": "Volta {{round}} acabada. La propera volta apareixerà aquí quan comenci.",
+      "tournamentFinished": "Torneig acabat",
+      "out": "Fora del torneig ({{label}})"
     }
   },
   "contactPage": {
