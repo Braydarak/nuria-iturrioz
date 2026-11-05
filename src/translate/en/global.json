@@ -253,12 +253,27 @@
       "errorSubtitle": "This may be a temporary issue with the data source. Try refreshing in a few seconds.",
       "ctaStats": "View stats",
       "ctaNews": "View news",
-      "ctaHome": "Back to home"
+      "ctaHome": "Back to home",
+      "notInField": "Nuria isn't in the field for this tournament."
     },
     "status": {
       "inProgress": "In Progress",
       "finished": "Finished",
       "upcoming": "Upcoming"
+    },
+    "staleWarning": "We couldn't update the data. Showing the latest available and still trying.",
+    "updatedAgo": "updated {{ago}}",
+    "thru": "Thru",
+    "holeShort": "H",
+    "startTee": "Started on hole {{tee}}",
+    "state": {
+      "teeTime": "Round {{round}}: tees off at {{time}} (local time) on hole {{tee}}",
+      "notStarted": "Round {{round}}: hasn't teed off yet",
+      "onCourse_one": "Round {{round}} in progress · thru {{count}} hole",
+      "onCourse_other": "Round {{round}} in progress · thru {{count}} holes",
+      "roundFinished": "Round {{round}} finished. The next round will show up here when it starts.",
+      "tournamentFinished": "Tournament finished",
+      "out": "Out of the tournament ({{label}})"
     }
   },
   "contactPage": {
@@ -504,5 +519,11 @@
     "next": "Next photo",
     "open": "View photo",
     "error": "We couldn't load the photos. Please try again later."
+  },
+  "updateNotice": {
+    "title": "A new version of the site is available",
+    "text": "Refresh to see the latest changes.",
+    "reload": "Refresh",
+    "close": "Close"
   }
 }

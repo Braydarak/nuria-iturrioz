@@ -78,7 +78,7 @@ export default function TrophyMuseum() {
           </p>
           <h2
             id="trophy-museum-title"
-            className="mt-3 font-signature text-5xl md:text-6xl text-white"
+            className="mt-3 font-signature text-[clamp(1.75rem,9vw,3rem)] md:text-6xl text-white"
           >
             {t("trophies.title")}
           </h2>

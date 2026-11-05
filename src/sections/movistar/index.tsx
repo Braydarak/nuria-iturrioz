@@ -38,7 +38,7 @@ export default function MovistarSection() {
     <section className="relative overflow-hidden bg-linear-to-br from-[#1B3A75] via-[#24508f] to-[#2A579E] py-16 text-white md:py-24">
       {/* Halo de color detrás del póster */}
       <div className="pointer-events-none absolute -left-32 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-[#3C7BEA]/35 blur-3xl" />
-      <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
+      <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-5 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
         <AnimateOnScroll x={-60} y={0} scale={1}>
           <a
             href={MOVISTAR_URL}
@@ -78,10 +78,10 @@ export default function MovistarSection() {
         </AnimateOnScroll>
 
         <AnimateOnScroll x={60} y={0} scale={1} delay={0.1}>
-          <p className="text-xs font-bold uppercase tracking-[0.35em] text-blue-200/80">
+          <p className="text-center text-xs font-bold uppercase tracking-[0.35em] text-blue-200/80 md:text-left">
             {t("movistar.kicker")}
           </p>
-          <h2 className="mt-3 text-3xl font-bold leading-tight md:text-4xl">
+          <h2 className="mt-3 text-center text-3xl font-bold leading-tight md:text-left md:text-4xl">
             {t("movistar.episodeTitle")}
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-blue-100/85">
@@ -92,10 +92,10 @@ export default function MovistarSection() {
             target="_blank"
             rel="noreferrer"
             aria-label={t("movistar.ctaAria")}
-            className="group mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 font-bold text-[#1B3A75] shadow-lg transition-colors hover:bg-[#E6F0FF]"
+            className="group mx-auto mt-8 flex w-full max-w-sm items-center justify-center gap-3 rounded-full bg-white px-5 py-3.5 text-sm font-bold text-[#1B3A75] sm:px-6 sm:text-base md:mx-0 md:w-fit md:max-w-none shadow-lg transition-colors hover:bg-[#E6F0FF]"
           >
-            <MovistarPlusLogo className="h-5 w-auto" />
-            <span className="whitespace-nowrap">{t("movistar.cta")}</span>
+            <MovistarPlusLogo className="h-5 w-auto shrink-0" />
+            <span className="text-center sm:whitespace-nowrap">{t("movistar.cta")}</span>
             <svg
               width="16"
               height="16"

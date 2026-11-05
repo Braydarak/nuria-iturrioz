@@ -10,6 +10,7 @@ import {
 import Header from "./components/header";
 import ScrollToTop from "./components/scrollToTop";
 import PopUpLive from "./components/popUpLive";
+import UpdateNotice from "./components/updateNotice";
 import { useTranslation } from "react-i18next";
 
 import { LayoutProvider } from "./context/LayoutContext";
@@ -80,6 +81,7 @@ function AppContent() {
         <Route path="/cookies" element={<CookiesPolicyPage />} />
       </Routes>
       <PopUpLive />
+      <UpdateNotice />
       {!hideFooter && <Footer />}
     </>
   );

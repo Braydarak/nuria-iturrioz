@@ -8,3 +8,5 @@ declare module "*.JPG" {
 interface ImportMetaEnv {
   readonly VITE_TOURNAMENTS_API_URL?: string;
 }
+
+declare const __BUILD_ID__: string;

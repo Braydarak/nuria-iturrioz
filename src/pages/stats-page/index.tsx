@@ -20,7 +20,7 @@ function SectionHeader({
   light?: boolean;
 }) {
   return (
-    <header className="mb-8 md:mb-10">
+    <header className="mb-8 text-center md:mb-10 md:text-left">
       <h2
         className={`font-signature text-3xl sm:text-4xl md:text-5xl ${
           light ? "text-white" : "text-[#2A579E]"
@@ -91,14 +91,19 @@ export default function StatsPage() {
         <Animation>
           {/* Encabezado + totales de carrera */}
           <Section className="pt-8 pb-10 md:pt-12 md:pb-16">
-            <AnimateOnScroll y={20} x={0} scale={1}>
+            <AnimateOnScroll
+              y={20}
+              x={0}
+              scale={1}
+              className="text-center md:text-left"
+            >
               <p className="text-xs font-bold uppercase tracking-[0.35em] text-[#2A579E]/70">
                 {t("statsPage.eyebrow")}
               </p>
-              <h1 className="mt-3 font-signature text-5xl text-[#2A579E] md:text-7xl">
+              <h1 className="mt-3 font-signature text-[clamp(2.25rem,12vw,3rem)] text-[#2A579E] md:text-7xl">
                 {t("statsPage.title")}
               </h1>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-700 md:mt-6 md:text-lg">
+              <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-neutral-700 md:mt-6 md:mx-0 md:text-lg">
                 {t("statsPage.description")}
               </p>
             </AnimateOnScroll>

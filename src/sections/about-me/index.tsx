@@ -187,11 +187,11 @@ const AboutMe = () => {
             y={0}
             scale={1}
           >
-            <h2 className="inline-block font-signature text-4xl md:text-5xl font-semibold -rotate-2 drop-shadow">
+            <h2 className="block text-center font-signature text-4xl md:inline-block md:text-left md:text-5xl font-semibold -rotate-2 drop-shadow">
               {t("aboutMe.title")}
             </h2>
             <svg
-              className="mt-1"
+              className="mx-auto mt-1 md:mx-0"
               width="180"
               height="12"
               viewBox="0 0 180 12"
@@ -208,13 +208,15 @@ const AboutMe = () => {
             </svg>
             <div className="space-y-6 text-xl font-light leading-relaxed md:text-2xl lg:text-3xl">
               <p>{t("aboutMe.p1_prefix")}</p>
-              <p className="font-medium text-[#A8D0FF]">{t("aboutMe.p4")}</p>
+              <p className="text-center font-medium text-[#A8D0FF] md:text-left">
+                {t("aboutMe.p4")}
+              </p>
             </div>
 
-            <div className="pt-2">
+            <div className="pt-2 text-center md:text-left">
               <Link
                 to="/carrer"
-                className="group inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-base font-bold text-[#1B3A75] shadow-lg transition-colors hover:bg-[#E6F0FF] md:text-lg"
+                className="group inline-flex w-full max-w-sm items-center justify-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-bold sm:px-7 sm:text-base md:w-auto md:max-w-none text-[#1B3A75] shadow-lg transition-colors hover:bg-[#E6F0FF] md:text-lg"
               >
                 {t("aboutMe.cta")}
                 <svg
@@ -223,7 +225,7 @@ const AboutMe = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={2}
                   stroke="currentColor"
-                  className="h-6 w-6 transition-transform group-hover:translate-x-1"
+                  className="h-6 w-6 shrink-0 transition-transform group-hover:translate-x-1"
                 >
                   <path
                     strokeLinecap="round"

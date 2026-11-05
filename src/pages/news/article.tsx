@@ -176,7 +176,7 @@ export default function ArticlePage() {
         {article && related.length > 0 && (
           <section className="bg-[#F8FAFD] py-14 md:py-20">
             <div className="mx-auto max-w-6xl px-5 sm:px-6">
-              <h2 className="mb-8 font-signature text-3xl text-[#2A579E] md:text-5xl">
+              <h2 className="mb-8 text-center font-signature text-3xl text-[#2A579E] md:text-left md:text-5xl">
                 {t("newsPage.related")}
               </h2>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

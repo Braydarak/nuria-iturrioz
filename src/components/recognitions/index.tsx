@@ -29,7 +29,7 @@ const Recognitions = () => {
           </p>
           <h2
             id="recognitions-title"
-            className="mt-3 font-signature text-5xl md:text-6xl text-[#2A579E]"
+            className="mt-3 font-signature text-[clamp(1.75rem,9vw,3rem)] md:text-6xl text-[#2A579E]"
           >
             {t("recognitions.title")}
           </h2>

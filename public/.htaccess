@@ -4,10 +4,13 @@ DirectoryIndex index.html
   RewriteEngine On
   RewriteBase /
 
+  # Forzar HTTPS
   RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
+  # Archivos y carpetas que existen (assets, api-web, páginas prerenderizadas)
+  # se sirven tal cual; el resto de rutas las resuelve la app (index.html)
   RewriteRule ^assets/ - [L]
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
@@ -16,16 +19,28 @@ DirectoryIndex index.html
 </IfModule>
 
 <IfModule mod_expires.c>
+  # Pisa cualquier caché por defecto del hosting: el HTML nunca se guarda
   ExpiresActive On
-  ExpiresByType text/css "access plus 1 year"
-  ExpiresByType application/javascript "access plus 1 year"
-  ExpiresByType text/javascript "access plus 1 year"
-  ExpiresByType font/woff2 "access plus 1 year"
-  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType text/html "access plus 0 seconds"
 </IfModule>
 
 <IfModule mod_headers.c>
-  <FilesMatch "\.(?:js|css|woff2|webp)$">
+  # HTML y version.json: el navegador siempre consulta si hay versión nueva. Así, al subir
+  # un build, todo el mundo ve la web actualizada en la siguiente visita.
+  <FilesMatch "\.html?$|^version\.json$">
+    Header set Cache-Control "no-cache, must-revalidate"
+    Header unset Expires
+  </FilesMatch>
+
+  # JS, CSS y fuentes solo existen en /assets/ con un hash en el nombre que
+  # cambia en cada build: se pueden guardar un año sin riesgo
+  <FilesMatch "\.(js|css|woff2?)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Imágenes, sitemap, robots...: una semana, porque las de /public pueden
+  # reemplazarse con el mismo nombre
+  <FilesMatch "\.(png|jpe?g|webp|avif|svg|ico|txt|xml)$">
+    Header set Cache-Control "public, max-age=604800"
   </FilesMatch>
 </IfModule>

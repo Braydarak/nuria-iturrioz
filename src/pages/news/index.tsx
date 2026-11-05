@@ -86,7 +86,7 @@ const NewsPage = () => {
 
       <main className="min-h-screen bg-[#F8FAFD] pt-[68px] md:pt-[84px]">
         <div className="mx-auto max-w-6xl px-5 pb-16 pt-8 sm:px-6 md:pb-24 md:pt-12">
-          <h1 className="font-signature text-5xl text-[#2A579E] md:text-7xl">
+          <h1 className="text-center font-signature text-5xl text-[#2A579E] md:text-left md:text-7xl">
             {t("newsPage.title")}
           </h1>
 

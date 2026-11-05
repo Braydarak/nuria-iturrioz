@@ -48,7 +48,7 @@ const ContactPage = () => {
           {/* Presentación */}
           <div className="order-1">
             <AnimateOnScroll y={20} x={0} scale={1}>
-              <h1 className="font-signature text-5xl text-[#2A579E] md:text-6xl">
+              <h1 className="text-center font-signature text-5xl text-[#2A579E] md:text-left md:text-6xl">
                 {t("contactPage.title")}
               </h1>
             </AnimateOnScroll>

@@ -74,6 +74,49 @@ html {
   font-family: var(--font-open);
 }
 
+/* Barra de scroll con los colores de la web. Chrome, Safari y Edge usan los
+   pseudo-elementos -webkit- (permiten bordes redondeados); Firefox solo
+   entiende scrollbar-color/scrollbar-width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eef3fa;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #2a579e;
+  border: 2px solid #eef3fa;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #1b3a75;
+}
+
+/* En carruseles y listas con scroll horizontal, sin riel de fondo */
+:not(html)::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+:not(html)::-webkit-scrollbar-thumb {
+  border-color: transparent;
+  background-clip: padding-box;
+  background-color: #2a579e66;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-color: #2a579e #eef3fa;
+  }
+
+  * {
+    scrollbar-width: thin;
+  }
+}
+
 h1,
 h2,
 h3,

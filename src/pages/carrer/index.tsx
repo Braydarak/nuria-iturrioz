@@ -170,12 +170,12 @@ export default function CareerPage() {
             <div className="texture-wedge golf-texture pointer-events-none absolute inset-y-0 left-0 w-[60vw] opacity-60" />
             <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-6 py-16 md:grid-cols-[1.15fr_0.85fr] md:py-24">
               <AnimateOnScroll y={24} x={0} scale={1}>
-                <p className="text-xs font-bold uppercase tracking-[0.35em] text-[#2A579E]/70">
+                <p className="text-center text-xs font-bold uppercase tracking-[0.35em] text-[#2A579E]/70 md:text-left">
                   {t("career.eyebrow")}
                 </p>
                 <h1
                   id="career-title"
-                  className="mt-3 font-signature text-5xl text-[#2A579E] sm:text-6xl md:text-7xl"
+                  className="mt-3 text-center font-signature text-5xl text-[#2A579E] sm:text-6xl md:text-left md:text-7xl"
                 >
                   {t("career.title")}
                 </h1>
