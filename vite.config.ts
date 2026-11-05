@@ -1,6 +1,7 @@
 import { defineConfig, loadEnv, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
@@ -31,6 +32,13 @@ function versionFile(): Plugin {
   };
 }
 
+// El prerender abre las páginas con Chrome. Solo existe en una máquina con
+// Chrome instalado (tu Mac): en Vercel u otro CI se saltea y la web funciona
+// igual como SPA. PRERENDER_CHROME permite indicar otra ruta.
+const CHROME_PATH =
+  process.env.PRERENDER_CHROME ??
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
@@ -38,6 +46,12 @@ export default defineConfig(({ mode }) => {
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const require = createRequire(import.meta.url);
   const vitePrerender = require("vite-plugin-prerender");
+  const canPrerender = fs.existsSync(CHROME_PATH);
+  if (!canPrerender && mode === "production") {
+    console.warn(
+      `[prerender] No se encontró Chrome en "${CHROME_PATH}": se omite el prerender.`,
+    );
+  }
 
   return {
     base,
@@ -48,18 +62,18 @@ export default defineConfig(({ mode }) => {
       react(),
       tailwindcss(),
       versionFile(),
-      vitePrerender({
-        staticDir: path.join(__dirname, "dist"),
-        routes: ["/", "/carrer", "/stats", "/contact", "/gallery"],
-        renderer: new vitePrerender.PuppeteerRenderer({
-          executablePath:
-            "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-          headless: true,
-          navigationOptions: {
-            timeout: 120000,
-          },
+      canPrerender &&
+        vitePrerender({
+          staticDir: path.join(__dirname, "dist"),
+          routes: ["/", "/carrer", "/stats", "/contact", "/gallery"],
+          renderer: new vitePrerender.PuppeteerRenderer({
+            executablePath: CHROME_PATH,
+            headless: true,
+            navigationOptions: {
+              timeout: 120000,
+            },
+          }),
         }),
-      }),
     ],
     build: {
       rollupOptions: {
