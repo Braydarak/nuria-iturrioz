@@ -51,6 +51,21 @@ describe("parseLetData con la respuesta real (Aramco China, vuelta 1)", () => {
     expect(snap.position).toEqual({ label: "T75", pos: 75 });
   });
 
+  it("tarjeta y estadísticas de la vuelta", () => {
+    expect(snap.cards).toHaveLength(1);
+    const card = snap.cards[0];
+    expect(card.id).toBe(1);
+    expect(card.holesPlayed).toBe(18);
+    expect(card.stats).toMatchObject({
+      fairways: { hit: 8, total: 14 },
+      gir: { hit: 14, total: 18 },
+      putts: 31,
+      birdies: 4,
+      bogeys: 4,
+      pars: 10,
+    });
+  });
+
   it("par del campo y hora de actualización del LET", () => {
     expect(snap.coursePar).toBe(73);
     expect(snap.updatedAt?.toISOString()).toBe("2026-11-05T13:26:22.000Z");
