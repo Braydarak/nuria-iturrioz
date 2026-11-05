@@ -136,7 +136,7 @@ const LivePage = () => {
   return (
     <>
       {seo}
-      <main className="w-full bg-white pt-[68px] md:pt-[84px]">
+      <main className="w-full bg-white">
         <LiveHero snap={snap} stale={!!live.error} />
         <ScorecardSection snap={snap} />
         <RoundsSection snap={snap} />
@@ -225,8 +225,10 @@ const LiveHero = ({ snap, stale }: { snap: LiveSnapshot; stale: boolean }) => {
         ? (snap.teeTime ?? "–")
         : "F";
 
+  // El bloque azul empieza detrás del header fijo: el azul llega hasta arriba
+  // aunque el header cambie de alto (zoom, tamaño de letra, barra del navegador)
   return (
-    <section className="relative overflow-hidden bg-linear-to-br from-[#173a70] via-[#2A579E] to-[#1f4a8f] py-10 text-white md:py-16">
+    <section className="relative overflow-hidden bg-linear-to-br from-[#173a70] via-[#2A579E] to-[#1f4a8f] pb-10 pt-[calc(4.25rem+2.5rem)] text-white md:pb-16 md:pt-[calc(5.25rem+4rem)]">
       <Dots />
       <Container>
         {/* Torneo + logo del torneo (el LET lo publica en event_sponsor_logo) */}
@@ -276,7 +278,7 @@ const LiveHero = ({ snap, stale }: { snap: LiveSnapshot; stale: boolean }) => {
             />
           </div>
           <div className="text-left">
-            <p className="font-signature text-3xl leading-none md:text-4xl">
+            <p className="whitespace-nowrap font-signature text-[clamp(1.5rem,7.5vw,1.875rem)] leading-none md:text-4xl">
               Nuria Iturrioz
             </p>
             <p className="mt-2 text-xs font-bold uppercase tracking-[0.25em] text-blue-100/80">
@@ -385,7 +387,7 @@ const ScoreMark = ({
   if (hole.strokes === null) {
     return (
       <span
-        className={`flex h-6 w-6 items-center justify-center rounded-md text-sm font-bold sm:h-10 sm:w-10 ${
+        className={`flex h-[1.35rem] w-[1.35rem] min-[380px]:h-6 min-[380px]:w-6 items-center justify-center rounded-md text-sm font-bold sm:h-10 sm:w-10 ${
           current
             ? "animate-pulse border-2 border-dashed border-[#2A579E] text-[#2A579E]"
             : "text-neutral-300"
@@ -397,7 +399,7 @@ const ScoreMark = ({
   }
   const diff = hole.strokes - hole.par;
   const base =
-    "flex h-6 w-6 items-center justify-center text-[11px] font-extrabold tabular-nums sm:h-10 sm:w-10 sm:text-base";
+    "flex h-[1.35rem] w-[1.35rem] min-[380px]:h-6 min-[380px]:w-6 items-center justify-center text-[10px] min-[380px]:text-[11px] font-extrabold tabular-nums sm:h-10 sm:w-10 sm:text-base";
   if (diff <= -2)
     return (
       <span
@@ -787,8 +789,8 @@ const NoLive = ({
   const tournamentName = live.tournament?.name;
 
   return (
-    <main className="w-full bg-white pt-[68px] md:pt-[84px]">
-      <section className="relative overflow-hidden bg-linear-to-br from-[#173a70] via-[#2A579E] to-[#1f4a8f] py-12 text-white md:py-20">
+    <main className="w-full bg-white">
+      <section className="relative overflow-hidden bg-linear-to-br from-[#173a70] via-[#2A579E] to-[#1f4a8f] pb-12 pt-[calc(4.25rem+3rem)] text-white md:pb-20 md:pt-[calc(5.25rem+5rem)]">
         <Dots />
         <Container>
           <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[minmax(0,1fr)_auto]">
@@ -834,7 +836,7 @@ const NoLive = ({
 
       <section className="py-10 md:py-14">
         <Container>
-          <div className="flex flex-wrap items-center justify-center gap-3 md:justify-start">
+          <div className="mx-auto grid max-w-sm grid-cols-1 gap-3 text-center sm:mx-0 sm:flex sm:max-w-none sm:flex-wrap sm:items-center md:justify-start">
             <button
               onClick={onRefresh}
               disabled={refreshing}
